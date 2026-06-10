@@ -1,0 +1,50 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+
+# velké video předlohy (necommitovat)
+/public/videos/**/reference/
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files
+.env*.local
+
+# gloss scratch emails (PII)
+/data/
+
+# typescript
+next-env.d.ts
+*.tsbuildinfo
+
+# local exports / source refs (not needed on deploy)
+/photo/
+/GLOSS-WEB-EXPORT/
+/GLOSS-WEB-EXPORT.zip
+GLOSS-*.md
+
+# vercel
+.vercel

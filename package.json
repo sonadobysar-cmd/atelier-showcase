@@ -1,0 +1,37 @@
+{
+  "name": "atelier-showcase",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "dev": "printf '\\n  ATELIER SHOWCASE — otevři v prohlížeči:\\n  http://127.0.0.1:3010/gloss\\n  http://127.0.0.1:3010/contour-clinic\\n  (rozcestník: http://127.0.0.1:3010)\\n\\n  Tip: při chybě 500 spusť npm run serve\\n\\n' && next dev -H 127.0.0.1 -p 3010",
+    "dev:clean": "lsof -ti:3010 | xargs kill -9 2>/dev/null; rm -rf .next node_modules/.cache && npm run dev",
+    "serve": "lsof -ti:3010 | xargs kill -9 2>/dev/null; rm -rf .next && npm run build && next start -H 127.0.0.1 -p 3010",
+    "open-contour": "open http://127.0.0.1:3010/contour-clinic",
+    "open-gloss": "open http://127.0.0.1:3010/gloss",
+    "build": "next build",
+    "start": "next start -H 127.0.0.1 -p 3010",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@google/genai": "^2.8.0",
+    "@google/generative-ai": "^0.24.1",
+    "@mediapipe/tasks-vision": "^0.10.35",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.16.0",
+    "eslint-config-next": "^15.1.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "typescript": "^5.7.2"
+  }
+}

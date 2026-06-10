@@ -149,12 +149,12 @@ export const glossFields: GlossField[] = [
 
 /** Fotky klientů ve vlnitých zrcadlech — soubory do public/images/gloss/clients/ */
 export const glossClientPhotos = [
-  { src: "/images/gloss/clients/client-1.jpg", alt: "Klientka GLOSS — lash lifting", objectPosition: "center 22%" },
-  { src: "/images/gloss/clients/client-2.png", alt: "Klientka GLOSS — brow bar", objectPosition: "center 28%" },
-  { src: "/images/gloss/clients/client-3.jpg", alt: "Klientka GLOSS — kosmetologie", objectPosition: "center 35%" },
-  { src: "/images/gloss/clients/client-4.jpg", alt: "Klientka GLOSS — prodlužování řas", objectPosition: "center 30%" },
-  { src: "/images/gloss/clients/client-5.jpg", alt: "Klientka GLOSS — glow & péče", objectPosition: "center 26%" },
-  { src: "/images/gloss/clients/client-6.jpg", alt: "Klientka GLOSS — atelier look", objectPosition: "center 32%" },
+  { src: "/images/gloss/clients/client-1.jpg", alt: "GLOSS — Korean lash lift", objectPosition: "center 42%" },
+  { src: "/images/gloss/clients/client-2.png", alt: "GLOSS — brow bar & barva", objectPosition: "center 38%" },
+  { src: "/images/gloss/clients/client-3.jpg", alt: "GLOSS — hydrafacial", objectPosition: "center 45%" },
+  { src: "/images/gloss/clients/client-4.jpg", alt: "GLOSS — classic lashes", objectPosition: "center 40%" },
+  { src: "/images/gloss/clients/client-5.jpg", alt: "GLOSS — foxy lashes", objectPosition: "center 42%" },
+  { src: "/images/gloss/clients/client-6.jpg", alt: "GLOSS — angel eyes volume", objectPosition: "center 40%" },
 ] as const;
 
 export type LashStyleId = "classic" | "volume" | "mega";

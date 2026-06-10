@@ -15,31 +15,40 @@ type Slide = {
 
 const SLIDES: Slide[] = [
   {
-    img: "/images/gloss/lash-lifting.png",
-    w: 1122,
-    h: 1402,
+    img: "/images/gloss/before-after/lash-lift.png",
+    w: 900,
+    h: 900,
     label: "Lash Lifting",
     beforeLabel: "Před",
     afterLabel: "Po lash liftingu",
     tag: "Zakřivení & délka",
   },
   {
-    img: "/images/gloss/prodluzovani-ras.png",
-    w: 1122,
-    h: 1402,
+    img: "/images/gloss/before-after/lash-extensions.png",
+    w: 900,
+    h: 900,
     label: "Prodloužení řas",
     beforeLabel: "Před",
     afterLabel: "Po prodloužení",
-    tag: "Dramatický efekt",
+    tag: "Classic natural",
   },
   {
-    img: "/images/gloss/brow-bar.png",
-    w: 1122,
-    h: 1402,
+    img: "/images/gloss/before-after/brow-lamination.png",
+    w: 900,
+    h: 900,
     label: "Brow Bar",
     beforeLabel: "Před",
     afterLabel: "Po laminaci",
     tag: "Definice & tvar",
+  },
+  {
+    img: "/images/gloss/before-after/hydrafacial.png",
+    w: 900,
+    h: 900,
+    label: "Hydra Glow",
+    beforeLabel: "Před",
+    afterLabel: "Po ošetření",
+    tag: "Čistá & zářivá pleť",
   },
 ];
 
@@ -110,7 +119,7 @@ function Slider({ slide }: { slide: Slide }) {
           alt={`Po — ${slide.label}`}
           fill
           sizes="(max-width: 600px) 100vw, 50vw"
-          style={{ objectFit: "cover", objectPosition: "center top" }}
+          style={{ objectFit: "cover", objectPosition: "center center" }}
           priority
         />
         <span className="ba-badge ba-badge-after">{slide.afterLabel}</span>
@@ -123,7 +132,7 @@ function Slider({ slide }: { slide: Slide }) {
           alt={`Před — ${slide.label}`}
           fill
           sizes="(max-width: 600px) 100vw, 50vw"
-          style={{ objectFit: "cover", objectPosition: "center top" }}
+          style={{ objectFit: "cover", objectPosition: "center center" }}
           aria-hidden
         />
         <span className="ba-badge ba-badge-before">{slide.beforeLabel}</span>

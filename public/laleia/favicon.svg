@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Laleia">
+  <rect width="32" height="32" rx="6" fill="#14140F"/>
+  <path d="M11 8.5v14.5h10" fill="none" stroke="#C9A06B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="8" y1="25.5" x2="24" y2="25.5" stroke="#EDEBE6" stroke-width="1.1" stroke-linecap="round" opacity="0.55"/>
+</svg>

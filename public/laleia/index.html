@@ -9,7 +9,7 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html,body{width:100%;overflow-x:hidden;scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;font-weight:300;color:#333;background:#fff}
+body{font-family:'Jost',sans-serif;font-weight:300;color:#000;background:#fff}
 button{font-family:inherit;cursor:pointer}
 a{color:inherit;text-decoration:none}
 .serif{font-family:'Playfair Display',Georgia,serif}
@@ -17,13 +17,15 @@ a{color:inherit;text-decoration:none}
 .top-announcement{background:#000;color:#fff;text-align:center;padding:8px 12px;font-size:11px;letter-spacing:.14em;line-height:1.4}
 .website-header{background:#fff;padding:15px 40px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;justify-content:space-between;min-height:80px;gap:16px}
 .header-nav{display:flex;gap:28px;flex:1}
-.nav-link{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.nav-link{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:#000}
 .nav-link:hover{opacity:.55}
-.header-logo{max-height:56px;max-width:180px;object-fit:contain;cursor:pointer}
+.header-logo{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;cursor:pointer;border:none;background:none;padding:0;text-decoration:none;color:#000}
+.header-logo .logo-lash{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:22px;letter-spacing:.02em}
+.header-logo .logo-babe{font-family:'Playfair Display',serif;font-weight:500;font-size:20px;letter-spacing:.18em;margin-top:1px}
 .header-actions{display:flex;gap:18px;flex:1;justify-content:flex-end;align-items:center}
-.header-icon{width:24px;height:24px;color:#333;background:none;border:none;padding:0}
+.header-icon{width:24px;height:24px;color:#000;background:none;border:none;padding:0}
 
-.disclaimer{background:#fff;padding:10px;overflow:hidden;white-space:nowrap;font-size:13px;text-transform:uppercase;letter-spacing:.14em}
+.disclaimer{background:#fff;color:#000;padding:10px;overflow:hidden;white-space:nowrap;font-size:13px;text-transform:uppercase;letter-spacing:.14em}
 .scrolling-text{display:inline-block;animation:marquee 16s linear infinite}
 @keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
 
@@ -31,16 +33,16 @@ a{color:inherit;text-decoration:none}
 .hero{display:grid;grid-template-columns:minmax(280px,44%) 1fr;min-height:min(68vh,720px);background:#fff;position:relative;overflow:hidden}
 .hero-copy{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(32px,6vw,80px) clamp(20px,4vw,40px);z-index:2;background:#fff}
 .hero-copy::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(118deg,transparent 0,transparent 46px,rgba(0,0,0,.04) 46px,rgba(0,0,0,.04) 44px);pointer-events:none}
-.hero-eyebrow{position:relative;font-family:'Playfair Display',serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin-bottom:clamp(20px,3.2vw,30px);font-weight:400}
-.hero-title{position:relative;line-height:.9;margin-bottom:clamp(26px,4vw,38px)}
-.hero-title .lash{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(58px,8.8vw,108px);margin-left:-.04em}
-.hero-title .babe{display:block;font-family:'Playfair Display',serif;font-size:clamp(62px,9.2vw,114px);font-weight:500;letter-spacing:.01em;margin-top:-.06em}
-.hero-btn{position:relative;border:1px solid #222;background:#fff;color:#222;padding:12px 32px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-family:'Playfair Display',serif;transition:.2s;box-shadow:0 0 0 4px #fff}
-.hero-btn:hover{background:#111;color:#fff;border-color:#111}
+.hero-eyebrow{position:relative;font-family:'Playfair Display',serif;font-size:11px;letter-spacing:.34em;text-transform:uppercase;margin-bottom:clamp(20px,3.2vw,30px);font-weight:400;color:#000}
+.hero-title{position:relative;line-height:.9;margin-bottom:clamp(26px,4vw,38px);color:#000}
+.hero-title .lash{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:500;font-size:clamp(58px,8.8vw,108px);margin-left:-.04em;color:#000}
+.hero-title .babe{display:block;font-family:'Playfair Display',serif;font-size:clamp(62px,9.2vw,114px);font-weight:500;letter-spacing:.01em;margin-top:-.06em;color:#000}
+.hero-btn{position:relative;border:1px solid #000;background:#fff;color:#000;padding:12px 32px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;font-family:'Playfair Display',serif;transition:.2s;box-shadow:0 0 0 4px #fff}
+.hero-btn:hover{background:#000;color:#fff;border-color:#000}
 .hero-photo{position:relative;overflow:hidden;background:#fff}
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:58% 22%;display:block;background:#fff}
 
-.section-label{background:#fff;padding:clamp(22px,4vw,34px) clamp(20px,4vw,48px);font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,28px);letter-spacing:.22em;text-transform:uppercase;text-align:center;font-weight:400}
+.section-label{background:#fff;color:#000;padding:clamp(22px,4vw,34px) clamp(20px,4vw,48px);font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,28px);letter-spacing:.22em;text-transform:uppercase;text-align:center;font-weight:400}
 .section-label.left{text-align:left}
 
 .collection-list{background:#fff;padding:8px 0 28px}
@@ -48,8 +50,8 @@ a{color:inherit;text-decoration:none}
 .collection-card{background:#fff;border-radius:22px;padding:14px 14px 12px;cursor:pointer;transition:transform .25s}
 .collection-card:hover{transform:translateY(-3px)}
 .collection-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px}
-.collection-card-head span{font-family:'Playfair Display',serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.collection-card-head .arr{width:34px;height:34px;border:1px solid #ddd;border-radius:50%;display:grid;place-items:center;font-size:14px;line-height:1}
+.collection-card-head span{font-family:'Playfair Display',serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#000}
+.collection-card-head .arr{width:34px;height:34px;border:1px solid #000;border-radius:50%;display:grid;place-items:center;font-size:14px;line-height:1;color:#000}
 .collection-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:16px;display:block}
 
 .luxury{position:relative;min-height:clamp(360px,42vw,480px);background:#fff;overflow:hidden}
@@ -63,7 +65,7 @@ a{color:inherit;text-decoration:none}
 .luxury-overlay h2{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,72px);font-weight:500;line-height:1;letter-spacing:.01em}
 .luxury-overlay h2 em{font-style:italic;font-weight:400}
 
-.type-row{background:#fff;padding:clamp(24px,4vw,40px) 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,40px);line-height:1.25}
+.type-row{background:#fff;color:#000;padding:clamp(24px,4vw,40px) 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 12px;font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,40px);line-height:1.25}
 .type-row .w1{font-style:italic;text-transform:uppercase}
 .type-row .w2{font-weight:600;font-style:italic}
 .type-row .w3{text-transform:uppercase}
@@ -73,11 +75,11 @@ a{color:inherit;text-decoration:none}
 .circle-grid{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;max-width:800px;margin:0 auto;padding:20px}
 .circle-item{text-align:center;cursor:pointer;transition:transform .2s;border:none;background:none;padding:0;color:inherit}
 .circle-item:hover{transform:translateY(-2px)}
-.circle-item:focus-visible .circle{outline:2px solid #333;outline-offset:3px}
-.circle-item.active .circle{outline:2px solid #333;outline-offset:3px}
-.circle{width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 10px;background:#fff;border:1px solid #e8e8e8;display:block}
+.circle-item:focus-visible .circle{outline:2px solid #000;outline-offset:3px}
+.circle-item.active .circle{outline:2px solid #000;outline-offset:3px}
+.circle{width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 10px;background:#fff;border:1px solid #000;display:block}
 .circle img{width:100%;height:100%;object-fit:cover;display:block}
-.circle-title{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#333}
+.circle-title{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#000}
 
 .verona-wrap{background:#fff;padding:clamp(16px,3vw,28px) clamp(16px,3vw,32px) clamp(24px,4vw,36px)}
 .verona-frame{position:relative;max-width:1180px;margin:0 auto;border-radius:clamp(18px,2.5vw,28px);overflow:hidden;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.04)}
@@ -85,41 +87,41 @@ a{color:inherit;text-decoration:none}
 .verona-card{position:absolute;right:clamp(14px,3.5vw,36px);top:50%;transform:translateY(-46%);background:#fff;border:none;border-radius:clamp(18px,2vw,24px);padding:clamp(14px,2vw,18px);width:min(200px,28vw);z-index:3;cursor:pointer;text-align:left;box-shadow:0 8px 32px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s}
 .verona-card:hover{transform:translateY(-48%);box-shadow:0 12px 36px rgba(0,0,0,.14)}
 .verona-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:clamp(10px,1.5vw,14px)}
-.verona-card-title{font-family:'Playfair Display',serif;font-size:clamp(9px,1vw,11px);letter-spacing:.14em;text-transform:uppercase;line-height:1.45;color:#222}
-.verona-card .arr{width:30px;height:30px;border:1px solid #ccc;border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;background:#fff;color:#222}
-.verona-strip-wrap{background:#fff;border-radius:clamp(12px,1.5vw,16px);padding:clamp(10px,1.5vw,14px);border:1px solid #f0f0f0}
+.verona-card-title{font-family:'Playfair Display',serif;font-size:clamp(9px,1vw,11px);letter-spacing:.14em;text-transform:uppercase;line-height:1.45;color:#000}
+.verona-card .arr{width:30px;height:30px;border:1px solid #000;border-radius:50%;display:grid;place-items:center;font-size:13px;flex-shrink:0;background:#fff;color:#000}
+.verona-strip-wrap{background:#fff;border-radius:clamp(12px,1.5vw,16px);padding:clamp(10px,1.5vw,14px);border:1px solid #000}
 .verona-strip-wrap img{width:100%;aspect-ratio:1;object-fit:contain;display:block;background:#fff}
 .verona-pill{position:absolute;left:clamp(14px,3vw,32px);bottom:clamp(14px,3vw,28px);background:#fff;border:none;border-radius:999px;padding:7px clamp(16px,2vw,22px) 7px 7px;display:flex;align-items:center;gap:clamp(10px,1.5vw,14px);z-index:3;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.1);transition:transform .2s,box-shadow .2s}
 .verona-pill:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.13)}
 .verona-pill img{width:clamp(44px,5vw,56px);height:clamp(44px,5vw,56px);border-radius:clamp(8px,1vw,12px);object-fit:cover;flex-shrink:0}
-.verona-pill-text{font-family:'Playfair Display',serif;font-size:clamp(9px,1vw,11px);letter-spacing:.12em;text-transform:uppercase;line-height:1.35;color:#222;text-align:left}
+.verona-pill-text{font-family:'Playfair Display',serif;font-size:clamp(9px,1vw,11px);letter-spacing:.12em;text-transform:uppercase;line-height:1.35;color:#000;text-align:left}
 .verona-pill .price{font-size:clamp(10px,1.1vw,12px);margin-top:3px;display:block}
 
 .products-section{background:#fff;padding:40px 0}
 .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto;padding:0 20px}
 .product{text-align:center;cursor:pointer}
-.product-image{aspect-ratio:1/1;background:#f5f5f5;border-radius:8px;overflow:hidden;margin-bottom:10px}
+.product-image{aspect-ratio:1/1;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:10px;border:1px solid #000}
 .product-image img{width:100%;height:100%;object-fit:cover}
-.product-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
-.product-price{font-size:14px;color:#666}
+.product-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;color:#000}
+.product-price{font-size:14px;color:#000}
 
 .lashgame{position:relative;background:#fff;overflow:hidden}
 .lashgame-photos{display:grid;grid-template-columns:1fr 1fr;min-height:320px}
 .lashgame-photos img{width:100%;height:100%;object-fit:cover;min-height:280px;filter:grayscale(1) contrast(1.05)}
-.lashgame-title{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-family:'Great Vibes',cursive;font-size:clamp(52px,10vw,110px);color:#111;white-space:nowrap;pointer-events:none;z-index:2}
-.lashgame-badge{position:absolute;right:clamp(12px,3vw,28px);bottom:clamp(12px,3vw,24px);width:110px;height:110px;border-radius:50%;border:1px solid #333;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;line-height:1.5;z-index:2;background:rgba(255,255,255,.9)}
+.lashgame-title{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-family:'Great Vibes',cursive;font-size:clamp(52px,10vw,110px);color:#000;white-space:nowrap;pointer-events:none;z-index:2}
+.lashgame-badge{position:absolute;right:clamp(12px,3vw,28px);bottom:clamp(12px,3vw,24px);width:110px;height:110px;border-radius:50%;border:1px solid #000;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:8px;letter-spacing:.14em;text-transform:uppercase;line-height:1.5;z-index:2;background:#fff;color:#000}
 
 .reviews-section{background:#fff;padding:40px 0}
 .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1000px;margin:0 auto;padding:0 20px}
-.review{background:#f5f5f5;padding:20px;border-radius:8px;text-align:left}
-.review-stars{font-size:16px;margin-bottom:15px}
-.review-name{font-size:12px;margin-bottom:10px;text-transform:uppercase}
-.review-text{font-size:14px;line-height:1.5;color:#666}
+.review{background:#fff;padding:20px;border-radius:8px;text-align:left;border:1px solid #000}
+.review-stars{font-size:16px;margin-bottom:15px;color:#000}
+.review-name{font-size:12px;margin-bottom:10px;text-transform:uppercase;color:#000}
+.review-text{font-size:14px;line-height:1.5;color:#000}
 
 .footer-banner{display:grid;grid-template-columns:minmax(200px,32%) 1fr;min-height:280px;background:#fff;position:relative;overflow:hidden}
-.footer-banner::after{content:"";position:absolute;right:0;top:0;width:68%;height:100%;background:linear-gradient(135deg,transparent 20%,rgba(0,0,0,.06) 60%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cpath fill='%23000' fill-opacity='.04' d='M280 20c40 60 20 120-30 140s-100-10-120-70 30-110 90-100 80 40 60 30z'/%3E%3C/svg%3E") right center/cover no-repeat;pointer-events:none}
+.footer-banner::after{content:"";position:absolute;right:0;top:0;width:68%;height:100%;background:#fff;pointer-events:none}
 .footer-model img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
-.footer-copy{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;z-index:1;font-family:'Great Vibes',cursive;font-size:clamp(28px,4vw,42px);line-height:1.45}
+.footer-copy{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;z-index:1;font-family:'Great Vibes',cursive;font-size:clamp(28px,4vw,42px);line-height:1.45;color:#000}
 .footer-copy .sub{margin-top:28px;font-size:clamp(24px,3.5vw,36px)}
 
 /* overlays */
@@ -128,8 +130,8 @@ a{color:inherit;text-decoration:none}
 .drawer{position:fixed;top:0;right:0;width:min(380px,92vw);height:100%;background:#fff;z-index:201;transform:translateX(100%);transition:transform .35s;padding:22px;overflow-y:auto}
 .drawer.on{transform:none}
 .drawer-x{position:absolute;top:12px;right:14px;font-size:26px;background:none;border:none;cursor:pointer}
-.search-field{width:100%;border:none;border-bottom:1px solid #ddd;padding:10px 0;font-size:15px;outline:none;font-family:inherit}
-.search-row{padding:12px 0;border-bottom:1px solid #eee;cursor:pointer;text-align:left}
+.search-field{width:100%;border:none;border-bottom:1px solid #000;padding:10px 0;font-size:15px;outline:none;font-family:inherit;color:#000}
+.search-row{padding:12px 0;border-bottom:1px solid #000;cursor:pointer;text-align:left;color:#000}
 .modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
 .modal.on{opacity:1;pointer-events:auto}
 .modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.55)}
@@ -137,10 +139,10 @@ a{color:inherit;text-decoration:none}
 .modal-box>img{width:100%;object-fit:cover}
 .modal-info{padding:24px;text-align:left;overflow-y:auto}
 .opts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}
-.opt{border:1px solid #ddd;padding:7px 12px;font-size:11px;background:#fff;cursor:pointer;font-family:inherit}
-.opt.on{background:#111;color:#fff}
-.modal-add{width:100%;background:#111;color:#fff;padding:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:#111;color:#fff;padding:10px 18px;font-size:12px;z-index:400;transition:transform .35s}
+.opt{border:1px solid #000;padding:7px 12px;font-size:11px;background:#fff;color:#000;cursor:pointer;font-family:inherit}
+.opt.on{background:#000;color:#fff}
+.modal-add{width:100%;background:#000;color:#fff;padding:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:#000;color:#fff;padding:10px 18px;font-size:12px;z-index:400;transition:transform .35s}
 .toast.on{transform:translateX(-50%) translateY(0)}
 .lightbox{position:fixed;inset:0;z-index:250;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .lightbox.on{opacity:1;pointer-events:auto}
@@ -150,7 +152,9 @@ a{color:inherit;text-decoration:none}
 @media(max-width:768px){
   .website-header{padding:10px 15px;flex-wrap:wrap;justify-content:center}
   .header-nav{order:2;gap:18px;flex:none}
-  .header-logo{order:1;max-width:140px}
+  .header-logo{order:1}
+  .header-logo .logo-lash{font-size:18px}
+  .header-logo .logo-babe{font-size:16px}
   .header-actions{order:3;flex:none}
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-copy{padding:36px 20px 28px}
@@ -186,7 +190,10 @@ a{color:inherit;text-decoration:none}
     <a href="#collections" class="nav-link">Katalog</a>
     <a href="#reviews" class="nav-link">Kontakt</a>
   </nav>
-  <img src="/laleia/images/logo.png" alt="Lash Babe's" class="header-logo" id="header-logo">
+  <button type="button" class="header-logo" id="header-logo" aria-label="Lash Babe's — domů">
+    <span class="logo-lash">Lash</span>
+    <span class="logo-babe">BABE'S</span>
+  </button>
   <div class="header-actions">
     <button type="button" class="header-icon" id="btn-search" aria-label="Hledat">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
@@ -407,16 +414,16 @@ a{color:inherit;text-decoration:none}
 <aside class="drawer" id="cart-drawer">
   <button class="drawer-x" data-close type="button">&times;</button>
   <h2 class="serif" style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px">Košík</h2>
-  <div id="cart-list"><div style="color:#888;padding:12px 0">Košík je prázdný</div></div>
+  <div id="cart-list"><div style="color:#000;padding:12px 0">Košík je prázdný</div></div>
 </aside>
 <div class="modal" id="product-modal">
   <div class="modal-bg" data-close></div>
   <div class="modal-box">
     <img id="modal-img" src="" alt="">
     <div class="modal-info">
-      <h3 id="modal-title" class="serif" style="font-size:15px;text-transform:uppercase;letter-spacing:.06em"></h3>
-      <p id="modal-price" style="margin:8px 0;color:#666"></p>
-      <p id="modal-desc" style="font-size:14px;line-height:1.5;color:#666;margin-bottom:12px">Profesionální řasy Lash Babe's.</p>
+      <h3 id="modal-title" class="serif" style="font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:#000"></h3>
+      <p id="modal-price" style="margin:8px 0;color:#000"></p>
+      <p id="modal-desc" style="font-size:14px;line-height:1.5;color:#000;margin-bottom:12px">Profesionální řasy Lash Babe's.</p>
       <div class="opts" id="modal-length">
         <button type="button" class="opt">10 mm</button>
         <button type="button" class="opt on">12 mm</button>
@@ -466,14 +473,14 @@ document.addEventListener('DOMContentLoaded', function () {
   function renderCart() {
     const box = el('cart-list');
     if (!cart.length) {
-      box.innerHTML = '<div style="color:#888;padding:12px 0">Košík je prázdný</div>';
+      box.innerHTML = '<div style="color:#000;padding:12px 0">Košík je prázdný</div>';
       return;
     }
     box.innerHTML = cart.map(it =>
-      '<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee">' +
+      '<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #000">' +
       '<img src="' + it.img + '" style="width:52px;height:52px;object-fit:cover;border-radius:6px">' +
-      '<div><div style="font-size:11px;text-transform:uppercase">' + it.title + '</div>' +
-      '<div style="color:#666;font-size:13px">' + it.price + '</div></div></div>'
+      '<div><div style="font-size:11px;text-transform:uppercase;color:#000">' + it.title + '</div>' +
+      '<div style="color:#000;font-size:13px">' + it.price + '</div></div></div>'
     ).join('');
   }
   function openProduct(p) {
@@ -553,7 +560,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const hits = !q ? products : products.filter(p => p.title.toLowerCase().includes(q));
     sl.innerHTML = hits.map(p =>
       '<div class="search-row" data-id="' + p.id + '">' + p.title + ' — ' + p.price + '</div>'
-    ).join('') || '<div class="search-row" style="color:#888">Nic nenalezeno</div>';
+    ).join('') || '<div class="search-row" style="color:#000">Nic nenalezeno</div>';
   }
   sf.oninput = () => search(sf.value);
   search('');

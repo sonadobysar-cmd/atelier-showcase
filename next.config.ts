@@ -6,6 +6,12 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
   },
+  async rewrites() {
+    return [
+      { source: "/laleia", destination: "/laleia/index.html" },
+      { source: "/atelier-void", destination: "/atelier-void/index.html" },
+    ];
+  },
 };
 
 export default nextConfig;

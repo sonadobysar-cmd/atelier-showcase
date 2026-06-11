@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/laleia/favicon.svg" type="image/svg+xml">
 <title>LALEIA — E-shop řas</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -13,7 +13,7 @@ body{font-family:'Jost',sans-serif;font-weight:300;color:#333;background:#fff}
 button{font-family:inherit;cursor:pointer;background:none;border:none}
 a{color:inherit;text-decoration:none}
 .top-announcement{background:#000;color:#fff;text-align:center;padding:8px;font-size:12px;text-transform:uppercase;letter-spacing:2px;width:100%}
-.website-header{background:#fff;padding:15px 40px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;min-height:80px;width:100%;position:sticky;top:0;z-index:100}
+.website-header{background-color:rgb(255,255,255);padding:15px 40px;border-bottom:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;min-height:80px;width:100%}
 .header-nav{display:flex;gap:30px;align-items:center;flex:1}
 .nav-link{font-size:16px;color:#333;text-transform:uppercase;letter-spacing:1px;transition:opacity .2s}
 .nav-link:hover,.nav-link.is-on{opacity:.5}
@@ -111,6 +111,7 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
+<div class="preview" id="preview-container">
 <div class="top-announcement" id="top-announcement-banner">Doprava zdarma nad 1 500 Kč · profesionální řasy LALEIA</div>
 
 <header class="website-header" id="website-header">
@@ -119,8 +120,8 @@ a{color:inherit;text-decoration:none}
 <a href="#katalog" class="nav-link" data-nav="katalog">Katalog</a>
 <a href="#kontakt" class="nav-link" data-nav="kontakt">Kontakt</a>
 </nav>
-<div class="header-logo-wrap">
-<img src="images/logo.png" alt="Laleia" class="header-logo" id="header-logo">
+<div style="flex:1 1 0%;text-align:center;background:transparent!important">
+<img src="/laleia/images/logo.png" alt="Laleia" class="header-logo" id="header-logo" style="background:none!important;mix-blend-mode:normal">
 </div>
 <div class="header-actions">
 <button type="button" class="header-icon" id="btn-search" aria-label="Hledat">
@@ -143,69 +144,69 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <div class="banner-container" id="domu">
-<img src="images/preview1.jpg" alt="Laleia — řasy" class="banner" id="preview1" loading="eager">
+<img src="/laleia/images/preview1.jpg" alt="Laleia — řasy" class="banner" id="preview1" loading="eager">
 </div>
 <div class="banner-container" id="section2">
-<img src="images/preview2.png" alt="Kolekce řas" class="banner" id="preview2" loading="lazy">
+<img src="/laleia/images/preview2.png" alt="Kolekce řas" class="banner" id="preview2" loading="lazy">
 </div>
 
 <section class="collection-list" id="katalog">
 <div class="collection-grid">
-<div class="collection-item" data-img="images/preview3.jpg"><img src="images/preview3.jpg" alt="Nová kolekce" loading="lazy"><span>Nová kolekce</span></div>
-<div class="collection-item" data-img="images/preview4.jpg"><img src="images/preview4.jpg" alt="Bestsellery" loading="lazy"><span>Bestsellery</span></div>
-<div class="collection-item" data-img="images/preview5.jpg"><img src="images/preview5.jpg" alt="Přírodní look" loading="lazy"><span>Přírodní look</span></div>
-<div class="collection-item" data-img="images/preview6.jpg"><img src="images/preview6.jpg" alt="Salonní objem" loading="lazy"><span>Salonní objem</span></div>
+<div class="collection-item" data-img="/laleia/images/preview3.jpg"><img src="/laleia/images/preview3.jpg" alt="Nová kolekce" loading="lazy"><span>Nová kolekce</span></div>
+<div class="collection-item" data-img="/laleia/images/preview4.jpg"><img src="/laleia/images/preview4.jpg" alt="Bestsellery" loading="lazy"><span>Bestsellery</span></div>
+<div class="collection-item" data-img="/laleia/images/preview5.jpg"><img src="/laleia/images/preview5.jpg" alt="Přírodní look" loading="lazy"><span>Přírodní look</span></div>
+<div class="collection-item" data-img="/laleia/images/preview6.jpg"><img src="/laleia/images/preview6.jpg" alt="Salonní objem" loading="lazy"><span>Salonní objem</span></div>
 </div>
 </section>
 
-<div class="banner-container" id="section7"><img src="images/preview7.jpg" alt="Lookbook řas" class="banner" id="preview7" loading="lazy"></div>
-<div class="banner-container" id="section8"><img src="images/preview8.jpg" alt="Laleia editorial" class="banner" id="preview8" loading="lazy"></div>
+<div class="banner-container" id="section7"><img src="/laleia/images/preview7.jpg" alt="Lookbook řas" class="banner" id="preview7" loading="lazy"></div>
+<div class="banner-container" id="section8"><img src="/laleia/images/preview8.jpg" alt="Laleia editorial" class="banner" id="preview8" loading="lazy"></div>
 
 <section class="circle-menu" id="circles">
 <div class="circle-grid">
-<div class="circle-item" data-cat="Klasické"><div class="circle"><img src="images/preview9.png" alt="Klasické" id="preview9" loading="lazy"></div><div class="circle-title" id="circle1-title">Klasické</div></div>
-<div class="circle-item" data-cat="Objemové"><div class="circle"><img src="images/preview10.png" alt="Objemové" id="preview10" loading="lazy"></div><div class="circle-title" id="circle2-title">Objemové</div></div>
-<div class="circle-item" data-cat="3D objem"><div class="circle"><img src="images/preview11.jpg" alt="3D objem" id="preview11" loading="lazy"></div><div class="circle-title" id="circle3-title">3D objem</div></div>
-<div class="circle-item" data-cat="Magnetické"><div class="circle"><img src="images/preview12.png" alt="Magnetické" id="preview12" loading="lazy"></div><div class="circle-title" id="circle4-title">Magnetické</div></div>
-<div class="circle-item" data-cat="Sady"><div class="circle"><img src="images/preview13.jpg" alt="Sady" id="preview13" loading="lazy"></div><div class="circle-title" id="circle5-title">Sady</div></div>
+<div class="circle-item" data-cat="Klasické"><div class="circle"><img src="/laleia/images/preview9.png" alt="Klasické" id="preview9" loading="lazy"></div><div class="circle-title" id="circle1-title">Klasické</div></div>
+<div class="circle-item" data-cat="Objemové"><div class="circle"><img src="/laleia/images/preview10.png" alt="Objemové" id="preview10" loading="lazy"></div><div class="circle-title" id="circle2-title">Objemové</div></div>
+<div class="circle-item" data-cat="3D objem"><div class="circle"><img src="/laleia/images/preview11.jpg" alt="3D objem" id="preview11" loading="lazy"></div><div class="circle-title" id="circle3-title">3D objem</div></div>
+<div class="circle-item" data-cat="Magnetické"><div class="circle"><img src="/laleia/images/preview12.png" alt="Magnetické" id="preview12" loading="lazy"></div><div class="circle-title" id="circle4-title">Magnetické</div></div>
+<div class="circle-item" data-cat="Sady"><div class="circle"><img src="/laleia/images/preview13.jpg" alt="Sady" id="preview13" loading="lazy"></div><div class="circle-title" id="circle5-title">Sady</div></div>
 </div>
 </section>
 
-<div class="banner-container" id="section14"><img src="images/preview14.jpg" alt="Salonní řasy" class="banner" id="preview14" loading="lazy"></div>
-<div class="banner-container" id="section15"><img src="images/preview15.png" alt="Laleia" class="banner" id="preview15" loading="lazy"></div>
+<div class="banner-container" id="section14"><img src="/laleia/images/preview14.jpg" alt="Salonní řasy" class="banner" id="preview14" loading="lazy"></div>
+<div class="banner-container" id="section15"><img src="/laleia/images/preview15.png" alt="Laleia" class="banner" id="preview15" loading="lazy"></div>
 
 <section class="products-section" id="products">
 <div class="products-grid">
-<article class="product" data-id="p1" data-title="Klasické řasy 0,15" data-price="890 Kč" data-img="images/preview16.jpg" data-desc="Jednotlivé trsy pro přirozený denní look. Měkké, lehké, vhodné pro začátečníky i profesionály.">
-<div class="product-image"><img src="images/preview16.jpg" alt="Klasické řasy 0,15" id="preview16" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p1" data-title="Klasické řasy 0,15" data-price="890 Kč" data-img="/laleia/images/preview16.jpg" data-desc="Jednotlivé trsy pro přirozený denní look. Měkké, lehké, vhodné pro začátečníky i profesionály.">
+<div class="product-image"><img src="/laleia/images/preview16.jpg" alt="Klasické řasy 0,15" id="preview16" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product1-title">Klasické řasy 0,15</div><div class="product-price">890 Kč</div></div>
 </article>
-<article class="product" data-id="p2" data-title="Objemové řasy 3D" data-price="990 Kč" data-img="images/preview17.jpg" data-desc="Více trsů na jednom stéble pro plnější linii. Drží tvar, snadná aplikace pinzetou.">
-<div class="product-image"><img src="images/preview17.jpg" alt="Objemové řasy 3D" id="preview17" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p2" data-title="Objemové řasy 3D" data-price="990 Kč" data-img="/laleia/images/preview17.jpg" data-desc="Více trsů na jednom stéble pro plnější linii. Drží tvar, snadná aplikace pinzetou.">
+<div class="product-image"><img src="/laleia/images/preview17.jpg" alt="Objemové řasy 3D" id="preview17" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product2-title">Objemové řasy 3D</div><div class="product-price">990 Kč</div></div>
 </article>
-<article class="product" data-id="p3" data-title="Sada Deluxe Wispy" data-price="1 290 Kč" data-img="images/preview18.jpg" data-desc="Kompletní sada pro salonní efekt — různé délky, jemně rozptýlený objem.">
-<div class="product-image"><img src="images/preview18.jpg" alt="Sada Deluxe Wispy" id="preview18" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p3" data-title="Sada Deluxe Wispy" data-price="1 290 Kč" data-img="/laleia/images/preview18.jpg" data-desc="Kompletní sada pro salonní efekt — různé délky, jemně rozptýlený objem.">
+<div class="product-image"><img src="/laleia/images/preview18.jpg" alt="Sada Deluxe Wispy" id="preview18" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product3-title">Sada Deluxe Wispy</div><div class="product-price">1 290 Kč</div></div>
 </article>
-<article class="product" data-id="p4" data-title="Magnetické řasy" data-price="1 490 Kč" data-img="images/preview19.jpg" data-desc="Rychlá aplikace bez lepidla na víčka. Opakované použití, pohodlné nošení.">
-<div class="product-image"><img src="images/preview19.jpg" alt="Magnetické řasy" id="preview19" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p4" data-title="Magnetické řasy" data-price="1 490 Kč" data-img="/laleia/images/preview19.jpg" data-desc="Rychlá aplikace bez lepidla na víčka. Opakované použití, pohodlné nošení.">
+<div class="product-image"><img src="/laleia/images/preview19.jpg" alt="Magnetické řasy" id="preview19" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product4-title">Magnetické řasy</div><div class="product-price">1 490 Kč</div></div>
 </article>
-<article class="product" data-id="p5" data-title="Lepidlo + pinzeta set" data-price="590 Kč" data-img="images/preview20.jpg" data-desc="Profesionální lepidlo s jemným štětečkem a precizní pinzeta v jednom balení.">
-<div class="product-image"><img src="images/preview20.jpg" alt="Lepidlo + pinzeta set" id="preview20" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p5" data-title="Lepidlo + pinzeta set" data-price="590 Kč" data-img="/laleia/images/preview20.jpg" data-desc="Profesionální lepidlo s jemným štětečkem a precizní pinzeta v jednom balení.">
+<div class="product-image"><img src="/laleia/images/preview20.jpg" alt="Lepidlo + pinzeta set" id="preview20" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product5-title">Lepidlo + pinzeta set</div><div class="product-price">590 Kč</div></div>
 </article>
-<article class="product" data-id="p6" data-title="Přírodní páskové řasy" data-price="790 Kč" data-img="images/preview21.jpg" data-desc="Pás řas na celé víčko — okamžitý efekt, ideální na večer i focení.">
-<div class="product-image"><img src="images/preview21.jpg" alt="Přírodní páskové řasy" id="preview21" loading="lazy"><span class="product-cta">Do košíku</span></div>
+<article class="product" data-id="p6" data-title="Přírodní páskové řasy" data-price="790 Kč" data-img="/laleia/images/preview21.jpg" data-desc="Pás řas na celé víčko — okamžitý efekt, ideální na večer i focení.">
+<div class="product-image"><img src="/laleia/images/preview21.jpg" alt="Přírodní páskové řasy" id="preview21" loading="lazy"><span class="product-cta">Do košíku</span></div>
 <div class="product-info"><div class="product-title" id="product6-title">Přírodní páskové řasy</div><div class="product-price">790 Kč</div></div>
 </article>
 </div>
 </section>
 
-<div class="banner-container" id="section22"><img src="images/preview22.jpg" alt="Aplikace řas" class="banner" id="preview22" loading="lazy"></div>
-<div class="banner-container" id="section23"><img src="images/preview23.jpg" alt="Laleia řasy" class="banner" id="preview23" loading="lazy"></div>
-<div class="banner-container" id="section24"><img src="images/preview24.jpg" alt="Profesionální řasy" class="banner" id="preview24" loading="lazy"></div>
+<div class="banner-container" id="section22"><img src="/laleia/images/preview22.jpg" alt="Aplikace řas" class="banner" id="preview22" loading="lazy"></div>
+<div class="banner-container" id="section23"><img src="/laleia/images/preview23.jpg" alt="Laleia řasy" class="banner" id="preview23" loading="lazy"></div>
+<div class="banner-container" id="section24"><img src="/laleia/images/preview24.jpg" alt="Profesionální řasy" class="banner" id="preview24" loading="lazy"></div>
 
 <section class="reviews-section" id="recenze">
 <div class="reviews-grid">
@@ -215,7 +216,7 @@ a{color:inherit;text-decoration:none}
 </div>
 </section>
 
-<div class="banner-container" id="section25"><img src="images/preview25.jpg" alt="Laleia" class="banner" id="preview25" loading="lazy"></div>
+<div class="banner-container" id="section25"><img src="/laleia/images/preview25.jpg" alt="Laleia" class="banner" id="preview25" loading="lazy"></div>
 
 <footer class="contact-bar" id="kontakt">
 <p><a href="mailto:hello@laleia.brandova.co">hello@laleia.brandova.co</a> · <a href="tel:+420770184220">+420 770 184 220</a></p>
@@ -226,6 +227,7 @@ a{color:inherit;text-decoration:none}
 </div>
 </footer>
 
+</div>
 <div class="mask" id="mask"></div>
 <aside class="drawer" id="search-drawer"><button class="drawer-x" data-close type="button">&times;</button><h2>Hledat</h2>
 <input class="search-field" id="search-field" placeholder="Řasy, lepidlo, sady…" autocomplete="off">
@@ -245,7 +247,7 @@ a{color:inherit;text-decoration:none}
 <div class="toast" id="toast"></div>
 
 <script>
-const PRODUCTS = [{"id": "p1", "img": "images/preview16.jpg", "title": "Klasické řasy 0,15", "price": "890 Kč", "desc": "Jednotlivé trsy pro přirozený denní look. Měkké, lehké, vhodné pro začátečníky i profesionály."}, {"id": "p2", "img": "images/preview17.jpg", "title": "Objemové řasy 3D", "price": "990 Kč", "desc": "Více trsů na jednom stéble pro plnější linii. Drží tvar, snadná aplikace pinzetou."}, {"id": "p3", "img": "images/preview18.jpg", "title": "Sada Deluxe Wispy", "price": "1 290 Kč", "desc": "Kompletní sada pro salonní efekt — různé délky, jemně rozptýlený objem."}, {"id": "p4", "img": "images/preview19.jpg", "title": "Magnetické řasy", "price": "1 490 Kč", "desc": "Rychlá aplikace bez lepidla na víčka. Opakované použití, pohodlné nošení."}, {"id": "p5", "img": "images/preview20.jpg", "title": "Lepidlo + pinzeta set", "price": "590 Kč", "desc": "Profesionální lepidlo s jemným štětečkem a precizní pinzeta v jednom balení."}, {"id": "p6", "img": "images/preview21.jpg", "title": "Přírodní páskové řasy", "price": "790 Kč", "desc": "Pás řas na celé víčko — okamžitý efekt, ideální na večer i focení."}];
+const PRODUCTS = [{"id": "p1", "img": "/laleia/images/preview16.jpg", "title": "Klasické řasy 0,15", "price": "890 Kč", "desc": "Jednotlivé trsy pro přirozený denní look. Měkké, lehké, vhodné pro začátečníky i profesionály."}, {"id": "p2", "img": "/laleia/images/preview17.jpg", "title": "Objemové řasy 3D", "price": "990 Kč", "desc": "Více trsů na jednom stéble pro plnější linii. Drží tvar, snadná aplikace pinzetou."}, {"id": "p3", "img": "/laleia/images/preview18.jpg", "title": "Sada Deluxe Wispy", "price": "1 290 Kč", "desc": "Kompletní sada pro salonní efekt — různé délky, jemně rozptýlený objem."}, {"id": "p4", "img": "/laleia/images/preview19.jpg", "title": "Magnetické řasy", "price": "1 490 Kč", "desc": "Rychlá aplikace bez lepidla na víčka. Opakované použití, pohodlné nošení."}, {"id": "p5", "img": "/laleia/images/preview20.jpg", "title": "Lepidlo + pinzeta set", "price": "590 Kč", "desc": "Profesionální lepidlo s jemným štětečkem a precizní pinzeta v jednom balení."}, {"id": "p6", "img": "/laleia/images/preview21.jpg", "title": "Přírodní páskové řasy", "price": "790 Kč", "desc": "Pás řas na celé víčko — okamžitý efekt, ideální na večer i focení."}];
 let cart = [];
 let activeProduct = null;
 

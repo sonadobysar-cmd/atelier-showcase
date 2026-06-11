@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GlossMirrorGlow } from "@/components/gloss/GlossMirrorGlow";
-import type { MirrorLookResult } from "@/lib/gloss-mirror-prompt";
 import {
   normalizeIngredients,
   resolveCustomRitual,
@@ -16,29 +15,64 @@ type Props = {
 
 type Phase = "compose" | "fog" | "revealed";
 
-function drawFog(ctx: CanvasRenderingContext2D, w: number, h: number) {
+function drawFogBase(ctx: CanvasRenderingContext2D, w: number, h: number) {
   ctx.globalCompositeOperation = "source-over";
-  const base = ctx.createLinearGradient(0, 0, 0, h);
-  base.addColorStop(0, "rgba(255,255,255,0.78)");
-  base.addColorStop(0.45, "rgba(255,248,252,0.82)");
-  base.addColorStop(1, "rgba(245,228,236,0.88)");
-  ctx.fillStyle = base;
+  ctx.fillStyle = "rgba(248, 242, 246, 0.97)";
   ctx.fillRect(0, 0, w, h);
 
-  const bloom = ctx.createRadialGradient(w * 0.5, h * 0.38, 0, w * 0.5, h * 0.45, w * 0.65);
-  bloom.addColorStop(0, "rgba(255,255,255,0.55)");
-  bloom.addColorStop(1, "rgba(255,255,255,0)");
-  ctx.fillStyle = bloom;
+  const steam = ctx.createLinearGradient(0, 0, 0, h);
+  steam.addColorStop(0, "rgba(255,255,255,0.92)");
+  steam.addColorStop(0.35, "rgba(255,252,254,0.88)");
+  steam.addColorStop(0.7, "rgba(245, 232, 240, 0.9)");
+  steam.addColorStop(1, "rgba(238, 220, 230, 0.94)");
+  ctx.fillStyle = steam;
   ctx.fillRect(0, 0, w, h);
+
+  for (let i = 0; i < 6; i++) {
+    const cx = w * (0.15 + i * 0.14);
+    const cy = h * (0.25 + (i % 3) * 0.18);
+    const r = w * (0.22 + (i % 2) * 0.08);
+    const mist = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+    mist.addColorStop(0, "rgba(255,255,255,0.55)");
+    mist.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = mist;
+    ctx.fillRect(0, 0, w, h);
+  }
+}
+
+function drawFingerHint(ctx: CanvasRenderingContext2D, w: number, h: number, lines: string[]) {
+  const size = Math.min(w * 0.078, 30);
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.font = `400 ${size}px "Ballet", "Brush Script MT", cursive`;
+  ctx.shadowColor = "rgba(255,255,255,0.95)";
+  ctx.shadowBlur = 14;
+  ctx.fillStyle = "rgba(175, 145, 158, 0.72)";
+
+  const startY = h * 0.38 - ((lines.length - 1) * size * 0.55) / 2;
+  lines.forEach((line, i) => {
+    const y = startY + i * size * 1.1;
+    const wobble = Math.sin(i * 1.2) * 2;
+    ctx.fillText(line, w * 0.5 + wobble, y);
+  });
+
+  ctx.shadowBlur = 0;
+  ctx.font = `400 ${size * 0.55}px "Ballet", cursive`;
+  ctx.fillStyle = "rgba(190, 160, 172, 0.45)";
+  ctx.fillText("♥", w * 0.72, h * 0.72);
+  ctx.restore();
+}
+
+function drawFog(ctx: CanvasRenderingContext2D, w: number, h: number, hint: string[]) {
+  drawFogBase(ctx, w, h);
+  drawFingerHint(ctx, w, h, hint);
 }
 
 export function GlossSignatureRitual({ onReserve }: Props) {
   const [picked, setPicked] = useState<RitualIngredientId[]>([]);
   const [phase, setPhase] = useState<Phase>("compose");
   const [fogOpacity, setFogOpacity] = useState(1);
-  const [generating, setGenerating] = useState(false);
-  const [generatedSrc, setGeneratedSrc] = useState<string | null>(null);
-  const [genNote, setGenNote] = useState<string | null>(null);
 
   const fogRef = useRef<HTMLCanvasElement>(null);
   const glassRef = useRef<HTMLDivElement>(null);
@@ -46,6 +80,11 @@ export function GlossSignatureRitual({ onReserve }: Props) {
 
   const result = useMemo(() => resolveCustomRitual(picked), [picked]);
   const canOpen = picked.length > 0 && phase === "compose";
+
+  const fogHint = useMemo(() => {
+    if (phase === "compose") return ["Vyber si vedle", "→"];
+    return ["Přejeď prstem", "po zrcadle"];
+  }, [phase]);
 
   const toggle = (id: RitualIngredientId) => {
     setPicked((prev) => {
@@ -67,44 +106,17 @@ export function GlossSignatureRitual({ onReserve }: Props) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawFog(ctx, rect.width, rect.height);
+    drawFog(ctx, rect.width, rect.height, fogHint);
     setFogOpacity(1);
-  }, []);
+  }, [fogHint]);
 
-  const openMirror = useCallback(async () => {
-    if (!canOpen || !result) return;
-
-    setGenerating(true);
-    setGenNote(null);
-    setGeneratedSrc(null);
-
-    try {
-      const res = await fetch("/api/gloss/mirror-look", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ingredients: picked,
-          procedure: result.look.procedure,
-        }),
-      });
-      const data = (await res.json()) as MirrorLookResult;
-
-      if (data.ok) {
-        setGeneratedSrc(data.imageDataUrl);
-        setGenNote("AI gloss look · Gemini");
-      } else {
-        setGenNote("Náhled ze salonu — pro AI nastav GEMINI_API_KEY");
-      }
-    } catch {
-      setGenNote("Náhled ze salonu — generování se nepodařilo");
-    } finally {
-      setGenerating(false);
-      setPhase("fog");
-    }
-  }, [canOpen, picked, result]);
+  const openMirror = useCallback(() => {
+    if (!canOpen) return;
+    setPhase("fog");
+  }, [canOpen]);
 
   useEffect(() => {
-    if (phase !== "fog") return;
+    if (phase === "revealed") return;
     const raf = requestAnimationFrame(setupFog);
     window.addEventListener("resize", setupFog);
     return () => {
@@ -122,10 +134,10 @@ export function GlossSignatureRitual({ onReserve }: Props) {
       const rect = canvas.getBoundingClientRect();
       const x = clientX - rect.left;
       const y = clientY - rect.top;
-      const r = 38;
+      const r = 44;
       const grad = ctx.createRadialGradient(x, y, 0, x, y, r);
-      grad.addColorStop(0, "rgba(0,0,0,0.85)");
-      grad.addColorStop(0.6, "rgba(0,0,0,0.25)");
+      grad.addColorStop(0, "rgba(0,0,0,0.9)");
+      grad.addColorStop(0.55, "rgba(0,0,0,0.35)");
       grad.addColorStop(1, "rgba(0,0,0,0)");
       ctx.globalCompositeOperation = "destination-out";
       ctx.fillStyle = grad;
@@ -138,7 +150,7 @@ export function GlossSignatureRitual({ onReserve }: Props) {
 
   const finishReveal = useCallback(() => {
     setFogOpacity(0);
-    window.setTimeout(() => setPhase("revealed"), 480);
+    window.setTimeout(() => setPhase("revealed"), 420);
   }, []);
 
   const checkFogCleared = useCallback(() => {
@@ -149,22 +161,22 @@ export function GlossSignatureRitual({ onReserve }: Props) {
     const { width, height } = canvas;
     const sample = ctx.getImageData(0, 0, width, height).data;
     let cleared = 0;
-    const step = 20;
+    const step = 18;
     for (let i = 3; i < sample.length; i += 4 * step) {
       if (sample[i]! < 40) cleared++;
     }
     const ratio = cleared / (sample.length / (4 * step));
-    if (ratio > 0.28) finishReveal();
+    if (ratio > 0.26) finishReveal();
   }, [finishReveal, phase]);
 
   const reset = () => {
     setPicked([]);
     setPhase("compose");
     setFogOpacity(1);
-    setGenerating(false);
-    setGeneratedSrc(null);
-    setGenNote(null);
   };
+
+  const showFog = phase !== "revealed";
+  const fogInteractive = phase === "fog";
 
   return (
     <section id="vyzkousej" className="gloss-playground gloss-lab gloss-ritual-lab">
@@ -174,39 +186,35 @@ export function GlossSignatureRitual({ onReserve }: Props) {
           Zrcadlo <em className="shine">rituálu</em>
         </h2>
         <p className="sec-note">
-          Vyber až tři procedury. Zrcadlo se zamlží — ty ho vyčistíš a odhalíš svůj look.
+          Vyber procedury vedle zrcadla. Po zamlžení přejeď prstem — odhalíš svůj look.
         </p>
       </div>
 
       <div className="playground-grid gloss-lab-grid gloss-ritual-grid">
         <div className="playground-mirror-wrap gloss-ritual-mirror-col">
           <div
-            className={`gloss-mirror gloss-ritual-mirror${picked.length ? " is-engaged" : ""}${phase === "revealed" ? " is-revealed" : ""}`}
+            className={`gloss-mirror gloss-ritual-mirror${picked.length ? " is-engaged" : ""}${phase === "revealed" ? " is-revealed" : ""}${showFog ? " is-fogged" : ""}`}
           >
             <div className="gloss-mirror-rim" aria-hidden />
             <div ref={glassRef} className="gloss-mirror-glass gloss-ritual-glass">
-              <GlossMirrorGlow
-                picked={picked}
-                phase={phase}
-                generatedSrc={generatedSrc}
-                generating={generating}
-              />
+              <GlossMirrorGlow picked={picked} phase={phase} />
 
               {phase === "revealed" && <div className="gloss-mirror-sweep" aria-hidden />}
 
-              {phase === "fog" && (
+              {showFog && (
                 <canvas
                   ref={fogRef}
-                  className="gloss-fog-canvas"
-                  style={{ opacity: fogOpacity, transition: "opacity .5s ease" }}
-                  aria-label="Vyčisti mlhu na zrcadle"
+                  className={`gloss-fog-canvas${fogInteractive ? " is-wipeable" : " is-idle"}`}
+                  style={{ opacity: fogOpacity, transition: "opacity .45s ease" }}
+                  aria-label={fogInteractive ? "Vyčisti mlhu na zrcadle" : "Zrcadlo zamlžené — vyber procedury vedle"}
                   onPointerDown={(e) => {
+                    if (!fogInteractive) return;
                     wipingRef.current = true;
                     (e.target as HTMLCanvasElement).setPointerCapture(e.pointerId);
                     wipeAt(e.clientX, e.clientY);
                   }}
                   onPointerMove={(e) => {
-                    if (!wipingRef.current) return;
+                    if (!wipingRef.current || !fogInteractive) return;
                     wipeAt(e.clientX, e.clientY);
                     checkFogCleared();
                   }}
@@ -219,12 +227,11 @@ export function GlossSignatureRitual({ onReserve }: Props) {
             </div>
           </div>
 
-          {(phase === "fog" || phase === "revealed") && (
+          {phase === "revealed" && (
             <p className="gloss-ritual-mirror-hint" aria-live="polite">
-              {phase === "fog" ? result?.message : "Zrcadlo je čisté — tvůj rituál je vpravo."}
+              Tvůj rituál je připravený — detaily vpravo.
             </p>
           )}
-          {genNote && phase !== "compose" && <p className="gloss-ritual-gen-note">{genNote}</p>}
         </div>
 
         <div className="playground-panel gloss-ritual-panel" aria-live={phase === "revealed" ? "polite" : "off"}>
@@ -258,23 +265,32 @@ export function GlossSignatureRitual({ onReserve }: Props) {
                 })}
               </ul>
 
-              <button
-                type="button"
-                className="gloss-ritual-cta"
-                disabled={!canOpen || generating}
-                onClick={() => void openMirror()}
-              >
-                {generating ? "Generuji look…" : "Vygenerovat & zamlžit"}
+              <button type="button" className="gloss-ritual-cta" disabled={!canOpen} onClick={openMirror}>
+                Zamlžit zrcadlo
               </button>
             </>
           )}
 
-          {phase === "fog" && (
+          {phase === "fog" && result && (
             <div className="gloss-ritual-wait">
-              <p className="gloss-ritual-panel-label">Vyčisti zrcadlo</p>
+              <p className="gloss-ritual-panel-label">Pod mlhou čeká tvůj look</p>
               <p className="gloss-ritual-panel-lead">
-                Pomalý tah po skle — jako po horké sprše v atelieru. Pod mlhou čeká tvůj rituál.
+                Pomalý tah po skle — jako po horké sprše v atelieru.
               </p>
+              <ul className="gloss-ritual-fog-picks">
+                {picked.map((id) => {
+                  const ing = ritualIngredients.find((x) => x.id === id);
+                  if (!ing) return null;
+                  return (
+                    <li key={id}>
+                      <span>{ing.num}</span> {ing.label}
+                    </li>
+                  );
+                })}
+              </ul>
+              <button type="button" className="playground-btn ghost gloss-ritual-back" onClick={reset}>
+                Změnit výběr
+              </button>
             </div>
           )}
 

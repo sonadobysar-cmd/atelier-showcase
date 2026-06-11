@@ -111,24 +111,24 @@ export type MirrorScene = {
   objectPosition: string;
 };
 
-/** Fotografie v zrcadle — mění se podle výběru procedur */
+/** Modelky v zrcadle rituálu — stejné fotky jako v kartách oborů */
 export function resolveMirrorScene(ids: RitualIngredientId[]): MirrorScene {
   const idle: MirrorScene = {
     src: "/images/gloss/hero.png",
-    objectPosition: "center 18%",
+    objectPosition: "52% 12%",
   };
 
   if (ids.length === 0) return idle;
   if (ids.length >= 2) {
-    return { src: "/images/gloss/hero.png", objectPosition: "center 20%" };
+    return { src: "/images/gloss/hero.png", objectPosition: "52% 14%" };
   }
 
   const sole = ids[0]!;
   const scenes: Record<RitualIngredientId, MirrorScene> = {
-    lift: { src: "/images/gloss/mirror/lash-lifting.png", objectPosition: "center 42%" },
-    laminate: { src: "/images/gloss/mirror/brow-bar.png", objectPosition: "center 38%" },
-    glow: { src: "/images/gloss/mirror/kosmetologie.png", objectPosition: "center 45%" },
-    volume: { src: "/images/gloss/mirror/prodluzovani-ras.png", objectPosition: "center 40%" },
+    lift: { src: "/images/gloss/fields/lash-lifting.png", objectPosition: "center 30%" },
+    laminate: { src: "/images/gloss/fields/brow-bar.png", objectPosition: "center 22%" },
+    glow: { src: "/images/gloss/fields/kosmetologie.png", objectPosition: "center 38%" },
+    volume: { src: "/images/gloss/fields/prodluzovani-ras.png", objectPosition: "68% 42%" },
   };
 
   return scenes[sole] ?? idle;

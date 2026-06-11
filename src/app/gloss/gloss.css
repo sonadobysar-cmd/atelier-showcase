@@ -925,27 +925,28 @@ section#rezervace .sec-head{margin-bottom:clamp(24px,3vw,36px);padding-top:0}
     0 44px 80px -28px rgba(180,100,130,.32),
     inset 0 1px 0 rgba(255,255,255,.95);
 }
-.gloss-ritual-glass{
+.gloss-ritual-lab .gloss-ritual-glass{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(168deg,#1c1218 0%,#120c10 45%,#0a080a 100%);
+  border-radius:inherit;
+  background:linear-gradient(168deg,#fff4f8 0%,#fde8f0 55%,#f8dce8 100%);
 }
-.gloss-ritual-glass::after{
+.gloss-ritual-lab .gloss-ritual-mirror.is-fogged .gloss-ritual-glass{
+  background:linear-gradient(168deg,#fff8fb 0%,#fdf0f6 100%);
+}
+.gloss-ritual-lab .gloss-ritual-mirror.is-revealed .gloss-ritual-glass::after{
   content:'';
   position:absolute;
   inset:0;
   z-index:3;
   pointer-events:none;
-  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.22) 48%,transparent 62%);
+  background:linear-gradient(115deg,transparent 32%,rgba(255,255,255,.35) 48%,transparent 62%);
   background-size:280% 280%;
-  animation:gloss 7s linear infinite;
-}
-.gloss-ritual-mirror.is-revealed .gloss-ritual-glass::after{
   animation:glossReveal .9s ease-out 1;
 }
 @keyframes glossReveal{
-  from{background-position:120% 0;opacity:.9}
-  to{background-position:-80% 0;opacity:.35}
+  from{background-position:120% 0;opacity:.85}
+  to{background-position:-80% 0;opacity:.2}
 }
 .gloss-mirror-glow{
   position:absolute;
@@ -964,6 +965,24 @@ section#rezervace .sec-head{margin-bottom:clamp(24px,3vw,36px);padding-top:0}
   filter:saturate(.88) contrast(1.04) brightness(.82);
   transform:scale(1.02);
   transition:opacity .7s ease,filter .7s ease,transform .9s ease;
+}
+.gloss-ritual-lab .gloss-ritual-glow .gloss-mirror-scene{
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transform:scale(1.04);
+  transition:opacity .6s ease,transform .8s ease,filter .6s ease;
+}
+.gloss-ritual-lab .gloss-ritual-glow.is-live .gloss-mirror-scene{
+  opacity:1;
+  transform:scale(1);
+  filter:saturate(1.02) contrast(1.05) brightness(.96);
+}
+.gloss-ritual-lab .gloss-ritual-glow.is-clear .gloss-mirror-scene{
+  opacity:1;
+  filter:saturate(1.04) contrast(1.06) brightness(1);
 }
 .gloss-mirror-scene.is-warm{
   filter:saturate(.95) contrast(1.02) brightness(.86) sepia(.06);
@@ -1036,8 +1055,15 @@ section#rezervace .sec-head{margin-bottom:clamp(24px,3vw,36px);padding-top:0}
 }
 .gloss-mirror-glow.is-clear .gloss-mirror-glow-ceiling{opacity:.88}
 .gloss-ritual-lab .gloss-mirror-sweep{
+  z-index:4;
+  opacity:.4;
+}
+.gloss-ritual-lab .gloss-ritual-glow .gloss-mirror-glow-sheen{
+  opacity:.28;
   z-index:2;
-  opacity:.55;
+}
+.gloss-ritual-lab .gloss-ritual-glow .gloss-mirror-glow-edge{
+  box-shadow:inset 0 0 40px rgba(255,200,220,.15),inset 0 1px 0 rgba(255,255,255,.2);
 }
 .gloss-mirror-glow.is-ai .gloss-mirror-scene{
   filter:saturate(1.04) contrast(1.06) brightness(.92);
@@ -1109,7 +1135,34 @@ section#rezervace .sec-head{margin-bottom:clamp(24px,3vw,36px);padding-top:0}
   height:100%;
   touch-action:none;
   cursor:default;
+  border-radius:inherit;
 }
+.gloss-fog-canvas.is-idle{
+  pointer-events:none;
+}
+.gloss-fog-canvas.is-wipeable{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='10' fill='rgba(255,255,255,.35)' stroke='rgba(200,150,170,.5)' stroke-width='1'/%3E%3C/svg%3E") 14 14, crosshair;
+}
+.gloss-ritual-fog-picks{
+  list-style:none;
+  margin:20px 0 0;
+  padding:16px 18px;
+  border-radius:16px;
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,143,196,.2);
+}
+.gloss-ritual-fog-picks li{
+  font-size:.82rem;
+  color:var(--plum);
+  padding:6px 0;
+  letter-spacing:.04em;
+}
+.gloss-ritual-fog-picks li span{
+  font-family:'Noto Serif Display',serif;
+  color:var(--bubble-deep);
+  margin-right:8px;
+}
+.gloss-ritual-back{margin-top:18px}
 .gloss-ritual-mirror-hint{
   font-family:'Noto Serif Display',serif;
   font-size:.88rem;

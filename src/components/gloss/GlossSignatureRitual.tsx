@@ -40,33 +40,126 @@ function drawFogBase(ctx: CanvasRenderingContext2D, w: number, h: number) {
   }
 }
 
-function drawFingerHint(ctx: CanvasRenderingContext2D, w: number, h: number, lines: string[]) {
-  const size = Math.min(w * 0.078, 30);
+function fingerFont(size: number, family: string) {
+  return `400 ${size}px ${family}`;
+}
+
+/** Jeden znak — široký „mokrý“ tah prstu ve mlze */
+function smudgeChar(
+  ctx: CanvasRenderingContext2D,
+  ch: string,
+  x: number,
+  y: number,
+  size: number,
+  family: string,
+) {
+  const rot = Math.sin(x * 0.04 + y * 0.02) * 0.11;
+  const dy = Math.sin(x * 0.08) * size * 0.06;
+
   ctx.save();
+  ctx.translate(x, y + dy);
+  ctx.rotate(rot);
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.font = `400 ${size}px "Ballet", "Brush Script MT", cursive`;
-  ctx.shadowColor = "rgba(255,255,255,0.95)";
-  ctx.shadowBlur = 14;
-  ctx.fillStyle = "rgba(175, 145, 158, 0.72)";
+  ctx.font = fingerFont(size, family);
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
 
-  const startY = h * 0.38 - ((lines.length - 1) * size * 0.55) / 2;
-  lines.forEach((line, i) => {
-    const y = startY + i * size * 1.1;
-    const wobble = Math.sin(i * 1.2) * 2;
-    ctx.fillText(line, w * 0.5 + wobble, y);
-  });
+  ctx.shadowColor = "rgba(255,255,255,0.95)";
+  ctx.shadowBlur = 10;
+  ctx.lineWidth = size * 0.38;
+  ctx.strokeStyle = "rgba(255,252,254,0.92)";
+  ctx.strokeText(ch, 0, 0);
+
+  ctx.shadowBlur = 5;
+  ctx.lineWidth = size * 0.2;
+  ctx.strokeStyle = "rgba(235,215,225,0.82)";
+  ctx.strokeText(ch, 0.5, 0.5);
 
   ctx.shadowBlur = 0;
-  ctx.font = `400 ${size * 0.55}px "Ballet", cursive`;
-  ctx.fillStyle = "rgba(190, 160, 172, 0.45)";
-  ctx.fillText("♥", w * 0.72, h * 0.72);
+  ctx.lineWidth = size * 0.09;
+  ctx.strokeStyle = "rgba(155,120,138,0.72)";
+  ctx.strokeText(ch, 1, 1);
+
   ctx.restore();
 }
 
-function drawFog(ctx: CanvasRenderingContext2D, w: number, h: number, hint: string[]) {
+function drawFingerText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  centerX: number,
+  centerY: number,
+  size: number,
+  family: string,
+) {
+  const chars = [...text];
+  const spacing = size * 0.48;
+  const totalW = chars.length * spacing;
+  let x = centerX - totalW / 2 + spacing / 2;
+
+  for (const ch of chars) {
+    if (ch !== " ") smudgeChar(ctx, ch, x, centerY, size, family);
+    x += spacing;
+  }
+}
+
+/** Šipka prstem — k vpravo vedlejšímu panelu */
+function drawFingerArrow(ctx: CanvasRenderingContext2D, x: number, y: number, len: number) {
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+
+  const drawStroke = (width: number, color: string, blur: number, ox: number, oy: number) => {
+    ctx.shadowColor = color;
+    ctx.shadowBlur = blur;
+    ctx.lineWidth = width;
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x + ox, y + oy);
+    ctx.quadraticCurveTo(x + len * 0.45 + ox, y - len * 0.12 + oy, x + len + ox, y + oy);
+    ctx.moveTo(x + len * 0.62 + ox, y - len * 0.2 + oy);
+    ctx.lineTo(x + len + ox, y + oy);
+    ctx.lineTo(x + len * 0.62 + ox, y + len * 0.2 + oy);
+    ctx.stroke();
+  };
+
+  drawStroke(len * 0.14, "rgba(255,252,254,0.9)", 8, 0, 0);
+  drawStroke(len * 0.08, "rgba(230,210,220,0.78)", 4, 1, 1);
+  drawStroke(len * 0.04, "rgba(150,115,130,0.7)", 0, 1.5, 1.5);
+  ctx.restore();
+}
+
+function drawFingerHint(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  lines: string[],
+  family: string,
+  showArrow: boolean,
+) {
+  const size = Math.min(w * 0.082, 34);
+  const blockH = lines.length * size * 1.15;
+  const startY = h * 0.4 - blockH / 2 + size * 0.5;
+
+  lines.forEach((line, i) => {
+    drawFingerText(ctx, line, w * 0.46, startY + i * size * 1.15, size, family);
+  });
+
+  if (showArrow) {
+    drawFingerArrow(ctx, w * 0.58, h * 0.4, w * 0.14);
+  }
+}
+
+function drawFog(
+  ctx: CanvasRenderingContext2D,
+  w: number,
+  h: number,
+  hint: string[],
+  family: string,
+  showArrow: boolean,
+) {
   drawFogBase(ctx, w, h);
-  drawFingerHint(ctx, w, h, hint);
+  drawFingerHint(ctx, w, h, hint, family, showArrow);
 }
 
 export function GlossSignatureRitual({ onReserve }: Props) {
@@ -76,15 +169,18 @@ export function GlossSignatureRitual({ onReserve }: Props) {
 
   const fogRef = useRef<HTMLCanvasElement>(null);
   const glassRef = useRef<HTMLDivElement>(null);
+  const fontProbeRef = useRef<HTMLSpanElement>(null);
   const wipingRef = useRef(false);
 
   const result = useMemo(() => resolveCustomRitual(picked), [picked]);
   const canOpen = picked.length > 0 && phase === "compose";
 
   const fogHint = useMemo(() => {
-    if (phase === "compose") return ["Vyber si vedle", "→"];
+    if (phase === "compose") return ["Vyber si vedle"];
     return ["Přejeď prstem", "po zrcadle"];
   }, [phase]);
+
+  const showFogArrow = phase === "compose";
 
   const toggle = (id: RitualIngredientId) => {
     setPicked((prev) => {
@@ -106,9 +202,13 @@ export function GlossSignatureRitual({ onReserve }: Props) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    drawFog(ctx, rect.width, rect.height, fogHint);
+    const family =
+      fontProbeRef.current
+        ? getComputedStyle(fontProbeRef.current).fontFamily
+        : '"Segoe Script", "Snell Roundhand", "Apple Chancery", cursive';
+    drawFog(ctx, rect.width, rect.height, fogHint, family, showFogArrow);
     setFogOpacity(1);
-  }, [fogHint]);
+  }, [fogHint, showFogArrow]);
 
   const openMirror = useCallback(() => {
     if (!canOpen) return;
@@ -118,10 +218,14 @@ export function GlossSignatureRitual({ onReserve }: Props) {
   useEffect(() => {
     if (phase === "revealed") return;
     const raf = requestAnimationFrame(setupFog);
+    const onFonts = () => setupFog();
     window.addEventListener("resize", setupFog);
+    void document.fonts.ready.then(onFonts);
+    document.fonts.addEventListener("loadingdone", onFonts);
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", setupFog);
+      document.fonts.removeEventListener("loadingdone", onFonts);
     };
   }, [phase, setupFog]);
 
@@ -180,6 +284,14 @@ export function GlossSignatureRitual({ onReserve }: Props) {
 
   return (
     <section id="vyzkousej" className="gloss-playground gloss-lab gloss-ritual-lab">
+      <span
+        ref={fontProbeRef}
+        className="gloss-fog-font-probe"
+        style={{ fontFamily: "var(--font-gloss-script), cursive" }}
+        aria-hidden
+      >
+        A
+      </span>
       <div className="sec-head gloss-lab-head">
         <div className="sec-eyebrow">Signature experience</div>
         <h2 className="sec-title">

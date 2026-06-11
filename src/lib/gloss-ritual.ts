@@ -125,10 +125,10 @@ export function resolveMirrorScene(ids: RitualIngredientId[]): MirrorScene {
 
   const sole = ids[0]!;
   const scenes: Record<RitualIngredientId, MirrorScene> = {
-    lift: { src: "/images/gloss/lash-lifting.png", objectPosition: "center 42%" },
-    laminate: { src: "/images/gloss/brow-bar.png", objectPosition: "center 38%" },
-    glow: { src: "/images/gloss/kosmetologie.png", objectPosition: "center 45%" },
-    volume: { src: "/images/gloss/prodluzovani-ras.png", objectPosition: "center 40%" },
+    lift: { src: "/images/gloss/mirror/lash-lifting.png", objectPosition: "center 42%" },
+    laminate: { src: "/images/gloss/mirror/brow-bar.png", objectPosition: "center 38%" },
+    glow: { src: "/images/gloss/mirror/kosmetologie.png", objectPosition: "center 45%" },
+    volume: { src: "/images/gloss/mirror/prodluzovani-ras.png", objectPosition: "center 40%" },
   };
 
   return scenes[sole] ?? idle;

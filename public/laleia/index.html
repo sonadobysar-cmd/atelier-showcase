@@ -3,360 +3,422 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300&display=swap" rel="stylesheet">
 <link rel="icon" href="/laleia/favicon.svg" type="image/svg+xml">
 <title>LALEIA — E-shop řas</title>
 <style>
-:root{--bg:#ededf0;--ink:#333;--serif:"Playfair Display",Georgia,serif;--sans:"Jost",sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{width:100%;overflow-x:hidden;scroll-behavior:smooth}
-body{font-family:var(--sans);font-weight:300;color:var(--ink);background:#fff}
-button{font-family:inherit;cursor:pointer;border:none;background:none}
-a{color:inherit;text-decoration:none}
-.serif{font-family:var(--serif)}
-.top-announcement{background:#000;color:#fff;text-align:center;padding:8px 12px;font-size:11px;text-transform:uppercase;letter-spacing:.18em}
-.website-header{background:#fff;padding:15px 40px;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;justify-content:space-between;min-height:80px;gap:16px}
-.header-nav{display:flex;gap:28px;flex:1}
-.nav-link{font-size:15px;text-transform:uppercase;letter-spacing:.08em}
-.nav-link:hover{opacity:.55}
-.header-logo{max-height:56px;max-width:180px;object-fit:contain;cursor:pointer}
-.header-actions{display:flex;gap:18px;align-items:center;flex:1;justify-content:flex-end}
-.header-icon{width:24px;height:24px;color:#333}
-.icon-wrap{position:relative}
-.badge{position:absolute;top:-5px;right:-7px;width:15px;height:15px;border-radius:50%;background:#111;color:#fff;font-size:9px;display:none;align-items:center;justify-content:center}
-.badge.on{display:flex}
-.disclaimer{background:var(--bg);padding:10px;overflow:hidden;white-space:nowrap;font-size:13px;text-transform:uppercase;letter-spacing:.14em}
-.scrolling-text{display:inline-block;animation:marquee 16s linear infinite}
-@keyframes marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+        body { font-family: 'Jost', sans-serif; font-weight: 300; color: #333; }
+        
+        .top-announcement {
+            background-color: rgb(0, 0, 0);
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+        }
+        
+        .website-header {
+            background-color: rgb(255, 255, 255);
+            padding: 15px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 80px;
+            width: 100%;
+        }
+        
+        .header-nav { display: flex; gap: 30px; align-items: center; flex: 1; }
+        .nav-link {
+            font-size: 16px;
+            color: rgb(51, 51, 51);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header-logo { 
+            flex: 1; 
+            text-align: center; 
+            max-height: 60px; 
+            max-width: 200px; 
+            object-fit: contain;
+            background-color: transparent !important;
+            mix-blend-mode: normal;
+        }
+        .header-actions { display: flex; gap: 20px; align-items: center; flex: 1; justify-content: flex-end; }
+        .header-icon { width: 24px; height: 24px; color: rgb(51, 51, 51); }
+        
+        .disclaimer {
+            background-color: rgb(237, 237, 240);
+            color: rgb(51, 51, 51);
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+        }
+        
+        .scrolling-text {
+            display: inline-block;
+            animation: scroll-left 15s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .banner-container { width: 100%; margin: 0; padding: 0; }
+        .banner { width: 100%; display: block; margin: 0; padding: 0; }
+        
+        .collection-list { background-color: rgb(237, 237, 240); padding: 20px 0; text-align: center; width: 100%; }
+        .collection-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .collection-item { aspect-ratio: 3/4; background-color: #f5f5f5; overflow: hidden; min-height: 200px; }
+        .collection-item img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .circle-menu { background-color: rgb(237, 237, 240); padding: 30px 0; text-align: center; width: 100%; }
+        .circle-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .circle-item { text-align: center; }
+        .circle { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 10px; background-color: #eee; }
+        .circle img { width: 100%; height: 100%; object-fit: cover; }
+        .circle-title { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .products-section { background-color: #ffffff; padding: 40px 0; text-align: center; width: 100%; }
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .product { text-align: center; }
+        .product-image { aspect-ratio: 1/1; background-color: #f5f5f5; border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; color: #333; }
+        .product-price { font-size: 14px; color: #666; }
+        
+        .reviews-section { background-color: rgb(237, 237, 240); padding: 40px 0; text-align: center; width: 100%; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .review { background-color: #f5f5f5; padding: 20px; border-radius: 8px; text-align: left; }
+        .review-stars { font-size: 16px; margin-bottom: 15px; }
+        .review-name { font-size: 12px; margin-bottom: 10px; text-transform: uppercase; }
+        .review-text { font-size: 14px; line-height: 1.5; color: #666; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .website-header { padding: 10px 15px; flex-direction: column; gap: 15px; }
+            .header-nav { order: 2; gap: 20px; justify-content: center; }
+            .nav-link { font-size: 14px; }
+            .header-logo { order: 1; max-width: 150px; max-height: 40px; }
+            .header-actions { order: 3; justify-content: center; gap: 15px; }
+            .header-icon { width: 20px; height: 20px; }
+            .collection-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; padding: 0 15px !important; }
+            .circle-grid { display: flex !important; justify-content: center !important; gap: 15px !important; padding: 15px !important; flex-wrap: wrap !important; }
+            .circle { width: 50px !important; height: 50px !important; }
+            .circle-title { font-size: 8px !important; width: 50px !important; }
+            .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 15px !important; padding: 0 15px !important; }
+            .reviews-grid { grid-template-columns: 1fr !important; gap: 20px !important; padding: 0 15px !important; }
+        }
+        
+        #collections { background-color: rgb(237, 237, 240) !important; }
+#collections { background-color: rgb(237, 237, 240) !important; }
+#collections { background-color: rgb(237, 237, 240) !important; }
+#collections { background-color: rgb(237, 237, 240) !important; }
+#circles { background-color: rgb(237, 237, 240) !important; }
+#circles { background-color: rgb(237, 237, 240) !important; }
+#circles { background-color: rgb(237, 237, 240) !important; }
+#circles { background-color: rgb(237, 237, 240) !important; }
+#circles { background-color: rgb(237, 237, 240) !important; }
+#section14 { background-color: rgb(237, 237, 240) !important; }
 
-/* HERO */
-.hero{display:grid;grid-template-columns:1fr 1fr;min-height:min(78vh,820px);background:#f7f6f4;position:relative;overflow:hidden}
-.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.25) 58%,transparent 70%);pointer-events:none}
-.hero-copy{display:flex;flex-direction:column;justify-content:center;padding:clamp(32px,6vw,88px);z-index:1}
-.hero-eyebrow{font-family:var(--serif);font-size:clamp(11px,1.2vw,13px);letter-spacing:.28em;text-transform:uppercase;margin-bottom:clamp(16px,3vw,28px)}
-.hero-title{line-height:.92;margin-bottom:clamp(24px,4vw,36px)}
-.hero-title .lash{display:block;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(52px,9vw,108px)}
-.hero-title .babe{display:block;font-family:var(--serif);font-size:clamp(56px,10vw,118px);font-weight:500;letter-spacing:.02em}
-.hero-btn{align-self:flex-start;border:1px solid #111;background:#ededf0;color:#111;padding:12px 30px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-family:var(--serif);transition:.2s}
-.hero-btn:hover{background:#111;color:#fff}
-.hero-photo{position:relative;overflow:hidden}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:saturate(.94) brightness(1.02)}
-
-.section-label{background:var(--bg);padding:22px clamp(20px,4vw,40px);font-family:var(--serif);font-size:clamp(22px,3vw,30px);letter-spacing:.06em;text-transform:uppercase}
-
-.collection-list{background:var(--bg);padding:8px 0 28px}
-.collection-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1200px;margin:0 auto;padding:0 20px}
-.collection-card{background:#fff;border-radius:18px;padding:14px 14px 12px;cursor:pointer;transition:transform .25s}
-.collection-card:hover{transform:translateY(-3px)}
-.collection-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding:0 4px}
-.collection-card-head span{font-family:var(--serif);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-.collection-card-head .arr{width:34px;height:34px;border:1px solid #ddd;border-radius:50%;display:grid;place-items:center;font-size:14px}
-.collection-card img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px;display:block}
-.collection-card:nth-child(1) img{filter:hue-rotate(6deg) saturate(.93)}
-.collection-card:nth-child(2) img{filter:hue-rotate(14deg) saturate(.9)}
-.collection-card:nth-child(3) img{filter:hue-rotate(-5deg) saturate(.95)}
-.collection-card:nth-child(4) img{filter:hue-rotate(10deg) saturate(.92)}
-
-.luxury{position:relative;display:grid;grid-template-columns:1.1fr .9fr 1fr;min-height:420px;background:#f5f3f0}
-.luxury-panel{overflow:hidden}
-.luxury-panel img{width:100%;height:100%;object-fit:cover}
-.luxury-panel.mid img{object-position:center 35%}
-.luxury-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;pointer-events:none;text-shadow:0 2px 24px rgba(0,0,0,.35)}
-.luxury-overlay small{font-family:var(--serif);letter-spacing:.35em;text-transform:uppercase;font-size:12px;margin-bottom:10px}
-.luxury-overlay h2{font-family:var(--serif);font-size:clamp(36px,6vw,72px);font-weight:500;line-height:1}
-.luxury-overlay h2 em{font-style:italic;font-weight:400}
-
-.type-row{background:var(--bg);padding:28px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;font-family:var(--serif);font-size:clamp(22px,3.8vw,42px);line-height:1.2}
-.type-row .w1{font-style:italic;text-transform:uppercase}
-.type-row .w2{font-weight:600;font-style:italic}
-.type-row .w3{text-transform:uppercase}
-.type-thumb{width:clamp(44px,6vw,64px);height:clamp(44px,6vw,64px);border-radius:10px;object-fit:cover;vertical-align:middle}
-
-.circle-menu{background:var(--bg);padding:30px 0}
-.circle-grid{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;max-width:820px;margin:0 auto;padding:0 20px}
-.circle-item{text-align:center;cursor:pointer}
-.circle{width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 8px;border:2px solid transparent;transition:.2s}
-.circle-item:hover .circle,.circle-item.on .circle{border-color:#111}
-.circle img{width:100%;height:100%;object-fit:cover}
-.circle-title{font-size:10px;text-transform:uppercase;letter-spacing:.1em}
-
-.featured{position:relative;min-height:520px;background:#ddd;overflow:hidden}
-.featured>img{width:100%;height:100%;object-fit:cover;min-height:520px;filter:saturate(.92)}
-.featured-cards{position:absolute;inset:0;padding:clamp(16px,4vw,40px);display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.fcard{background:rgba(248,248,248,.95);border-radius:22px;padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;backdrop-filter:blur(4px)}
-.fcard img{width:64px;height:64px;border-radius:12px;object-fit:cover}
-.fcard strong{display:block;font-family:var(--serif);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.fcard span{font-size:14px;color:#666}
-.fcard-lg{flex-direction:column;align-items:stretch;min-width:min(280px,42vw);padding:16px}
-.fcard-lg .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.fcard-lg .top span{font-family:var(--serif);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
-.fcard-lg .top .arr{width:32px;height:32px;border:1px solid #ccc;border-radius:50%;display:grid;place-items:center}
-.fcard-lg img{width:100%;aspect-ratio:1;object-fit:contain;background:#fff;border-radius:14px}
-
-.products-section{padding:36px 0 44px}
-.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto;padding:0 20px}
-.product{cursor:pointer;text-align:center}
-.product-image{aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:#f3f3f3;margin-bottom:10px;position:relative}
-.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.product:hover .product-image img{transform:scale(1.04)}
-.product:nth-child(odd) img{filter:hue-rotate(8deg) saturate(.93)}
-.product-cta{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#fff;padding:7px 14px;font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:0;transition:.25s}
-.product:hover .product-cta{opacity:1}
-.product-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-.product-price{font-size:14px;color:#666;margin-top:4px}
-
-.lash-game{display:grid;grid-template-columns:1fr 1fr;min-height:380px;position:relative;background:#ececec}
-.lash-game img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05)}
-.lash-game-title{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);font-family:var(--serif);font-style:italic;font-size:clamp(42px,7vw,88px);white-space:nowrap;pointer-events:none}
-.lash-game-badge{position:absolute;right:8%;bottom:18%;width:120px;height:120px;border-radius:50%;border:1px solid #111;display:grid;place-items:center;text-align:center;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:12px;line-height:1.5}
-
-.editorial{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.editorial img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
-.editorial img:nth-child(odd){filter:hue-rotate(5deg) saturate(.94)}
-
-.reviews-section{background:var(--bg);padding:40px 0}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1000px;margin:0 auto;padding:0 20px}
-.review{background:#f5f5f5;padding:20px;border-radius:10px;text-align:left}
-.review-name{font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin:10px 0 8px}
-.review-text{font-size:14px;line-height:1.55;color:#666}
-
-.closing{position:relative;min-height:360px;overflow:hidden}
-.closing img{width:100%;height:100%;object-fit:cover;min-height:360px}
-.closing-cap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
-.closing-cap h2{font-family:var(--serif);font-size:clamp(28px,5vw,52px);color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.4)}
-
-.contact-bar{background:#111;color:#fff;text-align:center;padding:40px 20px}
-.contact-bar a{color:#fff;border-bottom:1px solid rgba(255,255,255,.35)}
-.contact-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-.cbtn{background:#fff;color:#111;padding:11px 22px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-.cbtn.ghost{background:transparent;border:1px solid rgba(255,255,255,.45);color:#fff}
-
-.mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;opacity:0;pointer-events:none;transition:.3s}
-.mask.on{opacity:1;pointer-events:auto}
-.drawer{position:fixed;top:0;right:0;width:min(380px,92vw);height:100%;background:#fff;z-index:201;transform:translateX(100%);transition:.35s;padding:22px;overflow-y:auto}
-.drawer.on{transform:none}
-.drawer-x{position:absolute;top:12px;right:14px;font-size:26px}
+    
+.banner-hero{position:relative}
+.hero-shop-btn{position:absolute;left:clamp(20px,7.5vw,132px);top:62%;transform:translateY(-50%);z-index:2;min-width:148px;text-align:center;background:#ededf0;color:#333;border:1px solid #333;padding:12px 28px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-family:Georgia,serif;text-decoration:none;cursor:pointer;box-shadow:0 0 0 4px #ededf0}
+.hero-shop-btn:hover{background:#111;color:#fff}
+.collection-item,.product,.circle-item{cursor:pointer}
+#preview3{filter:hue-rotate(8deg) saturate(.93)}#preview4{filter:hue-rotate(16deg) saturate(.9)}#preview5{filter:hue-rotate(-6deg) saturate(.94)}#preview6{filter:hue-rotate(12deg) saturate(.91)}
+#preview16{filter:hue-rotate(5deg) saturate(.94)}#preview17{filter:hue-rotate(14deg) saturate(.9)}#preview18{filter:hue-rotate(-4deg) saturate(.95)}#preview19{filter:hue-rotate(18deg) saturate(.88)}#preview20{filter:hue-rotate(10deg) saturate(.92)}#preview21{filter:hue-rotate(-8deg) saturate(.93)}
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}.mask.on{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:0;width:min(380px,92vw);height:100%;background:#fff;z-index:201;transform:translateX(100%);transition:transform .35s;padding:22px;overflow-y:auto}.drawer.on{transform:none}
+.drawer-x{position:absolute;top:12px;right:14px;font-size:26px;background:none;border:none;cursor:pointer}
 .search-field{width:100%;border:none;border-bottom:1px solid #ddd;padding:10px 0;font-size:15px;outline:none;font-family:inherit}
 .search-row{padding:12px 0;border-bottom:1px solid #eee;cursor:pointer;text-align:left}
-.modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:.3s}
-.modal.on{opacity:1;pointer-events:auto}
-.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.55)}
-.modal-box{position:relative;background:#fff;max-width:860px;width:100%;display:grid;grid-template-columns:1fr 1fr;max-height:90vh;overflow:hidden}
-.modal-box>img{width:100%;object-fit:cover;aspect-ratio:1/1}
-.modal-info{padding:28px;text-align:left;overflow-y:auto}
-.opts{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
-.opt{border:1px solid #ddd;padding:7px 12px;font-size:11px;background:#fff;cursor:pointer}
-.opt.on{background:#111;color:#fff;border-color:#111}
-.modal-add{width:100%;background:#111;color:#fff;padding:13px;font-size:10px;letter-spacing:.15em;text-transform:uppercase}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:#111;color:#fff;padding:11px 18px;font-size:12px;z-index:400;transition:.35s}
-.toast.on{transform:translateX(-50%) translateY(0)}
-
-@media(max-width:900px){
-.hero{grid-template-columns:1fr;min-height:auto}
-.hero-photo{min-height:340px;order:-1}
-.luxury{grid-template-columns:1fr;min-height:auto}
-.luxury-panel{min-height:220px}
-.lash-game{grid-template-columns:1fr;min-height:300px}
-.lash-game img:last-child{display:none}
-.editorial{grid-template-columns:1fr}
-}
-@media(max-width:768px){
-.website-header{flex-wrap:wrap;padding:12px 16px;justify-content:center}
-.header-nav,.header-actions{flex:1 1 100%;justify-content:center}
-.collection-grid,.products-grid,.reviews-grid{grid-template-columns:repeat(2,1fr)!important;gap:14px!important}
-.circle{width:56px;height:56px}
-.modal-box{grid-template-columns:1fr}
-}
+.modal{position:fixed;inset:0;z-index:300;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}.modal.on{opacity:1;pointer-events:auto}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.55)}.modal-box{position:relative;background:#fff;max-width:820px;width:100%;display:grid;grid-template-columns:1fr 1fr;max-height:90vh;overflow:hidden}
+.modal-box>img{width:100%;object-fit:cover}.modal-info{padding:24px;text-align:left;overflow-y:auto}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 16px}.opt{border:1px solid #ddd;padding:7px 12px;font-size:11px;background:#fff;cursor:pointer;font-family:inherit}.opt.on{background:#111;color:#fff}
+.modal-add{width:100%;background:#111;color:#fff;padding:12px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:#111;color:#fff;padding:10px 18px;font-size:12px;z-index:400;transition:transform .35s}.toast.on{transform:translateX(-50%) translateY(0)}
+.lightbox{position:fixed;inset:0;z-index:250;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}.lightbox.on{opacity:1;pointer-events:auto}
+.lightbox img{max-width:min(92vw,760px);max-height:86vh;object-fit:contain}.lightbox-x{position:absolute;top:16px;right:20px;color:#fff;font-size:30px;background:none;border:none;cursor:pointer}
+@media(max-width:768px){.hero-shop-btn{left:50%;top:auto;bottom:14%;transform:translateX(-50%)}.modal-box{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="preview" id="preview-container">
-<div class="top-announcement">Doprava zdarma nad 1 500 Kč · profesionální řasy LALEIA</div>
 
-<header class="website-header">
-<nav class="header-nav">
-<a href="#domu" class="nav-link">Domů</a>
-<a href="#katalog" class="nav-link">Katalog</a>
-<a href="#kontakt" class="nav-link">Kontakt</a>
-</nav>
-<img src="/laleia/images/logo.png" alt="Laleia" class="header-logo" id="header-logo">
-<div class="header-actions">
-<button type="button" class="header-icon" id="btn-search" aria-label="Hledat"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-<button type="button" class="header-icon" id="btn-account" aria-label="Účet"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
-<div class="icon-wrap"><button type="button" class="header-icon" id="btn-cart" aria-label="Košík"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></button><span class="badge" id="cart-count">0</span></div>
-</div>
-</header>
+    <div class="preview" id="preview-container">
+            <!-- Mobile/Desktop Toggle -->
+            
+            
+            <!-- Top Announcement Banner -->
+            <div class="top-announcement" id="top-announcement-banner" style="background-color: rgb(0, 0, 0);">
+                <span id="top-announcement-display">Doprava zdarma nad 1 500 Kč · profesionální řasy LALEIA</span>
+            </div>
+            
+            <!-- Website Header -->
+            <header class="website-header" id="website-header">
+                <nav class="header-nav" id="header-nav">
+                    <a href="#section1" class="nav-link">Domů</a>
+                    <a href="#collections" class="nav-link">Katalog</a>
+                    <a href="#reviews" class="nav-link">Kontakt</a>
+                </nav>
+                
+                <div style="flex: 1 1 0%; text-align: center; background: transparent !important;">
+                    <img src="/laleia/images/logo.png" alt="Logo" class="header-logo" id="header-logo" style="background: none !important; mix-blend-mode: normal !important;">
+                </div>
+                
+                <div class="header-actions">
+                    <button type="button" class="header-icon" id="btn-search" aria-label="Hledat" style="background:none;border:none;padding:0;cursor:pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg></button>
+                    <button type="button" class="header-icon" id="btn-account" aria-label="Účet" style="background:none;border:none;padding:0;cursor:pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg></button>
+                    <button type="button" class="header-icon" id="btn-cart" aria-label="Košík" style="background:none;border:none;padding:0;cursor:pointer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg></button>
+                </div>
+            </header>
+            
+            <!-- Announcement Banner -->
+            <div class="disclaimer" id="announcement-banner" style="background-color: rgb(237, 237, 240);">
+                <span class="scrolling-text" id="announcement-display">DOPRAVA ZDARMA NAD 1 500 KČ</span>
+            </div>
+            
+            <!-- Banner 1 -->
+            <div class="banner-container banner-hero" id="section1" style="position:relative">
+                <img src="/laleia/images/preview1.jpg" alt="Banner 1" id="preview1" class="banner"><a href="#products" class="hero-shop-btn" id="hero-shop-btn">Nakupovat</a>
+            </div>
+            
+            <!-- Banner 2 -->
+            <div class="banner-container" id="section2">
+                <img src="/laleia/images/preview2.png" alt="Banner 2" id="preview2" class="banner">
+            </div>
+            
+            <!-- Collections -->
+            <div class="collection-list" id="collections" style="background-color: rgb(237, 237, 240);">
+                <div class="collection-grid">
+                    <div class="collection-item">
+                        <img src="/laleia/images/preview3.jpg" alt="Collection 1" id="preview3">
+                    </div>
+                    <div class="collection-item">
+                        <img src="/laleia/images/preview4.jpg" alt="Collection 2" id="preview4">
+                    </div>
+                    <div class="collection-item">
+                        <img src="/laleia/images/preview5.jpg" alt="Collection 3" id="preview5">
+                    </div>
+                    <div class="collection-item">
+                        <img src="/laleia/images/preview6.jpg" alt="Collection 4" id="preview6">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Banner 3 -->
+            <div class="banner-container" id="section7">
+                <img src="/laleia/images/preview7.jpg" alt="Banner 3" id="preview7" class="banner">
+            </div>
+            
+            <!-- Banner 4 -->
+            <div class="banner-container" id="section8">
+                <img src="/laleia/images/preview8.jpg" alt="Banner 4" id="preview8" class="banner">
+            </div>
+            
+            <!-- Circle Menu -->
+            <div class="circle-menu" id="circles" style="background-color: rgb(237, 237, 240);">
+                <div class="circle-grid">
+                    <div class="circle-item">
+                        <div class="circle">
+                            <img src="/laleia/images/preview9.png" alt="Circle 1" id="preview9">
+                        </div>
+                        <div class="circle-title" id="circle1-title">Klasické</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle">
+                            <img src="/laleia/images/preview10.png" alt="Circle 2" id="preview10">
+                        </div>
+                        <div class="circle-title" id="circle2-title">Objemové</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle">
+                            <img src="/laleia/images/preview11.jpg" alt="Circle 3" id="preview11">
+                        </div>
+                        <div class="circle-title" id="circle3-title">3D objem</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle">
+                            <img src="/laleia/images/preview12.png" alt="Circle 4" id="preview12">
+                        </div>
+                        <div class="circle-title" id="circle4-title">Magnetické</div>
+                    </div>
+                    <div class="circle-item">
+                        <div class="circle">
+                            <img src="/laleia/images/preview13.jpg" alt="Circle 5" id="preview13">
+                        </div>
+                        <div class="circle-title" id="circle5-title">Sady</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Banner 5 -->
+            <div class="banner-container" id="section14" style="background-color: rgb(237, 237, 240);">
+                <img src="/laleia/images/preview14.jpg" alt="Banner 5" id="preview14" class="banner">
+            </div>
+            
+            <!-- Banner 6 -->
+            <div class="banner-container" id="section15">
+                <img src="/laleia/images/preview15.png" alt="Banner 6" id="preview15" class="banner">
+            </div>
+            
+            <!-- Products Section -->
+            <div class="products-section" id="products">
+                <div class="products-grid">
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview16.jpg" alt="Product 1" id="preview16">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product1-title">Klasické řasy 0,15</div>
+                            <div class="product-price">890 Kč</div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview17.jpg" alt="Product 2" id="preview17">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product2-title">Objemové řasy 3D</div>
+                            <div class="product-price">990 Kč</div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview18.jpg" alt="Product 3" id="preview18">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product3-title">Sada Deluxe Wispy</div>
+                            <div class="product-price">1 290 Kč</div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview19.jpg" alt="Product 4" id="preview19">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product4-title">Řasy Verona</div>
+                            <div class="product-price">1 490 Kč</div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview20.jpg" alt="Product 5" id="preview20">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product5-title">Lepidlo + pinzeta</div>
+                            <div class="product-price">590 Kč</div>
+                        </div>
+                    </div>
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="/laleia/images/preview21.jpg" alt="Product 6" id="preview21">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title" id="product6-title">Páskové řasy</div>
+                            <div class="product-price">790 Kč</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Banner 7 -->
+            <div class="banner-container" id="section22">
+                <img src="/laleia/images/preview22.jpg" alt="Banner 7" id="preview22" class="banner">
+            </div>
+            
+            <!-- Banner 8 -->
+            <div class="banner-container" id="section23">
+                <img src="/laleia/images/preview23.jpg" alt="Banner 8" id="preview23" class="banner">
+            </div>
+            
+            <!-- Banner 9 -->
+            <div class="banner-container" id="section24">
+                <img src="/laleia/images/preview24.jpg" alt="Banner 9" id="preview24" class="banner">
+            </div>
+            
+            <!-- Reviews Section -->
+            <div class="reviews-section" id="reviews" style="background-color: rgb(237, 237, 240);">
+                <div class="reviews-grid">
+                    <div class="review">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-name">Denisa W.</div>
+                        <div class="review-text">Řasy vypadají přirozeně a drží celý den. Objem sedí přesně jako na fotce — kvalita i cena super.</div>
+                    </div>
+                    <div class="review">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-name">Nikola V.</div>
+                        <div class="review-text">Konečně lepidlo, které opravdu drží. Aplikace doma bez stresu, objem krásně rovnoměrný.</div>
+                    </div>
+                    <div class="review">
+                        <div class="review-stars">★★★★★</div>
+                        <div class="review-name">Adéla S.</div>
+                        <div class="review-text">Magnetické řasy za minutu. Vypadají jako z salonu — mám černé i hnědé.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Banner 10 -->
+            <div class="banner-container" id="section25">
+                <img src="/laleia/images/preview25.jpg" alt="Banner 10" id="preview25" class="banner">
+            </div>
+        </div>
 
-<div class="disclaimer"><span class="scrolling-text">Nová kolekce řas 2026 — přirozený objem, salonní kvalita</span></div>
-
-<section class="hero" id="domu">
-<div class="hero-copy">
-<p class="hero-eyebrow">Ráda tě tu vidím</p>
-<h1 class="hero-title"><span class="lash">lash</span><span class="babe">BABE</span></h1>
-<button type="button" class="hero-btn" id="hero-shop-btn">Nakupovat</button>
-</div>
-<div class="hero-photo"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1400&q=85" alt="Laleia řasy — beauty look" loading="eager"></div>
-</section>
-
-<h2 class="section-label" id="katalog">Naše kolekce</h2>
-<section class="collection-list">
-<div class="collection-grid">
-<article class="collection-card" data-img="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85"><div class="collection-card-head"><span>Glamour</span><span class="arr">↗</span></div><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85" alt="Glamour" loading="lazy"></article>
-<article class="collection-card" data-img="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85"><div class="collection-card-head"><span>Přírodní</span><span class="arr">↗</span></div><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=85" alt="Přírodní" loading="lazy"></article>
-<article class="collection-card" data-img="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85"><div class="collection-card-head"><span>Salon</span><span class="arr">↗</span></div><img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=800&q=85" alt="Salon" loading="lazy"></article>
-<article class="collection-card" data-img="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=85"><div class="collection-card-head"><span>Editorial</span><span class="arr">↗</span></div><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=85" alt="Editorial" loading="lazy"></article>
-</div></section>
-
-<section class="luxury">
-<div class="luxury-panel"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=80" alt="" loading="lazy"></div>
-<div class="luxury-panel mid"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=700&q=85" alt="Řasy detail" loading="lazy"></div>
-<div class="luxury-panel"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=85" alt="Beauty portrét" loading="lazy"></div>
-<div class="luxury-overlay"><small>Máme pouze</small><h2><em>Luxusní</em> řasy</h2></div>
-</section>
-
-<div class="type-row">
-<span class="w1">Co</span>
-<img class="type-thumb" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=200&q=80" alt="">
-<span class="w2">dnes</span>
-<span>hledáš</span>
-<img class="type-thumb" src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=200&q=80" alt="">
-<span class="w3">?</span>
-</div>
-
-<section class="circle-menu" id="circles">
-<div class="circle-grid">
-<div class="circle-item" data-cat="Klasické"><div class="circle"><img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=200&q=80" alt="Klasické" loading="lazy"></div><div class="circle-title">Klasické</div></div>
-<div class="circle-item" data-cat="Objem"><div class="circle"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=200&q=80" alt="Objem" loading="lazy"></div><div class="circle-title">Objem</div></div>
-<div class="circle-item" data-cat="3D"><div class="circle"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=200&q=80" alt="3D" loading="lazy"></div><div class="circle-title">3D</div></div>
-<div class="circle-item" data-cat="Magnetické"><div class="circle"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=200&q=80" alt="Magnetické" loading="lazy"></div><div class="circle-title">Magnetické</div></div>
-<div class="circle-item" data-cat="Sady"><div class="circle"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80" alt="Sady" loading="lazy"></div><div class="circle-title">Sady</div></div>
-</div></section>
-
-<h2 class="section-label">Naše bestsellery</h2>
-
-<section class="featured">
-<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=85" alt="">
-<div class="featured-cards">
-<div class="fcard" data-product="p4"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=300&q=80" alt=""><div><strong>Získej svůj set</strong><span>690 Kč</span></div></div>
-<article class="fcard fcard-lg" data-product="p4"><div class="top"><span>Řasy „Verona“</span><span class="arr">↗</span></div><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=600&q=80" alt="Řasy Verona"></article>
-</div></section>
-
-<section class="products-section" id="products">
-<div class="products-grid">
-<article class="product" data-id="p1" data-title="Klasické řasy 0,15" data-price="890 Kč" data-img="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=85" data-desc="Jednotlivé trsy pro přirozený denní look.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=85" alt="Klasické řasy 0,15" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Klasické řasy 0,15</div><div class="product-price">890 Kč</div></article>
-<article class="product" data-id="p2" data-title="Objemové řasy 3D" data-price="990 Kč" data-img="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85" data-desc="Plnější linie víčka, snadná aplikace pinzetou.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85" alt="Objemové řasy 3D" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Objemové řasy 3D</div><div class="product-price">990 Kč</div></article>
-<article class="product" data-id="p3" data-title="Sada Deluxe Wispy" data-price="1 290 Kč" data-img="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85" data-desc="Salonní efekt — různé délky v jedné sadě.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85" alt="Sada Deluxe Wispy" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Sada Deluxe Wispy</div><div class="product-price">1 290 Kč</div></article>
-<article class="product" data-id="p4" data-title="Řasy Verona" data-price="1 490 Kč" data-img="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=85" data-desc="Naše bestseller linie s jemným objemem.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=85" alt="Řasy Verona" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Řasy Verona</div><div class="product-price">1 490 Kč</div></article>
-<article class="product" data-id="p5" data-title="Lepidlo + pinzeta" data-price="590 Kč" data-img="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=85" data-desc="Profesionální set pro domácí i salonní aplikaci.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=85" alt="Lepidlo + pinzeta" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Lepidlo + pinzeta</div><div class="product-price">590 Kč</div></article>
-<article class="product" data-id="p6" data-title="Páskové řasy Natural" data-price="790 Kč" data-img="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=85" data-desc="Okamžitý efekt na celé víčko.">
-<div class="product-image"><img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=85" alt="Páskové řasy Natural" loading="lazy"><span class="product-cta">Do košíku</span></div>
-<div class="product-title">Páskové řasy Natural</div><div class="product-price">790 Kč</div></article>
-</div></section>
-
-<section class="lash-game">
-<img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1000&q=85" alt=""><img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1000&q=80" alt="">
-<p class="lash-game-title">lash game</p>
-<div class="lash-game-badge">Jen ty nejfluffnější řasy</div>
-</section>
-
-<section class="editorial">
-<img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1600&q=85" alt="" loading="lazy">
-<img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=85" alt="" loading="lazy">
-</section>
-
-<section class="reviews-section" id="recenze">
-<div class="reviews-grid">
-<div class="review"><div>★★★★★</div><div class="review-name">Denisa W.</div><div class="review-text">Řasy vypadají přirozeně a drží celý den. Objem sedí přesně jako na fotce.</div></div>
-<div class="review"><div>★★★★★</div><div class="review-name">Nikola V.</div><div class="review-text">Konečně lepidlo, které opravdu drží. Aplikace doma bez stresu.</div></div>
-<div class="review"><div>★★★★★</div><div class="review-name">Adéla S.</div><div class="review-text">Magnetické řasy za minutu. Vypadají jako z salonu.</div></div>
-</div></section>
-
-<section class="closing">
-<img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=85" alt="">
-<div class="closing-cap"><h2 class="serif">Laleia · řasy</h2></div>
-</section>
-
-<footer class="contact-bar" id="kontakt">
-<p><a href="mailto:hello@laleia.brandova.co">hello@laleia.brandova.co</a> · <a href="tel:+420770184220">+420 770 184 220</a></p>
-<div class="contact-btns"><a href="mailto:hello@laleia.brandova.co" class="cbtn">Napsat nám</a><a href="#products" class="cbtn ghost">Nakupovat</a></div>
-</footer>
-</div>
 
 <div class="mask" id="mask"></div>
-<aside class="drawer" id="search-drawer"><button class="drawer-x" data-close>&times;</button><h2 style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px">Hledat</h2>
-<input class="search-field" id="search-field" placeholder="Řasy, lepidlo, sady…"><div id="search-list"></div></aside>
-<aside class="drawer" id="cart-drawer"><button class="drawer-x" data-close>&times;</button><h2 style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px">Košík</h2><div id="cart-list"><div style="color:#888;padding:12px 0">Košík je prázdný</div></div></aside>
-
-<div class="modal" id="product-modal"><div class="modal-bg" data-close></div>
-<div class="modal-box"><img id="modal-img" src="" alt=""><div class="modal-info">
-<h3 id="modal-title" class="serif" style="font-size:18px;text-transform:uppercase;letter-spacing:.06em"></h3>
-<p id="modal-price" style="margin:8px 0 14px;color:#666"></p><p id="modal-desc" style="font-size:14px;line-height:1.55;color:#666;margin-bottom:16px"></p>
-<p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase">Délka</p>
-<div class="opts" id="modal-length"><button type="button" class="opt">10 mm</button><button type="button" class="opt on">12 mm</button><button type="button" class="opt">14 mm</button></div>
-<p style="font-size:10px;letter-spacing:.12em;text-transform:uppercase">Ohyb</p>
-<div class="opts" id="modal-curl"><button type="button" class="opt on">C</button><button type="button" class="opt">D</button><button type="button" class="opt">CC</button></div>
-<button type="button" class="modal-add" id="modal-add">Přidat do košíku</button>
-</div></div></div>
+<aside class="drawer" id="search-drawer"><button class="drawer-x" data-close type="button">&times;</button><h2 style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px">Hledat</h2><input class="search-field" id="search-field" placeholder="Řasy, lepidlo…"><div id="search-list"></div></aside>
+<aside class="drawer" id="cart-drawer"><button class="drawer-x" data-close type="button">&times;</button><h2 style="font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px">Košík</h2><div id="cart-list"><div style="color:#888;padding:12px 0">Košík je prázdný</div></div></aside>
+<div class="modal" id="product-modal"><div class="modal-bg" data-close></div><div class="modal-box"><img id="modal-img" src="" alt=""><div class="modal-info"><h3 id="modal-title" style="font-size:15px;text-transform:uppercase;letter-spacing:.06em"></h3><p id="modal-price" style="margin:8px 0;color:#666"></p><p id="modal-desc" style="font-size:14px;line-height:1.5;color:#666;margin-bottom:12px"></p><div class="opts" id="modal-length"><button type="button" class="opt">10 mm</button><button type="button" class="opt on">12 mm</button><button type="button" class="opt">14 mm</button></div><button type="button" class="modal-add" id="modal-add">Přidat do košíku</button></div></div></div>
+<div class="lightbox" id="lightbox"><button class="lightbox-x" type="button">&times;</button><img id="lightbox-img" src="" alt=""></div>
 <div class="toast" id="toast"></div>
-
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-const PRODUCTS = [{"id": "p1", "title": "Klasické řasy 0,15", "price": "890 Kč", "img": "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?auto=format&fit=crop&w=800&q=85", "desc": "Jednotlivé trsy pro přirozený denní look."}, {"id": "p2", "title": "Objemové řasy 3D", "price": "990 Kč", "img": "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85", "desc": "Plnější linie víčka, snadná aplikace pinzetou."}, {"id": "p3", "title": "Sada Deluxe Wispy", "price": "1 290 Kč", "img": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=85", "desc": "Salonní efekt — různé délky v jedné sadě."}, {"id": "p4", "title": "Řasy Verona", "price": "1 490 Kč", "img": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=85", "desc": "Naše bestseller linie s jemným objemem."}, {"id": "p5", "title": "Lepidlo + pinzeta", "price": "590 Kč", "img": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=85", "desc": "Profesionální set pro domácí i salonní aplikaci."}, {"id": "p6", "title": "Páskové řasy Natural", "price": "790 Kč", "img": "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=800&q=85", "desc": "Okamžitý efekt na celé víčko."}];
-let cart=[], active=null;
-const el=id=>document.getElementById(id);
-function toast(m){const t=el('toast');if(!t)return;t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400)}
+const products=[];document.querySelectorAll('.product').forEach((node,i)=>{const p={id:'p'+(i+1),title:node.querySelector('[id^=product]')?.textContent||'',price:node.querySelector('.product-price')?.textContent||'',img:node.querySelector('img')?.src||'',desc:'Profesionální řasy LALEIA.'};products.push(p);node.onclick=()=>openProduct(p);});
+let cart=[],active=null;const el=id=>document.getElementById(id);
+function toast(m){const t=el('toast');if(!t)return;t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2200)}
 function closeAll(){document.querySelectorAll('.drawer,.mask').forEach(e=>e.classList.remove('on'))}
-function openDrawer(id){const m=el('mask'),d=el(id);if(m)m.classList.add('on');if(d)d.classList.add('on')}
-function renderCart(){
-  const n=cart.length;const b=el('cart-count');if(b){b.textContent=n;b.classList.toggle('on',n>0)}
-  const box=el('cart-list');if(!box)return;
-  if(!n){box.innerHTML='<div style="color:#888;padding:12px 0">Košík je prázdný</div>';return}
-  box.innerHTML=cart.map(it=>'<div style="display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #eee"><img src="'+it.img+'" style="width:56px;height:56px;object-fit:cover;border-radius:6px"><div><div style="font-size:11px;text-transform:uppercase">'+it.title+'</div><div style="color:#666;font-size:13px">'+it.price+' · '+it.len+'</div></div></div>').join('');
-}
-function openProduct(p){
-  active=p;const mi=el('modal-img'),mt=el('modal-title'),mp=el('modal-price'),md=el('modal-desc'),mo=el('product-modal');
-  if(mi)mi.src=p.img;if(mt)mt.textContent=p.title;if(mp)mp.textContent=p.price;if(md)md.textContent=p.desc;
-  document.querySelectorAll('#modal-length .opt').forEach((b,i)=>b.classList.toggle('on',i===1));
-  document.querySelectorAll('#modal-curl .opt').forEach((b,i)=>b.classList.toggle('on',i===0));
-  if(mo)mo.classList.add('on');
-}
+function openDrawer(id){el('mask')?.classList.add('on');el(id)?.classList.add('on')}
+function renderCart(){const box=el('cart-list');if(!box)return;if(!cart.length){box.innerHTML='<div style="color:#888;padding:12px 0">Košík je prázdný</div>';return}box.innerHTML=cart.map(it=>'<div style="display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eee"><img src="'+it.img+'" style="width:52px;height:52px;object-fit:cover"><div><div style="font-size:11px;text-transform:uppercase">'+it.title+'</div><div style="color:#666;font-size:13px">'+it.price+'</div></div></div>').join('')}
+function openProduct(p){active=p;if(el('modal-img'))el('modal-img').src=p.img;if(el('modal-title'))el('modal-title').textContent=p.title;if(el('modal-price'))el('modal-price').textContent=p.price;if(el('modal-desc'))el('modal-desc').textContent=p.desc;el('product-modal')?.classList.add('on')}
 if(el('btn-search'))el('btn-search').onclick=()=>openDrawer('search-drawer');
 if(el('btn-cart'))el('btn-cart').onclick=()=>openDrawer('cart-drawer');
 if(el('btn-account'))el('btn-account').onclick=()=>toast('Přihlášení — brzy');
 if(el('mask'))el('mask').onclick=closeAll;
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeAll);
-if(el('header-logo'))el('header-logo').onclick=()=>el('domu')&&el('domu').scrollIntoView({behavior:'smooth'});
-if(el('hero-shop-btn'))el('hero-shop-btn').onclick=()=>el('products')&&el('products').scrollIntoView({behavior:'smooth'});
-document.querySelectorAll('.product').forEach(node=>{
-  const p={id:node.dataset.id,title:node.dataset.title,price:node.dataset.price,img:node.dataset.img,desc:node.dataset.desc};
-  const go=()=>openProduct(p);
-  node.onclick=e=>{if(!e.target.closest('.product-cta'))go()};
-  const cta=node.querySelector('.product-cta');if(cta)cta.onclick=e=>{e.stopPropagation();go()};
-});
+if(el('header-logo'))el('header-logo').onclick=()=>el('section1')?.scrollIntoView({behavior:'smooth'});
+if(el('hero-shop-btn'))el('hero-shop-btn').addEventListener('click',e=>{e.preventDefault();el('products')?.scrollIntoView({behavior:'smooth'})});
+document.querySelectorAll('.collection-item').forEach(item=>{item.onclick=()=>{const img=item.querySelector('img');if(img&&el('lightbox-img')){el('lightbox-img').src=img.src;el('lightbox')?.classList.add('on')}}});
+if(el('lightbox'))el('lightbox').onclick=e=>{if(e.target===el('lightbox')||e.target.classList.contains('lightbox-x'))el('lightbox').classList.remove('on')};
+document.querySelectorAll('.circle-item').forEach(c=>c.onclick=()=>el('products')?.scrollIntoView({behavior:'smooth'}));
 document.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{b.parentElement.querySelectorAll('.opt').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
-if(el('modal-add'))el('modal-add').onclick=()=>{
-  if(!active)return;
-  cart.push({...active,len:document.querySelector('#modal-length .opt.on').textContent,curl:document.querySelector('#modal-curl .opt.on').textContent});
-  renderCart();el('product-modal').classList.remove('on');toast('Přidáno do košíku');
-};
-document.querySelectorAll('.collection-card').forEach(c=>c.onclick=()=>{el('products')&&el('products').scrollIntoView({behavior:'smooth'});toast('Kolekce — prohlédni produkty')});
-document.querySelectorAll('.circle-item').forEach(c=>c.onclick=()=>{document.querySelectorAll('.circle-item').forEach(x=>x.classList.remove('on'));c.classList.add('on');el('products')&&el('products').scrollIntoView({behavior:'smooth'})});
-document.querySelectorAll('[data-product]').forEach(node=>node.onclick=()=>{const p=PRODUCTS.find(x=>x.id===node.dataset.product);if(p)openProduct(p)});
-const sf=el('search-field'), sl=el('search-list');
-function search(q){if(!sl)return;q=(q||'').toLowerCase();const hits=!q?PRODUCTS:PRODUCTS.filter(p=>p.title.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
-sl.innerHTML=hits.map(p=>'<div class="search-row" data-id="'+p.id+'">'+p.title+' — '+p.price+'</div>').join('')||'<div class="search-row" style="color:#888">Nic nenalezeno</div>'}
-if(sf)sf.oninput=()=>search(sf.value);search('');
-if(sl)sl.onclick=e=>{const r=e.target.closest('.search-row');if(!r||!r.dataset.id)return;const p=PRODUCTS.find(x=>x.id===r.dataset.id);if(p){closeAll();openProduct(p)}};
+if(el('modal-add'))el('modal-add').onclick=()=>{if(!active)return;cart.push({...active});renderCart();el('product-modal')?.classList.remove('on');toast('Přidáno do košíku')};
+const sf=el('search-field'),sl=el('search-list');
+function search(q){if(!sl)return;q=(q||'').toLowerCase();const hits=!q?products:products.filter(p=>p.title.toLowerCase().includes(q));sl.innerHTML=hits.map(p=>'<div class="search-row" data-id="'+p.id+'">'+p.title+' — '+p.price+'</div>').join('')||'<div class="search-row" style="color:#888">Nic nenalezeno</div>'}
+if(sf){sf.oninput=()=>search(sf.value);search('')}
+if(sl)sl.onclick=e=>{const r=e.target.closest('.search-row');if(!r)return;const p=products.find(x=>x.id===r.dataset.id);if(p){closeAll();openProduct(p)}};
 });
 </script>
-</body></html>
+
+</body>
+</html>

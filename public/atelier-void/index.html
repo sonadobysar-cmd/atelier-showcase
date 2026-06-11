@@ -72,13 +72,13 @@ section{padding:120px 4vw;position:relative}
 
 /* projects */
 .proj{border-top:1px solid var(--line)}
-.proj-row{display:grid;grid-template-columns:60px 1.4fr 1fr 100px;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);cursor:pointer;position:relative;transition:.4s}
-.proj-row:hover{padding-left:18px;background:var(--ink);color:var(--white);margin:0 -4vw;padding-right:4vw;padding-left:calc(4vw + 18px)}
+.proj-row{display:grid;grid-template-columns:60px 1.4fr 1fr 100px;gap:24px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line);cursor:pointer;position:relative;transition:.35s}
+.proj-row.expanded{padding-left:18px;background:var(--ink);color:var(--white);margin:0 -4vw;padding-right:4vw;padding-left:calc(4vw + 18px)}
 .proj-row .pn{font-family:'Spline Sans Mono';font-size:.75rem;color:var(--muted)}
 .proj-row h3{font-family:'Archivo Narrow';font-weight:600;text-transform:uppercase;font-size:clamp(1.4rem,3vw,2.4rem);letter-spacing:.01em}
 .proj-row .loc{font-family:'Spline Sans Mono';font-size:.78rem;color:var(--muted)}
 .proj-row .yr{font-family:'Spline Sans Mono';font-size:.82rem;text-align:right}
-.proj-row:hover .pn,.proj-row:hover .loc{color:#9AA0FF}
+.proj-row.expanded .pn,.proj-row.expanded .loc{color:#9AA0FF}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:50px;border-top:1px solid var(--line);padding-top:40px}
@@ -115,9 +115,9 @@ section{padding:120px 4vw;position:relative}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero-title .row span{transform:none}.reveal{opacity:1;transform:none}}
 
 /* popup */
-.pop-overlay{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,8,12,0);pointer-events:none;transition:background .28s ease;will-change:opacity;border-radius:2px}
-.pop-overlay.open{background:rgba(8,8,12,.9);pointer-events:none}
-.pop-card{position:relative;pointer-events:auto;width:min(520px,94%);background:#14141f;border:1px solid #2C2C3A;border-radius:8px;overflow:hidden;box-shadow:0 50px 120px rgba(0,0,0,.6);transform:translateY(12px) scale(.97);opacity:0;transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .28s ease;will-change:transform,opacity}
+.pop-overlay{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:4vw;background:rgba(8,8,12,0);pointer-events:none;transition:background .28s ease;will-change:opacity}
+.pop-overlay.open{background:rgba(8,8,12,.82);pointer-events:none}
+.pop-card{position:relative;pointer-events:none;width:min(680px,92vw);background:#14141f;border:1px solid #2C2C3A;border-radius:8px;overflow:hidden;box-shadow:0 50px 120px rgba(0,0,0,.6);transform:translateY(12px) scale(.97);opacity:0;transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .28s ease;will-change:transform,opacity}
 .pop-overlay.open .pop-card{transform:translateY(0) scale(1);opacity:1}
 .pop-scene{width:100%;aspect-ratio:3/2;background:#0c0c12;overflow:hidden}
 .pop-body{padding:26px 30px 30px}
@@ -125,7 +125,7 @@ section{padding:120px 4vw;position:relative}
 .pop-title{font-family:'Archivo Narrow';font-weight:700;text-transform:uppercase;font-size:clamp(1.6rem,4vw,2.6rem);color:#FAF9F6;line-height:1;letter-spacing:.01em}
 .pop-cap{color:#B8B4AA;margin-top:14px;max-width:520px;line-height:1.6}
 .pop-note{margin-top:18px;font-family:'Spline Sans Mono';font-size:.66rem;letter-spacing:.05em;color:#8A8578;border-top:1px solid #2C2C3A;padding-top:14px}
-.pop-close{position:absolute;top:14px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;font-size:1.4rem;cursor:pointer;line-height:1;transition:.3s;backdrop-filter:blur(4px)}
+.pop-close{position:absolute;top:14px;right:16px;z-index:3;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(0,0,0,.35);color:#fff;font-size:1.4rem;cursor:pointer;line-height:1;transition:.3s;backdrop-filter:blur(4px);pointer-events:auto}
 .pop-close:hover{background:#C9A06B;border-color:#C9A06B}
 .cut-stage .floor{transition:opacity .3s}
 
@@ -172,7 +172,7 @@ section{padding:120px 4vw;position:relative}
 .proj-row{border-bottom:none!important}
 .proj-row{position:relative}
 .proj-row::after{content:'+';position:absolute;right:0;top:50%;transform:translateY(-50%);font-family:'Spline Sans Mono';font-size:1.1rem;color:var(--muted);transition:.3s;pointer-events:none}
-.proj-row:hover::after{color:#C9A06B}
+
 .proj-row.expanded::after{content:'\2013';color:#C9A06B}
 .proj-detail{max-height:0;overflow:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1),opacity .4s;opacity:0}
 .proj-detail.open{max-height:2600px;opacity:1}
@@ -239,18 +239,6 @@ section{padding:120px 4vw;position:relative}
   <div class="section-cut">
     <div class="cut-stage" id="cutStage"></div>
     <div class="cut-info" id="floorList"></div>
-<div class="pop-overlay" id="pop-overlay">
-  <div class="pop-card" id="pop-card">
-    <button class="pop-close" id="pop-close" aria-label="Zavřít">×</button>
-    <div class="pop-scene" id="pop-scene"></div>
-    <div class="pop-body">
-      <div class="pop-tag" id="pop-tag"></div>
-      <h3 class="pop-title" id="pop-title"></h3>
-      <p class="pop-cap" id="pop-cap"></p>
-      <div class="pop-note" id="pop-note">Ilustrační scéna · zde později nahradíš skutečnou fotkou interiéru</div>
-    </div>
-  </div>
-</div>
   </div>
   <p class="cut-hint" id="cutHint">↑ Najeď myší na patro — otevře se scéna.</p>
 </section>
@@ -307,6 +295,19 @@ section{padding:120px 4vw;position:relative}
 </footer>
 
 
+
+<div class="pop-overlay" id="pop-overlay">
+  <div class="pop-card" id="pop-card">
+    <button class="pop-close" id="pop-close" aria-label="Zavřít">×</button>
+    <div class="pop-scene" id="pop-scene"></div>
+    <div class="pop-body">
+      <div class="pop-tag" id="pop-tag"></div>
+      <h3 class="pop-title" id="pop-title"></h3>
+      <p class="pop-cap" id="pop-cap"></p>
+      <div class="pop-note" id="pop-note">Ilustrační scéna · zde později nahradíš skutečnou fotkou interiéru</div>
+    </div>
+  </div>
+</div>
 
 <script>
 /* ---------- interactive cross-section building ---------- */
@@ -403,8 +404,10 @@ if(sectionCut){
   sectionCut.addEventListener('mouseleave',scheduleClose);
 }
 const stavbaSection=document.getElementById('stavba');
-if(stavbaSection){stavbaSection.addEventListener('mouseleave',scheduleClose);}
-window.addEventListener('scroll',()=>{if(overlay.classList.contains('open')){cancelOpenTimer();closePopup();clearH();}},{passive:true});
+if(stavbaSection){
+  stavbaSection.addEventListener('mouseenter',cancelCloseTimer);
+  stavbaSection.addEventListener('mouseleave',scheduleClose);
+}
 
 
 /* ---- BEAUTIFUL POPUP that grows from click point ---- */
@@ -596,11 +599,9 @@ function initPdGallery(panel){
   const dots=[...gal.querySelectorAll('.pd-gal-dot')];
   let idx=0,timer=null;
   function go(i){idx=(i+slides.length)%slides.length;track.style.transform='translateX(-'+(idx*100)+'%)';dots.forEach((d,j)=>d.classList.toggle('on',j===idx));}
-  function restart(){if(timer)clearInterval(timer);timer=setInterval(()=>go(idx+1),3200);}
-  gal.querySelector('.pd-gal-arrow.l').onclick=e=>{e.stopPropagation();go(idx-1);restart();};
-  gal.querySelector('.pd-gal-arrow.r').onclick=e=>{e.stopPropagation();go(idx+1);restart();};
-  dots.forEach((d,j)=>d.onclick=e=>{e.stopPropagation();go(j);restart();});
-  restart();
+  gal.querySelector('.pd-gal-arrow.l').onclick=e=>{e.stopPropagation();go(idx-1);};
+  gal.querySelector('.pd-gal-arrow.r').onclick=e=>{e.stopPropagation();go(idx+1);};
+  dots.forEach((d,j)=>d.onclick=e=>{e.stopPropagation();go(j);});
 }
 
 /* ---------- stats counter ---------- */

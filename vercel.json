@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "laleia.brandova.co" }],
+      "destination": "/laleia/:path*"
+    }
+  ]
+}

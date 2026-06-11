@@ -354,6 +354,6 @@ const sf=$('search-field'), sl=$('search-list');
 function search(q){q=(q||'').toLowerCase();const hits=!q?PRODUCTS:PRODUCTS.filter(p=>p.title.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q));
 sl.innerHTML=hits.map(p=>'<div class="search-row" data-id="'+p.id+'">'+p.title+' — '+p.price+'</div>').join('')||'<div class="search-row" style="color:#888">Nic nenalezeno</div>'}
 sf.oninput=()=>search(sf.value);search('');
-sl.onclick=e=>{const r=e.target.closest('.search-row');if(!r||!r.dataset.id)return;const p=PRODUCTS.find(x=>x.id===r.dataset.id);if(p){closeAll();openProduct(p)};
+sl.onclick=e=>{const r=e.target.closest('.search-row');if(!r||!r.dataset.id)return;const p=PRODUCTS.find(x=>x.id===r.dataset.id);if(p){closeAll();openProduct(p)}};
 </script>
 </body></html>

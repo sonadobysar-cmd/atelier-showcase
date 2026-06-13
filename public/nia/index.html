@@ -55,11 +55,11 @@ img{display:block;max-width:100%}
 
 /* HERO */
 .hero{position:relative;min-height:100vh;background:var(--black);color:#fff;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
-.hero-layout{display:grid;grid-template-columns:.92fr 1.08fr;gap:32px;align-items:end}
-.hero-portrait{position:relative;justify-self:end;width:100%;max-width:min(500px,42vw);opacity:0;animation:fadeUp 1s .7s forwards;align-self:end}
+.hero-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:20px;align-items:end}
+.hero-portrait{position:relative;justify-self:end;width:100%;max-width:min(680px,54vw);opacity:0;animation:fadeUp 1s .7s forwards;align-self:end}
 .hero-portrait::before{display:none}
 .hero-portrait::after{content:'';position:absolute;inset:12% -2% 0 -2%;background:radial-gradient(ellipse at 52% 82%,rgba(214,152,133,.32),transparent 70%);z-index:0;pointer-events:none}
-.hero-portrait img{position:relative;z-index:1;width:100%;height:auto;max-height:min(88vh,780px);object-fit:contain;object-position:bottom center;display:block;filter:drop-shadow(0 24px 44px rgba(0,0,0,.42))}
+.hero-portrait img{position:relative;z-index:1;width:auto;max-width:100%;height:min(94vh,940px);object-fit:contain;object-position:bottom center;display:block;margin-left:auto;filter:drop-shadow(0 24px 44px rgba(0,0,0,.42))}
 .hero-portrait .tag{position:absolute;left:0;bottom:12%;z-index:2;background:rgba(32,16,15,.82);backdrop-filter:blur(8px);
   color:var(--rg3);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;padding:10px 16px;border-radius:30px}
 .hero::before{content:'';position:absolute;top:-25%;right:-12%;width:62vw;height:62vw;border-radius:50%;
@@ -288,8 +288,8 @@ img{display:block;max-width:100%}
 /* RESPONSIVE */
 @media(max-width:980px){
   .hero-layout{grid-template-columns:1fr;gap:24px;align-items:end}
-  .hero-portrait{max-width:min(360px,90vw);justify-self:center}
-  .hero-portrait img{max-height:min(64vh,540px)}
+  .hero-portrait{max-width:min(440px,94vw);justify-self:center}
+  .hero-portrait img{height:min(72vh,620px)}
   .hero-inner{padding:96px 0 72px}
   .work-item,.work-item.rev{grid-template-columns:1fr;gap:34px}
   .work-item.rev .work-meta{order:0}

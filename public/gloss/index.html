@@ -47,9 +47,11 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
 @media(max-width:900px){
-  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:75%;max-width:340px;background:#fff;flex-direction:column;justify-content:center;gap:34px;font-size:1.1rem;transition:right .45s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(255,79,163,.18)}
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:75%;max-width:340px;background:#fff;flex-direction:column;justify-content:center;gap:34px;font-size:1.1rem;transition:right .45s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(255,79,163,.18);z-index:101}
   .nav-links.open{right:0}
-  .burger{display:flex;z-index:101}
+  .burger{display:flex;z-index:102}
+  body.nav-open{overflow:hidden}
+  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(10,10,10,.35);z-index:100}
 }
 
 /* ---------- HERO ---------- */
@@ -91,6 +93,18 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .hero-photo img{object-position:55% 14%}
   .hero-spark{top:24px;left:auto;right:32px}
   .hero-grid{padding:40px 7vw 64px}
+  .hero-badge{position:static;margin-top:22px;box-shadow:0 8px 24px rgba(255,79,163,.2)}
+  body{padding-bottom:88px}
+  .sc-form{flex-direction:column}
+  .sc-form button{width:100%}
+}
+@media(max-width:520px){
+  #zrcadlo,#obory,#cenik,#galerie,#kontakt{padding:64px 0}
+  #rezervace{padding:64px 0 100px}
+  .hero-cta{flex-direction:column;align-items:stretch}
+  .btn-primary,.btn-ghost{display:flex;justify-content:center;text-align:center}
+  .marquee-track{font-size:1.05rem}
+  .sc-card{padding:32px 20px 28px}
 }
 /* ---------- MARQUEE ---------- */
 .marquee{background:linear-gradient(180deg,var(--bubble),var(--bubble-deep));color:#fff;padding:20px 0;overflow:hidden;white-space:nowrap;transform:rotate(-2.4deg);width:116%;margin:-44px 0 70px -8%;position:relative;z-index:6;box-shadow:0 18px 46px rgba(229,25,126,.28)}
@@ -218,7 +232,7 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .rez-field input,.rez-field select,.rez-field textarea{font-family:'Archivo';font-size:.95rem;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);transition:.3s;width:100%}
 .rez-field input:focus,.rez-field select:focus,.rez-field textarea:focus{outline:none;border-color:var(--bubble);box-shadow:0 0 0 4px rgba(255,79,163,.1)}
 .rez-times{display:flex;flex-wrap:wrap;gap:8px}
-.rez-time{padding:9px 16px;border:1.5px solid var(--line);border-radius:30px;font-size:.85rem;cursor:pointer;transition:.3s}
+.rez-time{padding:10px 16px;min-height:44px;display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:30px;font-size:.85rem;cursor:pointer;transition:.3s}
 .rez-time:hover{border-color:var(--bubble);color:var(--bubble)}
 .rez-time.on{background:var(--bubble);color:#fff;border-color:var(--bubble)}
 .rez-submit{width:100%;margin-top:8px;background:var(--bubble);color:#fff;border:none;padding:18px;border-radius:16px;font-family:'Archivo';font-size:1rem;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:.3s;box-shadow:0 12px 34px rgba(255,79,163,.3)}
@@ -297,7 +311,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
   background:linear-gradient(135deg,var(--bubble),var(--bubble-deep));color:#fff;box-shadow:0 12px 26px rgba(229,25,126,.32);transition:.25s}
 .sc-book:hover{transform:translateY(-2px)}
 .sc-spark{position:absolute;pointer-events:none;font-size:1rem;z-index:5;animation:scPop .8s ease-out forwards}
-@keyframes scPop{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1.4) translateY(-30px) rotate(40deg);opacity:0}}100%{transform:scale(1.4) translateY(-30px) rotate(40deg);opacity:0}}
+@keyframes scPop{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1.4) translateY(-30px) rotate(40deg);opacity:0}}
 </style>
 </head>
 <body>
@@ -324,15 +338,15 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
   <div class="hero-grid">
     <div class="hero-text">
       <span class="hero-eyebrow"><span class="dot"></span><span class="eyebrow">Praha · Atelier de Beauté · od 2026</span></span>
-      <h1>Probuď se <em>krásná</em><br>zůstaň&nbsp;IN.</h1>
-      <p class="lead">Lash lifting, brow bar, kosmetologie a prodlužování řas. Glossy výsledky, které mluví za vše — a welcome drink vždycky gratis.</p>
+      <h1>Probuď se <em>krásnou</em><br>zůstaň&nbsp;IN.</h1>
+      <p class="lead">Lash lifting, brow bar, kosmetologie a prodlužování řas. Lesklé výsledky, které mluví za vše — a welcome drink vždy zdarma.</p>
       <div class="hero-cta">
         <a href="#rezervace" class="btn-primary">Rezervovat termín</a>
         <a href="#zrcadlo" class="btn-ghost">Vyzkoušej si look ✦</a>
       </div>
       <div class="hero-badge">
         <span class="heart">♥</span>
-        <div><b>Welcome drink</b><span>vždy gratis</span></div>
+        <div><b>Welcome drink</b><span>vždy zdarma</span></div>
       </div>
     </div>
   </div>
@@ -372,7 +386,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <div class="mirror-head">
       <span class="eyebrow">Signature experience</span>
       <h2 class="section-title">Najdi svůj <em>look</em></h2>
-      <p>Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj ho jedním klikem.</p>
+      <p>Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.</p>
     </div>
     <div class="look-grid">
       <div class="look-list" id="lookList"></div>
@@ -426,7 +440,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <div class="gal-head">
       <span class="eyebrow">Signature prostor</span>
       <h2 class="section-title">Vlnitá zrcadla, ve kterých <em>záříš</em></h2>
-      <p>Naše klientky — glossy výsledky, které mluví za vše.</p>
+      <p>Naše klientky — výsledky, které mluví za vše.</p>
     </div>
     <div class="gal-masonry" id="galGrid"></div>
   </div>
@@ -440,7 +454,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
       <h2 class="section-title">Najdeš nás <em>v centru</em> Prahy</h2>
     </div>
     <div class="kontakt-grid">
-      <div class="kontakt-card"><div class="ico">⌖</div><b>Růžová 7, Praha 1</b><span>2. patro, výtah do atelieru</span></div>
+      <div class="kontakt-card"><div class="ico">⌖</div><b>Růžová 7, Praha 1</b><span>2. patro, výtah do ateliéru</span></div>
       <a class="kontakt-card" href="tel:+420777123456"><div class="ico">☎</div><b>+420 777 123 456</b><span>volej nebo piš na WhatsApp</span></a>
       <a class="kontakt-card" href="mailto:ahoj@gloss-atelier.cz"><div class="ico">✉</div><b>ahoj@gloss-atelier.cz</b><span>odpovídáme do pár hodin</span></a>
       <div class="kontakt-card"><div class="ico">◷</div><b>Út–Ne 9:00–19:00</b><span>pondělí zavřeno</span></div>
@@ -454,7 +468,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <div class="rez-head">
       <span class="eyebrow">Rezervace</span>
       <h2 class="section-title">Zarezervuj si <em>svůj glow</em></h2>
-      <p>Vyber proceduru a termín. Formulář je připravený na napojení rezervačního systému.</p>
+      <p>Vyber proceduru, datum a čas. Ozveme se ti s potvrzením termínu.</p>
     </div>
     <div class="rez-form" data-booking>
       <div class="rez-row">
@@ -479,7 +493,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
         <div class="rez-field full"><label>Poznámka (volitelné)</label><textarea rows="2" placeholder="Cokoliv nám chceš dopředu říct…"></textarea></div>
       </div>
       <button class="rez-submit" id="rezSubmit">Odeslat rezervaci ✦</button>
-      <p class="rez-note">✦ Připraveno pro napojení rezervačního systému (data-booking hook)</p>
+      <p class="rez-note">Ozveme se do 24 hodin s potvrzením.</p>
     </div>
   </div>
 </section>
@@ -491,7 +505,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <a href="#obory">Obory</a><a href="#cenik">Ceník</a><a href="#galerie">Galerie</a><a href="#kontakt">Kontakt</a><a href="#rezervace">Rezervace</a><a href="#">Instagram</a>
   </div>
   <div class="foot-meta">
-    Atelier de Beauté · Růžová 7, Praha 1 · út–ne 9–19 · welcome drink vždy gratis<br>
+    Atelier de Beauté · Růžová 7, Praha 1 · út–ne 9–19 · welcome drink vždy zdarma<br>
     © 2026 GLOSS. Vyrobeno s láskou, růžovou a třpytem. <span class="star">✦</span>
   </div>
 </footer>
@@ -503,7 +517,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <button class="sc-close" id="scClose" aria-label="Zavřít">✕</button>
     <div class="sc-emoji">💖</div>
     <h3 id="scTitle">Tvoje malá odměna</h3>
-    <div class="scr">setři a získej slevu</div>
+    <div class="scr">Stírej a odhal slevu</div>
     <p id="scLead">Zadej e-mail a odemkni stírací kartičku — schovává slevu <b>až 15 %</b> na tvůj první termín.</p>
 
     <div class="sc-scratch-wrap" id="scWrap">
@@ -517,7 +531,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     </div>
 
     <div class="sc-form" id="scForm">
-      <input type="email" id="scEmail" placeholder="tvuj@email.cz" autocomplete="email">
+      <input type="email" id="scEmail" placeholder="tvůj@email.cz" autocomplete="email">
       <button id="scGo">Odemknout ✦</button>
     </div>
     <div class="sc-err" id="scErr"></div>
@@ -564,11 +578,11 @@ const mirrorProcs=[
 /* galerie klientek */
 const klientky=[
   {cap:'Korean lash lift',img:window.__BEAUTY['korean_lash_lift']},
-  {cap:'Brow bar & barva',img:window.__BEAUTY['brow_bar_colour']},
+  {cap:'Brow bar a barva',img:window.__BEAUTY['brow_bar_colour']},
   {cap:'Hydrafacial glow',img:window.__BEAUTY['hydrafacial']},
-  {cap:'Classic lashes',img:window.__BEAUTY['classic_natural']},
-  {cap:'Foxy lashes',img:window.__BEAUTY['foxy_lashes']},
-  {cap:'Angel eyes volume',img:window.__BEAUTY['angel_eyes']}
+  {cap:'Classic řasy',img:window.__BEAUTY['classic_natural']},
+  {cap:'Liščí řasy',img:window.__BEAUTY['foxy_lashes']},
+  {cap:'Angel eyes objem',img:window.__BEAUTY['angel_eyes']}
 ];
 
 function ph(label,w,h){return "data:image/svg+xml,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+w+' '+h+'"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFD1E6"/><stop offset="1" stop-color="#FFC2DE"/></linearGradient></defs><rect width="'+w+'" height="'+h+'" fill="url(%23g)"/><text x="'+(w/2)+'" y="'+(h/2)+'" font-family="monospace" font-size="13" fill="%23E5197E" text-anchor="middle">'+label+'</text></svg>');}
@@ -610,16 +624,16 @@ obory.forEach(o=>o.procs.forEach(p=>{const opt=document.createElement('option');
 
 /* ============ NAJDI SVŮJ LOOK ============ */
 const looks=[
-  {n:'01',name:'Korean Lash Lift',sub:'natural lift',key:'korean_lash_lift',
-   desc:'Přirozené nakroucení tvých vlastních řas. Žádné nalepování — jen efekt „vzhůru" na 6–8 týdnů.',proc:'Korean Lash Lift · 60 min',price:'1 290 Kč'},
-  {n:'02',name:'Classic Lashes',sub:'dílko po dílku',key:'classic_natural',
-   desc:'Jedno umělé vlákno na jednu řasu. Decentní, elegantní, jako lepší verze tvých vlastních řas.',proc:'Classic Lash Set · 90 min',price:'1 290 Kč'},
+  {n:'01',name:'Korean Lash Lift',sub:'přirozený lifting',key:'korean_lash_lift',
+   desc:'Přirozené zakroucení tvých vlastních řas. Žádné nalepování — jen efekt „vzhůru" na 6–8 týdnů.',proc:'Korean Lash Lift · 60 min',price:'1 290 Kč'},
+  {n:'02',name:'Classic Lashes',sub:'řasa po řase',key:'classic_natural',
+   desc:'Jedno umělé vlákno na jednu řasu. Decentní, elegantní — jako vylepšená verze tvých vlastních řas.',proc:'Classic Lash Set · 90 min',price:'1 290 Kč'},
   {n:'03',name:'Volume Lashes',sub:'plný objem',key:'volume_lashes',
    desc:'Ručně tvořené trsy pro hustý, sametový objem. Pro pohled, který je vidět přes celou místnost.',proc:'Volume Lash Set · 120 min',price:'1 890 Kč'},
   {n:'04',name:'Fox Eye',sub:'liščí pohled',key:'fox_eye',
-   desc:'Protažený, zvednutý vnější koutek. Sexy „cat eye" efekt, který zúží a zvedne oko.',proc:'Volume Lash Set · 120 min',price:'1 890 Kč'},
+   desc:'Protažený, zvednutý vnější koutek. Sexy „cat eye" efekt, který prodlouží a zvedne oko.',proc:'Volume Lash Set · 120 min',price:'1 890 Kč'},
   {n:'05',name:'Wispy / Anime',sub:'dramatické špičky',key:'anime_lashes',
-   desc:'Střídání délek do špiček — našepsovaný, našponovaný, motýlí efekt. Maximální drama.',proc:'Mega Volume · 140 min',price:'2 290 Kč'},
+   desc:'Střídání délek do špiček — vzdušné vrstvy s motýlím efektem na míru. Maximální drama.',proc:'Mega Volume · 140 min',price:'2 290 Kč'},
   {n:'06',name:'Brow Lamination',sub:'architektura obočí',key:'brows',
    desc:'Narovnání a zafixování chloupků do dokonalého tvaru. Husté, učesané obočí na týdny.',proc:'Brow Lamination · 60 min',price:'1 190 Kč'},
   {n:'07',name:'Hydra Glow',sub:'záře zevnitř',key:'hydrafacial',
@@ -651,7 +665,7 @@ looks.forEach((l,i)=>{
   const el=document.createElement('div');el.className='look-pick';
   el.innerHTML='<span class="lnum">'+l.n+'</span><span class="linfo"><b>'+l.name+'</b><span>'+l.sub+'</span></span><span class="larrow">→</span>';
   el.addEventListener('click',()=>selectLook(i));
-  el.addEventListener('mouseenter',()=>selectLook(i));
+  if(window.matchMedia('(hover:hover)').matches)el.addEventListener('mouseenter',()=>selectLook(i));
   lookList.appendChild(el);lookEls.push(el);
 });
 selectLook(0);
@@ -669,8 +683,9 @@ document.getElementById('rezSubmit').addEventListener('click',()=>{
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
 const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
-burger.addEventListener('click',()=>navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+function setNavOpen(on){navLinks.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);}
+burger.addEventListener('click',()=>setNavOpen(!navLinks.classList.contains('open')));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setNavOpen(false)));
 
 /* ===== HERO FOTKA (čistá modelka na růžovém pozadí) ===== */
 (function(){var h=document.getElementById('img-hero');if(h)h.src=BEAUTY['hero_model_pink']||ph('GLOSS',800,1000);})();
@@ -728,8 +743,8 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLink
     pctEl.textContent=prize+' %';codeEl.textContent=code;
     unlocked=true;wrap.classList.add('unlocked');
     form.classList.add('hide');
-    err.className='sc-err ok';err.textContent='Odemčeno! Teď setři růžovou vrstvu 💕';
-    title.textContent='Setři kartičku ✦';
+    err.className='sc-err ok';err.textContent='Odemčeno! Teď stírej růžovou vrstvu 💕';
+    title.textContent='Stírej kartičku ✦';
     lead.textContent='Přejeď prstem nebo myší přes růžovou vrstvu a odhal svou slevu.';
   });
 

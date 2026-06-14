@@ -203,6 +203,29 @@ a{color:inherit;text-decoration:none}
 .cart-checkout:hover{background:var(--cocoa);transform:translateY(-2px)}
 .cart-checkout:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .cart-ok{font-family:var(--b);font-size:.82rem;color:var(--matcha);text-align:center;margin-top:10px;min-height:1.1em}
+.cart-field{width:100%;font-family:var(--b);font-size:.86rem;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:10px;background:#fff;color:var(--ink)}
+.cart-field:focus{outline:none;border-color:var(--matcha)}
+.cart-demo-note{font-family:var(--b);font-size:.72rem;color:var(--taupe);line-height:1.5;margin-bottom:10px}
+.demo-pill{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:120;background:rgba(38,35,15,.82);color:#fff;font-family:var(--b);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:8px 16px;border-radius:99px;pointer-events:none;backdrop-filter:blur(8px)}
+.kf-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.kf-tab{flex:1;min-width:120px;border:1px solid var(--line);background:#fff;color:var(--ink);font-family:var(--b);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:12px 14px;border-radius:99px;cursor:pointer;transition:.25s}
+.kf-tab.on{background:var(--deep);color:var(--cream);border-color:var(--deep)}
+.kf-tab:hover:not(.on){border-color:var(--matcha)}
+.kf-hint{font-size:.78rem;color:var(--taupe);line-height:1.55;margin:-4px 0 4px}
+.kf select.kf-inp{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);font-family:var(--b);font-size:1rem;color:var(--ink);padding:9px 0;outline:none}
+.kf select.kf-inp:focus{border-color:var(--matcha)}
+.pv-add{margin-top:18px;width:100%;font-family:var(--b);font-weight:600;font-size:.82rem;letter-spacing:.06em;color:#fff;background:var(--matcha);border:none;border-radius:99px;padding:14px 20px;cursor:pointer;transition:.25s}
+.pv-add:hover{background:var(--deep2);transform:translateY(-2px)}
+.demo-modal-back{position:fixed;inset:0;z-index:90;background:rgba(38,35,15,.5);opacity:0;pointer-events:none;transition:opacity .3s}
+.demo-modal-back.open{opacity:1;pointer-events:auto}
+.demo-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%) scale(.96);z-index:91;width:min(440px,92vw);background:var(--paper);border-radius:24px;padding:32px 28px;box-shadow:0 40px 80px -32px rgba(38,35,15,.45);opacity:0;pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.demo-modal-back.open .demo-modal{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.demo-modal h4{font-family:var(--d);font-style:italic;font-weight:600;font-size:1.9rem;color:var(--deep2);margin-bottom:8px}
+.demo-modal .dm-id{font-family:var(--b);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--caramel);margin-bottom:14px}
+.demo-modal p{font-family:var(--b);font-size:.92rem;line-height:1.65;color:var(--ink);margin-bottom:18px}
+.demo-modal .dm-list{font-size:.86rem;line-height:1.7;color:var(--deep2);background:rgba(63,79,42,.06);border-radius:14px;padding:14px 16px;margin-bottom:18px;white-space:pre-line}
+.demo-modal .dm-close{width:100%;font-family:var(--b);font-weight:600;font-size:.86rem;color:#fff;background:var(--caramel);border:none;border-radius:99px;padding:14px;cursor:pointer}
+.demo-modal .dm-badge{display:inline-block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;background:rgba(199,126,58,.15);color:var(--caramel);padding:6px 10px;border-radius:99px;margin-bottom:12px}
 
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
 .reveal.in{opacity:1;transform:none}
@@ -253,12 +276,14 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
+<div class="demo-pill" aria-hidden="true">Demo režim · ukázkové rezervace &amp; rozvoz</div>
 
 <header class="mast" id="mast">
   <a class="mb" href="#top">MATCHÁ</a>
   <nav id="nav">
     <a href="#karta">Karta</a><a href="#maison">O nás</a><a href="#visite">Návštěva</a>
-    <a href="#visite" class="mcta">Rezervovat stůl</a>
+    <a href="#karta" id="navRozvoz">Rozvoz</a>
+    <a href="#visite" class="mcta">Rezervovat</a>
   </nav>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
 </header>
@@ -284,7 +309,7 @@ a{color:inherit;text-decoration:none}
 
 <section class="karta sec" id="karta">
   <div class="wrap">
-    <div class="head reveal"><span class="rn">I</span><h2>Naše karta</h2><span class="lbl">menu · najeď myší</span></div>
+    <div class="head reveal"><span class="rn">I</span><h2>Naše karta</h2><span class="lbl">menu · rozvoz u všeho</span></div>
     <div class="karta-grid">
       <div class="karta-list">
         <div class="cat reveal"><h3>Matcha</h3><p class="cat-info">Ceremoniální matcha z japonské Uji — stínovaná a kamenem mletá. Šleháme ji bambusovou metličkou (chasen) ve vodě okolo 80 °C, aby zůstala sametová, jasně zelená a bez hořkosti.</p><div class="dish" data-img="matcha" data-name="Matcha" data-price="95 Kč" data-note="Ceremoniální, šlehaná z prémiového prášku."><span class="dn">Matcha</span><span class="dp">95<b> Kč</b></span><span class="dd">Ceremoniální, šlehaná z prémiového prášku.</span></div><div class="dish" data-img="icematcha" data-name="Ice Matcha Latte" data-price="95 Kč" data-note="Ledová klasika, sametově krémová."><span class="dn">Ice Matcha Latte</span><span class="dp">95<b> Kč</b></span><span class="dd">Ledová klasika, sametově krémová.</span></div><div class="dish" data-img="deluxe" data-name="Matcha Latte Deluxe" data-price="119 Kč" data-note="Vrcholná verze se šlehačkou."><span class="dn">Matcha Latte Deluxe</span><span class="dp">119<b> Kč</b></span><span class="dd">Vrcholná verze se šlehačkou.</span></div><div class="dish" data-img="mango" data-name="Ice Mango Matcha Latte" data-price="105 Kč" data-note="Matcha a sluneční mango."><span class="dn">Ice Mango Matcha Latte</span><span class="dp">105<b> Kč</b></span><span class="dd">Matcha a sluneční mango.</span></div><div class="dish" data-img="straw" data-name="Ice Strawberry Matcha Latte" data-price="105 Kč" data-note="Matcha a sladké jahody."><span class="dn">Ice Strawberry Matcha Latte</span><span class="dp">105<b> Kč</b></span><span class="dd">Matcha a sladké jahody.</span></div><div class="dish" data-img="icecoffee" data-name="Ice Coffee Matcha Latte" data-price="99 Kč" data-note="Matcha potkává espresso."><span class="dn">Ice Coffee Matcha Latte</span><span class="dp">99<b> Kč</b></span><span class="dd">Matcha potkává espresso.</span></div></div>
@@ -298,6 +323,7 @@ a{color:inherit;text-decoration:none}
           <div class="pv-name" id="pvName">Matcha</div>
           <div class="pv-price" id="pvPrice">95 Kč</div>
           <div class="pv-note" id="pvNote">Ceremoniální, šlehaná z prémiového prášku.</div>
+          <button class="pv-add" id="pvAdd" type="button">+ Přidat do košíku · rozvoz</button>
         </div>
       </aside>
     </div>
@@ -386,11 +412,18 @@ a{color:inherit;text-decoration:none}
         <p class="addr">Zahradní 12 · u parku · zastávka „Sad"</p>
       </div>
       <form class="kf reveal" id="kForm">
-        <div class="two"><div><label>Jméno</label><input type="text" id="fName" placeholder="Tvoje jméno" required></div><div><label>Počet osob</label><input type="text" id="fPpl" placeholder="2"></div></div>
-        <div class="two"><div><label>Datum</label><input type="text" id="fDate" placeholder="napiš datum"></div><div><label>Čas</label><input type="text" id="fTime" placeholder="napiš čas"></div></div>
-        <div><label>Poznámka</label><textarea id="fMsg" placeholder="Oslava? Dort na přání?"></textarea></div>
-        <button type="submit" class="sub">Odeslat rezervaci →</button>
-        <p class="kok" id="kOk">Děkujeme! Otevřeli jsme ti e-mail — stačí odeslat. ✦</p>
+        <div class="kf-tabs" role="tablist">
+          <button type="button" class="kf-tab on" data-mode="table">Rezervace stolu</button>
+          <button type="button" class="kf-tab" data-mode="delivery">Rozvoz domů</button>
+        </div>
+        <p class="kf-hint" id="kfHint">Vyber termín — v demo režimu dostaneš potvrzení hned na obrazovce.</p>
+        <div class="two"><div><label>Jméno</label><input type="text" id="fName" placeholder="Tvoje jméno" required></div><div><label>Telefon</label><input type="tel" id="fPhone" placeholder="+420 …" required></div></div>
+        <div class="two" id="fTableRow"><div><label>Počet osob</label><input type="number" id="fPpl" min="1" max="12" value="2" class="kf-inp" style="border-bottom:1px solid var(--line);width:100%;background:transparent;padding:9px 0"></div><div><label>E-mail</label><input type="email" id="fMail" placeholder="tvuj@email.cz"></div></div>
+        <div class="two"><div><label>Datum</label><input type="date" id="fDate" required class="kf-inp" style="border-bottom:1px solid var(--line);width:100%;background:transparent;padding:9px 0"></div><div><label>Čas</label><select id="fTime" class="kf-inp" required></select></div></div>
+        <div id="fAddrWrap" style="display:none"><label>Adresa rozvozu</label><textarea id="fAddr" placeholder="Ulice, číslo, město…"></textarea></div>
+        <div><label>Poznámka</label><textarea id="fMsg" placeholder="Oslava? Dort na přání? Alergie?"></textarea></div>
+        <button type="submit" class="sub" id="fSubmit">Potvrdit rezervaci →</button>
+        <p class="kok" id="kOk"></p>
       </form>
     </div>
   </div>
@@ -408,6 +441,35 @@ a{color:inherit;text-decoration:none}
   </div>
 </footer>
 
+<div class="demo-modal-back" id="demoModalBack" aria-hidden="true">
+  <div class="demo-modal" role="dialog" aria-labelledby="demoModalTitle">
+    <span class="dm-badge">Demo potvrzení</span>
+    <h4 id="demoModalTitle">Hotovo!</h4>
+    <div class="dm-id" id="demoModalId"></div>
+    <p id="demoModalText"></p>
+    <div class="dm-list" id="demoModalList"></div>
+    <button type="button" class="dm-close" id="demoModalClose">Zavřít</button>
+  </div>
+</div>
+
+<button class="cart-fab" id="cartFab" type="button" aria-label="Košík"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Košík <span class="cart-count" id="cartCount">0</span></button>
+<div class="cart-back" id="cartBack"></div>
+<aside class="cart-panel" id="cartPanel" aria-label="Tvoje objednávka">
+  <div class="cart-head"><h3>Tvoje objednávka</h3><button class="cart-x" id="cartX" type="button" aria-label="Zavřít">×</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-deliver"><span>Rozvoz po celé nabídce</span><b>zdarma · Brno</b></div>
+    <div class="cart-total"><span>Celkem</span><span id="cartTotal">0 Kč</span></div>
+    <p class="cart-demo-note">Demo objednávka — nic se reálně neodesílá, jen ukázka flow.</p>
+    <input class="cart-field" id="cartName" type="text" placeholder="Jméno" autocomplete="name">
+    <input class="cart-field" id="cartPhone" type="tel" placeholder="Telefon" autocomplete="tel">
+    <textarea class="cart-addr" id="cartAddr" placeholder="Adresa pro rozvoz (ulice, číslo, patro…)"></textarea>
+    <button class="cart-checkout" id="cartCheckout" type="button">Objednat rozvoz →</button>
+    <div class="cart-ok" id="cartOk"></div>
+  </div>
+</aside>
+
+
 <script>
 var mast=document.getElementById('mast'),nav=document.getElementById('nav'),burger=document.getElementById('burger');
 window.addEventListener('scroll',function(){mast.classList.toggle('sc',window.scrollY>40);});
@@ -423,10 +485,45 @@ nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',functio
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-document.getElementById('kForm').addEventListener('submit',function(e){e.preventDefault();
- var n=document.getElementById('fName').value,p=document.getElementById('fPpl').value,d=document.getElementById('fDate').value,t=document.getElementById('fTime').value,m=document.getElementById('fMsg').value;
- document.getElementById('kOk').style.display='block';
- window.location.href='mailto:ahoj@matcha-kavarna.cz?subject='+encodeURIComponent('Rezervace — '+n)+'&body='+encodeURIComponent('Rezervace\nJmeno: '+n+'\nOsob: '+p+'\nDatum: '+d+'\nCas: '+t+'\n\n'+m);});
+(function(){
+ var form=document.getElementById('kForm'); if(!form) return;
+ var mode='table', tabs=document.querySelectorAll('.kf-tab'), timeSel=document.getElementById('fTime');
+ var slots=['8:30','9:00','9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30'];
+ slots.forEach(function(s){ var o=document.createElement('option'); o.value=s; o.textContent=s; timeSel.appendChild(o); });
+ var d=document.getElementById('fDate'); if(d){ var dt=new Date(); dt.setDate(dt.getDate()+1); d.min=dt.toISOString().slice(0,10); d.value=d.min; }
+ function setMode(m){
+   mode=m; tabs.forEach(function(b){ b.classList.toggle('on', b.dataset.mode===m); });
+   document.getElementById('fTableRow').style.display=m==='table'?'grid':'none';
+   document.getElementById('fAddrWrap').style.display=m==='delivery'?'block':'none';
+   document.getElementById('fSubmit').textContent=m==='table'?'Potvrdit rezervaci →':'Objednat rozvoz →';
+   document.getElementById('kfHint').textContent=m==='table'?'Rezervace stolu — v demo režimu dostaneš potvrzení hned.':'Rozvoz celé nabídky po Brně zdarma — demo potvrzení na obrazovce.';
+ }
+ tabs.forEach(function(b){ b.addEventListener('click',function(){ setMode(b.dataset.mode); }); });
+ form.addEventListener('submit',function(e){
+   e.preventDefault();
+   var n=document.getElementById('fName').value.trim(), ph=document.getElementById('fPhone').value.trim();
+   var mail=document.getElementById('fMail').value.trim(), ppl=document.getElementById('fPpl').value;
+   var date=document.getElementById('fDate').value, time=document.getElementById('fTime').value;
+   var addr=document.getElementById('fAddr').value.trim(), msg=document.getElementById('fMsg').value.trim();
+   if(!n||!ph||!date||!time){ document.getElementById('kOk').textContent='Vyplň prosím povinná pole.'; document.getElementById('kOk').style.display='block'; return; }
+   if(mode==='delivery'&&!addr){ document.getElementById('kOk').textContent='U rozvozu potřebujeme adresu.'; document.getElementById('kOk').style.display='block'; return; }
+   var id='MAT-'+Math.random().toString(36).slice(2,8).toUpperCase();
+   var lines=[mode==='table'?'Rezervace stolu':'Rozvoz domů','Jméno: '+n,'Telefon: '+ph];
+   if(mail) lines.push('E-mail: '+mail);
+   if(mode==='table') lines.push('Osob: '+ppl); else lines.push('Adresa: '+addr);
+   lines.push('Termín: '+date+' '+time);
+   if(msg) lines.push('Poznámka: '+msg);
+   lines.push('','Demo režim — žádná reálná objednávka.');
+   window.showDemoModal({
+     title: mode==='table'?'Stůl rezervovaný':'Rozvoz přijat',
+     id: id,
+     text: mode==='table'?'Tvoje rezervace je v demo systému potvrzená. V reálném provozu by ti přišel SMS/e-mail.':'Kurýr by vyjel za cca 35–45 minut. V demo režimu je to jen ukázka.',
+     list: lines.join('\n')
+   });
+   try{ localStorage.setItem('matcha_demo_last', JSON.stringify({type:mode,id:id,at:Date.now(),lines:lines})); }catch(e){}
+   document.getElementById('kOk').textContent='Potvrzeno: '+id; document.getElementById('kOk').style.display='block';
+ });
+})();
 (function(){
  var svg=document.getElementById('wstripSvg'),path=document.getElementById('wpath'),tp=document.getElementById('wtp'),txt=document.getElementById('wtext');
  if(!svg) return;
@@ -562,8 +659,6 @@ var ILL2={"matcha":"data:image/webp;base64,UklGRlQ/AABXRUJQVlA4WAoAAAAQAAAAywEAy
     var price=base[2]+milk[2]+flav[2]+top[2];
     els.price.innerHTML=price+'\u00a0K\u010d';
   }
-  var cta=document.getElementById('mxCta');
-  if(cta) cta.addEventListener('click',function(){ if(els.ok) els.ok.classList.add('show'); });
   render();
 })();
 
@@ -631,6 +726,8 @@ var ILL2={"matcha":"data:image/webp;base64,UklGRlQ/AABXRUJQVlA4WAoAAAAQAAAAywEAy
   fab.addEventListener('click',open);
   back.addEventListener('click',close);
   xBtn.addEventListener('click',close);
+  var navRozvoz=document.getElementById('navRozvoz');
+  if(navRozvoz) navRozvoz.addEventListener('click',function(e){ e.preventDefault(); open(); });
 
   // inject add buttons on every dish
   document.querySelectorAll('.dish').forEach(function(d){
@@ -657,33 +754,57 @@ var ILL2={"matcha":"data:image/webp;base64,UklGRlQ/AABXRUJQVlA4WAoAAAAQAAAAywEAy
     });
   }
 
-  // checkout via mailto
+  try{ var saved=localStorage.getItem('matcha_cart'); if(saved) cart=JSON.parse(saved)||[]; }catch(e){}
+
+  var nameEl=document.getElementById('cartName'), phoneEl=document.getElementById('cartPhone');
+  function persist(){ try{ localStorage.setItem('matcha_cart', JSON.stringify(cart)); }catch(e){} }
+
+  var _render=render;
+  render=function(){ _render(); persist(); };
+
   checkoutBtn.addEventListener('click',function(){
     if(cart.length===0) return;
-    var lines=cart.map(function(i){ return i.qty+'\u00d7 '+i.name+' \u2014 '+(i.price>0?fmt(i.price*i.qty):'zdarma'); }).join('\n');
-    var addr=(addrEl.value||'').trim();
-    var body='Objedn\u00e1vka MATCH\u00c1\n\n'+lines+'\n\nCelkem: '+fmt(total())+'\nRozvoz po Brn\u011b: zdarma\n\nAdresa pro rozvoz: '+(addr||'(dopl\u0148')+'\n';
-    okEl.textContent='Otev\u0159eli jsme ti e-mail \u2014 sta\u010d\u00ed odeslat. \u2728';
-    window.location.href='mailto:ahoj@matcha-kavarna.cz?subject='+encodeURIComponent('Objedn\u00e1vka \u2014 rozvoz po Brn\u011b')+'&body='+encodeURIComponent(body);
+    var addr=(addrEl.value||'').trim(), nm=(nameEl&&nameEl.value||'').trim(), ph=(phoneEl&&phoneEl.value||'').trim();
+    if(!nm||!ph||!addr){ okEl.textContent='Vyplň jméno, telefon a adresu rozvozu.'; return; }
+    var id='ORD-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    var lines=cart.map(function(i){ return i.qty+'\u00d7 '+i.name+' \u2014 '+(i.price>0?fmt(i.price*i.qty):'zdarma'); });
+    lines.push('','Celkem: '+fmt(total()),'Rozvoz po Brně: zdarma','Jméno: '+nm,'Telefon: '+ph,'Adresa: '+addr,'Odhad doručení: 35–45 min','Demo režim — žádná reálná objednávka.');
+    window.showDemoModal({ title:'Objednávka přijata', id:id, text:'Košík je v demo režimu odeslaný. V reálném provozu by kurýr vyrazil za pár minut.', list:lines.join('\n') });
+    okEl.textContent='Potvrzeno: '+id;
+    cart=[]; if(addrEl) addrEl.value=''; render(); close();
+    try{ localStorage.removeItem('matcha_cart'); }catch(e){}
   });
+
+  // preview add button
+  var pvAdd=document.getElementById('pvAdd');
+  if(pvAdd){
+    pvAdd.addEventListener('click',function(){
+      var active=document.querySelector('.dish.active')||document.querySelector('.dish');
+      if(!active) return;
+      add(active.dataset.name, parsePrice(active.dataset.price));
+      open();
+    });
+  }
 
   render();
 })();
 
+/* demo modal + global helper */
+(function(){
+  var back=document.getElementById('demoModalBack'), closeBtn=document.getElementById('demoModalClose');
+  function close(){ back.classList.remove('open'); back.setAttribute('aria-hidden','true'); }
+  window.showDemoModal=function(opts){
+    document.getElementById('demoModalTitle').textContent=opts.title||'Hotovo';
+    document.getElementById('demoModalId').textContent=opts.id||'';
+    document.getElementById('demoModalText').textContent=opts.text||'';
+    document.getElementById('demoModalList').textContent=opts.list||'';
+    back.classList.add('open'); back.setAttribute('aria-hidden','false');
+  };
+  closeBtn.addEventListener('click',close);
+  back.addEventListener('click',function(e){ if(e.target===back) close(); });
+})();
+
 </script>
 
-<button class="cart-fab" id="cartFab" type="button" aria-label="Košík"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Košík <span class="cart-count" id="cartCount">0</span></button>
-<div class="cart-back" id="cartBack"></div>
-<aside class="cart-panel" id="cartPanel" aria-label="Tvoje objednávka">
-  <div class="cart-head"><h3>Tvoje objednávka</h3><button class="cart-x" id="cartX" type="button" aria-label="Zavřít">×</button></div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-foot">
-    <div class="cart-deliver"><span>Rozvoz po Brně</span><b>zdarma</b></div>
-    <div class="cart-total"><span>Celkem</span><span id="cartTotal">0 Kč</span></div>
-    <textarea class="cart-addr" id="cartAddr" placeholder="Adresa pro rozvoz (ulice, číslo, patro…)"></textarea>
-    <button class="cart-checkout" id="cartCheckout" type="button">Objednat e-mailem →</button>
-    <div class="cart-ok" id="cartOk"></div>
-  </div>
-</aside>
 </body>
 </html>

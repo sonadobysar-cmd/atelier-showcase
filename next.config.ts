@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
       { source: "/laleia", destination: "/laleia/index.html" },
       { source: "/gloss", destination: "/gloss/index.html" },
       { source: "/atelier-void", destination: "/atelier-void/index.html" },
+      { source: "/matcha", destination: "/matcha/index.html" },
       { source: "/nia", destination: "/nia/index.html" },
       { source: "/nia/projekty", destination: "/nia/projekty/index.html" },
     ];

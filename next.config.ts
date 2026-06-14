@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
       { source: "/atelier-void", destination: "/atelier-void/index.html" },
       { source: "/matcha", destination: "/matcha/index.html" },
       { source: "/masterclass", destination: "/masterclass/index.html" },
+      { source: "/zakaznici", destination: "/masterclass/index.html" },
+      { source: "/webinar", destination: "/masterclass/index.html" },
       { source: "/nia", destination: "/nia/index.html" },
       { source: "/nia/projekty", destination: "/nia/projekty/index.html" },
     ];

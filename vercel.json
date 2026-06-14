@@ -2,6 +2,8 @@
   "rewrites": [
     { "source": "/matcha", "destination": "/matcha/index.html" },
     { "source": "/masterclass", "destination": "/masterclass/index.html" },
+    { "source": "/zakaznici", "destination": "/masterclass/index.html" },
+    { "source": "/webinar", "destination": "/masterclass/index.html" },
     { "source": "/laleia", "destination": "/laleia/index.html" },
     { "source": "/gloss", "destination": "/gloss/index.html" },
     { "source": "/atelier-void", "destination": "/atelier-void/index.html" },

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nia Dobyšar — Webdesign studio</title>
-<meta name="description" content="Nia Dobyšar — moderní weby na míru pro značky, které chtějí vyčnívat. Webdesign, branding, vývoj.">
+<title>Projekty — Nia Dobyšar</title>
+<meta name="description" content="Portfolio Nia Dobyšar — 10 webových projektů s živými ukázkami, detaily a case study.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -157,12 +157,6 @@ img{display:block;max-width:100%}
 .pg-phone-copy{flex:none;padding:clamp(18px,2.6vw,26px) clamp(12px,1.6vw,16px) clamp(20px,2.8vw,28px);text-align:center;background:var(--white);border-radius:0 0 clamp(34px,4vw,44px) clamp(34px,4vw,44px)}
 .pg-copy-sm{font-family:var(--display);font-size:clamp(.48rem,1vw,.58rem);letter-spacing:.28em;text-transform:uppercase;font-weight:500;line-height:1.45;color:var(--black);display:block}
 .pg-copy-lg{font-family:var(--display);font-size:clamp(.88rem,2.1vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;font-weight:600;line-height:1.1;color:var(--burgundy3);display:block;margin:8px 0 6px}
-.proj-teaser-cta{text-align:center;padding:0 6vw clamp(56px,9vw,80px);background:var(--black)}
-.proj-teaser-cta p{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:24px;font-weight:400}
-.proj-teaser-cta .btn{margin-bottom:18px}
-.proj-teaser-cta .btn-line{color:rgba(255,255,255,.82);border-bottom-color:rgba(255,255,255,.35)}
-.proj-teaser-cta .btn-line:hover{color:var(--white);border-color:var(--burgundy-glow)}
-
 .live.is-loaded,.live{background:var(--off)}
 .live-poster{background:var(--off)}
 .live-poster .play{background:var(--burgundy);color:var(--white);box-shadow:none}
@@ -383,63 +377,44 @@ img{display:block;max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
+
+.proj-page-head{background:var(--black);color:var(--white);padding:clamp(120px,14vw,160px) 0 clamp(48px,8vw,72px);text-align:center}
+.proj-page-head .wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.proj-page-head h1{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.05;margin-top:8px}
+.proj-page-head h1 .grad{color:var(--burgundy-glow)}
+.proj-page-head .idx{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:8px}
+.proj-back{align-self:flex-start;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.65;margin-bottom:20px;transition:opacity .3s}
+.proj-back:hover{opacity:1}
+.proj-page-head .eyebrow{color:rgba(255,255,255,.5)}
+.nav.proj-nav{background:rgba(8,6,6,.94);color:var(--white);padding:18px 6vw;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-dot" id="cursorDot"></div>
 
-<header class="nav" id="nav">
-  <a class="brand" href="#top">Nia Dobyšar<span class="dot"></span></a>
+<header class="nav proj-nav scrolled" id="nav">
+  <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
-    <a href="#studio">Studio</a>
-    <a href="#sluzby">Ceník</a>
-    <a href="#konzultace">Konzultace</a>
-    <a href="#kontakt">Kontakt</a>
-    <a href="#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
+    <a href="/nia#studio">Studio</a>
+    <a href="/nia#sluzby">Ceník</a>
+    <a href="/nia#konzultace">Konzultace</a>
+    <a href="/nia#kontakt">Kontakt</a>
+    <a href="/nia#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
   </nav>
   <button class="burger" id="burger" aria-label="Otevřít menu"><span></span><span></span></button>
 </header>
 
-<section id="top" class="hero hero-editorial">
-  <div class="hero-stage">
-    <div class="hero-name-layer" aria-hidden="true">
-      <div class="hero-name-stack">
-        <h1 class="hero-backdrop-shadow"><span>NIA</span><span>DOBYŠAR</span></h1>
-        <h1 class="hero-backdrop"><span>NIA</span><span>DOBYŠAR</span></h1>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="hero-figure">
-        <img src="/nia/photos/nia-canva-hero.png?v=3" alt="Nia Dobyšar — webdesignérka" width="409" height="1011" loading="eager">
-      </div>
-    </div>
-    <div class="hero-copy">
-      <p class="hero-eyebrow">Webdesign studio · Brno &amp; Praha</p>
-      <p class="hero-slogan">Moderní weby, co <span class="grad">září</span>.</p>
-      <div class="hero-cta">
-        <a href="/nia/projekty" class="btn" data-cursor>Vybrané práce</a>
-        <a href="#konzultace" class="btn-line" data-cursor>Rezervovat konzultaci</a>
-      </div>
-    </div>
-  </div>
-  <div class="hero-foot">
-    <div class="scrollcue"><span class="bar"></span>Scroll</div>
+<section class="proj-page-head reveal">
+  <div class="wrap">
+    <a href="/nia" class="proj-back" data-cursor>← Zpět na hlavní</a>
+    <span class="eyebrow">Vybrané práce</span>
+    <h1>Projekty s <span class="grad">charakterem</span></h1>
+    <span class="idx">10 projektů · živé ukázky</span>
   </div>
 </section>
-
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Webdesign</span><span class="x">·</span><span>Weby na míru</span><span class="x">·</span><span>Branding</span><span class="x">·</span><span>UX &amp; UI</span><span class="x">·</span><span>Konzultace</span><span class="x">·</span>
-    <span>Webdesign</span><span class="x">·</span><span>Weby na míru</span><span class="x">·</span><span>Branding</span><span class="x">·</span><span>UX &amp; UI</span><span class="x">·</span><span>Konzultace</span><span class="x">·</span>
-  </div>
-</div>
-
-<div class="editorial-intro reveal">
-  <p>Navrhuju weby, které vypadají jako velká značka — čisté, moderní a do posledního detailu.</p>
-  <span class="sig-quote">Tvůj web, tvoje záře.</span>
-</div>
 
 <section class="proj-gallery reveal" id="projGallery" aria-label="Galerie projektů">
   <div class="proj-gallery-head">
@@ -463,158 +438,316 @@ img{display:block;max-width:100%}
       </div>
     </div>
   </div>
-  <div class="proj-teaser-cta reveal">
-    <p>10 projektů · živé ukázky · detaily</p>
-    <a href="/nia/projekty" class="btn" data-cursor>Všechny projekty</a>
-    <br>
-    <a href="/nia/projekty" class="btn-line" data-cursor>Prohlédnout portfolio →</a>
-  </div>
 </section>
 
-<section id="studio" class="studio">
+<section id="prace" class="work">
   <div class="wrap">
     <div class="sec-head centered reveal">
       <div>
-        <span class="eyebrow">Studio</span>
-        <h2>Za každým webem <span class="grad">já</span><span class="rule"></span></h2>
+        <span class="eyebrow">Vybrané práce</span>
+        <h2>Projekty s <span class="grad">charakterem</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">o mně &amp; proces</span>
+      <span class="idx">10 projektů</span>
     </div>
-    <div class="studio-grid">
-      <div class="studio-photo reveal">
-        <img src="/nia/photos/nia-studio.jpg" alt="Nia Dobyšar v ateliéru" width="520" height="650" loading="lazy">
-      </div>
-      <div class="studio-copy">
-      <div class="reveal">
-        <p class="studio-lead">Navrhuju a stavím weby, které vypadají, jako by je dělala velká značka — i když za nimi stojí jeden člověk.</p>
-        <p class="studio-text">Každý projekt je čistý, moderní a do detailu promyšlený. Vlastní typografie, vlastní identita, žádné šablony. Od prázdné stránky po hotový web, který prodává dřív, než se dočte.</p>
-        <blockquote class="studio-quote">
-          <p>„Web má být krásný ještě předtím, než někdo přečte první větu.“</p>
-          <cite>— Nia</cite>
-        </blockquote>
-      </div>
-      <div class="process reveal">
-        <div class="step"><span class="n">01</span><div><h4>Brief</h4><p>Poznáme značku, cíle a tón. Bez toho se nekreslí.</p></div></div>
-        <div class="step"><span class="n">02</span><div><h4>Koncept</h4><p>Směr, paleta, typografie a struktura. Základ, na kterém vše stojí.</p></div></div>
-        <div class="step"><span class="n">03</span><div><h4>Design</h4><p>Vizuál na míru, doladěný do posledního pixelu.</p></div></div>
-        <div class="step"><span class="n">04</span><div><h4>Vývoj</h4><p>Ručně kódovaný web — rychlý, responzivní, živý.</p></div></div>
-        <div class="step"><span class="n">05</span><div><h4>Předání</h4><p>Hotový web, zaškolení a klid v duši.</p></div></div>
-      </div>
-      </div>
-    </div>
-    <div class="studio-shots reveal">
-      <figure><img src="/nia/photos/nia-portfolio-alt.png" alt="Nia Dobyšar — portrét" width="400" height="500" loading="lazy"></figure>
-      <figure class="shot-work"><img src="/nia/photos/nia-at-work.jpg?v=5" alt="Nia Dobyšar při práci na webu" width="400" height="500" loading="lazy"></figure>
-      <figure><img src="/nia/photos/nia-hero-cv5.jpg" alt="Nia Dobyšar — profil" width="400" height="500" loading="lazy"></figure>
-    </div>
-  </div>
-</section>
 
-<section id="sluzby" class="sluzby">
-  <div class="wrap">
-    <div class="sec-head centered reveal">
-      <div>
-        <span class="eyebrow">Služby &amp; ceník</span>
-        <h2>Vyber si <span class="grad">balíček</span><span class="rule"></span></h2>
-      </div>
-      <span class="idx">ceny orientační</span>
-    </div>
-    <div class="price-grid">
-      <div class="price reveal">
-        <span class="pk">Landing</span>
-        <div class="pkn">Jednostránka</div>
-        <div class="amt"><span class="od">od</span>9 900<span class="cur"> Kč</span></div>
-        <div class="from">jednorázově</div>
-        <p class="pdesc">Jedna silná stránka, co prodává. Ideální pro službu, akci nebo osobní značku.</p>
-        <ul><li>Design na míru</li><li>Responzivní</li><li>Kontaktní formulář</li><li>Nasazení online</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-      <div class="price feat reveal">
-        <span class="pk">Nejoblíbenější</span>
-        <div class="pkn">Web na míru</div>
-        <div class="amt"><span class="od">od</span>24 900<span class="cur"> Kč</span></div>
-        <div class="from">dle rozsahu</div>
-        <p class="pdesc">Vícestránkový web s vlastní identitou a interaktivními prvky. Tvoje výkladní skříň.</p>
-        <ul><li>Kompletní design</li><li>Interaktivní prvky</li><li>Až 6 sekcí / stránek</li><li>Animace &amp; mikrointerakce</li><li>SEO základ</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-      <div class="price prem reveal">
-        <span class="pk">Premium</span>
-        <div class="pkn">Web + branding</div>
-        <div class="amt"><span class="od">od</span>39 900<span class="cur"> Kč</span></div>
-        <div class="from">komplet</div>
-        <p class="pdesc">Kompletní vizuální identita a web, co spolu ladí do posledního detailu.</p>
-        <ul><li>Logo &amp; identita</li><li>Web na míru</li><li>Barvy, typografie, styl</li><li>Sociální šablony</li><li>Prioritní termín</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-    </div>
-    <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
-  </div>
-</section>
-
-<section id="konzultace" class="konzultace">
-  <div class="wrap">
-    <div class="sec-head centered reveal">
-      <div>
-        <span class="eyebrow">Konzultace</span>
-        <h2>Rezervuj si <span class="grad">termín</span><span class="rule"></span></h2>
-      </div>
-      <span class="idx">online · Brno · Praha</span>
-    </div>
-    <div class="konz-grid">
-      <div class="konz-panel reveal">
-        <div class="konz-tabs" id="konzTabs">
-          <button type="button" class="konz-tab on" data-mode="online">Online<small>Po–Pá, flexibilně</small></button>
-          <button type="button" class="konz-tab" data-mode="brno">Brno<small>Úterý &amp; čtvrtek</small></button>
-          <button type="button" class="konz-tab" data-mode="praha">Praha<small>Středa &amp; sobota</small></button>
+    <article class="work-item reveal" id="work-void" data-project="void">
+      <div class="work-meta">
+        <span class="work-num">01 — Architektura</span>
+        <h3>Atelier Void</h3>
+        <p class="work-desc">Tiché, luxusní architektonické studio. Interaktivní řez budovou, kde se patra rozehrávají pod kurzorem. Beton, mosaz a hodně ticha.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Vývoj</span><span>Interakce</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          
+          <div><b>Obor</b><p>Architektura</p></div>
         </div>
-        <div class="konz-days-label">Vyber den</div>
-        <div class="konz-days" id="konzDays"></div>
-        <div class="konz-days-label">Vyber čas</div>
-        <div class="konz-times" id="konzTimes"></div>
-        <p class="konz-hint" id="konzHint">Online konzultace trvá 45 minut. Pošlu ti odkaz na Google Meet.</p>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/atelier-void" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
       </div>
-      <form class="konz-form reveal" id="konzForm">
-        <div class="konz-summary" id="konzSummary">Vyber typ konzultace, den a čas vlevo.</div>
-        <div><label>Jméno</label><input type="text" id="kName" placeholder="Tvoje jméno" required></div>
-        <div><label>E-mail</label><input type="email" id="kMail" placeholder="tvůj@email.cz" required></div>
-        <div><label>Telefon (volitelné)</label><input type="tel" id="kPhone" placeholder="+420 …"></div>
-        <div><label>O čem chceš mluvit?</label><textarea id="kMsg" placeholder="Krátký popis projektu nebo otázky…" required></textarea></div>
-        <button type="submit" class="btn" data-cursor>Rezervovat konzultaci ✦</button>
-        <p class="konz-ok" id="konzOk">Děkuju! Otevřela jsem ti e-mail — stačí odeslat a termín potvrdím. ✦</p>
-      </form>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/atelier-void" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/atelier-void">
+        <div class="live-poster"><span class="play">▶</span><b>Atelier Void</b><span>Klikni pro živý náhled</span></div>
+      </div>
     </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/atelier-void"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+</a>
+    </article>
+
+    <article class="work-item rev reveal" id="work-gloss" data-project="gloss">
+      <div class="work-meta">
+        <span class="work-num">02 — Beauty</span>
+        <h3>Gloss</h3>
+        <p class="work-desc">Žvýkačkový beauty atelier s šťávou. Vlnité „zrcadlo looků“, stírací kartička se slevou a šikmý hero, který se nedá přehlédnout.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Vývoj</span><span>Gamifikace</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          
+          <div><b>Obor</b><p>Beauty</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/gloss" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/gloss" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/gloss">
+        <div class="live-poster"><span class="play">▶</span><b>Gloss</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/gloss"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+</a>
+    </article>
+
+    <article class="work-item reveal" id="work-mochi" data-project="mochi">
+      <div class="work-meta">
+        <span class="work-num">03 — Brand &amp; web</span>
+        <h3>Mochi Box</h3>
+        <p class="work-desc">Hravý e-shop se sladkostmi — pastelové barvy, roztomilé detaily a chuť na první pohled. Brand i web v jednom.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>E-shop</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Food / Brand</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://mochi-shop-tau.vercel.app" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://mochi-shop-tau.vercel.app" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://mochi-shop-tau.vercel.app">
+        <div class="live-poster"><span class="play">▶</span><b>Mochi Box</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://mochi-shop-tau.vercel.app"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item rev reveal" id="work-contour" data-project="contour">
+      <div class="work-meta">
+        <span class="work-num">04 — Estetika · ve vývoji</span>
+        <h3>Contour Clinic</h3>
+        <p class="work-desc">Prémiová estetická klinika — čistý, důvěryhodný web s elegancí. Služby, tým a online rezervace na míru.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>Vývoj</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Estetická klinika</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/contour-clinic" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/contour-clinic" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/contour-clinic">
+        <div class="live-poster"><span class="play">▶</span><b>Contour Clinic</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/contour-clinic"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item reveal" id="work-laleia" data-project="laleia">
+      <div class="work-meta">
+        <span class="work-num">05 — Beauty / E-shop</span>
+        <h3>Lash Babe's</h3>
+        <p class="work-desc">E-shop s řasami — svůdný, čistý web s důrazem na produkt a hladký nákup. Beauty, co prodává samo.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>E-shop</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Beauty / E-shop</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/laleia" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/laleia" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/laleia">
+        <div class="live-poster"><span class="play">▶</span><b>Lash Babe's</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/laleia"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item rev reveal" id="work-matcha" data-project="matcha">
+      <div class="work-meta">
+        <span class="work-num">06 — Kavárna · brzy live</span>
+        <h3>MATCHÁ</h3>
+        <p class="work-desc">Signature kavárna kolem matcha rituálu — čistý web, menu, rezervace stolů a atmosféra, která voní ještě před prvním douškem.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>Rezervace</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Kavárna / gastronomie</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="/nia#konzultace" class="work-view" data-cursor>Ukázka brzy — domluv konzultaci →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="/nia#konzultace" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loaded" data-vw="1340" data-soon>
+        <div class="live-poster"><span class="play">✦</span><b>MATCHÁ</b><span>Skoro hotovo — rezervuj konzultaci</span></div>
+      </div>
+    </div>
+    <span class="frame-tag">Brzy live</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item reveal" id="work-realty" data-project="realty">
+      <div class="work-meta">
+        <span class="work-num">07 — Služby · ve vývoji</span>
+        <h3>Reality &amp; Právo</h3>
+        <p class="work-desc">Prémiová realitní nebo advokátní kancelář — důvěryhodný web, který budí jistotu na první pohled. Jasná struktura, silné CTA a profesionální tón.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>Konverze</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Realitka / právo</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="/nia#konzultace" class="work-view" data-cursor>Domluvit konzultaci →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="/nia#konzultace" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loaded" data-vw="1340" data-soon>
+        <div class="live-poster"><span class="play">✦</span><b>Reality &amp; Právo</b><span>Ukázka brzy — rezervuj konzultaci</span></div>
+      </div>
+    </div>
+    <span class="frame-tag">Ve vývoji</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item rev reveal" id="work-coach" data-project="coach">
+      <div class="work-meta">
+        <span class="work-num">08 — Koučink</span>
+        <h3>Koučink 1:1</h3>
+        <p class="work-desc">Osobní a kariérní koučink — klidný, věrohodný web s jasnou cestou k rezervaci úvodního hovoru. Méně šumu, víc důvěry.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Rezervace</span><span>UX</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Life &amp; career coaching</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/petra-sladek" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/petra-sladek" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/petra-sladek">
+        <div class="live-poster"><span class="play">▶</span><b>Koučink 1:1</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/petra-sladek"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item reveal" id="work-funnel" data-project="funnel">
+      <div class="work-meta">
+        <span class="work-num">09 — Prodej</span>
+        <h3>Konverzní trychtýř</h3>
+        <p class="work-desc">Prodejní landing s jasným CTA, sociálním důkazem a plynulým funnel až k objednávce. Web, který vede — ne jen informuje.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Konverze</span><span>E-shop</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Prodejní funnel</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="https://atelier-showcase-cyan.vercel.app/revolution-of-beauty" target="_blank" rel="noopener" class="work-view" data-cursor>Živá ukázka ↗</a>
+        <a href="/nia#konzultace" class="work-view" data-cursor>Chci podobný web →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="https://atelier-showcase-cyan.vercel.app/revolution-of-beauty" target="_blank" rel="noopener" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/revolution-of-beauty">
+        <div class="live-poster"><span class="play">▶</span><b>Konverzní trychtýř</b><span>Klikni pro živý náhled</span></div>
+      </div>
+    </div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/revolution-of-beauty"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
+      </a>
+    </article>
+
+    <article class="work-item rev reveal" id="work-wellness" data-project="wellness">
+      <div class="work-meta">
+        <span class="work-num">10 — Wellness · ve vývoji</span>
+        <h3>Wellness Penzion</h3>
+        <p class="work-desc">Prémiový penzion nebo wellness retreat — atmosféra místa, pokoje, rezervace a storytelling, který prodává klid ještě před příjezdem.</p>
+        <div class="work-tags"><span>Webdesign</span><span>Branding</span><span>Rezervace</span></div>
+        <div class="work-data">
+          <div><b>Role</b><p>Design &amp; vývoj</p></div>
+          <div><b>Obor</b><p>Wellness / penzion</p></div>
+        </div>
+        <div class="work-view-row">
+        <a href="/nia#konzultace" class="work-view" data-cursor>Domluvit konzultaci →</a>
+        </div>
+      </div>
+      <a class="tilt work-visual" href="/nia#konzultace" data-cursor style="display:block;cursor:pointer">
+  <div class="frame">
+    <span class="spark">✦</span>
+    <div class="screen"><div class="shine"></div>
+      <div class="live is-loaded" data-vw="1340" data-soon>
+        <div class="live-poster"><span class="play">✦</span><b>Wellness Penzion</b><span>Ukázka brzy — rezervuj konzultaci</span></div>
+      </div>
+    </div>
+    <span class="frame-tag">Ve vývoji</span>
+  </div>
+      </a>
+    </article>
+
+
+
   </div>
 </section>
 
-<section id="kontakt" class="kontakt">
-  <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <span class="eyebrow">Kontakt</span>
-      <h2>Pojďme udělat něco, na co se <span class="grad">nezapomíná</span>.<span class="rule"></span></h2>
-    </div>
-    <div class="k-grid">
-      <form class="k-form reveal" id="kForm">
-        <div><label>Jméno</label><input type="text" id="fName" placeholder="Tvoje jméno" required></div>
-        <div><label>E-mail</label><input type="email" id="fMail" placeholder="tvůj@email.cz" required></div>
-        <div><label>O projektu</label><textarea id="fMsg" placeholder="Pár vět o tom, co potřebuješ…" required></textarea></div>
-        <button type="submit" class="btn" data-cursor>Odeslat poptávku</button>
-        <p class="k-ok" id="kOk">Děkuju! Otevřela jsem ti e-mail — stačí odeslat a ozvu se. ✦</p>
-      </form>
-      <div class="k-info reveal">
-        <div class="ki"><div class="l">E-mail</div><a href="mailto:niadobyshar@gmail.com" data-cursor>niadobyshar@gmail.com</a></div>
-        <div class="ki"><div class="l">Telefon</div><a href="tel:+420773800785" data-cursor>+420 773 800 785</a></div>
-        <div class="ki"><div class="l">Instagram</div><a href="https://instagram.com/niadobysar" target="_blank" rel="noopener" data-cursor>@niadobysar</a></div>
-        
-      </div>
-    </div>
-  </div>
+<section class="kontakt" style="padding:var(--section) 0 0;background:var(--black)">
   <footer class="footer">
     <div class="wrap">
       <div class="foot-top">
         <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
         <div class="foot-links">
-          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a>
+          <a href="/nia/projekty">Práce</a><a href="/nia#studio">Studio</a><a href="/nia#sluzby">Ceník</a><a href="/nia#konzultace">Konzultace</a><a href="/nia#kontakt">Kontakt</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
@@ -675,6 +808,7 @@ document.querySelectorAll('.tilt').forEach(function(t){
   t.addEventListener('mouseleave',function(){m.style.transform='rotateY(0) rotateX(0)';if(sh)sh.style.transform='translateX(-30%)';});
 });
 
+
 var PROJECTS=[
   {id:'void',num:'01',name:'Atelier Void',cat:'Architektura',url:'https://atelier-showcase-cyan.vercel.app/atelier-void'},
   {id:'gloss',num:'02',name:'Gloss',cat:'Beauty',url:'https://atelier-showcase-cyan.vercel.app/gloss'},
@@ -725,7 +859,7 @@ function makePgCard(p,i){
     document.querySelectorAll('.pg-card').forEach(function(c){c.classList.remove('on');});
     document.querySelectorAll('.pg-card[data-project="'+p.id+'"]').forEach(function(c){c.classList.add('on');});
     var target=document.getElementById('work-'+p.id);
-    window.location.href='/nia/projekty'+(target?'#work-'+p.id:'');
+    if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
   });
   return card;
 }
@@ -772,7 +906,7 @@ window.addEventListener('load',function(){setTimeout(fitLive,120);setTimeout(fit
 document.querySelectorAll('.live').forEach(function(live){
   var poster=live.querySelector('.live-poster');
   if(live.hasAttribute('data-soon')){
-    if(poster)poster.addEventListener('click',function(){document.getElementById('konzultace').scrollIntoView({behavior:'smooth'});});
+    if(poster)poster.addEventListener('click',function(){window.location.href='/nia#konzultace';});
     return;
   }
   if(poster)poster.addEventListener('click',function(e){e.stopPropagation();mountIframe(live);});
@@ -786,90 +920,21 @@ var liveIo=new IntersectionObserver(function(es){
 },{rootMargin:'120px',threshold:[0,.35]});
 document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
 
+var activeIo=new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    var id=en.target.id&&en.target.id.replace('work-','');
+    if(!id)return;
+    document.querySelectorAll('.pg-card').forEach(function(c){
+      c.classList.toggle('on',c.dataset.project===id);
+    });
+  });
+},{threshold:.45});
+document.querySelectorAll('[data-project]').forEach(function(el){activeIo.observe(el);});
+
+
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.16});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-
-/* KONZULTACE */
-var KONZ={
-  online:{label:'Online konzultace',hint:'Online konzultace trvá 45 minut. Pošlu ti odkaz na Google Meet.',days:[1,2,3,4,5],times:['9:00','10:30','13:00','15:00','17:30']},
-  brno:{label:'Osobně — Brno',hint:'Setkáme se v centru Brna. Adresu pošlu po potvrzení termínu.',days:[2,4],times:['9:30','11:00','14:00','16:30']},
-  praha:{label:'Osobně — Praha',hint:'Setkáme se v centru Prahy. Adresu pošlu po potvrzení termínu.',days:[3,6],times:['10:00','12:00','15:00','17:00']}
-};
-var DNY=['Ne','Po','Út','St','Čt','Pá','So'];
-var mode='online',selDay=null,selTime=null;
-var konzDays=document.getElementById('konzDays'),konzTimes=document.getElementById('konzTimes');
-var konzHint=document.getElementById('konzHint'),konzSummary=document.getElementById('konzSummary');
-
-function nextDates(weekdays,count){
-  var out=[],d=new Date();d.setHours(12,0,0,0);
-  while(out.length<count){
-    if(weekdays.indexOf(d.getDay())>-1)out.push(new Date(d));
-    d.setDate(d.getDate()+1);
-  }
-  return out;
-}
-function fmtDate(dt){return dt.getDate()+'. '+(dt.getMonth()+1)+'.';}
-function renderDays(){
-  var cfg=KONZ[mode],dates=nextDates(cfg.days,8);
-  konzDays.innerHTML='';selDay=null;selTime=null;renderTimes();updateSummary();
-  dates.forEach(function(dt,i){
-    var b=document.createElement('button');b.type='button';b.className='konz-day'+(i===0?' on':'');
-    if(i===0)selDay=dt;
-    b.innerHTML='<span class="wd">'+DNY[dt.getDay()]+'</span><span class="dt">'+fmtDate(dt)+'</span>';
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.konz-day').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');selDay=dt;updateSummary();
-    });
-    konzDays.appendChild(b);
-  });
-}
-function renderTimes(){
-  var cfg=KONZ[mode];
-  konzTimes.innerHTML='';
-  cfg.times.forEach(function(t,i){
-    var b=document.createElement('button');b.type='button';b.className='konz-time'+(i===0?' on':'');
-    if(i===0)selTime=t;
-    b.textContent=t;
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.konz-time').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');selTime=t;updateSummary();
-    });
-    konzTimes.appendChild(b);
-  });
-}
-function updateSummary(){
-  if(!selDay||!selTime){konzSummary.textContent='Vyber typ konzultace, den a čas vlevo.';return;}
-  konzSummary.innerHTML='<b>'+KONZ[mode].label+'</b><br>'+DNY[selDay.getDay()]+' '+fmtDate(selDay)+' · '+selTime;
-}
-document.querySelectorAll('.konz-tab').forEach(function(tab){
-  tab.addEventListener('click',function(){
-    document.querySelectorAll('.konz-tab').forEach(function(t){t.classList.remove('on');});
-    tab.classList.add('on');mode=tab.dataset.mode;
-    konzHint.textContent=KONZ[mode].hint;renderDays();updateSummary();
-  });
-});
-renderDays();updateSummary();
-
-document.getElementById('konzForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  if(!selDay||!selTime)return;
-  var n=document.getElementById('kName').value,m=document.getElementById('kMail').value,
-      ph=document.getElementById('kPhone').value,msg=document.getElementById('kMsg').value;
-  var when=DNY[selDay.getDay()]+' '+fmtDate(selDay)+' '+selTime;
-  var body=encodeURIComponent('Jméno: '+n+'\nE-mail: '+m+(ph?'\nTelefon: '+ph:'')+'\nTyp: '+KONZ[mode].label+'\nTermín: '+when+'\n\n'+msg);
-  var sub=encodeURIComponent('Rezervace konzultace — '+n);
-  document.getElementById('konzOk').style.display='block';
-  window.location.href='mailto:niadobyshar@gmail.com?subject='+sub+'&body='+body;
-});
-
-document.getElementById('kForm').addEventListener('submit',function(e){
-  e.preventDefault();
-  var n=document.getElementById('fName').value,m=document.getElementById('fMail').value,msg=document.getElementById('fMsg').value;
-  var body=encodeURIComponent('Jméno: '+n+'\nE-mail: '+m+'\n\n'+msg);
-  var sub=encodeURIComponent('Poptávka webu — '+n);
-  document.getElementById('kOk').style.display='block';
-  window.location.href='mailto:niadobyshar@gmail.com?subject='+sub+'&body='+body;
-});
 </script>
 </body>
 </html>

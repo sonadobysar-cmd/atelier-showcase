@@ -134,13 +134,13 @@ img{display:block;max-width:100%}
 .proj-gallery-head{text-align:center;padding:0 6vw clamp(40px,6vw,64px);line-height:.82;position:relative}
 .proj-gallery-script{font-family:var(--script);font-style:normal;font-size:clamp(4.2rem,12vw,8.5rem);font-weight:400;color:var(--white);display:block;margin-bottom:-.32em;transform:translateX(-12%);position:relative;z-index:2}
 .proj-gallery-title{font-family:var(--display);font-weight:500;font-size:clamp(3.2rem,10vw,7.2rem);letter-spacing:.02em;text-transform:uppercase;color:var(--white);margin:0}
-.proj-gallery-stage{position:relative;height:clamp(380px,46vw,520px);display:flex;align-items:center;justify-content:center}
-.proj-gallery-track-wrap{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
-.proj-gallery-track{display:flex;align-items:center;gap:10px;width:max-content;animation:pgScroll 70s linear infinite;will-change:transform;padding:0 50%}
-.proj-gallery-track-wrap:hover .proj-gallery-track{animation-play-state:paused}
-@keyframes pgScroll{to{transform:translateX(-50%)}}
-.pg-card{flex:0 0 clamp(196px,20vw,268px);height:clamp(248px,30vw,352px);position:relative;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--burgundy2);border-radius:var(--r-md);transition:transform .5s var(--ease),filter .4s,box-shadow .4s}
-.pg-card:hover{filter:brightness(1.1);transform:scale(1.02)}
+.proj-gallery-stage{position:relative;height:clamp(380px,46vw,520px);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.proj-gallery-track-wrap{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 10%,#000 90%,transparent 100%)}
+.proj-gallery-track{display:flex;align-items:center;gap:12px;width:max-content;animation:pgScroll 42s linear infinite;will-change:transform}
+.proj-gallery-stage:hover .proj-gallery-track,.proj-gallery-track-wrap:hover .proj-gallery-track{animation-duration:26s}
+@keyframes pgScroll{to{transform:translateX(var(--pg-shift,-50%))}}
+.pg-card{flex:0 0 clamp(196px,20vw,268px);height:clamp(248px,30vw,352px);position:relative;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--burgundy2);border-radius:var(--r-md);transition:transform .45s var(--ease),filter .4s,box-shadow .45s var(--ease)}
+.pg-card:hover{filter:brightness(1.12);transform:scale(1.04) translateY(-4px);box-shadow:0 24px 48px -20px rgba(158,77,106,.35)}
 .pg-card.on{filter:brightness(1.14);box-shadow:0 0 0 2px rgba(158,77,106,.5)}
 .pg-card-screen{position:absolute;inset:0;overflow:hidden;background:var(--off);border-radius:var(--r-md)}
 .pg-card-screen .live,.pg-card-screen .pg-live{position:absolute;inset:0}
@@ -328,13 +328,30 @@ img{display:block;max-width:100%}
 .k-form textarea{resize:vertical}
 .konz-form textarea{resize:vertical}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(40px) scale(.98);transition:opacity 1s var(--ease),transform 1s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.reveal.in .work-tags span,.reveal.in .price{animation:staggerUp .7s var(--ease) both}
-.reveal.in .work-tags span:nth-child(1){animation-delay:.1s}
-.reveal.in .work-tags span:nth-child(2){animation-delay:.18s}
-.reveal.in .work-tags span:nth-child(3){animation-delay:.26s}
+/* REVEAL + LUXURY MOTION */
+.reveal{opacity:0;transform:translateY(36px) scale(.97);filter:blur(10px);transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease)}
+.reveal.in{opacity:1;transform:none;filter:blur(0)}
+.reveal.in .work-tags span,.reveal.in .price{animation:staggerUp .55s var(--ease) both}
+.reveal.in .work-tags span:nth-child(1){animation-delay:.08s}
+.reveal.in .work-tags span:nth-child(2){animation-delay:.14s}
+.reveal.in .work-tags span:nth-child(3){animation-delay:.2s}
+.reveal-child{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in .reveal-child,.reveal.in.reveal-child{opacity:1;transform:none}
+.reveal.in .reveal-child:nth-child(1){transition-delay:.05s}
+.reveal.in .reveal-child:nth-child(2){transition-delay:.12s}
+.reveal.in .reveal-child:nth-child(3){transition-delay:.19s}
+.reveal.in .reveal-child:nth-child(4){transition-delay:.26s}
+.reveal.in .reveal-child:nth-child(5){transition-delay:.33s}
+.sec-head h2 .rule{transform:scaleX(0);transform-origin:left;transition:transform .8s var(--ease) .15s}
+.sec-head.centered h2 .rule{transform-origin:center}
+.reveal.in .sec-head h2 .rule{transform:scaleX(1)}
+.proj-gallery-head .proj-gallery-script{opacity:0;transform:translateX(-24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.proj-gallery-head .proj-gallery-title{opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease) .12s,transform .8s var(--ease) .12s}
+.reveal.in .proj-gallery-head .proj-gallery-script,.reveal.in .proj-gallery-head .proj-gallery-title{opacity:1;transform:none}
+.work-item{transition:transform .5s var(--ease)}
+.work-item:hover .work-visual{transform:translateY(-4px)}
+.work-visual{transition:transform .5s var(--ease)}
+.tilt:hover .screen{box-shadow:0 40px 80px -36px rgba(8,6,6,.28)}
 @keyframes staggerUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* RESPONSIVE */
@@ -864,9 +881,11 @@ function makePgCard(p,i){
   return card;
 }
 if(pgTrack){
-  PROJECTS.concat(PROJECTS).forEach(function(p,i){
-    pgTrack.appendChild(makePgCard(p,i%PROJECTS.length));
-  });
+  var PG_COPIES=3;
+  for(var c=0;c<PG_COPIES;c++){
+    PROJECTS.forEach(function(p,i){pgTrack.appendChild(makePgCard(p,i));});
+  }
+  pgTrack.style.setProperty('--pg-shift',-(100/PG_COPIES)+'%');
 }
 
 var pgGallery=document.getElementById('projGallery');
@@ -933,7 +952,7 @@ var activeIo=new IntersectionObserver(function(es){
 document.querySelectorAll('[data-project]').forEach(function(el){activeIo.observe(el);});
 
 
-var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.16});
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
 </body>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%237C3AED%22/><path d=%22M12 9v14l12-8z%22 fill=%22white%22/></svg>" type="image/svg+xml">
+<title>Zákazníci z internetu — bezplatná živá masterclass</title>
+<meta name="description" content="Bezplatná živá online masterclass: jak získat stálý přísun zákazníků z internetu — bez placené reklamy a bez složitostí. Rezervuj si místo zdarma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0613; --bg2:#0E0A1A; --ink:#070410;
+  --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.07); --br:rgba(244,239,251,.12);
+  --tx:#F4EFFB; --mut:#A99CC0; --mut2:#7E7396;
+  --v1:#7C3AED; --v2:#A855F7; --v3:#EC4899;
+  --grad:linear-gradient(120deg,#7C3AED 0%,#A855F7 48%,#EC4899 100%);
+  --glow:rgba(168,85,247,.4); --glow2:rgba(236,72,153,.26);
+  --live:#FF3B5C;
+  --d:'Space Grotesk',sans-serif; --b:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{font-family:var(--b);background:var(--bg);color:var(--tx);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(620px circle at 78% -5%,var(--glow),transparent 60%),
+  radial-gradient(560px circle at 8% 110%,var(--glow2),transparent 60%)}
+h1,h2,h3{font-family:var(--d);font-weight:700;line-height:1.08;letter-spacing:-.02em;color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92vw);margin:0 auto;position:relative;z-index:1}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--b);font-weight:700;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--v2)}
+.sec{padding:clamp(70px,8vw,116px) 0;position:relative;z-index:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--b);font-weight:600;font-size:1rem;border-radius:13px;padding:16px 28px;cursor:pointer;border:1px solid transparent;transition:transform .2s,box-shadow .25s,background .2s,border-color .2s;line-height:1}
+.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 30px var(--glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 44px var(--glow)}
+.btn-ghost{background:rgba(255,255,255,.03);color:var(--tx);border-color:var(--br)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(244,239,251,.3)}
+@keyframes ctapulse{0%{box-shadow:0 0 0 0 rgba(168,85,247,.5)}70%{box-shadow:0 0 0 16px rgba(168,85,247,0)}100%{box-shadow:0 0 0 0 rgba(168,85,247,0)}}
+.pulse{animation:ctapulse 2.6s infinite}
+:focus-visible{outline:3px solid var(--v2);outline-offset:3px;border-radius:6px}
+
+/* live badge */
+.live{display:inline-flex;align-items:center;gap:8px;font-family:var(--b);font-weight:700;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:rgba(255,59,92,.14);border:1px solid rgba(255,59,92,.4);border-radius:99px;padding:7px 14px}
+.live .ld{width:9px;height:9px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,59,92,.7);animation:livep 1.7s infinite}
+@keyframes livep{0%{box-shadow:0 0 0 0 rgba(255,59,92,.6)}70%{box-shadow:0 0 0 11px rgba(255,59,92,0)}100%{box-shadow:0 0 0 0 rgba(255,59,92,0)}}
+
+/* promo bar */
+.promo{position:fixed;top:0;left:0;right:0;z-index:90;background:var(--ink);color:var(--tx);min-height:40px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:.82rem;padding:6px 14px;border-bottom:1px solid rgba(168,85,247,.3);flex-wrap:nowrap}
+.promo b{color:#fff;font-weight:700}
+.promo .pc{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--mut)}
+.promo .px{white-space:nowrap;color:var(--mut)}
+.promo a{display:inline-flex;align-items:center;gap:5px;background:var(--grad);color:#fff;font-weight:700;border-radius:99px;padding:6px 14px;font-size:.76rem;white-space:nowrap}
+@media(max-width:640px){.promo{font-size:.74rem;gap:10px}.promo .px{display:none}}
+
+/* header */
+.hd{position:fixed;top:40px;left:0;right:0;z-index:80;background:rgba(10,6,19,.72);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+.hd.scrolled{border-color:var(--br);background:rgba(10,6,19,.9)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--d);font-weight:700;font-size:1.16rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.logo .mk{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px var(--glow)}
+.hd-nav{display:flex;align-items:center;gap:30px}
+.hd-nav a.lnk{font-size:.92rem;color:var(--mut);font-weight:500;transition:color .2s}
+.hd-nav a.lnk:hover{color:#fff}
+.hd .when{font-size:.86rem;color:var(--mut);font-weight:500}
+.hd .when b{color:#fff}
+.hd .btn{padding:11px 20px;font-size:.9rem}
+@media(max-width:900px){.hd-nav a.lnk,.hd .when{display:none}}
+
+/* hero */
+.hero{padding:130px 0 84px;text-align:center;overflow:hidden}
+.hero .live{margin:0 auto}
+.hero h1{font-size:clamp(2.5rem,6.2vw,4.7rem);max-width:17ch;margin:22px auto 0;text-wrap:balance}
+.hero p.sub{font-size:1.18rem;color:var(--mut);max-width:54ch;margin:22px auto 0}
+.when-pill{display:inline-flex;align-items:center;gap:10px;margin-top:28px;background:var(--panel);border:1px solid var(--br);border-radius:99px;padding:11px 20px;font-weight:600;font-size:.98rem}
+.when-pill svg{color:var(--v2)}
+.when-pill .tz{color:var(--mut);font-weight:500}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
+.countdown{margin-top:44px}
+.cd-lbl{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:9px;justify-content:center}
+.clock{display:flex;gap:14px;justify-content:center}
+.cell{background:var(--panel);border:1px solid var(--br);border-radius:18px;padding:18px 10px;min-width:92px;backdrop-filter:blur(6px)}
+.cell .n{font-family:var(--d);font-size:2.7rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cell .l{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-top:9px}
+.trust{display:inline-flex;align-items:center;gap:12px;margin-top:34px;color:var(--mut);font-size:.92rem;flex-wrap:wrap;justify-content:center}
+.trust .avs{display:flex}
+.trust .avs span{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-9px;background:var(--grad);display:inline-block}
+.trust b{color:#fff}
+@media(max-width:540px){.cell{min-width:70px;padding:14px 6px}.cell .n{font-size:2rem}}
+@media(max-width:380px){.clock{gap:8px}.cell{min-width:60px;padding:12px 4px}.cell .n{font-size:1.7rem}}
+
+/* section head */
+.shead{max-width:60ch;margin:0 auto 50px;text-align:center}
+.shead h2{font-size:clamp(2rem,4vw,3rem);margin-top:14px;text-wrap:balance}
+.shead p{margin-top:14px;font-size:1.08rem;color:var(--mut)}
+
+/* audience */
+.aud-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:880px;margin:0 auto}
+.aud{display:flex;gap:15px;align-items:flex-start;background:var(--panel);border:1px solid var(--br);border-radius:16px;padding:22px 24px}
+.aud .ck{flex:none;width:30px;height:30px;border-radius:9px;background:rgba(168,85,247,.18);color:var(--v2);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.aud p{font-size:1rem;color:var(--tx)}
+.aud p b{color:#fff;font-weight:600}
+@media(max-width:680px){.aud-grid{grid-template-columns:1fr}}
+
+/* learn (pillars) */
+.learn-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.lcard{background:var(--panel);border:1px solid var(--br);border-radius:20px;padding:30px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}
+.lcard:hover{transform:translateY(-4px);border-color:rgba(168,85,247,.45)}
+.lcard .ln{font-family:var(--d);font-weight:700;font-size:1rem;color:var(--v2);margin-bottom:16px;display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;background:rgba(168,85,247,.14)}
+.lcard h3{font-size:1.28rem;margin-bottom:9px}
+.lcard p{font-size:.99rem;color:var(--mut)}
+@media(max-width:760px){.learn-grid{grid-template-columns:1fr}}
+
+/* host */
+.host{display:grid;grid-template-columns:.74fr 1.26fr;gap:50px;align-items:center}
+.medal{aspect-ratio:1;width:100%;max-width:290px;border-radius:50%;background:linear-gradient(150deg,#1a1030,#0d0820);display:flex;align-items:center;justify-content:center;position:relative;margin:0 auto;box-shadow:0 0 60px var(--glow)}
+.medal .ring{position:absolute;border-radius:50%;border:1.5px solid rgba(168,85,247,.4)}
+.medal .r1{inset:-14px;animation:sig 3s ease-out infinite}
+.medal .r2{inset:-14px;animation:sig 3s ease-out infinite 1.5s}
+@keyframes sig{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.18);opacity:0}}
+.medal .mono{font-family:var(--d);font-weight:700;font-size:4.6rem;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;z-index:1}
+.host .role{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--v2);font-weight:700;margin-bottom:8px}
+.host h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin-bottom:14px}
+.host p{font-size:1.05rem;color:var(--mut);margin-bottom:14px}
+.host .creds{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.cred{font-size:.82rem;font-weight:500;background:var(--panel);border:1px solid var(--br);border-radius:99px;padding:9px 15px;color:var(--tx)}
+@media(max-width:760px){.host{grid-template-columns:1fr;gap:30px;text-align:center}.host .creds{justify-content:center}.medal{max-width:200px}}
+
+/* testimonials */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tcard{background:var(--panel);border:1px solid var(--br);border-radius:20px;padding:28px}
+.tcard .st{color:var(--v3);letter-spacing:2px;font-size:.9rem;margin-bottom:12px}
+.tcard .q{font-size:1.04rem;line-height:1.55;color:var(--tx)}
+.tcard .who{display:flex;align-items:center;gap:12px;margin-top:20px}
+.tcard .av{width:42px;height:42px;border-radius:50%;background:var(--grad);color:#fff;font-family:var(--d);font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
+.tcard .who b{font-weight:600;font-size:.94rem;color:#fff}
+.tcard .who span{display:block;font-size:.78rem;color:var(--mut2)}
+@media(max-width:820px){.tg{grid-template-columns:1fr}}
+
+/* seats / urgency */
+.seatbox{max-width:760px;margin:0 auto;background:var(--panel);border:1px solid var(--br);border-radius:22px;padding:clamp(26px,4vw,40px);text-align:center;backdrop-filter:blur(6px)}
+.seatbox h2{font-size:clamp(1.7rem,3.6vw,2.5rem)}
+.seatbox p{color:var(--mut);margin-top:12px;font-size:1.05rem}
+.bar{height:12px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin:26px 0 12px}
+.bar i{display:block;height:100%;width:0;background:var(--grad);border-radius:99px;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
+.seatnum{display:flex;justify-content:space-between;font-size:.86rem;color:var(--mut);font-weight:500}
+.seatnum b{color:#fff}
+.seatbox .btn{margin-top:26px}
+
+/* faq */
+.faq{max-width:840px;margin:0 auto}
+.faq details{border:1px solid var(--br);border-radius:16px;margin-bottom:12px;background:var(--panel);transition:border-color .2s}
+.faq details[open]{border-color:rgba(168,85,247,.45)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 24px;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:var(--d);font-weight:600;font-size:1.12rem;color:#fff}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pl{flex:none;width:26px;height:26px;border-radius:8px;background:rgba(255,255,255,.06);position:relative;transition:transform .3s,background .3s}
+.faq details[open] summary .pl{background:var(--v2);transform:rotate(90deg)}
+.faq summary .pl::before,.faq summary .pl::after{content:'';position:absolute;background:var(--v2);border-radius:2px;transition:background .3s}
+.faq details[open] summary .pl::before,.faq details[open] summary .pl::after{background:#fff}
+.faq summary .pl::before{top:12px;left:6px;right:6px;height:2px}
+.faq summary .pl::after{left:12px;top:6px;bottom:6px;width:2px;transition:opacity .3s,background .3s}
+.faq details[open] summary .pl::after{opacity:0}
+.faq .ans{padding:0 24px 24px;font-size:1.02rem;color:var(--mut)}
+
+/* final + form */
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.final h2{font-size:clamp(2.1rem,4.6vw,3.3rem);max-width:15ch}
+.final p.sub{color:var(--mut);font-size:1.12rem;margin-top:18px;max-width:46ch}
+.form{background:var(--panel);border:1px solid var(--br);border-radius:24px;padding:clamp(26px,3vw,36px);backdrop-filter:blur(6px)}
+.form .formtop{font-family:var(--d);font-weight:700;font-size:1.3rem;color:#fff;margin-bottom:4px}
+.form .formsub{font-size:.92rem;color:var(--mut);margin-bottom:20px}
+.field{margin-bottom:15px}
+.field label{display:block;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:8px}
+.field input{width:100%;font-family:var(--b);font-size:1rem;color:#fff;background:rgba(255,255,255,.05);border:1px solid var(--br);border-radius:13px;padding:15px 16px;transition:border-color .2s}
+.field input::placeholder{color:var(--mut2)}
+.field input:focus{outline:none;border-color:var(--v2)}
+.form .btn{width:100%;font-size:1.05rem;padding:18px;margin-top:4px}
+.form .fine{font-size:.78rem;color:var(--mut);margin-top:14px;text-align:center;line-height:1.5}
+.form-ok{color:var(--v2);text-align:center;margin-top:14px;min-height:1.2em;font-size:.96rem;font-weight:500}
+@media(max-width:820px){.final-grid{grid-template-columns:1fr;gap:32px}}
+
+/* section CTA rows */
+.cta-row{text-align:center;margin-top:50px}
+.cta-row .btn{font-size:1.05rem;padding:17px 36px}
+.cta-row .micro{display:block;font-size:.84rem;color:var(--mut);margin-top:14px;font-weight:500}
+
+/* sticky bottom bar */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:85;background:rgba(7,4,16,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(168,85,247,.3);transform:translateY(120%);transition:transform .35s ease;padding:12px 0}
+.sticky.show{transform:none}
+.sticky-in{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sticky .st-txt b{font-family:var(--d);color:#fff;font-size:1.04rem;font-weight:700;line-height:1.1;display:flex;align-items:center;gap:8px}
+.sticky .st-txt span{display:block;font-size:.76rem;color:var(--mut);margin-top:3px;font-variant-numeric:tabular-nums}
+.sticky .btn{white-space:nowrap;padding:13px 26px}
+@media(max-width:560px){.sticky .st-txt span{display:none}.sticky-in{gap:12px}}
+
+/* footer */
+.ft{background:var(--ink);color:var(--mut2);padding:42px 0;position:relative;z-index:1}
+.ft-in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;font-size:.84rem}
+.ft a{color:var(--v2);font-weight:500}
+
+
+/* demo + media */
+.demo-pill{position:fixed;top:48px;left:50%;transform:translateX(-50%);z-index:95;background:rgba(7,4,16,.82);color:#fff;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:8px 16px;border-radius:99px;pointer-events:none;backdrop-filter:blur(8px);border:1px solid rgba(168,85,247,.35)}
+.hero-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,54px);align-items:center;text-align:left}
+.hero-wrap .hero-copy{text-align:left}
+.hero-wrap .hero-copy h1{margin-left:0;margin-right:0}
+.hero-wrap .hero-copy .sub{margin-left:0;margin-right:0}
+.hero-wrap .hero-cta{justify-content:flex-start}
+.hero-wrap .trust{justify-content:flex-start}
+.hero-visual{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--br);box-shadow:0 30px 80px -24px var(--glow);background:#12081f}
+.hero-visual img{width:100%;aspect-ratio:16/11;object-fit:cover;display:block;animation:ken 18s ease-in-out infinite alternate;transform-origin:center}
+@keyframes ken{0%{transform:scale(1)}100%{transform:scale(1.06)}}
+.hero-visual .hv-live{position:absolute;top:16px;left:16px}
+.hero-visual .hv-meta{position:absolute;left:16px;right:16px;bottom:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.hero-visual .hv-chip{background:rgba(7,4,16,.72);backdrop-filter:blur(8px);border:1px solid var(--br);border-radius:12px;padding:10px 14px;font-size:.78rem;color:var(--mut)}
+.hero-visual .hv-chip b{color:#fff;display:block;font-size:.92rem;margin-top:2px}
+.host-photo{aspect-ratio:1;width:100%;max-width:320px;border-radius:50%;overflow:hidden;position:relative;margin:0 auto;box-shadow:0 0 60px var(--glow);border:2px solid rgba(168,85,247,.45)}
+.host-photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}
+.host-photo .ring{position:absolute;border-radius:50%;border:1.5px solid rgba(168,85,247,.4);pointer-events:none}
+.host-photo .r1{inset:-14px;animation:sig 3s ease-out infinite}
+.host-photo .r2{inset:-14px;animation:sig 3s ease-out infinite 1.5s}
+.tcard .av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+.trust .avs img{width:30px;height:30px;border-radius:50%;border:2px solid var(--bg);margin-left:-9px;object-fit:cover;display:inline-block;background:#1a1030}
+.trust .avs img:first-child{margin-left:0}
+.learn-grid .lcard .thumb{width:100%;aspect-ratio:16/10;border-radius:14px;overflow:hidden;margin-bottom:18px;border:1px solid var(--br)}
+.learn-grid .lcard .thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:.92}
+.demo-modal-back{position:fixed;inset:0;z-index:120;background:rgba(7,4,16,.62);opacity:0;pointer-events:none;transition:opacity .3s}
+.demo-modal-back.open{opacity:1;pointer-events:auto}
+.demo-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-46%) scale(.96);z-index:121;width:min(440px,92vw);background:var(--bg2);border:1px solid var(--br);border-radius:24px;padding:32px 28px;box-shadow:0 40px 80px -32px rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .3s,transform .35s cubic-bezier(.2,.8,.2,1)}
+.demo-modal-back.open .demo-modal{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.demo-modal h4{font-size:1.6rem;margin-bottom:8px}
+.demo-modal .dm-id{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--v2);margin-bottom:14px}
+.demo-modal p{font-size:.95rem;color:var(--mut);margin-bottom:18px;line-height:1.65}
+.demo-modal .dm-close{width:100%;font-weight:600;font-size:.95rem;color:#fff;background:var(--grad);border:none;border-radius:13px;padding:14px;cursor:pointer}
+@media(max-width:980px){.hero-wrap{grid-template-columns:1fr;text-align:center}.hero-wrap .hero-copy{text-align:center}.hero-wrap .hero-copy h1,.hero-wrap .hero-copy .sub{margin-left:auto;margin-right:auto}.hero-wrap .hero-cta,.hero-wrap .trust{justify-content:center}}
+@media(max-width:760px){.host-photo{max-width:220px}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="demo-pill" aria-hidden="true">Demo režim · ukázková registrace</div>
+
+<!-- PROMO BAR -->
+<div class="promo" id="promo">
+  <span class="px"><b>Živě online</b> · vstup zdarma</span>
+  <span class="pc">Začínáme za <span id="promoCd">…</span></span>
+  <a href="#registrace">Rezervovat →</a>
+</div>
+
+<!-- HEADER -->
+<header class="hd" id="hd">
+  <div class="wrap hd-in">
+    <a class="logo" href="#top">
+      <span class="mk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
+      Masterclass
+    </a>
+    <nav class="hd-nav">
+      <a class="lnk" href="#dozvis">Co se dozvíš</a>
+      <a class="lnk" href="#lektor">Lektor</a>
+      <a class="lnk" href="#faq">Dotazy</a>
+      <span class="when">Živě <b class="evDate">…</b></span>
+      <a class="btn btn-primary pulse" href="#registrace">Rezervovat zdarma</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap hero-wrap">
+    <div class="hero-copy">
+      <span class="live rv in"><span class="ld"></span> Živě · online · zdarma</span>
+      <h1 class="rv in">Získej stálý přísun <span class="grad">zákazníků z internetu</span> — bez placené reklamy.</h1>
+      <p class="sub rv in">Bezplatná 90minutová živá masterclass, kde ti krok za krokem ukážu systém, díky kterému ti chodí poptávky samy — i když nejsi marketér a nemáš velký rozpočet.</p>
+      <div class="rv in">
+        <span class="when-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> <span class="evDate">…</span> <span class="tz">(SEČ)</span></span>
+      </div>
+      <div class="hero-cta rv in">
+        <a class="btn btn-primary" href="#registrace">Rezervovat místo zdarma →</a>
+        <a class="btn btn-ghost" href="#dozvis">Co se dozvíš</a>
+      </div>
+      <div class="countdown rv in">
+        <div class="cd-lbl"><span class="live" style="padding:4px 10px;font-size:.66rem"><span class="ld"></span> Živě</span> Začínáme za</div>
+        <div class="clock" aria-label="Odpočet do začátku webináře">
+          <div class="cell"><div class="n" id="cd-d">00</div><div class="l">dní</div></div>
+          <div class="cell"><div class="n" id="cd-h">00</div><div class="l">hodin</div></div>
+          <div class="cell"><div class="n" id="cd-m">00</div><div class="l">minut</div></div>
+          <div class="cell"><div class="n" id="cd-s">00</div><div class="l">sekund</div></div>
+        </div>
+      </div>
+      <div class="trust rv in">
+        <span class="avs">
+          <img src="/masterclass/images/avatar-tereza.jpg" alt="" width="30" height="30" loading="lazy">
+          <img src="/masterclass/images/avatar-jan.jpg" alt="" width="30" height="30" loading="lazy">
+          <img src="/masterclass/images/avatar-marketa.jpg" alt="" width="30" height="30" loading="lazy">
+          <img src="/masterclass/images/host-klara.jpg" alt="" width="30" height="30" loading="lazy">
+        </span>
+        <span>Už <b>1 842</b> přihlášených · vstup <b>0 Kč</b></span>
+      </div>
+    </div>
+    <div class="hero-visual rv in" aria-hidden="true">
+      <img src="/masterclass/images/hero-webinar.jpg" alt="">
+      <span class="live hv-live"><span class="ld"></span> Živý náhled</span>
+      <div class="hv-meta">
+        <span class="hv-chip">Účastníci online<b>1 842+</b></span>
+        <span class="hv-chip">Délka<b>90 min + Q&A</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE -->
+<section class="sec" id="protebe">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Je to pro tebe, pokud…</span>
+      <h2>Děláš dobrou práci, ale lidi o tobě pořád neví.</h2>
+    </div>
+    <div class="aud-grid">
+      <div class="aud rv"><span class="ck"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>Jsi <b>OSVČ nebo malá firma</b> a chceš předvídatelný přísun poptávek, ne náhodu.</p></div>
+      <div class="aud rv"><span class="ck"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>Spoléháš hlavně na <b>doporučení</b> a chceš se konečně postavit na vlastní nohy.</p></div>
+      <div class="aud rv"><span class="ck"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>Nechceš <b>pálit peníze za reklamu</b>, kterou neumíš vyhodnotit.</p></div>
+      <div class="aud rv"><span class="ck"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 13l4 4L20 5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><p>Marketing tě <b>zahlcuje</b> a chceš jeden jasný systém, který prostě funguje.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- LEARN -->
+<section class="sec" id="dozvis" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Co si z webináře odneseš</span>
+      <h2>Tři věci, které změní, jak k tobě chodí zákazníci.</h2>
+    </div>
+    <div class="learn-grid">
+      <div class="lcard rv"><div class="thumb"><img src="/masterclass/images/hero-webinar.jpg" alt="" loading="lazy"></div><span class="ln">1</span><h3>Magnet na zákazníky</h3><p>Jednoduchý systém, který přitahuje poptávky i ve chvíli, kdy zrovna nepracuješ — bez reklamy.</p></div>
+      <div class="lcard rv"><div class="thumb"><img src="/masterclass/images/host-klara.jpg" alt="" loading="lazy"></div><span class="ln">2</span><h3>Slova, co prodávají</h3><p>Jak mluvit o své práci tak, aby lidé chtěli koupit právě od tebe — i když jsi dražší než konkurence.</p></div>
+      <div class="lcard rv"><div class="thumb"><img src="/masterclass/images/trust-avatars.jpg" alt="" loading="lazy"></div><span class="ln">3</span><h3>3 tiché chyby</h3><p>Tři chyby, kvůli kterým ti zákazníci utíkají z webu i z profilu — a jak je za večer opravit.</p></div>
+    </div>
+    <div class="cta-row rv"><a class="btn btn-primary" href="#registrace">Chci se to naučit živě →</a><span class="micro">Vstup zdarma · 90 minut + Q&A</span></div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section class="sec" id="lektor">
+  <div class="wrap host">
+    <div class="host-photo rv" role="img" aria-label="Lektorka — Klára Novotná">
+      <span class="ring r1"></span><span class="ring r2"></span>
+      <img src="/masterclass/images/host-klara.jpg" alt="Klára Novotná — lektorka masterclass" width="320" height="320" loading="lazy">
+    </div>
+    <div class="rv">
+      <span class="role">Tvá průvodkyně</span>
+      <h2>Klára Novotná</h2>
+      <p>Osm let pomáhám OSVČ a malým firmám získávat zákazníky z internetu — bez nafouknutých rozpočtů a marketingového balastu. Sama jsem začínala u kuchyňského stolu s nulovým publikem.</p>
+      <p>Na webináři ti dám přesně ten systém, který používám s klienty každý den. Žádná teorie do šuplíku — odneseš si konkrétní kroky, které můžeš použít hned druhý den.</p>
+      <div class="creds">
+        <span class="cred">8 let praxe</span>
+        <span class="cred">500+ klientů</span>
+        <span class="cred">Bez placené reklamy</span>
+        <span class="cred">Autorka newsletteru</span>
+      </div>
+      <div class="cta-row rv" style="text-align:left;margin-top:30px"><a class="btn btn-ghost" href="#registrace">Rezervovat místo zdarma →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="reference" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Co říkají účastníci</span>
+      <h2>Z minulých běhů.</h2>
+    </div>
+    <div class="tg">
+      <div class="tcard rv"><div class="st">★★★★★</div><p class="q">„Za jeden večer jsem pochopila víc než z dražšího kurzu. Hned další týden mi přišly dvě poptávky."</p><div class="who"><span class="av"><img src="/masterclass/images/avatar-tereza.jpg" alt="" width="42" height="42" loading="lazy"></span><div><b>Tereza M.</b><span>kadeřnice, Brno</span></div></div></div>
+      <div class="tcard rv"><div class="st">★★★★★</div><p class="q">„Konečně někdo mluvil normálně a prakticky. Opravil jsem ty tři chyby na webu a poptávky se zvedly."</p><div class="who"><span class="av"><img src="/masterclass/images/avatar-jan.jpg" alt="" width="42" height="42" loading="lazy"></span><div><b>Jan P.</b><span>truhlář, Plzeň</span></div></div></div>
+      <div class="tcard rv"><div class="st">★★★★★</div><p class="q">„Bála jsem se, že to bude prodejní masakr. Místo toho samá konkrétní rada, kterou používám dodnes."</p><div class="who"><span class="av"><img src="/masterclass/images/avatar-marketa.jpg" alt="" width="42" height="42" loading="lazy"></span><div><b>Markéta S.</b><span>fotografka, Praha</span></div></div></div>
+    </div>
+    <div class="cta-row rv"><a class="btn btn-primary" href="#registrace">Přidej se k nim →</a><span class="micro">Už 1 842 přihlášených</span></div>
+  </div>
+</section>
+
+<!-- SEATS / URGENCY -->
+<section class="sec" id="urgence">
+  <div class="wrap">
+    <div class="seatbox rv">
+      <span class="live" style="margin:0 auto 16px;display:inline-flex"><span class="ld"></span> Kapacita se plní</span>
+      <h2>Místa jsou omezená — sál pojme jen 200 lidí.</h2>
+      <p>Webinář je živý, abys mohl/a klást otázky. Proto je počet míst limitovaný a rezervace se uzavírá v okamžiku startu.</p>
+      <div class="bar"><i id="seatBar"></i></div>
+      <div class="seatnum"><span>Obsazeno <b id="seatTaken">163</b> z 200</span><span><b id="seatLeft">37</b> volných míst</span></div>
+      <a class="btn btn-primary pulse" href="#registrace">Zabrat poslední místo zdarma →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Časté dotazy</span>
+      <h2>Než se přihlásíš.</h2>
+    </div>
+    <div class="faq rv">
+      <details><summary>Je to opravdu zdarma?<span class="pl"></span></summary><div class="ans">Ano, účast na živém webináři je úplně zdarma. Stačí se zaregistrovat e-mailem a v daný čas se připojit.</div></details>
+      <details><summary>Bude k dispozici záznam?<span class="pl"></span></summary><div class="ans">Přihlášení dostanou krátký záznam dostupný 48 hodin po skončení. Největší hodnota je ale v živém Q&A — vyplatí se být u toho naživo.</div></details>
+      <details><summary>Pro koho je webinář určený?<span class="pl"></span></summary><div class="ans">Pro OSVČ, malé firmy a začínající podnikatele, kteří chtějí stálý přísun zákazníků z internetu bez placené reklamy. Žádné předchozí znalosti marketingu nepotřebuješ.</div></details>
+      <details><summary>Jak je to dlouhé a kdy to bude?<span class="pl"></span></summary><div class="ans">Zhruba 90 minut živě plus prostor na dotazy. Termín i čas vidíš nahoře na stránce, připojíš se přes odkaz, který ti pošleme na e-mail.</div></details>
+      <details><summary>Budeš mi pak něco prodávat?<span class="pl"></span></summary><div class="ans">Na konci zmíním, jak můžeme pokračovat dál, pokud budeš chtít. Ale i kdyby ses rozhodl/a nepokračovat, odneseš si konkrétní systém, který můžeš použít hned.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA + FORM -->
+<section class="sec final" id="registrace">
+  <div class="wrap final-grid">
+    <div class="rv">
+      <span class="eyebrow">Rezervace zdarma</span>
+      <h2 style="margin-top:16px">Zabav si místo, dokud je volné.</h2>
+      <p class="sub">Nech nám e-mail a pošleme ti odkaz na živé vysílání + připomenutí, ať nezapomeneš. Začínáme <b class="evDate" style="color:#fff">…</b>.</p>
+      <div class="trust" style="margin-top:24px;justify-content:flex-start"><span class="avs"><img src="/masterclass/images/avatar-tereza.jpg" alt="" width="30" height="30" loading="lazy"><img src="/masterclass/images/avatar-jan.jpg" alt="" width="30" height="30" loading="lazy"><img src="/masterclass/images/avatar-marketa.jpg" alt="" width="30" height="30" loading="lazy"></span><span><b>37</b> volných míst z 200</span></div>
+    </div>
+    <div class="form rv">
+      <div class="formtop">Rezervuj si místo</div>
+      <div class="formsub">Vstup zdarma · žádná platba</div>
+      <div class="field"><label for="f-name">Jméno</label><input id="f-name" type="text" placeholder="Tvé jméno" autocomplete="name"></div>
+      <div class="field"><label for="f-mail">E-mail</label><input id="f-mail" type="email" placeholder="tvuj@email.cz" autocomplete="email"></div>
+      <button class="btn btn-primary pulse" id="enroll" type="button">Rezervovat místo zdarma →</button>
+      <p class="fine">Odkaz a připomenutí ti pošleme e-mailem. Žádný spam.</p>
+      <div class="form-ok" id="enrollOk" role="status"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY BAR -->
+<div class="sticky" id="sticky">
+  <div class="wrap sticky-in">
+    <div class="st-txt"><b><span class="live" style="padding:3px 9px;font-size:.6rem"><span class="ld"></span> Živě</span> Vstup zdarma</b><span>začínáme za <span id="stickyCd"></span> · 37 volných míst</span></div>
+    <a class="btn btn-primary pulse" href="#registrace">Rezervovat zdarma →</a>
+  </div>
+</div>
+
+
+<div class="demo-modal-back" id="demoModalBack" aria-hidden="true">
+  <div class="demo-modal" role="dialog" aria-labelledby="demoModalTitle">
+    <h4 id="demoModalTitle">Místo rezervované</h4>
+    <div class="dm-id" id="demoModalId"></div>
+    <p id="demoModalText">V demo režimu je registrace potvrzená na obrazovce. V reálném provozu by ti přišel e-mail s odkazem na živé vysílání.</p>
+    <button type="button" class="dm-close" id="demoModalClose">Zavřít</button>
+  </div>
+</div>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <span>© 2026 Zákazníci z internetu · demo web</span>
+    <span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var hd=document.getElementById('hd'), sticky=document.getElementById('sticky'),
+      reg=document.getElementById('registrace');
+  function onScroll(){
+    hd.classList.toggle('scrolled', window.scrollY>10);
+    if(sticky){
+      var past=window.scrollY > window.innerHeight*0.7;
+      var r=reg.getBoundingClientRect();
+      var formVisible=r.top < window.innerHeight*0.85;
+      sticky.classList.toggle('show', past && !formVisible);
+    }
+  }
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+
+  // reveal
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    rv.forEach(function(el){ if(!el.classList.contains('in')) io.observe(el); });
+  } else { rv.forEach(function(el){el.classList.add('in');}); }
+
+  // seat progress bar fills when in view
+  var sb=document.getElementById('seatBar');
+  if(sb && 'IntersectionObserver' in window){
+    var io2=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ sb.style.width='81.5%'; io2.unobserve(e.target); } });
+    },{threshold:.4});
+    io2.observe(sb);
+  } else if(sb){ sb.style.width='81.5%'; }
+
+  // event date = ~3 days out at 20:00, always near-future & consistent with countdown
+  var days=['neděle','pondělí','úterý','středa','čtvrtek','pátek','sobota'];
+  var months=['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
+  var now=new Date();
+  var target=new Date(now.getFullYear(),now.getMonth(),now.getDate()+3,20,0,0,0);
+  if(target-now < 0) target.setDate(target.getDate()+1);
+  var dateStr=days[target.getDay()]+' '+target.getDate()+'. '+months[target.getMonth()]+' · 20:00';
+  Array.prototype.forEach.call(document.querySelectorAll('.evDate'),function(el){ el.textContent=dateStr; });
+
+  // countdown
+  var dd=document.getElementById('cd-d'),hh=document.getElementById('cd-h'),
+      mm=document.getElementById('cd-m'),ss=document.getElementById('cd-s'),
+      promoCd=document.getElementById('promoCd'),stickyCd=document.getElementById('stickyCd');
+  function pad(n){return (n<10?'0':'')+n;}
+  function tick(){
+    var diff=Math.max(0,target-new Date());
+    var sec=Math.floor(diff/1000);
+    var D=Math.floor(sec/86400),H=Math.floor(sec%86400/3600),M=Math.floor(sec%3600/60),S=sec%60;
+    if(dd){dd.textContent=pad(D);hh.textContent=pad(H);mm.textContent=pad(M);ss.textContent=pad(S);}
+    if(promoCd) promoCd.textContent=D+'d '+pad(H)+':'+pad(M)+':'+pad(S);
+    if(stickyCd) stickyCd.textContent=D+'d '+pad(H)+':'+pad(M)+':'+pad(S);
+  }
+  tick(); setInterval(tick,1000);
+
+  // demo registration
+  var btn=document.getElementById('enroll'), ok=document.getElementById('enrollOk');
+  var dmBack=document.getElementById('demoModalBack'), dmClose=document.getElementById('demoModalClose');
+  function closeDm(){ dmBack.classList.remove('open'); dmBack.setAttribute('aria-hidden','true'); }
+  if(dmClose) dmClose.addEventListener('click', closeDm);
+  if(dmBack) dmBack.addEventListener('click', function(e){ if(e.target===dmBack) closeDm(); });
+  btn.addEventListener('click',function(){
+    var n=(document.getElementById('f-name').value||'').trim();
+    var m=(document.getElementById('f-mail').value||'').trim();
+    if(!m){ ok.textContent='Doplň prosím e-mail, ať ti můžeme poslat odkaz.'; return; }
+    var id='WEB-'+Math.random().toString(36).slice(2,8).toUpperCase();
+    document.getElementById('demoModalId').textContent=id+' · '+dateStr;
+    document.getElementById('demoModalTitle').textContent=n?('Díky, '+n+'!'):'Místo rezervované';
+    dmBack.classList.add('open'); dmBack.setAttribute('aria-hidden','false');
+    ok.textContent='Potvrzeno: '+id+' (demo)';
+    try{ localStorage.setItem('masterclass_demo_reg', JSON.stringify({id:id,name:n,mail:m,at:Date.now()})); }catch(e){}
+  });
+})();
+</script>
+</body>
+</html>

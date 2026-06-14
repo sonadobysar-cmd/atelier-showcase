@@ -66,44 +66,42 @@ img{display:block;max-width:100%}
 .burger.open span:nth-child(2){transform:rotate(-45deg)}
 
 /* HERO */
-.hero-editorial{position:relative;min-height:100vh;background:var(--cream);color:var(--ink);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero-editorial{position:relative;min-height:100vh;background:var(--black);color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .hero-editorial::before{content:'';display:block;position:absolute;inset:0;background:
-  radial-gradient(ellipse 70% 55% at 50% 85%,rgba(92,42,62,.08) 0%,transparent 60%),
-  radial-gradient(ellipse 45% 35% at 85% 15%,rgba(122,61,84,.05) 0%,transparent 55%);
+  radial-gradient(ellipse 80% 60% at 50% 100%,rgba(92,42,62,.35) 0%,transparent 62%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(122,61,84,.12) 0%,transparent 55%);
   pointer-events:none}
-.hero-editorial::after{display:none}
+.hero-editorial::after{content:'';position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,transparent,rgba(8,6,6,.55));pointer-events:none}
 .hero-stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-height:100vh;padding:120px 4vw 48px;text-align:center;z-index:2}
-.hero-name-layer{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:clamp(72px,10vh,120px) 4vw clamp(18vh,22vh,28vh);pointer-events:none;user-select:none}
+.hero-name-layer{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;padding:80px 1vw 24vh;pointer-events:none;user-select:none}
 .hero-name-stack{position:relative;width:100%;max-width:100%;display:grid;place-items:center}
 .hero-backdrop,.hero-backdrop-shadow{margin:0;grid-area:1/1;
-  font-family:var(--display);font-weight:500;letter-spacing:.06em;line-height:.78;
-  text-transform:uppercase;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(.05em,.4vh,.12em);
-  font-size:clamp(3.2rem,min(13.5vw,20vh),11.5rem);width:100%;max-width:100%}
-.hero-backdrop .hero-line,.hero-backdrop-shadow .hero-line{display:block;text-align:center;white-space:nowrap;line-height:.9}
-.hero-backdrop .hero-line-2,.hero-backdrop-shadow .hero-line-2{letter-spacing:.12em}
-.hero-backdrop{position:relative;z-index:2;color:var(--black);opacity:0;animation:heroNameIn 1.2s .1s var(--ease) forwards}
-.hero-backdrop-shadow{z-index:1;color:rgba(92,42,62,.1);
-  transform:translate(10px,14px);opacity:0;animation:heroShadowIn 1.1s .05s var(--ease) forwards}
+  font-family:var(--display);font-weight:500;letter-spacing:.04em;line-height:.88;
+  text-transform:uppercase;white-space:nowrap;
+  display:flex;align-items:baseline;justify-content:center;gap:clamp(.55rem,3vw,2.4rem);
+  font-size:clamp(4rem,min(21vw,28vh),22rem)}
+.hero-backdrop{position:relative;z-index:2;color:var(--white);opacity:0;animation:heroNameIn 1.2s .1s var(--ease) forwards}
+.hero-backdrop-shadow{z-index:1;color:rgba(158,77,106,.14);
+  transform:translate(14px,18px);opacity:0;animation:heroShadowIn 1.1s .05s var(--ease) forwards}
 .hero-visual{position:relative;z-index:3;width:min(980px,94vw);margin:0 auto;display:flex;flex-direction:column;align-items:center}
 .hero-figure{position:relative;z-index:4;width:min(440px,72vw);margin:clamp(80px,12vh,160px) auto 0;display:flex;justify-content:center;align-items:flex-end;
   opacity:0;animation:fadeUp 1.1s .4s var(--ease) forwards}
 .hero-figure img{width:100%;height:auto;max-height:min(72vh,760px);object-fit:contain;object-position:bottom center;display:block;
-  filter:drop-shadow(0 20px 40px rgba(8,6,6,.12))}
+  filter:drop-shadow(0 24px 48px rgba(0,0,0,.45))}
 .hero-copy{position:relative;z-index:4;margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:28px;padding-bottom:12px;
   opacity:0;animation:fadeUp 1s .75s var(--ease) forwards}
-.hero-eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;color:var(--muted);font-weight:400;margin-bottom:-6px}
+.hero-eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:400;margin-bottom:-6px}
 .hero-editorial .hero-cta{margin-top:0;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
 .hero-foot{position:relative;z-index:4;display:flex;align-items:flex-end;justify-content:center;padding:0 6vw 32px;margin-top:-4px}
 .hero-foot .tags{display:none}
-.scrollcue{font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted2);display:flex;align-items:center;gap:12px}
-.hero-slogan{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.85rem);letter-spacing:.06em;text-transform:uppercase;line-height:1.28;margin:0;max-width:28ch;color:var(--black)}
-.hero-slogan .grad{color:var(--burgundy4);font-size:1.45em}
-.hero-editorial .btn,.btn{background:var(--burgundy3);color:var(--white);font-weight:400;letter-spacing:.24em;font-size:.64rem;padding:16px 32px;box-shadow:0 12px 32px -12px rgba(92,42,62,.45)}
-.hero-editorial .btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(92,42,62,.55);background:var(--burgundy4)}
-.btn-line{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;font-weight:400;opacity:.9;color:var(--black);border-bottom:1px solid var(--burgundy3);padding-bottom:6px;transition:color .35s,border-color .35s,opacity .35s,transform .35s var(--ease)}
-.btn-line:hover{color:var(--burgundy4);border-color:var(--burgundy4);opacity:1;transform:translateY(-1px)}
-.scrollcue .bar{width:1px;height:48px;background:linear-gradient(var(--burgundy3),transparent);animation:drop 2s infinite}
+.scrollcue{font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:12px}
+.hero-slogan{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.6vw,1.85rem);letter-spacing:.06em;text-transform:uppercase;line-height:1.28;margin:0;max-width:28ch;color:var(--white)}
+.hero-slogan .grad{color:var(--burgundy-glow);font-size:1.45em}
+.hero-editorial .btn,.btn{background:var(--burgundy3);color:var(--white);font-weight:400;letter-spacing:.24em;font-size:.64rem;padding:16px 32px;box-shadow:0 12px 32px -12px rgba(92,42,62,.55)}
+.hero-editorial .btn:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(92,42,62,.65);background:var(--burgundy4)}
+.btn-line{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;font-weight:400;opacity:.82;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:6px;transition:color .35s,border-color .35s,opacity .35s,transform .35s var(--ease)}
+.btn-line:hover{color:var(--white);border-color:var(--burgundy-glow);opacity:1;transform:translateY(-1px)}
+.scrollcue .bar{width:1px;height:48px;background:linear-gradient(var(--burgundy-glow),transparent);animation:drop 2s infinite}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.1%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes heroNameIn{from{opacity:0;transform:translateY(24px) scale(.98)}to{opacity:1;transform:none}}
@@ -341,9 +339,9 @@ img{display:block;max-width:100%}
 
 /* RESPONSIVE */
 @media(max-width:980px){
-  .hero-name-layer{padding:clamp(64px,9vh,96px) 5vw clamp(16vh,20vh,24vh)}
-  .hero-backdrop,.hero-backdrop-shadow{font-size:clamp(2.6rem,min(11vw,16vh),6.5rem);gap:.06em}
-  .hero-backdrop-shadow{transform:translate(8px,10px)}
+  .hero-name-layer{padding:64px 2vw 18vh}
+  .hero-backdrop,.hero-backdrop-shadow{font-size:clamp(3rem,min(18vw,20vh),7rem);gap:clamp(.35rem,4vw,1.2rem)}
+  .hero-backdrop-shadow{transform:translate(10px,14px)}
   .hero-figure{width:min(380px,86vw);margin-top:clamp(64px,10vh,120px)}
   .hero-figure img{max-height:min(58vh,560px)}
   .hero-stage{padding:96px 4vw 36px}
@@ -402,8 +400,8 @@ img{display:block;max-width:100%}
   <div class="hero-stage">
     <div class="hero-name-layer" aria-hidden="true">
       <div class="hero-name-stack">
-        <h1 class="hero-backdrop-shadow"><span class="hero-line hero-line-1">NIA</span><span class="hero-line hero-line-2">DOBYŠAR</span></h1>
-        <h1 class="hero-backdrop"><span class="hero-line hero-line-1">NIA</span><span class="hero-line hero-line-2">DOBYŠAR</span></h1>
+        <h1 class="hero-backdrop-shadow"><span>NIA</span><span>DOBYŠAR</span></h1>
+        <h1 class="hero-backdrop"><span>NIA</span><span>DOBYŠAR</span></h1>
       </div>
     </div>
     <div class="hero-visual">

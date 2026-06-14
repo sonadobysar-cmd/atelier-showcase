@@ -126,29 +126,32 @@ img{display:block;max-width:100%}
 .sec-head:not(.centered) h2 .rule{margin-left:0}
 .sec-head .idx{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:400}
 
-/* PROJECT GALLERY */
+/* PROJECT GALLERY — filmstrip za statickým telefonem */
 .proj-gallery{background:var(--black);color:var(--white);padding:clamp(88px,12vw,140px) 0 clamp(72px,10vw,112px);overflow:hidden}
 .proj-gallery-head{text-align:center;padding:0 6vw clamp(40px,6vw,64px);line-height:.82;position:relative}
 .proj-gallery-script{font-family:var(--script);font-style:normal;font-size:clamp(4.2rem,12vw,8.5rem);font-weight:400;color:var(--white);display:block;margin-bottom:-.32em;transform:translateX(-12%);position:relative;z-index:2}
 .proj-gallery-title{font-family:var(--display);font-weight:500;font-size:clamp(3.2rem,10vw,7.2rem);letter-spacing:.02em;text-transform:uppercase;color:var(--white);margin:0}
-.proj-gallery-stage{position:relative;padding:clamp(80px,12vw,128px) 0}
-.proj-gallery-track-wrap{overflow:hidden;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
-.proj-gallery-track{display:flex;gap:6px;width:max-content;animation:pgScroll 50s linear infinite;will-change:transform;padding:0 3px}
+.proj-gallery-stage{position:relative;height:clamp(380px,46vw,520px);display:flex;align-items:center;justify-content:center}
+.proj-gallery-track-wrap{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.proj-gallery-track{display:flex;align-items:center;gap:10px;width:max-content;animation:pgScroll 70s linear infinite;will-change:transform;padding:0 50%}
 .proj-gallery-track-wrap:hover .proj-gallery-track{animation-play-state:paused}
 @keyframes pgScroll{to{transform:translateX(-50%)}}
-.pg-card{flex:0 0 clamp(172px,18vw,236px);height:clamp(248px,33vw,352px);position:relative;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--burgundy2);border-radius:var(--r-sm);transition:transform .5s var(--ease),filter .4s,box-shadow .4s}
-.pg-card:hover{filter:brightness(1.12);transform:scale(1.03);box-shadow:0 24px 48px -20px rgba(0,0,0,.55)}
-.pg-card.on{filter:brightness(1.16);outline:2px solid rgba(158,77,106,.45);box-shadow:0 0 0 4px rgba(158,77,106,.12)}
-.pg-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,6,6,.72) 100%);pointer-events:none;border-radius:inherit}
-.pg-card-num{position:absolute;top:16px;left:16px;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:400;z-index:2}
-.pg-card-name{position:absolute;left:16px;right:16px;bottom:18px;font-family:var(--display);font-size:clamp(.82rem,1.5vw,1.05rem);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--white);text-align:left;line-height:1.2;z-index:2}
-.pg-phone{position:absolute;left:50%;top:50%;transform:translate(-50%,-48%);z-index:5;width:clamp(204px,22vw,284px);pointer-events:none;animation:phoneFloat 6s ease-in-out infinite}
-@keyframes phoneFloat{0%,100%{transform:translate(-50%,-48%)}50%{transform:translate(-50%,-51%)}}
-.pg-phone-body{background:var(--white);border-radius:clamp(38px,4.6vw,48px);padding:clamp(8px,1vw,10px);border:2px solid rgba(255,255,255,.95);box-shadow:0 56px 100px -36px rgba(0,0,0,.8)}
-.pg-phone-screen{border-radius:clamp(30px,3.6vw,40px);overflow:hidden;background:var(--white);aspect-ratio:9/19.2;display:flex;flex-direction:column}
-.pg-phone-preview{flex:1.15;position:relative;min-height:0;background:var(--off)}
-.pg-phone-preview .live{position:absolute;inset:0}
-.pg-phone-copy{flex:none;padding:clamp(18px,2.6vw,26px) clamp(12px,1.6vw,16px) clamp(20px,2.8vw,28px);text-align:center;background:var(--white)}
+.pg-card{flex:0 0 clamp(196px,20vw,268px);height:clamp(248px,30vw,352px);position:relative;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--burgundy2);border-radius:var(--r-md);transition:transform .5s var(--ease),filter .4s,box-shadow .4s}
+.pg-card:hover{filter:brightness(1.1);transform:scale(1.02)}
+.pg-card.on{filter:brightness(1.14);box-shadow:0 0 0 2px rgba(158,77,106,.5)}
+.pg-card-screen{position:absolute;inset:0;overflow:hidden;background:var(--off);border-radius:var(--r-md)}
+.pg-card-screen .live,.pg-card-screen .pg-live{position:absolute;inset:0}
+.pg-card-screen .live iframe{pointer-events:none}
+.pg-card-soon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.pg-card-num{position:absolute;top:12px;left:12px;font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.8);font-weight:400;z-index:3;background:rgba(8,6,6,.45);padding:6px 10px;border-radius:var(--r-pill)}
+.pg-card-name{position:absolute;left:0;right:0;bottom:0;padding:28px 14px 14px;font-family:var(--display);font-size:clamp(.7rem,1.2vw,.84rem);font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--white);text-align:left;line-height:1.2;z-index:3;background:linear-gradient(180deg,transparent,rgba(8,6,6,.82) 55%)}
+.pg-phone{position:absolute;left:50%;top:50%;transform:translate(-50%,calc(-50% - 52px));z-index:6;width:clamp(212px,22vw,292px);pointer-events:none}
+.pg-phone-body{background:transparent;border-radius:clamp(40px,4.8vw,52px);padding:0;border:none;box-shadow:none}
+.pg-phone-bezel{border-radius:clamp(40px,4.8vw,52px);border:3px solid rgba(255,255,255,.94);overflow:hidden;box-shadow:0 56px 100px -36px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.08)}
+.pg-phone-window{height:clamp(248px,30vw,352px);background:transparent;position:relative}
+.pg-phone-window::before{content:'';position:absolute;inset:0;z-index:2;box-shadow:inset 0 0 28px rgba(0,0,0,.28);pointer-events:none;border-radius:clamp(34px,4vw,44px) clamp(34px,4vw,44px) 0 0}
+.pg-phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:28%;height:5px;background:rgba(8,6,6,.12);border-radius:var(--r-pill);z-index:3}
+.pg-phone-copy{flex:none;padding:clamp(18px,2.6vw,26px) clamp(12px,1.6vw,16px) clamp(20px,2.8vw,28px);text-align:center;background:var(--white);border-radius:0 0 clamp(34px,4vw,44px) clamp(34px,4vw,44px)}
 .pg-copy-sm{font-family:var(--display);font-size:clamp(.48rem,1vw,.58rem);letter-spacing:.28em;text-transform:uppercase;font-weight:500;line-height:1.45;color:var(--black);display:block}
 .pg-copy-lg{font-family:var(--display);font-size:clamp(.88rem,2.1vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;font-weight:600;line-height:1.1;color:var(--burgundy3);display:block;margin:8px 0 6px}
 .live.is-loaded,.live{background:var(--off)}
@@ -345,9 +348,11 @@ img{display:block;max-width:100%}
   .frame .phone{right:4%;width:24%;max-width:96px}
   .proj-gallery-script{transform:translateX(-8%);font-size:clamp(3rem,14vw,5.5rem)}
   .proj-gallery-title{font-size:clamp(2.4rem,12vw,4.2rem)}
-  .pg-phone{width:clamp(168px,42vw,220px)}
-  .proj-gallery-stage{padding:clamp(56px,14vw,88px) 0}
-  .pg-card{flex:0 0 clamp(140px,36vw,180px);height:clamp(200px,48vw,260px)}
+  .proj-gallery-stage{height:clamp(340px,52vw,440px)}
+  .pg-phone{width:clamp(188px,44vw,240px)}
+  .pg-phone-window{height:clamp(210px,38vw,280px)}
+  .pg-card{flex:0 0 clamp(168px,38vw,210px);height:clamp(210px,38vw,280px)}
+  .pg-phone{transform:translate(-50%,calc(-50% - 40px))}
   .studio-grid,.k-grid,.konz-grid{grid-template-columns:1fr;gap:44px}
   .studio-shots{grid-template-columns:1fr;gap:16px;margin-top:48px}
   .studio-photo{order:-1;max-width:400px}
@@ -379,7 +384,7 @@ img{display:block;max-width:100%}
   <nav class="nav-links" id="navLinks">
     <a href="#prace">Práce</a>
     <a href="#studio">Studio</a>
-    <a href="#sluzby">Služby</a>
+    <a href="#sluzby">Ceník</a>
     <a href="#konzultace">Konzultace</a>
     <a href="#kontakt">Kontakt</a>
     <a href="#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
@@ -437,12 +442,8 @@ img{display:block;max-width:100%}
     </div>
     <div class="pg-phone" aria-hidden="true">
       <div class="pg-phone-body">
-        <div class="pg-phone-screen">
-          <div class="pg-phone-preview">
-            <div class="live is-loading" id="pgPhoneLive" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/gloss">
-              <div class="live-poster"><span class="play">▶</span></div>
-            </div>
-          </div>
+        <div class="pg-phone-bezel">
+          <div class="pg-phone-window"><span class="pg-phone-notch"></span></div>
           <div class="pg-phone-copy">
             <span class="pg-copy-sm">Naše weby jsou</span>
             <span class="pg-copy-lg">responzivní</span>
@@ -898,7 +899,7 @@ img{display:block;max-width:100%}
       <div class="foot-top">
         <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
         <div class="foot-links">
-          <a href="#prace">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Služby</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a>
+          <a href="#prace">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>
@@ -984,11 +985,27 @@ var PG_GRADS=[
   'linear-gradient(158deg,#221018 0%,#5c3040 50%,#120810 100%)'
 ];
 var pgTrack=document.getElementById('projGalleryTrack');
-function makePgCard(p,i,first){
-  var card=document.createElement('button');card.type='button';card.className='pg-card'+(first?' on':'');
+function makePgCard(p,i){
+  var card=document.createElement('button');card.type='button';card.className='pg-card';
   card.dataset.project=p.id;
-  card.style.background=PG_GRADS[i%PG_GRADS.length];
-  card.innerHTML='<span class="pg-card-num">'+p.num+'</span><span class="pg-card-name">'+p.name+'</span>';
+  var screen=document.createElement('div');screen.className='pg-card-screen';
+  if(p.url){
+    var live=document.createElement('div');
+    live.className='live is-loading pg-live';
+    live.setAttribute('data-vw','430');
+    live.setAttribute('data-src',p.url);
+    live.setAttribute('data-pg','1');
+    live.innerHTML='<div class="live-poster"><span class="play">▶</span></div>';
+    screen.appendChild(live);
+  }else{
+    screen.style.background=PG_GRADS[i%PG_GRADS.length];
+    screen.innerHTML='<span class="pg-card-soon">Brzy</span>';
+  }
+  var num=document.createElement('span');num.className='pg-card-num';num.textContent=p.num;
+  screen.appendChild(num);
+  var name=document.createElement('span');name.className='pg-card-name';name.textContent=p.name;
+  card.appendChild(screen);
+  screen.appendChild(name);
   card.addEventListener('click',function(){
     document.querySelectorAll('.pg-card').forEach(function(c){c.classList.remove('on');});
     document.querySelectorAll('.pg-card[data-project="'+p.id+'"]').forEach(function(c){c.classList.add('on');});
@@ -999,24 +1016,19 @@ function makePgCard(p,i,first){
 }
 if(pgTrack){
   PROJECTS.concat(PROJECTS).forEach(function(p,i){
-    pgTrack.appendChild(makePgCard(p,i%PROJECTS.length,i===0));
+    pgTrack.appendChild(makePgCard(p,i%PROJECTS.length));
   });
 }
 
-var pgLive=document.getElementById('pgPhoneLive');
-var pgUrls=PROJECTS.filter(function(p){return p.url;});
-var pgIdx=0;
-function cyclePgPhone(){
-  if(!pgUrls.length||!pgLive)return;
-  var p=pgUrls[pgIdx%pgUrls.length];pgIdx++;
-  if(pgLive.dataset.mounted){
-    var f=pgLive.querySelector('iframe');
-    if(f){f.src=p.url;f.addEventListener('load',function(){fitOne(pgLive);},{once:true});}
-  }else{
-    pgLive.setAttribute('data-src',p.url);
-    mountIframe(pgLive);
-  }
-}
+var pgGallery=document.getElementById('projGallery');
+var pgGalleryIo=pgGallery?new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
+    pgGalleryIo.unobserve(en.target);
+  });
+},{threshold:.12}):null;
+if(pgGallery&&pgGalleryIo)pgGalleryIo.observe(pgGallery);
 
 function mountIframe(live){
   if(live.dataset.mounted)return;
@@ -1057,8 +1069,7 @@ var liveIo=new IntersectionObserver(function(es){
     if(en.isIntersecting&&en.intersectionRatio>.35)mountIframe(en.target);
   });
 },{rootMargin:'120px',threshold:[0,.35]});
-document.querySelectorAll('.live[data-src]').forEach(function(l){liveIo.observe(l);});
-if(pgUrls.length>1)setInterval(cyclePgPhone,7000);
+document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
 
 var activeIo=new IntersectionObserver(function(es){
   es.forEach(function(en){
@@ -1068,16 +1079,6 @@ var activeIo=new IntersectionObserver(function(es){
     document.querySelectorAll('.pg-card').forEach(function(c){
       c.classList.toggle('on',c.dataset.project===id);
     });
-    var proj=PROJECTS.find(function(p){return p.id===id;});
-    if(proj&&proj.url&&pgLive){
-      if(pgLive.dataset.mounted){
-        var f=pgLive.querySelector('iframe');
-        if(f&&f.src!==proj.url){f.src=proj.url;f.addEventListener('load',function(){fitOne(pgLive);},{once:true});}
-      }else{
-        pgLive.setAttribute('data-src',proj.url);
-        mountIframe(pgLive);
-      }
-    }
   });
 },{threshold:.45});
 document.querySelectorAll('[data-project]').forEach(function(el){activeIo.observe(el);});

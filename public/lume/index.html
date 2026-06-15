@@ -315,7 +315,7 @@ a{color:inherit;text-decoration:none}
 <section class="hero" id="top">
   <div class="hero-photo">
     <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka modelky</span></div>
-    <img class="rimg" src="img/hero-model.jpg" alt="" onerror="this.remove()">
+    <img class="rimg" src="/lume/img/hero-model.jpg" alt="" onerror="this.remove()">
   </div>
   <div class="hero-fluted" aria-hidden="true"></div>
 
@@ -397,7 +397,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap edi-grid">
     <div class="edi-model rv">
       <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka</span></div>
-      <img class="rimg" src="img/studio-model.jpg" alt="" onerror="this.remove()">
+      <img class="rimg" src="/lume/img/studio-model.jpg" alt="" onerror="this.remove()">
       <div class="ef" aria-hidden="true"></div>
       <div class="ecap">Aesthetic studio · Praha</div>
       <div class="edate">2026</div>
@@ -420,7 +420,7 @@ a{color:inherit;text-decoration:none}
 
 <!-- EXCLUSIVE -->
 <section class="excl" id="vstup">
-  <div class="excl-bg"><div class="ph"></div><img class="rimg" src="img/exclusive-bg.jpg" alt="" onerror="this.remove()"></div>
+  <div class="excl-bg"><div class="ph"></div><img class="rimg" src="/lume/img/exclusive-bg.jpg" alt="" onerror="this.remove()"></div>
   <div class="wrap">
     <div class="glass excl-card rv">
       <span class="eyebrow">Exclusive access</span>
@@ -440,8 +440,8 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="ba-wrap rv">
       <div class="ba" id="ba">
-        <div class="layer ba-after"><div class="ph"></div><img class="rimg" src="img/after.jpg" alt="" onerror="this.remove()"><div class="glow"></div></div>
-        <div class="ba-before-clip"><div class="layer ba-before"><div class="ph"></div><img class="rimg" src="img/before.jpg" alt="" onerror="this.remove()"></div></div>
+        <div class="layer ba-after"><div class="ph"></div><img class="rimg" src="/lume/img/after.jpg" alt="" onerror="this.remove()"><div class="glow"></div></div>
+        <div class="ba-before-clip"><div class="layer ba-before"><div class="ph"></div><img class="rimg" src="/lume/img/before.jpg" alt="" onerror="this.remove()"></div></div>
         <div class="ba-lab bef">Před</div>
         <div class="ba-lab aft">Po</div>
         <div class="ba-divider"><div class="ba-handle">⇄</div></div>
@@ -543,7 +543,7 @@ a{color:inherit;text-decoration:none}
     {n:'Lifting pleti',d:'Zpevnění a vypnutí kontur obličeje bez skalpelu. Postupně a přirozeně.',p:'od 7 500 Kč'},
     {n:'Laserové ošetření',d:'Řešení pigmentací, zarudnutí i jizviček. Sjednocená a hladká pleť.',p:'od 3 900 Kč'}
   ];
-  var IMG={1:'osetreni/botulotoxin.jpg',2:'osetreni/vyplne-rtu.jpg',3:'osetreni/skinboosters.jpg',4:'osetreni/mezoterapie.jpg',5:'osetreni/lifting.jpg',6:'osetreni/laser.jpg'};
+  var IMG={1:'/lume/osetreni/botulotoxin.jpg',2:'/lume/osetreni/vyplne-rtu.jpg',3:'/lume/osetreni/skinboosters.jpg',4:'/lume/osetreni/mezoterapie.jpg',5:'/lume/osetreni/lifting.jpg',6:'/lume/osetreni/laser.jpg'};
   document.getElementById('svcGrid').innerHTML=SVC.map(function(s,i){
     var k=i+1,num=(k<10?'0':'')+k;
     return '<article class="svc rv">'+

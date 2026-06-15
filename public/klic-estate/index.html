@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Realitní kancelář — najdi místo, kterému budeš říkat domov</title>
-<meta name="description" content="Byty, domy a pozemky k prodeji i pronájmu. Prověřené nabídky, hypotéka na míru a kompletní servis od prohlídky po předání.">
+<meta name="description" content="Byty a domy k prodeji i pronájmu. Prověřené nabídky, hypotéka na míru a kompletní servis od prohlídky po předání.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,7 +53,17 @@ a{color:inherit;text-decoration:none}
 .hd-nav a.lnk:hover{color:var(--mut)}
 .hd-right{margin-left:auto;display:flex;align-items:center;gap:14px}
 .hd-right .tel{font-size:.92rem;font-weight:600}
-@media(max-width:1000px){.hd-nav,.hd-right .tel{display:none}}
+.hd-burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;padding:0;border:none;background:transparent;cursor:pointer;margin-left:auto}
+.hd-burger span{display:block;width:24px;height:2px;background:currentColor;transition:transform .3s,opacity .3s}
+.hd-burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hd-burger.open span:nth-child(2){opacity:0}
+.hd-burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.hd-mob{position:fixed;top:72px;left:0;right:0;z-index:79;background:#fff;border-bottom:1px solid var(--line);padding:18px 6vw 22px;display:flex;flex-direction:column;gap:14px;transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .35s ease,opacity .35s}
+.hd-mob.open{transform:none;opacity:1;pointer-events:auto}
+.hd-mob a{font-size:1rem;font-weight:600;padding:4px 0}
+.hd-mob .btn{align-self:flex-start;margin-top:6px}
+body.menu-open{overflow:hidden}
+@media(max-width:1000px){.hd-nav,.hd-right .tel,.hd-right .btn{display:none}.hd-burger{display:flex}}
 
 /* hero */
 .hero{padding:108px 0 0}
@@ -79,12 +89,12 @@ a{color:inherit;text-decoration:none}
 .search-row .fld label{display:block;font-size:.66rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
 .search-row .fld select{width:100%;font-family:var(--f);font-weight:600;font-size:.95rem;color:var(--ink);background:transparent;border:none;cursor:pointer;padding:0}
 .search-row .fld select:focus{outline:none}
-.search-row .btn{align-self:center;height:48px;border-radius:14px}
-@media(max-width:760px){.search-row{grid-template-columns:1fr 1fr}.search-row .btn{grid-column:1/-1}}
+.search-row .btn{align-self:center;height:48px;border-radius:14px;white-space:nowrap}
+@media(max-width:760px){.search{margin-top:-28px;padding:8px}.search-tabs{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.search-tabs button{flex:none}.search-row{grid-template-columns:1fr}.search-row .btn{width:100%}}
 
 /* generic head */
 .bhead{display:grid;grid-template-columns:1.5fr 1fr;gap:40px;align-items:end;margin-bottom:38px}
-.bhead h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:700;letter-spacing:-.035em;max-width:16ch}
+.bhead h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:700;letter-spacing:-.035em;max-width:none}
 .bhead .aside{color:var(--mut);font-size:1.02rem;max-width:40ch;padding-bottom:8px}
 @media(max-width:780px){.bhead{grid-template-columns:1fr;gap:14px}.bhead .aside{padding-bottom:0}}
 
@@ -105,7 +115,7 @@ a{color:inherit;text-decoration:none}
 .pcard-img{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden;background:var(--bg2);min-height:220px}
 .pcard-slider{position:absolute;inset:0;overflow:hidden;touch-action:pan-y}
 .pcard-track{display:flex;height:100%;transition:transform .38s ease;will-change:transform}
-.pcard-track img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;display:block;background:var(--bg2);user-select:none;-webkit-user-drag:none}
+.pcard-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:center;display:block;background:var(--bg2);user-select:none;-webkit-user-drag:none}
 .pcard-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:34px;height:34px;border-radius:50%;border:none;background:rgba(255,255,255,.92);color:var(--ink);font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(15,15,14,.12);opacity:0;transition:opacity .2s,background .2s}
 .pcard-img:hover .pcard-nav,.pcard-img:focus-within .pcard-nav{opacity:1}
 .pcard-nav:hover{background:#fff}
@@ -119,8 +129,9 @@ a{color:inherit;text-decoration:none}
 .pcard-imgs-count{position:absolute;right:13px;bottom:13px;font-size:.66rem;font-weight:700;background:rgba(15,15,14,.72);color:#fff;padding:5px 10px;border-radius:8px;z-index:2}
 .pcard-body{padding:16px 4px 4px}
 .pcard-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
-.pcard-top h3{font-size:1.18rem;font-weight:700;letter-spacing:-.02em}
-.pcard-price{font-size:1.18rem;font-weight:800;white-space:nowrap;letter-spacing:-.02em}
+.pcard-top h3{font-size:1.18rem;font-weight:700;letter-spacing:-.02em;min-width:0}
+.pcard-price{font-size:1.18rem;font-weight:800;letter-spacing:-.02em;flex:none}
+@media(max-width:560px){.pcard-top{flex-direction:column;align-items:flex-start;gap:4px}.pcard-price{font-size:1.05rem}}
 .pcard-loc{color:var(--mut);font-size:.9rem;margin-top:4px}
 .pcard-meta{display:flex;gap:18px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
 .pcard-meta span{display:inline-flex;align-items:center;gap:6px;font-size:.84rem;font-weight:500;color:var(--tx)}
@@ -140,7 +151,8 @@ a{color:inherit;text-decoration:none}
 .steps li .sc p{color:var(--mut);font-size:.95rem;margin-top:6px;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease,opacity .3s,margin .3s}
 .steps li.on .sn{color:var(--ink)}
 .steps li:not(.on) .sc h3{color:var(--mut2)}
-.steps li.on .sc p{max-height:120px;opacity:1;margin-top:8px}
+.steps li.on .sc p{max-height:200px;opacity:1;margin-top:8px}
+@media(max-width:560px){.steps li.on .sc p{max-height:280px}}
 .steps li.on .sc .btn{margin-top:14px}
 .steps li:not(.on) .sc .btn{display:none}
 .how-img{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3.4}
@@ -229,9 +241,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .modal-back.open{opacity:1;pointer-events:auto}
 .modal{position:fixed;z-index:96;top:50%;left:50%;transform:translate(-50%,-46%);width:min(920px,96vw);max-height:92vh;overflow-y:auto;background:#fff;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:0 50px 110px rgba(15,15,14,.4)}
 .modal-ph{aspect-ratio:auto;border-radius:24px 24px 0 0;position:relative;overflow:hidden;background:var(--bg2)}
-.mgallery-main{position:relative;min-height:min(52vh,520px);background:#efefea;overflow:hidden;touch-action:pan-y}
-.mgallery-track{display:flex;height:min(52vh,520px);transition:transform .38s ease;will-change:transform}
-.mgallery-track img{flex:0 0 100%;width:100%;height:min(52vh,520px);object-fit:contain;display:block;background:#efefea;user-select:none;-webkit-user-drag:none}
+.mgallery-main{position:relative;aspect-ratio:4/3;width:100%;max-height:min(56vh,500px);min-height:220px;background:#e8e8e2;overflow:hidden;touch-action:pan-y}
+.mgallery-track{display:flex;height:100%;transition:transform .38s ease;will-change:transform}
+.mgallery-track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;object-position:center;display:block;user-select:none;-webkit-user-drag:none}
 .mgal-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;width:42px;height:42px;border-radius:50%;border:none;background:rgba(255,255,255,.94);color:var(--ink);font-size:1.45rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(15,15,14,.15)}
 .mgal-prev{left:14px}
 .mgal-next{right:14px}
@@ -239,14 +251,14 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .mgallery-thumbs{display:flex;gap:8px;padding:12px;background:var(--bg2);overflow-x:auto}
 .mgallery-thumbs button{flex:0 0 28%;min-width:88px;max-width:140px;border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;opacity:.62;background:var(--bg3,#e8e8e2);transition:opacity .2s,border-color .2s}
 .mgallery-thumbs button.on{border-color:var(--ink);opacity:1}
-.mgallery-thumbs img{width:100%;aspect-ratio:4/3;object-fit:contain;display:block;background:var(--bg3,#e8e8e2)}
+.mgallery-thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center;display:block;background:var(--bg3,#e8e8e2)}
 .modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
-.modal-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:1.35rem;line-height:1;cursor:pointer;z-index:2;color:var(--ink)}
+.modal-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:1.35rem;line-height:1;cursor:pointer;z-index:12;color:var(--ink)}
 .modal-b{padding:clamp(24px,3vw,38px)}
 .modal-b .mdeal{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
 .modal-b .mtop{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-.modal-b h3{font-size:1.9rem;font-weight:700;letter-spacing:-.02em}
-.modal-b .mprice{font-size:1.9rem;font-weight:800;white-space:nowrap;letter-spacing:-.02em}
+.modal-b h3{font-size:1.9rem;font-weight:700;letter-spacing:-.02em;min-width:0;word-break:break-word}
+.modal-b .mprice{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:800;white-space:nowrap;letter-spacing:-.02em}
 .modal-b .mloc{color:var(--mut);margin:4px 0 22px}
 .mtable{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
 .mtable .mt{background:var(--bg2);border-radius:14px;padding:16px}
@@ -254,7 +266,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .mtable .mt b{font-size:1.1rem;display:block;margin-top:4px;font-weight:700}
 .modal-b .mdesc{color:#46463f;margin-bottom:26px;line-height:1.8}
 .modal-cta{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:520px){.mtable{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.mtable{grid-template-columns:1fr 1fr}.modal{width:100%;max-height:100vh;border-radius:0;top:0;left:0;transform:none!important}.modal.open{transform:none!important}.modal-back.open+.modal,.modal.open{top:0}.modal-x{top:12px;right:12px}.modal-b h3{font-size:1.45rem}.modal-b .mprice{font-size:1.3rem}.modal-cta .btn{flex:1;min-width:140px;justify-content:center}}
 
 .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
@@ -278,8 +290,17 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <span class="tel">+420 777 123 456</span>
       <a class="btn btn-out btn-sm" href="#kontakt">Přidat nemovitost</a>
     </div>
+    <button class="hd-burger" id="hdBurger" type="button" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
+<nav class="hd-mob" id="hdMob" aria-label="Mobilní menu">
+  <a href="#nabidky">Nabídky</a>
+  <a href="#kalkulacka">Hypotéka</a>
+  <a href="#jak">Jak to funguje</a>
+  <a href="#maklere">Makléři</a>
+  <a href="#kontakt">Kontakt</a>
+  <a class="btn btn-dark btn-sm" href="#kontakt">Domluvit hovor</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -314,7 +335,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   <div class="wrap">
     <div class="bhead">
       <h2>Pomůžeme ti najít domov, který bude tvůj.</h2>
-      <div class="aside">Naše projekty jsou o harmonii, stylu a péči o to, na čem opravdu záleží.</div>
+      <div class="aside">Každá nabídka je o harmonii, stylu a péči o to, na čem opravdu záleží.</div>
     </div>
     <div class="toolbar">
       <span class="count" id="count">—</span>
@@ -337,7 +358,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <div class="how">
       <div class="how-grid">
         <ol class="steps" id="steps">
-          <li data-i="0"><span class="sn">01</span><div class="sc"><h3>Poptávka & požadavky</h3><p>Sejdeme se a zjistíme přesně, co hledáš — lokalitu, rozpočet, styl i to, na čem ti záleží.</p></div></li>
+          <li data-i="0"><span class="sn">01</span><div class="sc"><h3>Poptávka a požadavky</h3><p>Sejdeme se a zjistíme přesně, co hledáš — lokalitu, rozpočet, styl i to, na čem ti záleží.</p></div></li>
           <li data-i="1" class="on"><span class="sn">02</span><div class="sc"><h3>Výběr nemovitosti</h3><p>Makléř připraví seznam prověřených nabídek na míru. Včetně fotek, 3D prohlídek a osobních i online prohlídek.</p><a class="btn btn-dark btn-sm" href="#nabidky">Prohlédnout nabídky</a></div></li>
           <li data-i="2"><span class="sn">03</span><div class="sc"><h3>Právní servis</h3><p>Smlouvy, úschovu a katastr ošetří naši právníci. Tvoje peníze i nemovitost jsou v bezpečí.</p></div></li>
           <li data-i="3"><span class="sn">04</span><div class="sc"><h3>Předání klíčů</h3><p>Společně zkontrolujeme stav, předáme klíče a jsme tu i po nastěhování. Hotovo.</p></div></li>
@@ -422,7 +443,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       </div>
       <div class="cform rv">
         <div class="field"><label for="k-name">Jméno</label><input id="k-name" type="text" placeholder="Tvé jméno" autocomplete="name"></div>
-        <div class="field"><label for="k-mail">E-mail</label><input id="k-mail" type="email" placeholder="tvuj@email.cz" autocomplete="email"></div>
+        <div class="field"><label for="k-mail">E-mail</label><input id="k-mail" type="email" placeholder="tvůj@email.cz" autocomplete="email"></div>
         <div class="field"><label for="k-tel">Telefon</label><input id="k-tel" type="tel" placeholder="+420…" autocomplete="tel"></div>
         <div class="field"><label for="k-msg">Zpráva</label><textarea id="k-msg" placeholder="Co hledáš nebo s čím pomoci?"></textarea></div>
         <button class="btn btn-dark" id="k-send" type="button">Odeslat poptávku</button>
@@ -627,7 +648,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         '<div class="mt"><span>Dispozice</span><b>'+(p.disp!=='—'?p.disp:'—')+'</b></div>'+
         '<div class="mt"><span>Umístění</span><b>'+p.floor+'</b></div>'+
         '<div class="mt"><span>Typ</span><b>'+TYPE[p.type]+'</b></div>'+
-        '<div class="mt"><span>Stav</span><b>k nastěhování</b></div>'+
+        '<div class="mt"><span>Stav</span><b>K nastěhování</b></div>'+
         '<div class="mt"><span>ID</span><b>RE-'+(1000+p.id)+'</b></div>'+
       '</div>'+
       '<p class="mdesc">'+p.desc+'</p>'+
@@ -658,7 +679,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
   // agents
   var AGENTS=[
     {n:'Olivia Bartošová',r:'Rezidenční makléřka',rate:'4,9',rev:120,img:'/klic-estate/images/agents/agent-olivia.jpg'},
-    {n:'Carlos Veselý',r:'Komerční nemovitosti',rate:'4,8',rev:80,img:'/klic-estate/images/agents/agent-carlos.jpg'},
+    {n:'Carlos Veselý',r:'Byty a rodinné domy',rate:'4,8',rev:80,img:'/klic-estate/images/agents/agent-carlos.jpg'},
     {n:'Adéla Chytrá',r:'Realitní makléřka',rate:'4,7',rev:88,img:'/klic-estate/images/agents/agent-adela.jpg'},
     {n:'Marek Levný',r:'Rezidenční makléř',rate:'4,9',rev:76,img:'/klic-estate/images/agents/agent-marek.jpg'},
     {n:'Petra Nová',r:'Luxusní nemovitosti',rate:'5,0',rev:64,img:'/klic-estate/images/agents/agent-petra.jpg'}
@@ -696,13 +717,24 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     var n=(document.getElementById('k-name').value||'').trim(),m=(document.getElementById('k-mail').value||'').trim(),
         t=(document.getElementById('k-tel').value||'').trim(),msg=(document.getElementById('k-msg').value||'').trim();
     if(!m){ko.textContent='Doplň prosím e-mail.';return;}
-    var body='Poptavka z ukazkoveho realitniho webu\n\nJmeno: '+(n||'(nevyplneno)')+'\nE-mail: '+m+'\nTelefon: '+(t||'(nevyplneno)')+'\n\nZprava:\n'+(msg||'(bez zpravy)');
+    var body='Poptávka z ukázkového realitního webu\n\nJméno: '+(n||'(nevyplněno)')+'\nE-mail: '+m+'\nTelefon: '+(t||'(nevyplněno)')+'\n\nZpráva:\n'+(msg||'(bez zprávy)');
     ko.textContent='Děkujeme! Otevřeli jsme ti e-mail — stačí odeslat. ✦';
     window.location.href='mailto:kontakt@ukazka-reality.cz?subject='+encodeURIComponent('Poptávka — '+(n||'zájemce'))+'&body='+encodeURIComponent(body);
   });
 
-  // header + reveal
-  var hd=document.getElementById('hd');
+  // header + mobile menu + reveal
+  var hd=document.getElementById('hd'), burger=document.getElementById('hdBurger'), mob=document.getElementById('hdMob');
+  function setMenu(on){
+    if(!burger||!mob)return;
+    burger.classList.toggle('open',on);
+    mob.classList.toggle('open',on);
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    document.body.classList.toggle('menu-open',on);
+  }
+  if(burger){
+    burger.addEventListener('click',function(){setMenu(!mob.classList.contains('open'));});
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  }
   function onScroll(){hd.classList.toggle('scrolled',window.scrollY>10);}
   onScroll();window.addEventListener('scroll',onScroll,{passive:true});
   var rv=document.querySelectorAll('.rv');

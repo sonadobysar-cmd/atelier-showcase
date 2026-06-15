@@ -105,7 +105,8 @@ a{color:inherit;text-decoration:none}
 .pcard-img{aspect-ratio:4/3;border-radius:18px;position:relative;overflow:hidden}
 .pcard-img .pc-deal,.pcard-img .pc-fav{z-index:2}
 .pcard-img .pc-deal{position:absolute;left:13px;top:13px;font-size:.66rem;font-weight:700;background:#fff;color:var(--ink);padding:6px 12px;border-radius:8px}
-.pcard-img .pc-fav{position:absolute;right:13px;top:13px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.pcard-img .pc-fav{position:absolute;right:13px;top:13px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;color:var(--ink);z-index:2}
+.pcard-imgs-count{position:absolute;right:13px;bottom:13px;font-size:.66rem;font-weight:700;background:rgba(15,15,14,.72);color:#fff;padding:5px 10px;border-radius:8px;z-index:2}
 .pcard-body{padding:16px 4px 4px}
 .pcard-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
 .pcard-top h3{font-size:1.18rem;font-weight:700;letter-spacing:-.02em}
@@ -218,7 +219,13 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .modal-back.open{opacity:1;pointer-events:auto}
 .modal{position:fixed;z-index:96;top:50%;left:50%;transform:translate(-50%,-46%);width:min(800px,94vw);max-height:90vh;overflow-y:auto;background:#fff;border-radius:24px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:0 50px 110px rgba(15,15,14,.4)}
 .modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
-.modal-ph{aspect-ratio:16/9;border-radius:24px 24px 0 0;position:relative;overflow:hidden;background:var(--bg2)}
+.modal-ph{aspect-ratio:auto;border-radius:24px 24px 0 0;position:relative;overflow:hidden;background:var(--bg2)}
+.mgallery-main{position:relative;aspect-ratio:16/9;overflow:hidden;background:#e8e8e2}
+.mgallery-main img{width:100%;height:100%;object-fit:cover;display:block}
+.mgallery-thumbs{display:flex;gap:8px;padding:12px;background:var(--bg2)}
+.mgallery-thumbs button{flex:1;border:2px solid transparent;border-radius:10px;overflow:hidden;padding:0;cursor:pointer;opacity:.62;background:none;transition:opacity .2s,border-color .2s}
+.mgallery-thumbs button.on{border-color:var(--ink);opacity:1}
+.mgallery-thumbs img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
 .modal-x{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:1.35rem;line-height:1;cursor:pointer;z-index:2;color:var(--ink)}
 .modal-b{padding:clamp(24px,3vw,38px)}
 .modal-b .mdeal{font-size:.66rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
@@ -267,7 +274,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <div class="aside"><p>S námi nenajdeš jen bydlení, ale místo, kde začíná nový život — plné pohody a možností.</p></div>
     </div>
     <div class="hero-img">
-      <img src="/klic-estate/images/hero/vila.jpg" alt="Luxusní vila s bazénem" width="1920" height="1080" fetchpriority="high">
+      <img src="/klic-estate/images/properties/01-vila-bazen-1.jpg" alt="Vila s bazénem a zahradou" width="1920" height="1080" fetchpriority="high">
       <a class="btn btn-dark" href="#kontakt">Domluvit hovor</a>
     </div>
   </div>
@@ -279,7 +286,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     </div>
     <div class="search-row">
       <div class="fld"><label for="f-city">Lokalita</label><select id="f-city"><option value="">Celá ČR</option></select></div>
-      <div class="fld"><label for="f-type">Typ</label><select id="f-type"><option value="">Vše</option><option value="byt">Byt</option><option value="dum">Dům</option><option value="pozemek">Pozemek</option><option value="komercni">Komerční</option></select></div>
+      <div class="fld"><label for="f-type">Typ</label><select id="f-type"><option value="">Vše</option><option value="byt">Byt</option><option value="dum">Dům</option></select></div>
       <div class="fld"><label for="f-disp">Dispozice</label><select id="f-disp"><option value="">Vše</option><option>1+kk</option><option>2+kk</option><option>3+kk</option><option>4+kk</option><option>5+kk</option><option>6+kk</option></select></div>
       <div class="fld"><label for="f-sort">Řazení</label><select id="f-sort"><option value="new">Nejnovější</option><option value="price-asc">Cena ↑</option><option value="price-desc">Cena ↓</option><option value="area-desc">Plocha ↓</option></select></div>
       <button class="btn btn-dark" id="h-search">Zobrazit nabídky</button>
@@ -297,7 +304,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     <div class="toolbar">
       <span class="count" id="count">—</span>
       <div class="filters">
-        <select id="f-type2"><option value="">Vše typy</option><option value="byt">Byt</option><option value="dum">Dům</option><option value="pozemek">Pozemek</option><option value="komercni">Komerční</option></select>
+        <select id="f-type2"><option value="">Vše typy</option><option value="byt">Byt</option><option value="dum">Dům</option></select>
         <select id="f-sort2"><option value="new">Nejnovější</option><option value="price-asc">Cena ↑</option><option value="price-desc">Cena ↓</option><option value="area-desc">Plocha ↓</option></select>
       </div>
     </div>
@@ -435,20 +442,34 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
 <script>
 (function(){
-  var TYPE={byt:'Byt',dum:'Dům',pozemek:'Pozemek',komercni:'Komerční'};
+  var TYPE={byt:'Byt',dum:'Dům'};
+  function propImgs(slug,n){var a=[];for(var i=1;i<=n;i++)a.push('/klic-estate/images/properties/'+slug+'-'+i+'.jpg');return a;}
+  function cover(p){return p.imgs[0];}
   var PROPS=[
-    {id:12,type:'byt',deal:'pronajem',title:'Byt na Vinohradech',city:'Praha 2 — Vinohrady',area:62,disp:'2+kk',floor:'3. patro',price:32000,img:'/klic-estate/images/properties/12-vinohrady.jpg',desc:'Stylově zařízený byt v secesním domě, plně vybavená kuchyně, klidná ulice s kavárnami za rohem.'},
-    {id:11,type:'byt',deal:'pronajem',title:'Penthouse s terasou',city:'Brno — střed',area:118,disp:'4+kk',floor:'8. patro',price:54000,img:'/klic-estate/images/properties/11-penthouse.jpg',desc:'Reprezentativní penthouse s velkou terasou a panoramatickým výhledem. Vlastní parkování, recepce, klimatizace.'},
-    {id:10,type:'dum',deal:'pronajem',title:'Moderní vila se zahradou',city:'Praha-západ — Jesenice',area:210,disp:'6+kk',floor:'2 podlaží',price:89000,img:'/klic-estate/images/properties/10-vila-bazen.jpg',desc:'Architektonicky čistá vila s bazénem a vzrostlou zahradou. Dvojgaráž, chytrá domácnost, soukromí.'},
-    {id:9,type:'byt',deal:'prodej',title:'Světlý byt s lodžií',city:'Praha 6 — Dejvice',area:78,disp:'3+kk',floor:'4. patro',price:8490000,img:'/klic-estate/images/properties/09-dejvice.jpg',desc:'Krásně dispozičně řešený byt po rekonstrukci v cihlovém domě. Klidná lokalita, výborná dostupnost MHD.'},
-    {id:8,type:'byt',deal:'prodej',title:'Útulný byt u parku',city:'Brno — Žabovřesky',area:54,disp:'2+kk',floor:'2. patro',price:5290000,img:'/klic-estate/images/properties/08-zabovresky.jpg',desc:'Kompaktní byt ideální pro pár nebo investici. Nová okna, sklep, pár kroků od parku a tramvaje.'},
-    {id:7,type:'dum',deal:'prodej',title:'Rodinný dům se zahradou',city:'Olomouc — Slavonín',area:142,disp:'5+kk',floor:'2 podlaží',price:11900000,img:'/klic-estate/images/properties/07-rodinny-dum.jpg',desc:'Prostorný dům s udržovanou zahradou 620 m², garáží a krbem. Klidná ulice na okraji města.'},
-    {id:6,type:'byt',deal:'prodej',title:'Investiční byt v centru',city:'Plzeň — město',area:32,disp:'1+kk',floor:'3. patro',price:2790000,img:'/klic-estate/images/properties/06-investicni.jpg',desc:'Skvělá investiční příležitost v centru. Stabilní nájemník, nízké náklady, ideální start do pronájmu.'},
-    {id:5,type:'pozemek',deal:'prodej',title:'Stavební pozemek 980 m²',city:'Liberec — Vratislavice',area:980,disp:'—',floor:'rovinatý',price:3490000,img:'/klic-estate/images/properties/05-pozemek.jpg',desc:'Slunný stavební pozemek se sítěmi na hranici. Vydané územní rozhodnutí, výhled do údolí.'},
-    {id:4,type:'byt',deal:'prodej',title:'Mezonet s terasou',city:'Praha 5 — Smíchov',area:116,disp:'4+kk',floor:'6.–7. patro',price:14500000,img:'/klic-estate/images/properties/04-mezonet.jpg',desc:'Reprezentativní mezonet s velkou terasou a výhledem. Vlastní parkovací stání, recepce, novostavba.'},
-    {id:3,type:'dum',deal:'prodej',title:'Chalupa k rekonstrukci',city:'Hradec Králové — okolí',area:96,disp:'4+1',floor:'2 podlaží',price:3990000,img:'/klic-estate/images/properties/03-chalupa.jpg',desc:'Kamenná chalupa s velkým potenciálem na klidném místě. Pozemek 1 100 m², studna, blízko lesa.'},
-    {id:2,type:'komercni',deal:'prodej',title:'Obchodní prostor v centru',city:'Brno — střed',area:88,disp:'—',floor:'přízemí',price:7250000,img:'/klic-estate/images/properties/02-komercni.jpg',desc:'Komerční jednotka s výlohou v pěší zóně. Vysoká frekvence, vhodné pro kavárnu, butik nebo ordinaci.'},
-    {id:1,type:'byt',deal:'prodej',title:'Novostavba s balkonem',city:'Olomouc — Nová Ulice',area:61,disp:'2+kk',floor:'1. patro',price:4690000,img:'/klic-estate/images/properties/01-novostavba.jpg',desc:'Energeticky úsporný byt v novostavbě s balkonem a sklepem. Kolaudace letos, parkování v ceně.'}
+    {id:24,type:'dum',deal:'pronajem',title:'Moderní vila k pronájmu',city:'Praha-západ — Černošice',area:245,disp:'6+kk',floor:'2 podlaží',price:95000,imgs:propImgs('24-moderni-vila',3),desc:'Nová vila s bazénem, venkovní kuchyní a výhledem do zeleně. Ideální pro rodinu, která chce klid a zároveň rychlý dojezd do centra.'},
+    {id:1,type:'dum',deal:'prodej',title:'Vila s bazénem a zahradou',city:'Praha-západ — Jesenice',area:320,disp:'7+kk',floor:'2 podlaží',price:28900000,imgs:propImgs('01-vila-bazen',3),desc:'Reprezentativní vila s bazénem, velkou zahradou a prostornou terasou. Soukromí, dvojgaráž a prémiové materiály.'},
+    {id:2,type:'dum',deal:'prodej',title:'Bílá moderní vila',city:'Brno — okolí',area:278,disp:'6+kk',floor:'2 podlaží',price:22400000,imgs:propImgs('02-bila-vila',3),desc:'Čistá moderní architektura, světlý interiér a wellness bazén. Dům připravený k okamžitému nastěhování.'},
+    {id:3,type:'dum',deal:'prodej',title:'Černá architektonická vila',city:'Praha 6 — Dejvice',area:310,disp:'6+kk',floor:'2 podlaží',price:34500000,imgs:propImgs('03-cerna-vila',3),desc:'Výrazná vila s černou fasádou, velkorysým obytným prostorem a soukromou zahradou v prestižní lokalitě.'},
+    {id:4,type:'dum',deal:'prodej',title:'Cihlový rodinný dům',city:'Olomouc — Slavonín',area:156,disp:'5+kk',floor:'2 podlaží',price:11890000,imgs:propImgs('04-cihlovy-dum',3),desc:'Teplý cihlový dům s prostornou kuchyní, zahradou a garáží. Klidná rezidenční ulice s výbornou občanskou vybaveností.'},
+    {id:5,type:'dum',deal:'prodej',title:'Reprezentativní luxusní dům',city:'Praha-západ — Roztoky',area:298,disp:'6+kk',floor:'2 podlaží',price:31200000,imgs:propImgs('05-luxusni-dum',3),desc:'Prémiový dům s velkorysým obývacím pokojem, designovou kuchyní a udržovanou zahradou.'},
+    {id:6,type:'dum',deal:'prodej',title:'Rodinný dům se zahradou',city:'Brno — Bystrc',area:142,disp:'5+kk',floor:'2 podlaží',price:10950000,imgs:propImgs('06-rd-zahrada',3),desc:'Rodinný dům s výhledem do zeleně, terasou a zahradou vhodnou pro děti i relax.'},
+    {id:7,type:'dum',deal:'prodej',title:'Moderní dům s venkovním posezením',city:'Liberec — okolí',area:198,disp:'5+kk',floor:'2 podlaží',price:13400000,imgs:propImgs('07-moderni-dum',3),desc:'Moderní dům s bazénem, chill zónou na zahradě a velkým zastíněným posezením.'},
+    {id:8,type:'dum',deal:'prodej',title:'Luxusní chata v přírodě',city:'Šumava — Železná Ruda',area:124,disp:'4+kk',floor:'2 podlaží',price:9890000,imgs:propImgs('08-lux-chata',3),desc:'Stylová chata obklopená přírodou — útulný interiér, krb a terasa s výhledem do lesa.'},
+    {id:9,type:'dum',deal:'prodej',title:'Vila u lesa s wellness bazénem',city:'Morava — Bílé Karpaty',area:265,disp:'6+kk',floor:'2 podlaží',price:19800000,imgs:propImgs('09-vila-les',3),desc:'Elegantní vila na okraji lesa s venkovním bazénem a velkorysým obytným prostorem.'},
+    {id:10,type:'byt',deal:'prodej',title:'Penthouse s vysokými stropy',city:'Praha 1 — Nové Město',area:142,disp:'4+kk',floor:'8. patro',price:24900000,imgs:propImgs('10-penthouse',3),desc:'Exkluzivní penthouse s dvojitou výškou stropů, designovou koupelnou a panoramatickým výhledem.'},
+    {id:11,type:'byt',deal:'pronajem',title:'Loft ve velkoměstě',city:'Praha 8 — Karlín',area:98,disp:'3+kk',floor:'5. patro',price:42000,imgs:propImgs('11-loft',3),desc:'Industriální loft s vysokými stropy, otevřeným obývákem a tmavou luxusní kuchyní. K dispozici ihned.'},
+    {id:12,type:'byt',deal:'pronajem',title:'Byt s balkonem a výhledem',city:'Praha 6 — Dejvice',area:72,disp:'2+kk',floor:'4. patro',price:28500,imgs:propImgs('12-balkon',3),desc:'Světlý byt s prostorným balkonem a výhledem do zeleně. Kompletně zařízený, vhodný pro pár.'},
+    {id:13,type:'byt',deal:'prodej',title:'Japandi byt v novostavbě',city:'Brno — střed',area:68,disp:'2+kk',floor:'3. patro',price:6790000,imgs:propImgs('13-japandi',3),desc:'Klidný japandi interiér s přírodními materiály, minimalistickou koupelnou a chytrým úložným prostorem.'},
+    {id:14,type:'byt',deal:'prodej',title:'Rustikální byt s dřevěnými podhledy',city:'Český Krumlov',area:84,disp:'3+kk',floor:'2. patro',price:7490000,imgs:propImgs('14-rustik',3),desc:'Atmosférický byt s dřevěnými trámy, rustikální kuchyní a útulnou ložnicí v historickém centru.'},
+    {id:15,type:'byt',deal:'prodej',title:'Světlý elegantní byt',city:'Praha 2 — Vinohrady',area:76,disp:'2+kk',floor:'3. patro',price:9290000,imgs:propImgs('15-svetly-byt',3),desc:'Světlý byt v secesním domě s designovou kuchyní a jemně zařízeným obývacím prostorem.'},
+    {id:16,type:'byt',deal:'prodej',title:'Luxusní byt s krbem',city:'Praha 5 — Smíchov',area:112,disp:'4+kk',floor:'6. patro',price:16800000,imgs:propImgs('16-krb',3),desc:'Reprezentativní byt s krbem, knihovnou a mramorovou koupelnou. Parkovací stání v ceně.'},
+    {id:17,type:'byt',deal:'prodej',title:'Mezonetový byt',city:'Praha 7 — Holešovice',area:128,disp:'4+kk',floor:'5.–6. patro',price:15400000,imgs:propImgs('17-mezonet',3),desc:'Prostorný mezonet s velkorysým obývákem, vysokými stropy a industriálními detaily.'},
+    {id:18,type:'byt',deal:'prodej',title:'Byt s otevřenou kuchyní',city:'Plzeň — město',area:64,disp:'2+kk',floor:'2. patro',price:4990000,imgs:propImgs('18-open-kitchen',3),desc:'Prakticky řešený byt s propojeným obývákem a kuchyní, světlou koupelnou a sklepem.'},
+    {id:19,type:'byt',deal:'prodej',title:'Tmavý luxusní byt',city:'Praha 4 — Nusle',area:88,disp:'3+kk',floor:'7. patro',price:11200000,imgs:propImgs('19-tmavy-lux',3),desc:'Elegantní tmavý interiér s černobílou kuchyní, designovou koupelnou a pracovnou.'},
+    {id:20,type:'byt',deal:'prodej',title:'Vintage byt v činžáku',city:'Praha 3 — Žižkov',area:71,disp:'2+kk',floor:'4. patro',price:6890000,imgs:propImgs('20-vintage',3),desc:'Charismatický byt v činžovním domě s vintage ložnicí, světlou chodbou a reprezentativním obývákem.'},
+    {id:21,type:'byt',deal:'pronajem',title:'Kompaktní byt 1+kk',city:'Brno — Žabovřesky',area:34,disp:'1+kk',floor:'1. patro',price:14500,imgs:propImgs('21-maly-byt',3),desc:'Útulný byt pro jednotlivce nebo pár — chytré řešení malé kuchyně, světlý obývák a klidná lokalita.'},
+    {id:22,type:'byt',deal:'prodej',title:'Přízemní byt se zahrádkou',city:'Praha-západ — Řeporyje',area:58,disp:'2+kk',floor:'přízemí',price:5790000,imgs:propImgs('22-zahrada',3),desc:'Byt s vlastní zahrádkou, světlým obývákem a praktickou koupelnou. Ideální pro začínající rodinu.'},
+    {id:23,type:'byt',deal:'prodej',title:'Byt v prémiovém domě',city:'Praha 6 — Bubeneč',area:92,disp:'3+kk',floor:'5. patro',price:13400000,imgs:propImgs('23-bytovy-dum',3),desc:'Byt v prémiové novostavbě s reprezentativním vchodem, luxusním obývákem a světlou ložnicí.'}
   ];
   var GRAD=[['#d7d7cf','#bbbbb1'],['#d2d2c8','#b4b4a8'],['#dad8cd','#bdbaad'],['#cfd2cd','#b1b6b0'],['#d9d4cd','#bcb6ab'],['#cdd0cd','#aeb3ae']];
   function gradFor(id){var g=GRAD[id%GRAD.length];return 'linear-gradient(140deg,'+g[0]+','+g[1]+')';}
@@ -490,11 +511,12 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     count.textContent=n+' '+(n===1?'nemovitost':(n>=2&&n<=4?'nemovitosti':'nemovitostí'));
     if(!n){grid.innerHTML='<div class="empty">Žádná nabídka neodpovídá výběru. Zkus filtry rozvolnit.</div>';return;}
     grid.innerHTML=list.map(function(p){
+      var cnt=p.imgs.length>1?'<span class="pcard-imgs-count">'+p.imgs.length+' fotky</span>':'';
       return '<article class="pcard" data-id="'+p.id+'">'+
-        '<div class="pcard-img"><img src="'+p.img+'" alt="'+p.title+'" loading="lazy" width="800" height="600"><span class="pc-deal">'+dealLabel(p.deal)+'</span><span class="pc-fav">'+HEART+'</span></div>'+
+        '<div class="pcard-img"><img src="'+cover(p)+'" alt="'+p.title+'" loading="lazy" width="800" height="600"><span class="pc-deal">'+dealLabel(p.deal)+'</span><span class="pc-fav">'+HEART+'</span>'+cnt+'</div>'+
         '<div class="pcard-body"><div class="pcard-top"><h3>'+p.title+'</h3><span class="pcard-price">'+priceLabel(p)+'</span></div>'+
         '<div class="pcard-loc">'+p.city+'</div>'+
-        '<div class="pcard-meta"><span>'+I_AREA+p.area+' m²</span><span>'+I_DISP+(p.disp!=='—'?p.disp:'pozemek')+'</span><span>'+I_FLOOR+p.floor+'</span></div>'+
+        '<div class="pcard-meta"><span>'+I_AREA+p.area+' m²</span><span>'+I_DISP+p.disp+'</span><span>'+I_FLOOR+p.floor+'</span></div>'+
         '</div></article>';
     }).join('');
   }
@@ -508,8 +530,24 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 
   // modal
   var modal=document.getElementById('modal'),mback=document.getElementById('modalBack'),mbody=document.getElementById('modalBody'),mph=document.getElementById('modalPh');
+  function buildGallery(p,active){
+    var thumbs=p.imgs.length>1?'<div class="mgallery-thumbs">'+p.imgs.map(function(src,i){
+      return '<button type="button" class="'+(i===active?'on':'')+'" data-i="'+i+'"><img src="'+src+'" alt="'+(i+1)+'. foto"></button>';
+    }).join('')+'</div>':'';
+    return '<div class="mgallery"><div class="mgallery-main"><img id="mGalMain" src="'+p.imgs[active]+'" alt="'+p.title+'"></div>'+thumbs+'</div>';
+  }
+  function bindGallery(p){
+    var main=document.getElementById('mGalMain');
+    mph.querySelectorAll('.mgallery-thumbs button').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var i=+btn.dataset.i;
+        main.src=p.imgs[i];
+        mph.querySelectorAll('.mgallery-thumbs button').forEach(function(b){b.classList.toggle('on',b===btn);});
+      });
+    });
+  }
   function openModal(p){
-    mph.innerHTML='<img src="'+p.img+'" alt="'+p.title+'">';
+    mph.innerHTML=buildGallery(p,0);
     mbody.innerHTML='<div class="mdeal">'+dealLabel(p.deal)+' · '+TYPE[p.type]+'</div>'+
       '<div class="mtop"><h3>'+p.title+'</h3><span class="mprice">'+priceLabel(p)+'</span></div>'+
       '<div class="mloc">'+p.city+'</div>'+
@@ -524,6 +562,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       '<p class="mdesc">'+p.desc+'</p>'+
       '<div class="modal-cta"><a class="btn btn-dark" href="#kontakt" id="mClose2">Domluvit prohlídku</a><a class="btn btn-out" href="tel:+420777123456">Zavolat makléři</a></div>';
     mback.classList.add('open');modal.classList.add('open');document.body.style.overflow='hidden';
+    bindGallery(p);
     var z=document.getElementById('mClose2');if(z)z.addEventListener('click',closeModal);
   }
   function closeModal(){mback.classList.remove('open');modal.classList.remove('open');document.body.style.overflow='';}

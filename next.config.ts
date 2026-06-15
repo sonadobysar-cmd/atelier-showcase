@@ -17,7 +17,8 @@ const nextConfig: NextConfig = {
       { source: "/webinar", destination: "/masterclass/index.html" },
       { source: "/nia", destination: "/nia/index.html" },
       { source: "/nia/projekty", destination: "/nia/projekty/index.html" },
-      { source: "/nia/bezpecnost", destination: "/nia/bezpecnost/index.html" },
+      { source: "/klic-estate", destination: "/klic-estate/index.html" },
+      { source: "/realitka", destination: "/klic-estate/index.html" },
     ];
   },
 };

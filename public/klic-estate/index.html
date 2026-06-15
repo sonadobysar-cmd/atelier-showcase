@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KLÍČ Estate — najdi místo, kterému budeš říkat domov</title>
-<meta name="description" content="Byty, domy a pozemky k prodeji i pronájmu. Prověřené nabídky, hypotéka na míru a kompletní servis od prohlídky po předání klíčů.">
+<title>Realitní kancelář — najdi místo, kterému budeš říkat domov</title>
+<meta name="description" content="Byty, domy a pozemky k prodeji i pronájmu. Prověřené nabídky, hypotéka na míru a kompletní servis od prohlídky po předání.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -244,7 +244,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <!-- HEADER -->
 <header class="hd" id="hd">
   <div class="wrap hd-in">
-    <a class="logo" href="#top"><b>KLÍČ</b><small>ESTATE</small></a>
+    <a class="logo" href="#top"><b>REALITY</b><small>PRAHA &amp; BRNO</small></a>
     <nav class="hd-nav">
       <a class="lnk" href="#nabidky">Nabídky</a>
       <a class="lnk" href="#kalkulacka">Hypotéka<span class="pill">Nové</span></a>
@@ -267,7 +267,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
       <div class="aside"><p>S námi nenajdeš jen bydlení, ale místo, kde začíná nový život — plné pohody a možností.</p></div>
     </div>
     <div class="hero-img">
-      <img src="/klic-estate/images/hero/vila.jpg" alt="Luxusní vila s bazénem — KLÍČ Estate" width="1920" height="1080" fetchpriority="high">
+      <img src="/klic-estate/images/hero/vila.jpg" alt="Luxusní vila s bazénem" width="1920" height="1080" fetchpriority="high">
       <a class="btn btn-dark" href="#kontakt">Domluvit hovor</a>
     </div>
   </div>
@@ -393,7 +393,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         <h2>Pojďme to probrat.</h2>
         <p class="lead">Koupě, prodej, pronájem nebo jen rada — ozvi se a my se ozveme zpátky do 24 hodin.</p>
         <div class="cinfo">
-          <div><small>E-mail</small><b>info@klic-estate.cz</b></div>
+          <div><small>E-mail</small><b>kontakt@ukazka-reality.cz</b></div>
           <div><small>Telefon</small><b>+420 777 123 456</b></div>
           <div><small>Kancelář</small><b>Pařížská 4, Praha 1</b></div>
         </div>
@@ -414,11 +414,11 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 <footer class="ft">
   <div class="wrap">
     <div class="ft-top">
-      <a class="logo" href="#top"><b>KLÍČ</b><small>ESTATE</small></a>
+      <a class="logo" href="#top"><b>REALITY</b><small>PRAHA &amp; BRNO</small></a>
       <nav class="ft-nav"><a href="#nabidky">Nabídky</a><a href="#kalkulacka">Hypotéka</a><a href="#jak">Jak to funguje</a><a href="#maklere">Makléři</a><a href="#kontakt">Kontakt</a></nav>
     </div>
     <div class="ft-bot">
-      <span>© 2026 KLÍČ Estate · ukázkový web</span>
+      <span>© 2026 Ukázkový realitní web</span>
       <span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span>
     </div>
     <p class="ft-demo">Ukázkový web v demo režimu — poptávky a rezervace prohlídek se reálně neodesílají, slouží k prezentaci realitního webu.</p>
@@ -519,7 +519,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         '<div class="mt"><span>Umístění</span><b>'+p.floor+'</b></div>'+
         '<div class="mt"><span>Typ</span><b>'+TYPE[p.type]+'</b></div>'+
         '<div class="mt"><span>Stav</span><b>k nastěhování</b></div>'+
-        '<div class="mt"><span>ID</span><b>KE-'+(1000+p.id)+'</b></div>'+
+        '<div class="mt"><span>ID</span><b>RE-'+(1000+p.id)+'</b></div>'+
       '</div>'+
       '<p class="mdesc">'+p.desc+'</p>'+
       '<div class="modal-cta"><a class="btn btn-dark" href="#kontakt" id="mClose2">Domluvit prohlídku</a><a class="btn btn-out" href="tel:+420777123456">Zavolat makléři</a></div>';
@@ -577,9 +577,9 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
     var n=(document.getElementById('k-name').value||'').trim(),m=(document.getElementById('k-mail').value||'').trim(),
         t=(document.getElementById('k-tel').value||'').trim(),msg=(document.getElementById('k-msg').value||'').trim();
     if(!m){ko.textContent='Doplň prosím e-mail.';return;}
-    var body='Poptavka z webu KLIC Estate\n\nJmeno: '+(n||'(nevyplneno)')+'\nE-mail: '+m+'\nTelefon: '+(t||'(nevyplneno)')+'\n\nZprava:\n'+(msg||'(bez zpravy)');
+    var body='Poptavka z ukazkoveho realitniho webu\n\nJmeno: '+(n||'(nevyplneno)')+'\nE-mail: '+m+'\nTelefon: '+(t||'(nevyplneno)')+'\n\nZprava:\n'+(msg||'(bez zpravy)');
     ko.textContent='Děkujeme! Otevřeli jsme ti e-mail — stačí odeslat. ✦';
-    window.location.href='mailto:info@klic-estate.cz?subject='+encodeURIComponent('Poptávka — '+(n||'zájemce'))+'&body='+encodeURIComponent(body);
+    window.location.href='mailto:kontakt@ukazka-reality.cz?subject='+encodeURIComponent('Poptávka — '+(n||'zájemce'))+'&body='+encodeURIComponent(body);
   });
 
   // header + reveal

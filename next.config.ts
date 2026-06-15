@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
       { source: "/nia/projekty", destination: "/nia/projekty/index.html" },
       { source: "/klic-estate", destination: "/klic-estate/index.html" },
       { source: "/realitka", destination: "/klic-estate/index.html" },
+      { source: "/lume", destination: "/lume/index.html" },
+      { source: "/klinika", destination: "/lume/index.html" },
     ];
   },
 };

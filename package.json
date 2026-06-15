@@ -6,7 +6,7 @@
     "node": "20.x"
   },
   "scripts": {
-    "dev": "printf '\\n  ATELIER SHOWCASE — otevři v prohlížeči:\\n  http://127.0.0.1:3010/gloss\\n  http://127.0.0.1:3010/contour-clinic\\n  (rozcestník: http://127.0.0.1:3010)\\n\\n  Tip: při chybě 500 spusť npm run serve\\n\\n' && next dev -H 127.0.0.1 -p 3010",
+    "dev": "printf '\\n  ATELIER SHOWCASE — otevři v prohlížeči:\\n  http://127.0.0.1:3010/gloss\\n  http://127.0.0.1:3010/lume\\n  http://127.0.0.1:3010/contour-clinic\\n  (rozcestník: http://127.0.0.1:3010)\\n\\n  Tip: při chybě 500 spusť npm run serve\\n\\n' && next dev -H 127.0.0.1 -p 3010",
     "dev:clean": "lsof -ti:3010 | xargs kill -9 2>/dev/null; rm -rf .next node_modules/.cache && npm run dev",
     "serve": "lsof -ti:3010 | xargs kill -9 2>/dev/null; rm -rf .next && npm run build && next start -H 127.0.0.1 -p 3010",
     "open-contour": "open http://127.0.0.1:3010/contour-clinic",

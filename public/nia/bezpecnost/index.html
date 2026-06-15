@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bezpečnost &amp; data — Nia Dobyšar</title>
+<meta name="description" content="Jak Nia Dobyšar řeší bezpečnost webů — osobní údaje, cookies, třetí strany, hosting a ochrana před zneužitím.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080606; --white:#fff; --cream:#f7f4f2; --off:#f0ebe8;
+  --burgundy2:#2d121c; --burgundy3:#5c2a3e; --burgundy4:#7a3d54; --burgundy-glow:#9e4d6a;
+  --ink:#080606; --muted:#6e5c64; --muted2:#9a888e;
+  --line:rgba(26,10,16,.1); --line-w:rgba(26,10,16,.18);
+  --r-lg:40px; --r-md:24px; --r-pill:999px;
+  --shadow:0 20px 60px -32px rgba(8,6,6,.18);
+  --display:'Bodoni Moda',Georgia,serif;
+  --script:'Pinyon Script',cursive;
+  --b:'Outfit',system-ui,sans-serif;
+  --section:clamp(72px,10vw,112px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{font-family:var(--b);background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:1.02rem;font-weight:300;line-height:1.75}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--burgundy3);color:var(--white)}
+.wrap{max-width:900px;margin:0 auto;padding:0 6vw;width:100%}
+.eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;font-weight:400;color:var(--burgundy4)}
+.grad{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.35em;line-height:.9;color:var(--burgundy-glow);vertical-align:-.08em}
+.sig{font-family:var(--script);font-size:1.3em;color:var(--burgundy-glow)}
+
+.cursor,.cursor-dot{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999}
+.cursor{width:34px;height:34px;border:1px solid rgba(42,18,28,.22);transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+.cursor-dot{width:4px;height:4px;background:var(--burgundy3);transform:translate(-50%,-50%)}
+.cursor.grow{width:68px;height:68px;background:rgba(90,42,58,.06);border-color:transparent}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  padding:18px 6vw;background:rgba(8,6,6,.94);color:var(--white);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.brand{font-family:var(--display);font-size:1.15rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow);flex:none}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;font-weight:400}
+.nav-links a{opacity:.78;transition:opacity .3s}
+.nav-links a:hover,.nav-links a.on{opacity:1}
+.nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 20px;letter-spacing:.24em;background:rgba(255,255,255,.06);opacity:1}
+.nav-links a.nav-cta:hover{background:var(--burgundy3);border-color:var(--burgundy3)}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210;color:inherit}
+.burger span{width:28px;height:2px;background:currentColor;transition:.35s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){transform:rotate(-45deg)}
+
+.page-head{background:var(--black);color:var(--white);padding:clamp(120px,14vw,150px) 0 clamp(40px,7vw,64px);text-align:center}
+.page-head .wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.page-head h1{font-family:var(--display);font-weight:500;font-size:clamp(2.2rem,5.5vw,3.8rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.06;margin-top:8px}
+.page-head .lead{max-width:52ch;font-size:1rem;color:rgba(255,255,255,.62);margin-top:8px;line-height:1.7}
+.page-head .eyebrow{color:rgba(255,255,255,.5)}
+.page-back{align-self:flex-start;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.65;margin-bottom:16px;transition:opacity .3s}
+.page-back:hover{opacity:1}
+.page-updated{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-top:6px}
+
+.sec-intro{background:var(--white);padding:var(--section) 0;border-bottom:1px solid var(--line)}
+.sec-intro p{font-size:1.05rem;color:var(--muted);max-width:68ch}
+.sec-intro strong{color:var(--ink);font-weight:500}
+
+.toc{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.toc a{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--cream);transition:background .3s,border-color .3s,color .3s}
+.toc a:hover{background:var(--burgundy3);border-color:var(--burgundy3);color:var(--white)}
+
+.sec-block{padding:var(--section) 0;border-bottom:1px solid var(--line)}
+.sec-block.alt{background:var(--off)}
+.sec-block h2{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.5vw,2.2rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.1;margin-bottom:18px;color:var(--black)}
+.sec-block h3{font-family:var(--display);font-weight:500;font-size:1.15rem;letter-spacing:.04em;margin:28px 0 10px;text-transform:uppercase}
+.sec-block p,.sec-block li{color:var(--muted);font-size:.95rem}
+.sec-block p+p,.sec-block ul{margin-top:14px}
+.sec-block ul{padding-left:1.2rem}
+.sec-block li{margin-bottom:10px}
+.sec-block li::marker{color:var(--burgundy3)}
+
+.card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.card{background:var(--white);border-radius:var(--r-md);padding:24px 22px;box-shadow:var(--shadow)}
+.card b{display:block;font-family:var(--display);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;color:var(--black)}
+.card p{font-size:.88rem;margin:0}
+
+.table-wrap{overflow-x:auto;margin-top:22px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--white)}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:520px}
+th,td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--burgundy4);font-weight:500;background:var(--cream)}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
+
+.note{margin-top:22px;padding:18px 20px;border-radius:var(--r-md);background:rgba(92,42,62,.06);border:1px solid rgba(92,42,62,.12);font-size:.9rem;color:var(--muted)}
+.note b{color:var(--burgundy3);font-weight:500}
+
+.cta-box{margin-top:36px;padding:32px 28px;border-radius:var(--r-lg);background:var(--black);color:var(--white);text-align:center}
+.cta-box p{color:rgba(255,255,255,.65);max-width:46ch;margin:10px auto 0}
+.cta-box .btn{display:inline-flex;margin-top:22px;background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;padding:14px 28px;border-radius:var(--r-pill);transition:background .3s,transform .3s}
+.cta-box .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
+.cta-box h3{font-family:var(--display);font-size:1.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--white)}
+
+.footer{background:var(--burgundy2);color:rgba(255,255,255,.75);padding:64px 0 36px}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:36px}
+.foot-brand{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);line-height:1.04;color:var(--white);display:flex;flex-direction:column}
+.foot-brand::after{content:'';display:block;width:min(90px,20vw);height:2px;margin-top:14px;background:var(--burgundy-glow);opacity:.7;border-radius:var(--r-pill)}
+.foot-links{display:flex;gap:22px;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap}
+.foot-links a{color:rgba(255,255,255,.65)}
+.foot-links a:hover{color:var(--white)}
+.foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);font-size:.68rem;color:rgba(255,255,255,.4);letter-spacing:.06em}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:760px){
+  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;background:var(--black);
+    flex-direction:column;justify-content:center;align-items:flex-start;padding:0 40px;gap:26px;transform:translateX(100%);
+    transition:transform .55s var(--ease);font-size:.95rem;z-index:205}
+  .nav-links.open{transform:translateX(0)}
+  body.nav-open{overflow:hidden}
+  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,6,6,.55);z-index:204}
+  .burger{display:flex}
+  .card-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
+  <nav class="nav-links" id="navLinks">
+    <a href="/nia/projekty">Práce</a>
+    <a href="/nia#studio">Studio</a>
+    <a href="/nia#sluzby">Ceník</a>
+    <a href="/nia#konzultace">Konzultace</a>
+    <a href="/nia#kontakt">Kontakt</a>
+    <a href="/nia/bezpecnost" class="on">Bezpečnost</a>
+    <a href="/nia#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Otevřít menu"><span></span><span></span></button>
+</header>
+
+<section class="page-head reveal">
+  <div class="wrap">
+    <a href="/nia" class="page-back" data-cursor>← Zpět na hlavní</a>
+    <span class="eyebrow">Transparentně &amp; zodpovědně</span>
+    <h1>Bezpečnost &amp; <span class="grad">data</span></h1>
+    <p class="lead">Jak chráníme weby, které stavíme — od ukázkových dem po ostrý provoz u klientů. Bez strašení, ale s jasnými pravidly.</p>
+    <p class="page-updated">Poslední aktualizace: červen 2026</p>
+  </div>
+</section>
+
+<section class="sec-intro reveal">
+  <div class="wrap">
+    <p>Bezpečnost není jen technická věc v pozadí — je součástí každého webu, který sbírá kontakt, rezervaci nebo platbu. Tady popisuju, <strong>jak to řešíme u mě ve studiu</strong>, co platí pro portfolio ukázky a co nastavíme, když web spouštíme doopravdy.</p>
+    <nav class="toc" aria-label="Obsah stránky">
+      <a href="#principy">Principy</a>
+      <a href="#demo">Demo vs. provoz</a>
+      <a href="#data">Osobní údaje</a>
+      <a href="#cookies">Cookies</a>
+      <a href="#treti">Třetí strany</a>
+      <a href="#technika">Technika &amp; viry</a>
+      <a href="#klient">U klienta</a>
+      <a href="#kontakt">Dotazy</a>
+    </nav>
+  </div>
+</section>
+
+<section class="sec-block reveal" id="principy">
+  <div class="wrap">
+    <h2>Naše principy</h2>
+    <p>Weby navrhujeme tak, aby sbíraly jen to, co je potřeba — a aby bylo jasné, kam data jdou a kdo za ně odpovídá.</p>
+    <div class="card-grid">
+      <div class="card"><b>Minimum dat</b><p>Formuláře bez zbytečných polí. Citlivé údaje (zdravotní info, rodná čísla) do běžných webových formulářů nedáváme.</p></div>
+      <div class="card"><b>Šifrované spojení</b><p>Vše běží přes HTTPS. Návštěvník i data v přenosu jsou chráněná standardním šifrováním.</p></div>
+      <div class="card"><b>Oddělené projekty</b><p>Každý ostrý web má vlastní hosting, doménu a přístupy. Klienti se nemíchají v jedné „krabici“.</p></div>
+      <div class="card"><b>Transparentnost</b><p>U dem i ostrých webů je jasné, co je ukázka a co reálná služba. Žádné skryté sbírání dat.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-block alt reveal" id="demo">
+  <div class="wrap">
+    <h2>Portfolio ukázky vs. ostrý provoz</h2>
+    <p>Weby v portfoliu (MATCHÁ, funnel, beauty, kavárny…) jsou z většiny <strong>demo ukázky designu a funkčnosti</strong>. Formuláře v nich typicky:</p>
+    <ul>
+      <li>zobrazí potvrzení na obrazovce (modal),</li>
+      <li>případně si data uloží jen do prohlížeče návštěvníka (<code>localStorage</code>) — tedy u tebe v zařízení, ne u nás na serveru,</li>
+      <li>neodesílají reálné objednávky, registrace ani platby.</li>
+    </ul>
+    <p class="note"><b>Demo badge</b> — u ukázkových webů je v patičce upozornění, že jde o prezentaci. Při ostrém spuštění u klienta demo režim vypínáme a napojíme reálné služby.</p>
+    <h3>Tento web (nia.cz / portfolio Nia)</h3>
+    <p>Kontaktní a konzultační formuláře otevřou <strong>e-mailového klienta</strong> (mailto) — zpráva odejde až po tvém potvrzení v mailu. Neukládáme ji do databáze na serveru.</p>
+  </div>
+</section>
+
+<section class="sec-block reveal" id="data">
+  <div class="wrap">
+    <h2>Osobní údaje &amp; GDPR</h2>
+    <p>Pokud web sbírá jméno, e-mail, telefon nebo zprávu z formuláře, jde o zpracování osobních údajů podle GDPR. U ostrých projektů řešíme:</p>
+    <ul>
+      <li><strong>Zásady ochrany osobních údajů</strong> — samostatná stránka na webu klienta,</li>
+      <li><strong>souhlas</strong> u formulářů (checkbox, nepředzaškrtnutý),</li>
+      <li><strong>správce údajů</strong> — obvykle klient (provozovatel firmy), my jako zpracovatel při vývoji a údržbě,</li>
+      <li><strong>doba uchování</strong> — jen po nezbytně nutnou dobu (např. do vyřízení poptávky nebo dle zákona).</li>
+    </ul>
+    <h3>Co neděláme</h3>
+    <ul>
+      <li>neprodáváme kontakty třetím stranám,</li>
+      <li>neukládáme hesla ani platební karty (platby řeší Stripe nebo banka),</li>
+      <li>do ukázkových dem neposíláme reálná data zákazníků klientů.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec-block alt reveal" id="cookies">
+  <div class="wrap">
+    <h2>Cookies &amp; měření</h2>
+    <p><strong>Cookies</strong> jsou malé soubory v prohlížeči. Některé jsou nutné pro fungování webu, jiné slouží k měření návštěvnosti nebo marketingu.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Typ</th><th>K čemu slouží</th><th>Ukázky v portfoliu</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Nezbytné</td><td>Základní chod webu, zapamatování košíku v demu</td><td>Ano — jen lokálně v prohlížeči</td></tr>
+          <tr><td>Analytické</td><td>Počet návštěv, chování na stránce</td><td>Jen po souhlasu u ostrého webu (např. GA4, Plausible)</td></tr>
+          <tr><td>Marketingové</td><td>Remarketing, pixel sítí</td><td>Jen u funnelů / e-shopů se souhlasem</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">U ostrého webu nastavíme <b>cookie lištu</b> podle toho, co skutečně používáme — ne „všechno najednou“. Bez analytiky a pixelů lištu nepotřebuješ.</p>
+  </div>
+</section>
+
+<section class="sec-block reveal" id="treti">
+  <div class="wrap">
+    <h2>Třetí strany</h2>
+    <p>Některé služby web potřebuje — hosting, fonty, mapy, platby. Vždy volíme ověřené poskytovatele a klienta informujeme, co se kde načítá.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Služba</th><th>Účel</th><th>Poznámka</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Vercel</td><td>Hosting, HTTPS, nasazení</td><td>Servery v EU / globální CDN, šifrovaný provoz</td></tr>
+          <tr><td>Google Fonts</td><td>Typografie</td><td>Načítání fontů; u citlivých projektů lze fonty hostovat lokálně</td></tr>
+          <tr><td>Stripe</td><td>Platby e-shopů</td><td>Karty neprocházejí webem klienta — řeší Stripe</td></tr>
+          <tr><td>Resend / Brevo / Cal.com</td><td>E-maily, rezervace</td><td>Po dohodě u ostrého provozu; API klíče jen na serveru</td></tr>
+          <tr><td>Instagram</td><td>Odkazy na sociální sítě</td><td>Jen po kliknutí — žádné vložené trackery bez souhlasu</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>API klíče a hesla <strong>nikdy nejsou v kódu ani v gitu</strong> — pouze v zabezpečených proměnných prostředí hostingu.</p>
+  </div>
+</section>
+
+<section class="sec-block alt reveal" id="technika">
+  <div class="wrap">
+    <h2>Technická bezpečnost &amp; „viry“</h2>
+    <p>Web samotný obvykle <strong>nešíří viry</strong> — návštěvník se nenakazí jen tím, že stránku otevře. Rizika jsou jinde: podvržený kód, únik dat, slabá hesla, nebo stažení podezřelého souboru.</p>
+    <h3>Co děláme proti zneužití</h3>
+    <ul>
+      <li><strong>HTTPS všude</strong> — šifrované spojení mezi prohlížečem a serverem,</li>
+      <li><strong>bezpečný hosting</strong> — aktualizace platformy, oddělené projekty,</li>
+      <li><strong>validace formulářů</strong> — ochrana proti spamu a zjevně neplatným vstupům,</li>
+      <li><strong>rate limiting</strong> u API (omezení počtu požadavků),</li>
+      <li><strong>žádné neznámé skripty</strong> — do webu nepřidáváme cizí kód bez důvodu,</li>
+      <li><strong>security hlavičky</strong> u Next.js webů (CSP, ochrana proti vložení do iframe).</li>
+    </ul>
+    <p class="note"><b>Pro tebe jako návštěvníka portfolia:</b> ukázkové formuláře neodesílají data na server. Pokud testuješ demo, nepoužívej reálná citlivá data — stačí fiktivní jméno a e-mail.</p>
+  </div>
+</section>
+
+<section class="sec-block reveal" id="klient">
+  <div class="wrap">
+    <h2>Co dostane klient při spuštění</h2>
+    <p>Když web přechází z ukázky do reálného provozu, standardně zajistíme nebo doporučíme:</p>
+    <ul>
+      <li>stránku zásad ochrany osobních údajů a obchodní podmínky (dle typu webu),</li>
+      <li>napojení formulářů na e-mail / CRM / rezervační systém,</li>
+      <li>cookie lištu, pokud používáme analytiku nebo marketing,</li>
+      <li>SSL certifikát a vlastní doménu,</li>
+      <li>zálohování a dokumentaci, kam data tečou,</li>
+      <li>u e-shopů platby přes Stripe (PCI na straně Stripe).</li>
+    </ul>
+    <p>Každý obor má svá pravidla — u kliniky, koučinku nebo funnelu řešíme detaily individuálně na konzultaci.</p>
+  </div>
+</section>
+
+<section class="sec-block alt reveal" id="kontakt">
+  <div class="wrap">
+    <h2>Máš dotaz?</h2>
+    <p>Pokud tě zajímá bezpečnost konkrétního webu v portfoliu nebo plánuješ ostrý provoz, napiš — projdeme to spolu na konzultaci.</p>
+    <div class="cta-box">
+      <h3>Pojďme to probrat</h3>
+      <p>E-mail, konzultace nebo poptávka — ozvu se s konkrétním návrhem pro tvůj obor.</p>
+      <a href="/nia#konzultace" class="btn" data-cursor>Rezervovat konzultaci</a>
+    </div>
+    <p style="margin-top:28px;font-size:.88rem;color:var(--muted2)">Kontakt: <a href="mailto:niadobyshar@gmail.com" style="border-bottom:1px solid var(--line-w)">niadobyshar@gmail.com</a> · <a href="tel:+420773800785" style="border-bottom:1px solid var(--line-w)">+420 773 800 785</a></p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap" style="max-width:1180px">
+    <div class="foot-top">
+      <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
+      <div class="foot-links">
+        <a href="/nia/projekty">Práce</a>
+        <a href="/nia#studio">Studio</a>
+        <a href="/nia#sluzby">Ceník</a>
+        <a href="/nia#konzultace">Konzultace</a>
+        <a href="/nia#kontakt">Kontakt</a>
+        <a href="/nia/bezpecnost">Bezpečnost</a>
+        <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© Nia Dobyšar — Webdesign studio</span>
+      <span>Navrženo &amp; postaveno s láskou ✦</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('cursor'),d=document.getElementById('cursorDot');
+  if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var cx=0,cy=0,dx=0,dy=0;
+    window.addEventListener('mousemove',function(e){cx=e.clientX;cy=e.clientY;d.style.left=cx+'px';d.style.top=cy+'px';});
+    (function loop(){dx+=(cx-dx)*.18;dy+=(cy-dy)*.18;c.style.left=dx+'px';c.style.top=dy+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('a,button,[data-cursor]').forEach(function(el){
+      el.addEventListener('mouseenter',function(){c.classList.add('grow');});
+      el.addEventListener('mouseleave',function(){c.classList.remove('grow');});
+    });
+  }
+})();
+var navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger');
+function setNavOpen(on){navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);}
+burger.addEventListener('click',function(){setNavOpen(!navLinks.classList.contains('open'));});
+navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNavOpen(false);});});
+document.querySelectorAll('.reveal').forEach(function(el){
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+    io.observe(el);
+  } else { el.classList.add('in'); }
+});
+</script>
+</body>
+</html>

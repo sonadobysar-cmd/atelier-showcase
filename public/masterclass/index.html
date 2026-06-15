@@ -186,22 +186,28 @@ a{color:inherit;text-decoration:none}
 .cta-row .micro{display:block;font-size:.84rem;color:var(--mut);margin-top:14px;font-weight:500}
 
 /* sticky bottom bar */
-.sticky{position:fixed;left:0;right:0;bottom:0;z-index:85;background:rgba(7,4,16,.92);backdrop-filter:blur(12px);border-top:1px solid rgba(168,85,247,.3);transform:translateY(120%);transition:transform .35s ease;padding:12px 0}
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:85;background:rgba(7,4,16,.94);backdrop-filter:blur(14px);border-top:1px solid rgba(168,85,247,.28);transform:translateY(110%);transition:transform .35s ease;padding:10px 0 calc(10px + env(safe-area-inset-bottom))}
 .sticky.show{transform:none}
-.sticky-in{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.sticky .st-txt b{font-family:var(--d);color:#fff;font-size:1.04rem;font-weight:700;line-height:1.1;display:flex;align-items:center;gap:8px}
-.sticky .st-txt span{display:block;font-size:.76rem;color:var(--mut);margin-top:3px;font-variant-numeric:tabular-nums}
-.sticky .btn{white-space:nowrap;padding:13px 26px}
-@media(max-width:560px){.sticky .st-txt span{display:none}.sticky-in{gap:12px}}
+.sticky-in{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sticky-meta{display:flex;align-items:center;gap:12px;min-width:0}
+.sticky-live{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:rgba(255,59,92,.16);border:1px solid rgba(255,59,92,.38);border-radius:99px;padding:6px 10px}
+.sticky-live .ld{width:7px;height:7px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(255,59,92,.6);animation:livep 1.7s infinite}
+.sticky-info{min-width:0}
+.sticky-info strong{display:block;font-family:var(--d);color:#fff;font-size:.98rem;font-weight:700;line-height:1.15}
+.sticky-sub{display:block;margin-top:3px;font-size:.76rem;color:var(--mut);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sticky-sub b{color:#fff;font-weight:600}
+.sticky .btn{flex:none;white-space:nowrap;padding:12px 22px;font-size:.92rem}
+body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+@media(max-width:560px){.sticky-in{gap:10px}.sticky-info strong{font-size:.9rem}.sticky-sub{font-size:.7rem}.sticky .btn{padding:11px 16px;font-size:.84rem}.sticky-live span.txt{display:none}}
 
 /* footer */
 .ft{background:var(--ink);color:var(--mut2);padding:42px 0;position:relative;z-index:1}
 .ft-in{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center;font-size:.84rem}
 .ft a{color:var(--v2);font-weight:500}
+.ft-demo{margin-top:18px;padding-top:16px;border-top:1px solid rgba(244,239,251,.08);text-align:center;font-size:.72rem;letter-spacing:.06em;color:var(--mut2);line-height:1.55}
 
 
 /* demo + media */
-.demo-pill{position:fixed;top:48px;left:50%;transform:translateX(-50%);z-index:95;background:rgba(7,4,16,.82);color:#fff;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;padding:8px 16px;border-radius:99px;pointer-events:none;backdrop-filter:blur(8px);border:1px solid rgba(168,85,247,.35)}
 .hero-wrap{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(280px,.82fr);gap:clamp(32px,4vw,56px);align-items:start;text-align:left}
 .hero-wrap .hero-copy{text-align:left}
 .hero-wrap .hero-copy h1{margin-left:0;margin-right:0;max-width:22ch}
@@ -302,6 +308,29 @@ a{color:inherit;text-decoration:none}
 .guarantee p{font-size:.92rem;color:var(--mut);margin:0}
 @media(max-width:900px){.statbar{grid-template-columns:repeat(2,1fr)}.pain,.stack-grid{grid-template-columns:1fr}.pain-img img{aspect-ratio:16/11}}
 
+
+/* responsive polish */
+@media(max-width:540px){
+  .hero-countdown .cell{min-width:64px;padding:12px 6px}
+  .hero-countdown .cell .n{font-size:1.75rem}
+  .hero-countdown .clock{gap:8px;flex-wrap:wrap}
+  .promo{flex-wrap:wrap;justify-content:center;row-gap:4px;min-height:auto;padding:8px 12px}
+  .hd{top:0}
+  html{scroll-padding-top:96px}
+  .hero{padding-top:108px}
+  .hero-cta .btn{width:100%}
+  .hero-cta .btn-ghost{width:100%}
+  .marquee span{font-size:.74rem}
+  .stack-grid{gap:20px}
+  .final-grid .form{margin-top:4px}
+}
+@media(max-width:380px){
+  .hero-countdown .cell{min-width:56px}
+  .hero-countdown .cell .n{font-size:1.5rem}
+  .statbar{gap:10px}
+  .stat{padding:16px 10px}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
 .rv.in{opacity:1;transform:none}
@@ -309,8 +338,6 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="demo-pill" aria-hidden="true">Demo režim · ukázková registrace</div>
-
 <!-- PROMO BAR -->
 <div class="promo" id="promo">
   <span class="px"><span class="hot">Kapacita se plní</span> · živě online</span>
@@ -562,7 +589,13 @@ a{color:inherit;text-decoration:none}
 <!-- STICKY BAR -->
 <div class="sticky" id="sticky">
   <div class="wrap sticky-in">
-    <div class="st-txt"><b><span class="live" style="padding:3px 9px;font-size:.6rem"><span class="ld"></span> Živě</span> Vstup zdarma</b><span>začínáme za <span id="stickyCd"></span> · 37 volných míst</span></div>
+    <div class="sticky-meta">
+      <span class="sticky-live"><span class="ld"></span><span class="txt">Živě</span></span>
+      <div class="sticky-info">
+        <strong>Vstup zdarma</strong>
+        <span class="sticky-sub">Začínáme za <b id="stickyCd">…</b> · <b id="stickySeats">37</b> volných míst</span>
+      </div>
+    </div>
     <a class="btn btn-primary pulse" href="#registrace">Rezervovat →</a>
   </div>
 </div>
@@ -578,9 +611,12 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <footer class="ft">
-  <div class="wrap ft-in">
-    <span>© 2026 Zákazníci z internetu · demo web</span>
-    <span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span>
+  <div class="wrap">
+    <div class="ft-in">
+      <span>© 2026 Zákazníci z internetu</span>
+      <span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span>
+    </div>
+    <p class="ft-demo">Ukázkový web v demo režimu — registrace se reálně neodesílá, slouží jen k prezentaci funnelu.</p>
   </div>
 </footer>
 
@@ -632,13 +668,15 @@ a{color:inherit;text-decoration:none}
       mm=document.getElementById('cd-m'),ss=document.getElementById('cd-s'),
       promoCd=document.getElementById('promoCd'),stickyCd=document.getElementById('stickyCd');
   function pad(n){return (n<10?'0':'')+n;}
+  function cdStr(D,H,M,S){ return D>0 ? (D+' d '+pad(H)+':'+pad(M)+':'+pad(S)) : (pad(H)+':'+pad(M)+':'+pad(S)); }
   function tick(){
     var diff=Math.max(0,target-new Date());
     var sec=Math.floor(diff/1000);
     var D=Math.floor(sec/86400),H=Math.floor(sec%86400/3600),M=Math.floor(sec%3600/60),S=sec%60;
     if(dd){dd.textContent=pad(D);hh.textContent=pad(H);mm.textContent=pad(M);ss.textContent=pad(S);}
-    if(promoCd) promoCd.textContent=D+'d '+pad(H)+':'+pad(M)+':'+pad(S);
-    if(stickyCd) stickyCd.textContent=D+'d '+pad(H)+':'+pad(M)+':'+pad(S);
+    var cd=cdStr(D,H,M,S);
+    if(promoCd) promoCd.textContent=cd;
+    if(stickyCd) stickyCd.textContent=cd;
   }
   tick(); setInterval(tick,1000);
 
@@ -650,15 +688,13 @@ a{color:inherit;text-decoration:none}
   if(dmBack) dmBack.addEventListener('click', function(e){ if(e.target===dmBack) closeDm(); });
   var seats=37;
   function syncSeats(){
-    ['heroSeats','formSeats','urgSeats','seatLeft'].forEach(function(id){
+    ['heroSeats','formSeats','urgSeats','seatLeft','stickySeats'].forEach(function(id){
       var el=document.getElementById(id);
       if(!el) return;
       if(id==='urgSeats') el.textContent=seats+' míst';
       else el.textContent=seats;
     });
     var st=document.getElementById('seatTaken'); if(st) st.textContent=(200-seats);
-    var sk=document.querySelector('.sticky .st-txt span');
-    if(sk) sk.innerHTML='začínáme za <span id="stickyCdInner">'+document.getElementById('stickyCd').textContent+'</span> · '+seats+' volných míst';
   }
   syncSeats();
   setInterval(function(){ if(seats>9 && Math.random()>.62){ seats--; syncSeats(); } }, 45000);

@@ -45,9 +45,14 @@ a{color:inherit;text-decoration:none}
 /* placeholder + image slots */
 .ph{position:relative;background:linear-gradient(150deg,#c6c7c3,#a7a8a3);display:flex;align-items:center;justify-content:center;color:rgba(38,37,35,.26);overflow:hidden}
 .ph .ph-tag{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);white-space:nowrap;font-family:var(--sans);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;background:rgba(38,37,35,.5);color:var(--cream);padding:5px 10px;border-radius:2px}
-.rimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;display:block;z-index:1}
+.rimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;display:block;z-index:1}
 .ph{z-index:0}
 .hero-photo:has(.rimg) .ph,.edi-model:has(.rimg) .ph,.svc-cover:has(.rimg) .ph,.excl-bg:has(.rimg) .ph,.ba:has(.rimg) .ph{display:none}
+.rimg--hero{object-position:center 12%}
+.rimg--studio{object-position:center 18%}
+.rimg--excl{object-position:center center}
+.rimg--ba{object-position:center 22%}
+.rimg--svc{object-position:center 28%}
 .figure{width:46%;max-width:120px;opacity:.4}
 
 /* glass */
@@ -77,7 +82,7 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(165deg,var(--silver-top) 0%,var(--silver-mid) 24%,var(--silver-lo) 58%,var(--cream) 86%,#fbfaf6 100%)}
 .hero-photo{position:absolute;inset:0;z-index:1}
 .hero-photo .ph{position:absolute;inset:0;background:linear-gradient(160deg,#b7b9b6 0%,#cfd0cb 48%,#eceae4 100%)}
-.hero-photo .rimg{object-position:center 18%}
+.hero-photo .rimg{object-position:center 12%}
 /* white fade at the bottom so the gold title sits on light */
 .hero::before{content:'';position:absolute;left:0;right:0;bottom:0;height:50%;z-index:3;pointer-events:none;
   background:linear-gradient(to top,#fbfaf6 8%,rgba(251,250,246,.66) 36%,transparent 76%)}
@@ -130,7 +135,7 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(165deg,var(--silver-top) 0%,var(--silver-mid) 30%,var(--silver-lo) 64%,var(--cream) 92%,#fbfaf6 100%)}
 .svc:hover .svc-cover{transform:translateY(-6px);box-shadow:0 34px 66px rgba(38,37,35,.22)}
 .svc-cover .ph{position:absolute;inset:0;background:linear-gradient(160deg,#b7b9b6,#cfd0cb 50%,#eceae4)}
-.svc-cover .rimg{object-position:center top}
+.svc-cover .rimg{object-position:center 28%}
 .svc-cover::before{content:'';position:absolute;left:0;right:0;bottom:0;height:44%;z-index:3;pointer-events:none;background:linear-gradient(to top,#fbfaf6 8%,rgba(251,250,246,.6) 36%,transparent 76%)}
 .svc-fluted{position:absolute;top:0;bottom:0;right:0;width:26%;z-index:2;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
   background:repeating-linear-gradient(90deg,rgba(255,255,255,.34) 0px,rgba(255,255,255,.1) 3px,rgba(255,255,255,.02) 6px,rgba(255,255,255,.12) 9px,rgba(255,255,255,.34) 12px);
@@ -317,7 +322,7 @@ a{color:inherit;text-decoration:none}
 <section class="hero" id="top">
   <div class="hero-photo">
     <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka modelky</span></div>
-    <img class="rimg" src="/lume/img/hero-model.jpg?v=2" alt="LUMÉ — beauty model" loading="eager" decoding="async">
+    <img class="rimg rimg--hero" src="/lume/img/hero-model.jpg?v=3" alt="LUMÉ — beauty model" loading="eager" decoding="async">
   </div>
   <div class="hero-fluted" aria-hidden="true"></div>
 
@@ -399,7 +404,7 @@ a{color:inherit;text-decoration:none}
   <div class="wrap edi-grid">
     <div class="edi-model rv">
       <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka</span></div>
-      <img class="rimg" src="/lume/img/studio-model.jpg?v=2" alt="LUMÉ studio" loading="lazy" decoding="async">
+      <img class="rimg rimg--studio" src="/lume/img/studio-model.jpg?v=3" alt="LUMÉ studio" loading="lazy" decoding="async">
       <div class="ef" aria-hidden="true"></div>
       <div class="ecap">Aesthetic studio · Praha</div>
       <div class="edate">2026</div>
@@ -422,7 +427,7 @@ a{color:inherit;text-decoration:none}
 
 <!-- EXCLUSIVE -->
 <section class="excl" id="vstup">
-  <div class="excl-bg"><div class="ph"></div><img class="rimg" src="/lume/img/exclusive-bg.jpg?v=2" alt="" loading="lazy" decoding="async"></div>
+  <div class="excl-bg"><div class="ph"></div><img class="rimg rimg--excl" src="/lume/img/exclusive-bg.jpg?v=3" alt="" loading="lazy" decoding="async"></div>
   <div class="wrap">
     <div class="glass excl-card rv">
       <span class="eyebrow">Exclusive access</span>
@@ -442,8 +447,8 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="ba-wrap rv">
       <div class="ba" id="ba">
-        <div class="layer ba-after"><div class="ph"></div><img class="rimg" src="/lume/img/after.jpg?v=2" alt="Po ošetření" loading="lazy" decoding="async"><div class="glow"></div></div>
-        <div class="ba-before-clip"><div class="layer ba-before"><div class="ph"></div><img class="rimg" src="/lume/img/before.jpg?v=2" alt="Před ošetřením" loading="lazy" decoding="async"></div></div>
+        <div class="layer ba-after"><div class="ph"></div><img class="rimg rimg--ba" src="/lume/img/after.jpg?v=3" alt="Po ošetření" loading="lazy" decoding="async"><div class="glow"></div></div>
+        <div class="ba-before-clip"><div class="layer ba-before"><div class="ph"></div><img class="rimg rimg--ba" src="/lume/img/before.jpg?v=3" alt="Před ošetřením" loading="lazy" decoding="async"></div></div>
         <div class="ba-lab bef">Před</div>
         <div class="ba-lab aft">Po</div>
         <div class="ba-divider"><div class="ba-handle">⇄</div></div>
@@ -545,13 +550,13 @@ a{color:inherit;text-decoration:none}
     {n:'Lifting pleti',d:'Zpevnění a vypnutí kontur obličeje bez skalpelu. Postupně a přirozeně.',p:'od 7 500 Kč'},
     {n:'Laserové ošetření',d:'Řešení pigmentací, zarudnutí i jizviček. Sjednocená a hladká pleť.',p:'od 3 900 Kč'}
   ];
-  var IMG={1:'/lume/osetreni/botulotoxin.jpg?v=2',2:'/lume/osetreni/vyplne-rtu.jpg?v=2',3:'/lume/osetreni/skinboosters.jpg?v=2',4:'/lume/osetreni/mezoterapie.jpg?v=2',5:'/lume/osetreni/lifting.jpg?v=2',6:'/lume/osetreni/laser.jpg?v=2'};
+  var IMG={1:'/lume/osetreni/botulotoxin.jpg?v=3',2:'/lume/osetreni/vyplne-rtu.jpg?v=3',3:'/lume/osetreni/skinboosters.jpg?v=3',4:'/lume/osetreni/mezoterapie.jpg?v=3',5:'/lume/osetreni/lifting.jpg?v=3',6:'/lume/osetreni/laser.jpg?v=3'};
   document.getElementById('svcGrid').innerHTML=SVC.map(function(s,i){
     var k=i+1,num=(k<10?'0':'')+k;
     return '<article class="svc rv">'+
       '<div class="svc-cover">'+
         '<div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.1"/></svg><span class="ph-tag">Foto ošetření</span></div>'+
-        '<img class="rimg" src="'+IMG[k]+'" alt="'+s.n+'" loading="lazy" decoding="async">'+
+        '<img class="rimg rimg--svc" src="'+IMG[k]+'" alt="'+s.n+'" loading="lazy" decoding="async">'+
         '<div class="svc-fluted"></div>'+
         '<div class="svc-cap">Ošetření · LUMÉ</div>'+
         '<div class="svc-num">'+num+'</div>'+

@@ -448,6 +448,8 @@ img{display:block;max-width:100%}
   .resp-theater{display:none!important}
   #prace{padding-top:clamp(96px,16vw,128px)}
   .work-back{display:inline-block;margin-bottom:28px;color:var(--muted)}
+  .frame .phone{display:none}
+  .frame{padding:0}
 }
 .work-back{display:none}
 @media(max-width:980px){
@@ -756,12 +758,12 @@ img{display:block;max-width:100%}
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
       <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/klic-estate">
-        <div class="live-poster"><span class="play">▶</span></div>
+        <div class="live-poster"><span class="play">▶</span><b>Prémiová realitka</b><span>Živý náhled</span></div>
       </div>
     </div>
-    <span class="frame-tag">Živě</span>
-  </div>
     <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/klic-estate"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <span class="frame-tag">Živá ukázka ↗</span>
+  </div>
       </a>
     </article>
 
@@ -939,38 +941,81 @@ function initLiveLinks(){
     a.dataset.liveUrl=url;
     a.removeAttribute('href');
     a.removeAttribute('target');
-    a.setAttribute('role','group');
+    a.setAttribute('role','link');
+    a.setAttribute('tabindex','0');
     a.style.cursor='pointer';
   });
+  document.querySelectorAll('.phone .live[data-src]').forEach(function(l){l.setAttribute('data-phone','1');});
+}
+
+var liveMounted=[];
+function liveMax(){
+  if(isCoarse||window.matchMedia('(max-width:1024px)').matches)return 1;
+  return 3;
+}
+function isMobilePreview(){return isCoarse||window.matchMedia('(max-width:1024px)').matches;}
+
+function unmountIframe(live){
+  if(!live||!live.dataset.mounted)return;
+  var f=live.querySelector('iframe');
+  if(f)f.remove();
+  delete live.dataset.mounted;
+  live.classList.remove('is-loaded','has-iframe');
+  live.classList.add('is-loading');
+  var i=liveMounted.indexOf(live);
+  if(i>-1)liveMounted.splice(i,1);
+}
+
+function mountIframe(live){
+  if(!live||live.dataset.mounted)return;
+  var src=live.getAttribute('data-src');if(!src)return;
+  if(live.hasAttribute('data-phone')&&isMobilePreview())return;
+  while(liveMounted.length>=liveMax()){
+    unmountIframe(liveMounted[0]);
+  }
+  var vw=parseFloat(live.getAttribute('data-vw'))||1280;
+  var f=document.createElement('iframe');
+  f.src=src;f.title='Živá ukázka';f.setAttribute('scrolling','no');f.setAttribute('loading','lazy');
+  f.setAttribute('tabindex','-1');
+  live.appendChild(f);live.dataset.mounted='1';
+  live.classList.remove('is-loading');live.classList.add('is-loaded','has-iframe');
+  liveMounted.push(live);
+  f.addEventListener('load',function(){fitOne(live);});
+  requestAnimationFrame(function(){fitOne(live);});
 }
 
 function mountWorkLives(container){
   if(!container)return;
-  container.querySelectorAll('.live[data-src]:not([data-soon])').forEach(function(l){mountIframe(l);});
+  var root=container.matches('[data-live-url]')?container:container.querySelector('[data-live-url]');
+  if(!root)root=container;
+  var primary=root.querySelector('.ds-vp-d .live[data-src], .screen .live[data-src]:not([data-soon])');
+  if(primary)mountIframe(primary);
+  if(!isMobilePreview()){
+    var phone=root.querySelector('.ds-vp-p .live[data-src], .phone .live[data-src]:not([data-soon])');
+    if(phone)mountIframe(phone);
+  }
 }
 
 function bindLivePreviews(root){
-  (root||document).querySelectorAll('.live').forEach(function(live){
+  (root||document).querySelectorAll('.live[data-soon]').forEach(function(live){
     if(live.dataset.bound)return;
     live.dataset.bound='1';
     var poster=live.querySelector('.live-poster');
-    if(live.hasAttribute('data-soon')){
-      if(poster)poster.addEventListener('click',function(e){e.preventDefault();window.location.href='/nia#konzultace';});
-      return;
-    }
-    function onActivate(e){
-      if(e){e.preventDefault();e.stopPropagation();}
-      mountIframe(live);
-    }
-    live.addEventListener('pointerup',onActivate);
+    if(poster)poster.addEventListener('click',function(e){e.preventDefault();window.location.href='/nia#konzultace';});
   });
   (root||document).querySelectorAll('[data-live-url]').forEach(function(wrap){
     if(wrap.dataset.liveTap)return;
     wrap.dataset.liveTap='1';
-    wrap.addEventListener('pointerup',function(e){
-      if(e.pointerType==='mouse'&&e.button!==0)return;
+    function openDemo(e){
+      if(e.target.closest('a.work-view'))return;
+      var url=wrap.dataset.liveUrl;
+      if(!url)return;
       e.preventDefault();
-      mountWorkLives(wrap);
+      window.open(url,'_blank','noopener');
+    }
+    wrap.addEventListener('click',openDemo);
+    wrap.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();openDemo(e);}
     });
   });
 }
@@ -1119,17 +1164,6 @@ function initRespTheater(){
   document.querySelectorAll('.work-item[data-project]').forEach(function(el){respIo.observe(el);});
 }
 
-function mountIframe(live){
-  if(live.dataset.mounted)return;
-  var src=live.getAttribute('data-src');if(!src)return;
-  var vw=parseFloat(live.getAttribute('data-vw'))||1280;
-  var f=document.createElement('iframe');
-  f.src=src;f.title='Živá ukázka';f.setAttribute('scrolling','no');f.setAttribute('loading','lazy');
-  live.appendChild(f);live.dataset.mounted='1';
-  live.classList.remove('is-loading');live.classList.add('is-loaded','has-iframe');
-  f.addEventListener('load',function(){fitOne(live);});
-  requestAnimationFrame(function(){fitOne(live);});
-}
 function fitOne(l){
   var f=l.querySelector('iframe');if(!f)return;
   var vw=parseFloat(l.getAttribute('data-vw'))||1280,w=l.clientWidth,h=l.clientHeight;
@@ -1158,15 +1192,17 @@ function handleProjHash(){
 }
 window.addEventListener('load',handleProjHash);
 
-var liveIo=new IntersectionObserver(function(es){
+var workLiveIo=new IntersectionObserver(function(es){
   es.forEach(function(en){
-    if(!en.isIntersecting||en.intersectionRatio<.15)return;
-    var item=en.target.closest('.work-item,[data-live-url],.resp-device,.resp-viewport');
-    if(item)mountWorkLives(item);
-    else mountIframe(en.target);
+    var item=en.target;
+    if(en.isIntersecting&&en.intersectionRatio>=.18){
+      mountWorkLives(item);
+    }else if(!en.isIntersecting&&isMobilePreview()){
+      item.querySelectorAll('.live[data-mounted]').forEach(function(l){unmountIframe(l);});
+    }
   });
-},{rootMargin:'180px',threshold:[0,.15,.35]});
-document.querySelectorAll('.live[data-src]').forEach(function(l){liveIo.observe(l);});
+},{rootMargin:isMobilePreview()?'48px':'100px',threshold:[0,.18,.35]});
+document.querySelectorAll('.work-item[data-project]').forEach(function(el){workLiveIo.observe(el);});
 var respTheaterEl=document.getElementById('respTheater');
 if(respTheaterEl)new IntersectionObserver(function(es){
   es.forEach(function(en){

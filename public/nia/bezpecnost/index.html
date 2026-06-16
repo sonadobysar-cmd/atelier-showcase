@@ -148,6 +148,7 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
   <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
+<script src="/nia/nia-nav.js"></script>
 
 <section class="page-head reveal">
   <div class="wrap">
@@ -344,43 +345,6 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
     });
   }
 })();
-var navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger'),navScrim=document.getElementById('navScrim');
-var navScrollY=0;
-function setNavOpen(on){
-  navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
-  burger.setAttribute('aria-expanded',on?'true':'false');
-  burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
-  if(navScrim){navScrim.hidden=!on;}
-  if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
-  else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
-}
-function onBurgerTap(e){e.preventDefault();e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));}
-var burgerTouched=false;
-burger.addEventListener('touchend',function(e){burgerTouched=true;onBurgerTap(e);},{passive:false});
-burger.addEventListener('click',function(e){if(burgerTouched){burgerTouched=false;return;}onBurgerTap(e);});
-if(navScrim)navScrim.addEventListener('click',function(){setNavOpen(false);});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
-navLinks.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var href=a.getAttribute('href')||'';
-    if(href.charAt(0)==='#'&&href.length>1){
-      e.preventDefault();
-      setNavOpen(false);
-      setTimeout(function(){
-        var el=document.getElementById(href.slice(1));
-        if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-      },100);
-      return;
-    }
-    if(href.indexOf('#')>-1){
-      e.preventDefault();
-      setNavOpen(false);
-      setTimeout(function(){window.location.href=href;},100);
-      return;
-    }
-    setNavOpen(false);
-  });
-});
 document.querySelectorAll('.reveal').forEach(function(el){
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});

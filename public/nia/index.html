@@ -490,6 +490,7 @@ img{display:block;max-width:100%}
   <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
+<script src="/nia/nia-nav.js"></script>
 
 <section id="top" class="hero hero-editorial">
   <div class="hero-stage">
@@ -830,45 +831,7 @@ img{display:block;max-width:100%}
     });
   }
 })();
-var nav=document.getElementById('nav'),navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger'),navScrim=document.getElementById('navScrim');
-window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
-var navScrollY=0;
 var isCoarse=window.matchMedia('(pointer:coarse)').matches;
-function setNavOpen(on){
-  navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
-  burger.setAttribute('aria-expanded',on?'true':'false');
-  burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
-  if(navScrim){navScrim.hidden=!on;}
-  if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
-  else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
-}
-function onBurgerTap(e){e.preventDefault();e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));}
-var burgerTouched=false;
-burger.addEventListener('touchend',function(e){burgerTouched=true;onBurgerTap(e);},{passive:false});
-burger.addEventListener('click',function(e){if(burgerTouched){burgerTouched=false;return;}onBurgerTap(e);});
-if(navScrim)navScrim.addEventListener('click',function(){setNavOpen(false);});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
-navLinks.querySelectorAll('a').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var href=a.getAttribute('href')||'';
-    if(href.charAt(0)==='#'&&href.length>1){
-      e.preventDefault();
-      setNavOpen(false);
-      setTimeout(function(){
-        var el=document.getElementById(href.slice(1));
-        if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
-      },100);
-      return;
-    }
-    if(href.indexOf('#')>-1){
-      e.preventDefault();
-      setNavOpen(false);
-      setTimeout(function(){window.location.href=href;},100);
-      return;
-    }
-    setNavOpen(false);
-  });
-});
 
 (function(){
   var h1=document.getElementById('heroH1');if(!h1)return;
@@ -994,9 +957,7 @@ var pgGallery=document.getElementById('projGallery');
 var pgGalleryIo=pgGallery?new IntersectionObserver(function(es){
   es.forEach(function(en){
     if(!en.isIntersecting)return;
-    if(!isCoarse){
-      document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
-    }
+    document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
     pgGalleryIo.unobserve(en.target);
   });
 },{threshold:.12}):null;
@@ -1032,18 +993,19 @@ document.querySelectorAll('.live').forEach(function(live){
     if(poster)poster.addEventListener('click',function(){document.getElementById('konzultace').scrollIntoView({behavior:'smooth'});});
     return;
   }
-  if(poster)poster.addEventListener('click',function(e){e.stopPropagation();mountIframe(live);});
-  live.addEventListener('click',function(){if(!live.dataset.mounted)mountIframe(live);});
+  live.addEventListener('pointerup',function(e){
+    if(e.pointerType==='mouse'&&e.button!==0)return;
+    e.preventDefault();
+    mountIframe(live);
+  });
 });
 
 var liveIo=new IntersectionObserver(function(es){
   es.forEach(function(en){
-    if(en.isIntersecting&&en.intersectionRatio>.35)mountIframe(en.target);
+    if(en.isIntersecting&&en.intersectionRatio>.15)mountIframe(en.target);
   });
-},{rootMargin:'120px',threshold:[0,.35]});
-if(!isCoarse){
-  document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
-}
+},{rootMargin:'180px',threshold:[0,.15,.35]});
+document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});

@@ -124,8 +124,9 @@ img{display:block;max-width:100%}
 .editorial-intro{background:var(--cream);padding:clamp(72px,10vw,108px) 6vw;text-align:center;border-bottom:1px solid var(--line)}
 .editorial-intro p{max-width:680px;margin:0 auto;font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.55rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.45;color:var(--black)}
 .editorial-intro .sig-quote{display:block;margin-top:22px;font-family:var(--script);font-style:normal;text-transform:none;font-size:clamp(2.4rem,6vw,3.8rem);letter-spacing:0;font-weight:400;line-height:1;color:var(--burgundy4)}
-.feat-spot{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,56px);align-items:center;max-width:1080px;margin:0 auto;padding:0 6vw clamp(56px,8vw,88px);text-decoration:none;color:inherit;transition:transform .45s var(--ease)}
-.feat-spot:hover{transform:translateY(-3px)}
+.feat-spot{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(28px,5vw,56px);align-items:center;max-width:1080px;margin:0 auto;padding:0 6vw clamp(56px,8vw,88px);color:inherit;transition:transform .45s var(--ease)}
+.feat-spot-copy{display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .45s var(--ease)}
+.feat-spot-copy:hover{transform:translateY(-3px)}
 .feat-spot-thumb{margin:0;overflow:hidden;border-radius:var(--r-lg);box-shadow:var(--shadow-lg);aspect-ratio:16/10;background:var(--off)}
 .feat-spot-thumb img{width:100%;height:100%;object-fit:cover;object-position:58% 30%;transition:transform .7s var(--ease)}
 .feat-spot:hover .feat-spot-thumb img{transform:scale(1.03)}
@@ -133,7 +134,7 @@ img{display:block;max-width:100%}
 .feat-spot-title{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.08;margin:14px 0 16px;color:var(--black)}
 .feat-spot-desc{font-size:.92rem;line-height:1.85;color:var(--muted);max-width:420px;margin:0 0 22px;font-weight:300}
 .feat-spot-cta{font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;color:var(--burgundy3);border-bottom:1px solid var(--burgundy3);padding-bottom:6px;transition:color .35s,border-color .35s,gap .35s var(--ease)}
-.feat-spot:hover .feat-spot-cta{color:var(--burgundy4);border-color:var(--burgundy4)}
+.feat-spot-copy:hover .feat-spot-cta{color:var(--burgundy4);border-color:var(--burgundy4)}
 
 /* SECTION HEAD */
 .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:64px;padding-bottom:0;border-bottom:none}
@@ -261,8 +262,8 @@ img{display:block;max-width:100%}
 
 /* SLUŽBY */
 .sluzby{background:var(--cream);padding:var(--section) 0}
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.price{background:var(--white);border:none;border-radius:var(--r-lg);padding:44px 32px;box-shadow:var(--shadow);transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.price{background:var(--white);border:none;border-radius:var(--r-lg);padding:44px 32px;box-shadow:var(--shadow);transition:transform .45s var(--ease),box-shadow .45s var(--ease);display:flex;flex-direction:column;height:100%}
 .price:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .price.feat{background:linear-gradient(165deg,var(--white) 0%,rgba(92,42,62,.06) 100%);outline:2px solid rgba(92,42,62,.14)}
 .price.prem{background:var(--white)}
@@ -271,19 +272,37 @@ img{display:block;max-width:100%}
 .price .pbtn:hover{background:var(--burgundy4);color:var(--white);border-color:transparent;transform:translateY(-2px)}
 .price-note{text-align:center;margin-top:36px;font-size:.86rem;color:var(--muted);font-weight:300}
 .sluzby-sub{margin-top:clamp(72px,10vw,104px);padding-top:clamp(48px,8vw,72px);border-top:1px solid var(--line)}
+.obsah-kluc{margin-top:clamp(56px,8vw,80px);padding:clamp(40px,6vw,56px) clamp(28px,5vw,48px);background:var(--white);border-radius:var(--r-xl);box-shadow:var(--shadow)}
+.obsah-kluc-inner{max-width:640px;margin:0 auto;text-align:center}
+.obsah-kluc h2{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.8vw,2.4rem);line-height:1.12;letter-spacing:.02em;text-transform:uppercase;color:var(--black);margin-top:12px}
+.obsah-kluc h2 .grad{font-size:1.15em}
+.obsah-kluc ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin:28px auto 0;max-width:460px;text-align:left}
+.obsah-kluc li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55;color:var(--ink);font-weight:300}
+.obsah-kluc li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--burgundy3);flex:none;margin-top:8px;opacity:.8}
+.obsah-kluc-price{font-size:.88rem;color:var(--muted);margin:24px 0 20px;line-height:1.65;font-weight:300}
+.obsah-kluc .btn{background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;padding:16px 32px}
+.obsah-kluc .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
 .sec-lead{font-size:clamp(.95rem,2.2vw,1.08rem);line-height:1.75;color:var(--muted);max-width:56ch;margin:18px auto 0;font-weight:300}
 .sec-head.centered .sec-lead{text-align:center}
 
 /* WEB NA SPLÁTKY */
 .splatky{background:var(--white);padding:var(--section) 0;border-top:1px solid var(--line)}
-.splatky-intro{max-width:640px;margin:0 auto clamp(32px,6vw,48px);text-align:center;font-size:clamp(.9rem,2.4vw,.98rem);line-height:1.85;color:var(--muted);font-weight:300}
-.splatky-box{background:var(--off);border-radius:var(--r-xl);padding:clamp(28px,5vw,44px) clamp(22px,4vw,40px);box-shadow:var(--shadow);max-width:720px;margin:0 auto}
+.splatky-intro{max-width:640px;margin:0 auto clamp(40px,6vw,56px);text-align:center;font-size:clamp(.9rem,2.4vw,.98rem);line-height:1.85;color:var(--muted);font-weight:300}
+.splatky-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(28px,5vw,48px);align-items:start;max-width:1040px;margin:0 auto}
+.splatky-benefits h3{font-family:var(--display);font-weight:500;font-size:clamp(1.2rem,2.8vw,1.65rem);letter-spacing:.04em;text-transform:uppercase;color:var(--black);margin-bottom:20px}
+.splatky-benefits ul{list-style:none;display:flex;flex-direction:column;gap:12px}
+.splatky-benefits li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55;color:var(--ink);font-weight:300}
+.splatky-benefits li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--burgundy3);flex:none;margin-top:8px;opacity:.8}
+.splatky-visual{margin:0 0 20px;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/10;background:var(--off);box-shadow:var(--shadow)}
+.splatky-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.splatky-box{background:var(--off);border-radius:var(--r-xl);padding:clamp(28px,5vw,44px) clamp(22px,4vw,40px);box-shadow:var(--shadow)}
 .splatky-box ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:8px}
 .splatky-box li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55;color:var(--ink);font-weight:300}
 .splatky-box li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--burgundy3);flex:none;margin-top:8px;opacity:.8}
 .splatky-box .btn{margin-top:24px;background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;padding:16px 32px}
 .splatky-box .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
-.splatky-legal{font-size:.76rem;color:var(--muted2);text-align:center;max-width:58ch;margin:28px auto 0;line-height:1.7;font-weight:300}
+.feat-spot-thumb .live{position:absolute;inset:0}
+.feat-spot-thumb{position:relative}
 
 /* KONZULTACE */
 .konzultace{background:var(--white);padding:var(--section) 0}
@@ -334,7 +353,7 @@ img{display:block;max-width:100%}
 .price .amt .od{font-size:.42em;color:var(--muted);vertical-align:.55em;margin-right:.35em}
 .price .amt span{font-size:.95rem;color:var(--muted)}
 .price .from{font-size:.78rem;color:var(--muted2)}
-.price .pdesc{font-size:.9rem;line-height:1.7;color:var(--muted);margin:16px 0 24px}
+.price .pdesc{font-size:.9rem;line-height:1.7;color:var(--muted);margin:16px 0 24px;flex:1}
 .price ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px}
 .price li{font-size:.88rem;display:flex;gap:10px;align-items:flex-start;line-height:1.5}
 .price li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--burgundy3);flex:none;margin-top:8px;opacity:.8}
@@ -434,7 +453,10 @@ img{display:block;max-width:100%}
   .studio-shots{grid-template-columns:1fr;gap:16px;margin-top:48px}
   .studio-photo{order:-1;max-width:400px;margin:0 auto}
   .feat-spot{grid-template-columns:1fr;gap:28px}
-  .price-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .price-grid{gap:14px}
+  .price{padding:36px 24px}
+  .price .amt{font-size:1.9rem}
+  .price .pkn{font-size:1.2rem}
   .work-item{margin-bottom:56px;padding-bottom:48px}
   .burger{display:flex;color:var(--ink);min-width:44px;min-height:44px;align-items:center;justify-content:center}
   .nav.scrolled .burger{color:var(--white)}
@@ -444,6 +466,10 @@ img{display:block;max-width:100%}
   body.nav-open{overflow:hidden}
   body.nav-open .nav-scrim{display:block}
   .nav,.nav.scrolled{padding:18px 6vw}
+}
+@media(max-width:700px){
+  .price-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+  .splatky-grid{grid-template-columns:1fr}
 }
 @media(max-width:760px){
   .hero-name-layer{padding:48px 0 12vh}
@@ -460,7 +486,8 @@ img{display:block;max-width:100%}
   .studio-shots figure:not(.shot-work){display:none}
   .studio-shots{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
   .splatky-box{padding:24px 18px}
-  .splatky-intro,.splatky-legal{padding:0 4px}
+  .splatky-intro{padding:0 4px}
+  .obsah-kluc{padding:28px 20px}
   .sec-lead{padding:0 8px}
 }
 @media(pointer:coarse){
@@ -535,17 +562,19 @@ img{display:block;max-width:100%}
   <span class="sig-quote">Tvůj web, tvoje záře.</span>
 </div>
 
-<a href="/nia/projekty#work-lume" class="feat-spot reveal" data-cursor>
+<div class="feat-spot reveal">
   <figure class="feat-spot-thumb">
-    <img src="/lume/img/hero-model.jpg?v=9" alt="LUMÉ Aesthetic Studio — náhled webu" width="640" height="400" loading="lazy" decoding="async">
+    <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/klic-estate">
+      <div class="live-poster"><span class="play">▶</span><b>Prémiová realitka</b><span>Živý náhled</span></div>
+    </div>
   </figure>
-  <div class="feat-spot-copy">
-    <span class="feat-spot-tag">Nový projekt · 04</span>
-    <h2 class="feat-spot-title">LUMÉ Aesthetic Studio</h2>
-    <p class="feat-spot-desc">Prémiový magazínový web estetické kliniky — glow analýza, Instagram obálka, before/after slider a rezervace.</p>
+  <a href="/nia/projekty#work-realty" class="feat-spot-copy" data-cursor>
+    <span class="feat-spot-tag">Vybraný projekt · 07</span>
+    <h2 class="feat-spot-title">Prémiová realitka</h2>
+    <p class="feat-spot-desc">Web pro prémiovou realitku — filtry nemovitostí, karty s galerií, detail s prohlídkou a rezervací termínu. Čistý, důvěryhodný design.</p>
     <span class="feat-spot-cta">Prohlédnout v portfoliu →</span>
-  </div>
-</a>
+  </a>
+</div>
 
 <section class="proj-gallery reveal" id="projGallery" aria-label="Galerie projektů">
   <div class="proj-gallery-head">
@@ -660,6 +689,22 @@ img{display:block;max-width:100%}
     </div>
     <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
 
+    <div class="obsah-kluc reveal">
+      <div class="obsah-kluc-inner">
+        <span class="eyebrow">Doplněk</span>
+        <h2>Nemáte texty ani fotky? <span class="grad">Vyřeším to za vás.</span></h2>
+        <p class="sec-lead">Obsah na klíč — napíšu texty, vyberu nebo zajistím fotky. Web bude hotový, i když přijdete s prázdnýma rukama.</p>
+        <ul>
+          <li>Texty na web na míru (copywriting)</li>
+          <li>Výběr a úprava fotek (AI, stock i vaše vlastní)</li>
+          <li>Zajištění focení (fotograf na míru — kavárna, produkty, portrét)</li>
+          <li>Jednoduchá grafika a sociální šablony</li>
+        </ul>
+        <p class="obsah-kluc-price">Příplatek od 3 000 Kč podle rozsahu — upřesníme na konzultaci.</p>
+        <a href="#konzultace" class="btn" data-cursor>Mám zájem</a>
+      </div>
+    </div>
+
     <div class="sluzby-sub">
       <div class="sec-head centered reveal">
         <div>
@@ -671,10 +716,10 @@ img{display:block;max-width:100%}
       </div>
       <div class="price-grid">
         <div class="price reveal">
-          <span class="pk">Základ</span>
-          <div class="pkn">Klid na provoz</div>
+          <span class="pk">Paušál</span>
+          <div class="pkn">Základ</div>
           <div class="amt"><span class="od">od</span>500<span class="cur"> Kč</span></div>
-          <div class="from">měsíčně</div>
+          <div class="from">/ měsíc</div>
           <p class="pdesc">Web běží, vy se staráte o byznys — techniku necháte na mně.</p>
           <ul>
             <li>Hosting a doména pod dohledem</li>
@@ -688,7 +733,7 @@ img{display:block;max-width:100%}
           <span class="pk">Doporučeno</span>
           <div class="pkn">Standard</div>
           <div class="amt"><span class="od">od</span>1 000<span class="cur"> Kč</span></div>
-          <div class="from">měsíčně</div>
+          <div class="from">/ měsíc</div>
           <p class="pdesc">Vše ze Základu plus pravidelné úpravy obsahu — bez řešení techniky.</p>
           <ul>
             <li>Vše ze Základu</li>
@@ -699,10 +744,10 @@ img{display:block;max-width:100%}
           <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
         </div>
         <div class="price prem reveal">
-          <span class="pk">Plus</span>
-          <div class="pkn">Růst &amp; přehled</div>
+          <span class="pk">Paušál</span>
+          <div class="pkn">Plus</div>
           <div class="amt"><span class="od">od</span>2 000<span class="cur"> Kč</span></div>
-          <div class="from">měsíčně</div>
+          <div class="from">/ měsíc</div>
           <p class="pdesc">Pro weby, co se mají postupně zlepšovat a vydělávat víc.</p>
           <ul>
             <li>Vše ze Standardu</li>
@@ -729,18 +774,32 @@ img{display:block;max-width:100%}
       <span class="idx">pro malé firmy &amp; živnostníky</span>
     </div>
     <p class="splatky-intro reveal">Chcete web hned, ale ne platit celou částku najednou? Web na splátky je ideální pro malé firmy a živnostníky. Od schválení návrhu platíte pevnou měsíční částku a web je online — s hostingem i správou v ceně.</p>
-    <div class="splatky-box reveal">
-      <ul>
-        <li>Měsíčně od 2 000 do 10 000 Kč podle rozsahu webu</li>
-        <li>Web je online hned po schválení návrhu</li>
-        <li>Tvorba, hosting i drobné úpravy v ceně</li>
-        <li>Minimální doba 12 měsíců</li>
-        <li>Web, doména a kód po dobu předplatného spravuji a vlastním já</li>
-        <li>Možnost web kdykoliv odkoupit do plného vlastnictví (volitelné)</li>
-      </ul>
-      <a href="#konzultace" class="btn" data-cursor>Mám zájem</a>
+    <div class="splatky-grid reveal">
+      <div class="splatky-benefits">
+        <h3>Proč web na splátky?</h3>
+        <ul>
+          <li>Web hned, bez velké počáteční investice</li>
+          <li>Pevná měsíční částka, žádné překvapení</li>
+          <li>Hosting, správa i drobné úpravy v ceně — o nic se nestaráte</li>
+          <li>Vždy aktuální a funkční web, profesionálně udržovaný</li>
+          <li>Ideální pro rozjezd nebo když chcete šetřit cashflow</li>
+        </ul>
+      </div>
+      <div class="splatky-side">
+        <figure class="splatky-visual">
+          <img src="/nia/photos/nia-at-work.jpg?v=5" alt="web na splátky pro malé firmy" width="640" height="400" loading="lazy" decoding="async">
+        </figure>
+        <div class="splatky-box">
+          <ul>
+            <li>Měsíčně od 2 000 do 10 000 Kč podle rozsahu webu</li>
+            <li>Web online hned po schválení návrhu</li>
+            <li>Tvorba, hosting i drobné úpravy v ceně</li>
+            <li>Minimální doba 12 měsíců</li>
+          </ul>
+          <a href="#konzultace" class="btn" data-cursor>Mám zájem</a>
+        </div>
+      </div>
     </div>
-    <p class="splatky-legal reveal">Po dobu předplatného je web, doména a kód v mé správě. Při ukončení platby web odpojím; vaše texty, fotky a data vám předám. Podmínky vždy upřesníme ve smlouvě.</p>
   </div>
 </section>
 
@@ -806,7 +865,7 @@ img{display:block;max-width:100%}
       <div class="foot-top">
         <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
         <div class="foot-links">
-          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
+          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>

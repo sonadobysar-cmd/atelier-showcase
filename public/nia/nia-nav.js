@@ -5,26 +5,19 @@
   var navScrim = document.getElementById("navScrim");
   if (!navLinks || !burger) return;
 
+  var isMobile = window.matchMedia("(max-width:980px)").matches;
   var navScrollY = 0;
-  var linkTouched = false;
 
   var style = document.createElement("style");
   style.textContent =
     "@media(max-width:980px){" +
-    ".nav-links.open{z-index:220!important}" +
-    ".burger.open{z-index:221}" +
-    ".nav-links.open a{display:flex;align-items:center;min-height:44px;width:100%;-webkit-tap-highlight-color:transparent}" +
+    "html.nav-open,body.nav-open{overflow:hidden;height:100%}" +
+    ".nav-links.open{z-index:300!important;pointer-events:auto!important}" +
+    ".nav-scrim{z-index:290!important}" +
+    ".burger.open{z-index:301!important;position:relative}" +
+    ".nav-links.open a{display:flex;align-items:center;min-height:44px;width:100%;pointer-events:auto;-webkit-tap-highlight-color:transparent}" +
     "}";
   document.head.appendChild(style);
-
-  function unlockBody() {
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
-    document.body.classList.remove("nav-open");
-  }
 
   function normalizePath(path) {
     var p = String(path || "").split("#")[0].split("?")[0];
@@ -43,38 +36,50 @@
     if (!el) return;
     var navH = nav ? nav.offsetHeight : 72;
     var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
-    window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    window.scrollTo({ top: Math.max(0, top), behavior: isMobile ? "auto" : "smooth" });
   }
 
-  function closeMenu() {
-    if (!navLinks.classList.contains("open")) return;
+  function lockScroll() {
+    navScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+    document.documentElement.classList.add("nav-open");
+    document.body.classList.add("nav-open");
+  }
+
+  function unlockScroll() {
+    document.documentElement.classList.remove("nav-open");
+    document.body.classList.remove("nav-open");
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+  }
+
+  function setMenuOpen(on) {
+    if (on) {
+      lockScroll();
+      navLinks.classList.add("open");
+      burger.classList.add("open");
+      burger.setAttribute("aria-expanded", "true");
+      burger.setAttribute("aria-label", "Zavřít menu");
+      if (navScrim) {
+        navScrim.hidden = false;
+        navScrim.style.display = "block";
+      }
+      return;
+    }
     navLinks.classList.remove("open");
     burger.classList.remove("open");
     burger.setAttribute("aria-expanded", "false");
     burger.setAttribute("aria-label", "Otevřít menu");
-    if (navScrim) navScrim.hidden = true;
-    unlockBody();
-    window.scrollTo(0, navScrollY);
+    if (navScrim) {
+      navScrim.hidden = true;
+      navScrim.style.display = "";
+    }
+    unlockScroll();
   }
 
-  window.setNavOpen = function (on) {
-    if (on) {
-      navScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-      navLinks.classList.add("open");
-      burger.classList.add("open");
-      document.body.classList.add("nav-open");
-      burger.setAttribute("aria-expanded", "true");
-      burger.setAttribute("aria-label", "Zavřít menu");
-      if (navScrim) navScrim.hidden = false;
-      document.body.style.position = "fixed";
-      document.body.style.top = "-" + navScrollY + "px";
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.width = "100%";
-      return;
-    }
-    closeMenu();
-  };
+  window.setNavOpen = setMenuOpen;
 
   function parseHref(href) {
     var h = (href || "").trim();
@@ -93,39 +98,20 @@
     return { path: normalizePath(h), hash: "", raw: h };
   }
 
-  function followNav(href, e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
+  function goHref(raw) {
+    if (!raw) return;
+    setMenuOpen(false);
+    if (raw.charAt(0) === "#") {
+      scrollToHash(raw.slice(1));
+      return;
     }
-    var dest = parseHref(href);
+    var dest = parseHref(raw);
     if (!dest) return;
-
-    var samePage = dest.path === currentPath();
-    var wasOpen = navLinks.classList.contains("open");
-
-    if (samePage && dest.hash) {
-      if (wasOpen) closeMenu();
-      setTimeout(function () {
-        scrollToHash(dest.hash);
-      }, wasOpen ? 100 : 0);
+    if (dest.path === currentPath() && dest.hash) {
+      scrollToHash(dest.hash);
       return;
     }
-
-    if (samePage) {
-      if (wasOpen) closeMenu();
-      return;
-    }
-
-    if (wasOpen) {
-      navLinks.classList.remove("open");
-      burger.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-      burger.setAttribute("aria-label", "Otevřít menu");
-      if (navScrim) navScrim.hidden = true;
-      unlockBody();
-    }
-    window.location.assign(dest.raw);
+    window.location.href = raw;
   }
 
   if (nav) {
@@ -142,18 +128,14 @@
   function onBurger(e) {
     e.preventDefault();
     e.stopPropagation();
-    setNavOpen(!navLinks.classList.contains("open"));
+    setMenuOpen(!navLinks.classList.contains("open"));
   }
 
   var burgerTouched = false;
-  burger.addEventListener(
-    "touchend",
-    function (e) {
-      burgerTouched = true;
-      onBurger(e);
-    },
-    { passive: false },
-  );
+  burger.addEventListener("touchend", function (e) {
+    burgerTouched = true;
+    onBurger(e);
+  }, { passive: false });
   burger.addEventListener("click", function (e) {
     if (burgerTouched) {
       burgerTouched = false;
@@ -162,29 +144,46 @@
     onBurger(e);
   });
 
-  if (navScrim) navScrim.addEventListener("click", closeMenu);
+  if (navScrim) {
+    navScrim.addEventListener("click", function () {
+      setMenuOpen(false);
+    });
+  }
+
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && navLinks.classList.contains("open")) closeMenu();
+    if (e.key === "Escape" && navLinks.classList.contains("open")) setMenuOpen(false);
   });
 
-  navLinks.querySelectorAll("a").forEach(function (a) {
-    function onLink(e) {
-      if (linkTouched && e.type === "click") {
-        linkTouched = false;
+  navLinks.addEventListener(
+    "click",
+    function (e) {
+      var a = e.target.closest("a");
+      if (!a || !navLinks.contains(a)) return;
+
+      var href = (a.getAttribute("href") || "").trim();
+      if (!href || href === "#") return;
+
+      if (!navLinks.classList.contains("open")) {
+        var dest = parseHref(href);
+        if (dest && dest.path === currentPath() && dest.hash) {
+          e.preventDefault();
+          scrollToHash(dest.hash);
+        }
         return;
       }
-      if (e.type === "touchend") linkTouched = true;
-      followNav(a.getAttribute("href"), e);
-    }
-    a.addEventListener("touchend", onLink, { passive: false });
-    a.addEventListener("click", onLink);
-  });
+
+      e.preventDefault();
+      e.stopPropagation();
+      goHref(href);
+    },
+    false,
+  );
 
   if (location.hash.length > 1) {
     window.addEventListener("load", function () {
       setTimeout(function () {
         scrollToHash(location.hash.slice(1));
-      }, 200);
+      }, 120);
     });
   }
 })();

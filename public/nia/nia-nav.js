@@ -8,12 +8,12 @@
   var style = document.createElement("style");
   style.textContent =
     "@media(max-width:980px){" +
-    "html.nav-open,body.nav-open{overflow:hidden;touch-action:none}" +
-    ".nav-links.open{z-index:300!important;pointer-events:auto!important}" +
-    ".nav-scrim{z-index:290!important}" +
+    "html.nav-open,body.nav-open{overflow:hidden}" +
+    ".nav-links.open{z-index:300!important;pointer-events:auto!important;touch-action:manipulation}" +
+    ".nav-scrim{z-index:290!important;touch-action:manipulation}" +
     ".burger.open{z-index:301!important}" +
     ".nav-links.open a{display:flex;align-items:center;min-height:44px;width:100%;" +
-    "pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent}" +
+    "pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}" +
     "}";
   document.head.appendChild(style);
 
@@ -90,9 +90,14 @@
     }
 
     if (dest.external || dest.path !== currentPath()) {
-      setTimeout(function () {
-        window.location.href = a.href;
-      }, wasOpen ? 30 : 0);
+      var target = a.href;
+      if (wasOpen) {
+        setTimeout(function () {
+          window.location.assign(target);
+        }, 40);
+      } else {
+        window.location.assign(target);
+      }
       return;
     }
   }
@@ -123,16 +128,17 @@
     if (e.key === "Escape" && navLinks.classList.contains("open")) setMenuOpen(false);
   });
 
-  navLinks.addEventListener(
-    "click",
-    function (e) {
-      var a = e.target.closest("a[href]");
-      if (!a || !navLinks.contains(a)) return;
-      e.preventDefault();
-      followLink(a);
-    },
-    false,
-  );
+  function onNavLinkActivate(e) {
+    var a = e.target.closest("a[href]");
+    if (!a || !navLinks.contains(a)) return;
+    var href = (a.getAttribute("href") || "").trim();
+    var dest = parseLink(href);
+    if (!dest) return;
+    e.preventDefault();
+    followLink(a);
+  }
+
+  navLinks.addEventListener("click", onNavLinkActivate, false);
 
   if (location.hash.length > 1) {
     var runHash = function () {

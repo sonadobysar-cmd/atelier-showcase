@@ -218,7 +218,7 @@ img{display:block;max-width:100%}
 .live iframe{position:absolute;top:0;left:0;border:0;pointer-events:none;transform-origin:0 0;max-width:none}
 
 /* RESPONSIVE THEATER — luxusní scéna desktop · tablet · mobil */
-.resp-theater{position:relative;background:var(--black);color:var(--white);padding:clamp(88px,11vw,128px) 0 clamp(96px,12vw,140px);overflow:hidden}
+.resp-theater{position:relative;background:var(--black);color:var(--white);padding:clamp(108px,12vw,136px) 0 clamp(96px,12vw,140px);overflow:hidden}
 .resp-theater-bg{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 70% 55% at 50% 38%,rgba(122,61,84,.22) 0%,transparent 62%),
   radial-gradient(ellipse 40% 30% at 12% 80%,rgba(92,42,62,.12) 0%,transparent 55%),
@@ -227,6 +227,8 @@ img{display:block;max-width:100%}
 .resp-theater-bg::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.35;mix-blend-mode:soft-light}
 .resp-theater-inner{position:relative;z-index:1}
 .resp-theater-head{text-align:center;max-width:640px;margin:0 auto clamp(48px,7vw,72px)}
+.resp-theater-head .proj-back{display:inline-block;margin-bottom:28px;color:rgba(255,255,255,.55)}
+.resp-theater-head .proj-back:hover{color:var(--white)}
 .resp-theater-head .eyebrow{color:rgba(255,255,255,.45)}
 .resp-theater-head h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.6rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.06;margin-top:14px;color:var(--white)}
 .resp-theater-head h2 .grad{color:var(--burgundy-glow);font-size:1.15em}
@@ -237,11 +239,11 @@ img{display:block;max-width:100%}
 .resp-name{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.8vw,2.8rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin:0;transition:opacity .45s var(--ease),transform .45s var(--ease)}
 .resp-num{display:block;margin-top:8px;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35)}
 .resp-stage-meta.is-switching .resp-name{opacity:0;transform:translateY(10px)}
-.resp-devices{position:relative;max-width:1040px;margin:0 auto;min-height:clamp(280px,42vw,460px);perspective:1400px}
-.resp-device{position:absolute;transition:transform .7s var(--ease),opacity .5s}
-.resp-device--desktop{left:0;top:0;width:min(72%,680px);z-index:1}
-.resp-device--tablet{right:clamp(8%,12vw,18%);top:14%;width:min(26%,220px);z-index:2;transform:translateZ(40px) rotateY(-8deg)}
-.resp-device--phone{right:0;bottom:0;width:min(15%,118px);z-index:3;transform:translateZ(80px) rotateY(-12deg)}
+.resp-devices{position:relative;width:100%;max-width:900px;margin:0 auto;min-height:clamp(300px,36vw,400px);padding:0 0 8px}
+.resp-device{position:absolute;transition:opacity .45s var(--ease),transform .55s var(--ease)}
+.resp-device--desktop{left:0;top:50%;transform:translateY(-50%);width:min(64%,580px);z-index:1}
+.resp-device--tablet{left:56%;top:6%;width:min(24%,190px);z-index:2}
+.resp-device--phone{left:70%;bottom:2%;width:min(14%,112px);z-index:3}
 .resp-bezel{position:relative;background:linear-gradient(145deg,#2a2a2e 0%,#121214 100%);border-radius:14px;padding:7px;box-shadow:0 40px 80px -24px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.12)}
 .resp-device--phone .resp-bezel{border-radius:28px;padding:5px}
 .resp-device--tablet .resp-bezel{border-radius:18px}
@@ -437,17 +439,17 @@ img{display:block;max-width:100%}
 @keyframes staggerUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* PORTFOLIO PAGE */
-.proj-page-head{background:var(--black);color:var(--white);padding:clamp(120px,14vw,160px) 0 clamp(48px,8vw,72px);text-align:center}
-.proj-page-head .wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-.proj-page-head h1{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.05;margin-top:8px}
-.proj-page-head h1 .grad{color:var(--burgundy-glow)}
-.proj-page-head .idx{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:8px}
-.proj-back{align-self:flex-start;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.65;margin-bottom:20px;transition:opacity .3s}
+.proj-back{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.65;transition:opacity .3s}
 .proj-back:hover{opacity:1}
-.proj-page-head .eyebrow{color:rgba(255,255,255,.5)}
 .nav.proj-nav{background:rgba(8,6,6,.94);color:var(--white);padding:18px 6vw;box-shadow:0 1px 0 rgba(255,255,255,.06)}
 
 /* RESPONSIVE */
+@media(max-width:1024px){
+  .resp-theater{display:none!important}
+  #prace{padding-top:clamp(96px,16vw,128px)}
+  .work-back{display:inline-block;margin-bottom:28px;color:var(--muted)}
+}
+.work-back{display:none}
 @media(max-width:980px){
   .hero-name-layer{padding:64px 2vw 18vh}
   .hero-backdrop,.hero-backdrop-shadow{font-size:clamp(3rem,min(18vw,20vh),7rem);gap:clamp(.35rem,4vw,1.2rem)}
@@ -462,10 +464,6 @@ img{display:block;max-width:100%}
   .frame .phone{right:4%;width:24%;max-width:96px}
   .device-suite .ds-device--tablet{right:10%;width:26%;max-width:120px}
   .device-suite .ds-device--phone{right:0;width:22%;max-width:96px}
-  .resp-device--desktop{width:88%;position:relative}
-  .resp-device--tablet{right:4%;top:18%;width:32%}
-  .resp-device--phone{width:20%;bottom:-4%}
-  .resp-devices{min-height:clamp(240px,55vw,380px)}
   .resp-picker{gap:6px}
   .resp-pill{padding:8px 12px;font-size:.52rem}
   .proj-gallery{--pg-w:clamp(200px,44vw,240px);--pg-h:clamp(255px,48vw,310px);--pg-r:clamp(32px,7vw,42px)}
@@ -489,13 +487,6 @@ img{display:block;max-width:100%}
   .studio-photo{margin:0 auto}
 }
 @media(max-width:760px){
-  .proj-page-head{padding:clamp(96px,22vw,120px) 0 clamp(40px,8vw,56px)}
-  .proj-back{align-self:center}
-  .resp-devices{min-height:auto;display:flex;flex-direction:column;align-items:center;gap:18px;padding:0}
-  .resp-device{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:min(92vw,340px)!important;transform:none!important}
-  .resp-picker{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;max-width:100%;-webkit-overflow-scrolling:touch;padding-bottom:6px;scrollbar-width:none}
-  .resp-picker::-webkit-scrollbar{display:none}
-  .resp-pill{font-size:.62rem;flex:none;padding:10px 14px}
   .device-suite .ds-row{min-height:clamp(200px,52vw,280px)}
   .device-suite .ds-device--tablet{right:8%;top:6%;width:30%;max-width:120px}
   .device-suite .ds-device--phone{right:0;bottom:0;width:24%;max-width:100px}
@@ -532,19 +523,11 @@ img{display:block;max-width:100%}
 <button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
 <script src="/nia/nia-nav.js"></script>
 
-<section class="proj-page-head reveal">
-  <div class="wrap">
-    <a href="/nia" class="proj-back" data-cursor>← Zpět na hlavní</a>
-    <span class="eyebrow">Vybrané práce</span>
-    <h1>Projekty s <span class="grad">charakterem</span></h1>
-    <span class="idx">10 projektů · živé ukázky</span>
-  </div>
-</section>
-
 <section class="resp-theater" id="respTheater" aria-label="Responzivní ukázka projektů">
   <div class="resp-theater-bg" aria-hidden="true"></div>
   <div class="wrap resp-theater-inner">
     <div class="resp-theater-head reveal">
+      <a href="/nia" class="proj-back" data-cursor>← Zpět na hlavní</a>
       <span class="eyebrow">Živé ukázky</span>
       <h2>Jeden web · <span class="grad">všechna zařízení</span></h2>
       <p class="resp-theater-lead">Každý projekt ladíme pixel po pixelu — od širokoúhlého monitoru přes tablet až po mobil v dlani. Vyber projekt nebo scrolluj dolů.</p>
@@ -568,12 +551,13 @@ img{display:block;max-width:100%}
 
 <section id="prace" class="work">
   <div class="wrap">
-    <div class="sec-head centered reveal">
+    <div class="sec-head centered reveal work-mobile-head">
+      <a href="/nia" class="proj-back work-back" data-cursor>← Zpět na hlavní</a>
       <div>
         <span class="eyebrow">Case study</span>
         <h2>Každý projekt <span class="grad">v detailu</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">scrolluj · scéna nahoře se synchronizuje</span>
+      <span class="idx">10 projektů · živé ukázky</span>
     </div>
 
     <article class="work-item reveal" id="work-void" data-project="void">
@@ -1101,7 +1085,7 @@ function setRespProject(idx,scrollTo){
 }
 function initRespTheater(){
   var picker=document.getElementById('respPicker');
-  if(!picker)return;
+  if(!picker||window.matchMedia('(max-width:1024px)').matches)return;
   PROJECTS.forEach(function(p,i){
     var b=document.createElement('button');
     b.type='button';
@@ -1114,13 +1098,13 @@ function initRespTheater(){
     b.addEventListener('click',function(){
       document.querySelectorAll('.resp-pill').forEach(function(x){x.setAttribute('aria-selected','false');});
       b.setAttribute('aria-selected','true');
-      setRespProject(i,true);
+      setRespProject(i,false);
     });
     picker.appendChild(b);
   });
   var prev=document.getElementById('respPrev'),next=document.getElementById('respNext');
-  if(prev)prev.addEventListener('click',function(){setRespProject(respIdx-1,true);});
-  if(next)next.addEventListener('click',function(){setRespProject(respIdx+1,true);});
+  if(prev)prev.addEventListener('click',function(){setRespProject(respIdx-1,false);});
+  if(next)next.addEventListener('click',function(){setRespProject(respIdx+1,false);});
   setRespProject(0,false);
   var respIo=new IntersectionObserver(function(es){
     if(respLock)return;

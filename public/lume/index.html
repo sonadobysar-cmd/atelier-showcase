@@ -493,7 +493,7 @@ a{color:inherit;text-decoration:none}
       <span class="eyebrow">Staňte se obálkou</span>
       <h2>Vyfoťte se po proceduře <span class="it gold">a sdílejte.</span></h2>
       <p>Proměňte svou fotku v luxusní LUMÉ obálku se zlatým nápisem a skleněným detailem — stáhněte ji a označte nás na Instagramu.</p>
-      <div class="cg-word"><label for="cgWord">Nápis</label><select id="cgWord"><option>GLOW DAY</option><option>FRESH GLOW</option><option>NEW ME</option><option>BEAUTY DAY</option></select></div>
+      <div class="cg-word"><label for="cgWord">Nápis na obálku</label><select id="cgWord"><option>MAIN CHARACTER</option><option>GLOW UP ERA</option><option>THAT GIRL GLOW</option><option>LUMÉ MOMENT</option><option>SELF LOVE DAY</option><option>NEW CHAPTER</option><option>CONFIDENCE ON</option><option>SPOIL YOURSELF</option></select></div>
       <div class="cg-actions">
         <button class="btn btn-gold" id="cgUpload" type="button">Nahrát selfie</button>
         <button class="btn btn-line" id="cgCam" type="button">Kamera</button>
@@ -687,7 +687,10 @@ a{color:inherit;text-decoration:none}
       dlBtn=document.getElementById('cgDownload'),shareBtn=document.getElementById('cgShare'),capBtn=document.getElementById('cgCaption'),
       resetBtn=document.getElementById('cgReset');
   var W=1080,H=1350,ctx=canvas.getContext('2d'),src=null,stream=null,isDemo=true;
-  var CAPTION='Po proceduře v @lume.aesthetic \u2728 #lumestudio';
+  function getCaption(){
+    var phrase=wordSel.value||'MAIN CHARACTER';
+    return phrase+' @lume.aesthetic \u2728 #lumestudio #glowup #maincharacter #aesthetic #prague';
+  }
   var demoImg=new Image();
   demoImg.onload=function(){if(isDemo&&!src){src=demoImg;go();}};
   demoImg.src='/lume/img/cover-demo-model.png?v=1';
@@ -709,11 +712,12 @@ a{color:inherit;text-decoration:none}
   wordSel.addEventListener('change',function(){if(src)render();});
   resetBtn.addEventListener('click',resetAll);
   dlBtn.addEventListener('click',function(){canvas.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='lume-obalka.png';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href);},2000);},'image/png');});
-  capBtn.addEventListener('click',function(){if(navigator.clipboard){navigator.clipboard.writeText(CAPTION).then(function(){capBtn.textContent='Popisek zkopírován ✓';setTimeout(function(){capBtn.textContent='Zkopírovat popisek';},1800);});}});
+  capBtn.addEventListener('click',function(){var cap=getCaption();if(navigator.clipboard){navigator.clipboard.writeText(cap).then(function(){capBtn.textContent='Popisek zkopírován ✓';setTimeout(function(){capBtn.textContent='Zkopírovat popisek';},1800);});}});
   shareBtn.addEventListener('click',function(){
+    var cap=getCaption();
     canvas.toBlob(function(b){var f=new File([b],'lume-obalka.png',{type:'image/png'});
-      if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:CAPTION}).catch(function(){});}
-      else if(navigator.share){navigator.share({text:CAPTION}).catch(function(){});}
+      if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:cap}).catch(function(){});}
+      else if(navigator.share){navigator.share({text:cap}).catch(function(){});}
     },'image/png');
   });
   function stopCam(){if(stream){stream.getTracks().forEach(function(t){t.stop();});stream=null;}}
@@ -756,7 +760,7 @@ a{color:inherit;text-decoration:none}
   function drawTexts(){
     ctx.save();ctx.fillStyle='#262523';ctx.textBaseline='top';try{ctx.letterSpacing='5px';}catch(e){}
     ctx.font="500 24px 'Jost', sans-serif";ctx.fillText('AESTHETIC STUDIO \u00B7 LUMÉ',70,72);ctx.restore();
-    var words=(wordSel.value||'GLOW DAY').split(' ');
+    var words=(wordSel.value||'MAIN CHARACTER').split(' ');
     var fx=Math.round(W*0.68);
     var fs=158,maxw=fx-100;ctx.font=fs+"px 'Anton', Impact, sans-serif";
     var widest=0;for(var w=0;w<words.length;w++){widest=Math.max(widest,ctx.measureText(words[w]).width);}

@@ -252,9 +252,6 @@ a{color:inherit;text-decoration:none}
 .cg-stage{position:relative;justify-self:center;width:min(100%,400px);aspect-ratio:4/5;border-radius:6px;overflow:hidden;box-shadow:0 30px 64px rgba(38,37,35,.22);background:var(--silver-mid)}
 .cg-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:none}
 .cg-stage video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;transform:scaleX(-1)}
-.cg-ph{position:absolute;inset:auto 0 0;z-index:4;display:flex;align-items:flex-end;justify-content:center;height:auto;min-height:0;padding:18px 16px clamp(20px,3vw,28px);pointer-events:none;
-  background:linear-gradient(to top,rgba(251,250,246,.96) 12%,rgba(251,250,246,.62) 52%,transparent)}
-.cg-ph .ph-gold{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(.82rem,2vw,.96rem);max-width:30ch;line-height:1.5;text-align:center}
 .cg-copy .eyebrow{display:block;margin-bottom:14px}
 .cg-copy h2{font-size:clamp(2rem,4vw,3rem);font-weight:600}
 .cg-copy h2 .it{font-style:italic}
@@ -483,9 +480,6 @@ a{color:inherit;text-decoration:none}
 <section class="sec" id="obalka">
   <div class="wrap cover-gen">
     <div class="cg-stage rv" id="cgStage">
-      <div class="cg-ph" id="cgPh">
-        <p class="ph-gold gold">Ukázka s generovanou modelkou — takto bude vypadat výsledek!</p>
-      </div>
       <video id="cgVideo" playsinline muted></video>
       <canvas id="cgCanvas" width="1080" height="1350"></canvas>
     </div>
@@ -681,7 +675,7 @@ a{color:inherit;text-decoration:none}
 
 (function(){
   var stage=document.getElementById('cgStage'); if(!stage) return;
-  var canvas=document.getElementById('cgCanvas'),video=document.getElementById('cgVideo'),ph=document.getElementById('cgPh'),
+  var canvas=document.getElementById('cgCanvas'),video=document.getElementById('cgVideo'),
       file=document.getElementById('cgFile'),wordSel=document.getElementById('cgWord'),
       upBtn=document.getElementById('cgUpload'),camBtn=document.getElementById('cgCam'),shotBtn=document.getElementById('cgShot'),
       dlBtn=document.getElementById('cgDownload'),shareBtn=document.getElementById('cgShare'),capBtn=document.getElementById('cgCaption'),
@@ -700,7 +694,7 @@ a{color:inherit;text-decoration:none}
   camBtn.addEventListener('click',function(){
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){return;}
     navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}}).then(function(st){
-      isDemo=false;stream=st;video.srcObject=st;video.style.display='block';ph.style.display='none';canvas.style.display='none';video.play();
+      isDemo=false;stream=st;video.srcObject=st;video.style.display='block';canvas.style.display='none';video.play();
       camBtn.hidden=true;upBtn.hidden=true;shotBtn.hidden=false;
     }).catch(function(){});
   });
@@ -740,7 +734,6 @@ a{color:inherit;text-decoration:none}
     drawGrain();
     drawTexts();
     canvas.style.display='block';
-    if(isDemo){ph.style.display='';}else{ph.style.display='none';}
     dlBtn.hidden=false;capBtn.hidden=false;resetBtn.hidden=false;if(navigator.share)shareBtn.hidden=false;
   }
   function drawFluted(){
@@ -775,7 +768,7 @@ a{color:inherit;text-decoration:none}
     ctx.font="500 26px 'Jost', sans-serif";ctx.fillText('@lume.aesthetic',W/2,H-66);ctx.restore();
   }
   function resetAll(){
-    stopCam();isDemo=true;src=demoImg;drawn=null;canvas.style.display='none';video.style.display='none';ph.style.display='';
+    stopCam();isDemo=true;src=demoImg;drawn=null;canvas.style.display='none';video.style.display='none';
     camBtn.hidden=false;upBtn.hidden=false;shotBtn.hidden=true;dlBtn.hidden=true;shareBtn.hidden=true;capBtn.hidden=true;resetBtn.hidden=true;
     go();
   }

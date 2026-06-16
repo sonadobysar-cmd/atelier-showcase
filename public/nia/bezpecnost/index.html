@@ -47,10 +47,11 @@ a{color:inherit;text-decoration:none}
 .nav-links a:hover,.nav-links a.on{opacity:1}
 .nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 20px;letter-spacing:.24em;background:rgba(255,255,255,.06);opacity:1}
 .nav-links a.nav-cta:hover{background:var(--burgundy3);border-color:var(--burgundy3)}
-.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210;color:inherit}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210;color:var(--white);-webkit-tap-highlight-color:transparent;appearance:none;-webkit-appearance:none}
 .burger span{width:28px;height:2px;background:currentColor;transition:.35s}
 .burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .burger.open span:nth-child(2){transform:rotate(-45deg)}
+.nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none;padding:0;margin:0;cursor:pointer}
 
 .page-head{background:var(--black);color:var(--white);padding:clamp(120px,14vw,150px) 0 clamp(40px,7vw,64px);text-align:center}
 .page-head .wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -113,12 +114,12 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:980px){
-  .burger{display:flex;color:inherit;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  .burger{display:flex;color:var(--white);min-width:44px;min-height:44px;align-items:center;justify-content:center}
   .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;height:100dvh;background:var(--black);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:max(88px,env(safe-area-inset-top)) 40px 40px;gap:22px;transform:translateX(100%);transition:transform .55s var(--ease),visibility .55s;font-size:.95rem;z-index:205;box-shadow:-12px 0 48px -16px rgba(0,0,0,.4);color:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch;letter-spacing:.18em;visibility:hidden;pointer-events:none}
   .nav-links.open{transform:translateX(0);visibility:visible;pointer-events:auto}
   .nav-links a.nav-cta{background:transparent;border-color:rgba(255,255,255,.35);opacity:1;width:100%;text-align:center;padding:14px 22px}
   body.nav-open{overflow:hidden}
-  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,6,6,.55);z-index:204}
+  body.nav-open .nav-scrim{display:block}
   .nav,.nav.scrolled{padding:18px 6vw}
 }
 @media(max-width:760px){
@@ -144,8 +145,9 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
     <a href="/nia/bezpecnost" class="on">Bezpečnost</a>
     <a href="/nia#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Otevřít menu"><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
+<button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
 
 <section class="page-head reveal">
   <div class="wrap">
@@ -342,17 +344,20 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
     });
   }
 })();
-var navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger');
+var navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger'),navScrim=document.getElementById('navScrim');
 var navScrollY=0;
 function setNavOpen(on){
   navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
   burger.setAttribute('aria-expanded',on?'true':'false');
   burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
+  if(navScrim){navScrim.hidden=!on;}
   if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
   else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
 }
-burger.addEventListener('click',function(e){e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));});
-document.addEventListener('click',function(e){if(!document.body.classList.contains('nav-open'))return;if(navLinks.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
+function onBurgerTap(e){e.preventDefault();e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));}
+burger.addEventListener('click',onBurgerTap);
+burger.addEventListener('touchend',onBurgerTap,{passive:false});
+if(navScrim)navScrim.addEventListener('click',function(){setNavOpen(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
 navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNavOpen(false);});});
 document.querySelectorAll('.reveal').forEach(function(el){

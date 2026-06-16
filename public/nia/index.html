@@ -60,10 +60,12 @@ img{display:block;max-width:100%}
 .nav-links a:not(.nav-cta):hover::after{width:100%}
 .nav-links a.nav-cta{border:1px solid var(--line-w);border-radius:var(--r-pill);padding:12px 24px;letter-spacing:.26em;background:rgba(255,255,255,.5);opacity:1;transition:background .35s var(--ease),border-color .35s,color .35s,transform .35s var(--ease)}
 .nav-links a.nav-cta:hover{background:var(--burgundy3);color:var(--white);border-color:var(--burgundy3);transform:translateY(-1px)}
-.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210;color:var(--ink);-webkit-tap-highlight-color:transparent;appearance:none;-webkit-appearance:none}
 .burger span{width:28px;height:2px;background:currentColor;transition:.35s}
 .burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .burger.open span:nth-child(2){transform:rotate(-45deg)}
+.nav.scrolled .burger{color:var(--white)}
+.nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none;padding:0;margin:0;cursor:pointer}
 
 /* HERO */
 .hero-editorial{position:relative;min-height:100vh;background:var(--black);color:var(--white);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
@@ -420,12 +422,13 @@ img{display:block;max-width:100%}
   .feat-spot{grid-template-columns:1fr;gap:28px}
   .price-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
   .work-item{margin-bottom:56px;padding-bottom:48px}
-  .burger{display:flex;color:inherit;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  .burger{display:flex;color:var(--ink);min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  .nav.scrolled .burger{color:var(--white)}
   .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;height:100dvh;background:var(--black);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:max(88px,env(safe-area-inset-top)) 40px 40px;gap:22px;transform:translateX(100%);transition:transform .55s var(--ease),visibility .55s;font-size:1rem;z-index:205;box-shadow:-12px 0 48px -16px rgba(0,0,0,.4);color:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch;letter-spacing:.18em;visibility:hidden;pointer-events:none}
   .nav-links.open{transform:translateX(0);visibility:visible;pointer-events:auto}
   .nav-links a.nav-cta{background:transparent;border-color:rgba(255,255,255,.35);opacity:1;width:100%;text-align:center;padding:14px 22px;letter-spacing:.2em}
   body.nav-open{overflow:hidden}
-  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,6,6,.55);z-index:204}
+  body.nav-open .nav-scrim{display:block}
   .nav,.nav.scrolled{padding:18px 6vw}
 }
 @media(max-width:760px){
@@ -440,6 +443,12 @@ img{display:block;max-width:100%}
   .konz-tabs{flex-direction:column}
   .konz-tab{min-width:0}
   .field input,.field textarea,.konz-form input,.konz-form textarea{font-size:16px}
+  .studio-shots figure:not(.shot-work){display:none}
+  .studio-shots{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
+}
+@media(pointer:coarse){
+  .reveal{filter:none;transform:translateY(20px)}
+  .hero-name-marquee-track{animation:none;transform:translateX(-15%)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}.hero-name-marquee-track{animation:none;transform:translateX(-25%)}.hero-backdrop{opacity:1!important;transform:none!important}}
 </style>
@@ -460,8 +469,9 @@ img{display:block;max-width:100%}
     <a href="/nia/bezpecnost">Bezpečnost</a>
     <a href="#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Otevřít menu"><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
+<button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
 
 <section id="top" class="hero hero-editorial">
   <div class="hero-stage">
@@ -662,7 +672,7 @@ img{display:block;max-width:100%}
         <div><label>Telefon (volitelné)</label><input type="tel" id="kPhone" placeholder="+420 …"></div>
         <div><label>O čem chceš mluvit?</label><textarea id="kMsg" placeholder="Krátký popis projektu nebo otázky…" required></textarea></div>
         <button type="submit" class="btn" data-cursor>Rezervovat konzultaci ✦</button>
-        <p class="konz-ok" id="konzOk">Děkuju! Otevřela jsem ti e-mail — stačí odeslat a termín potvrdím. ✦</p>
+        <p class="konz-ok" id="konzOk">Děkuju za rezervaci! Ozvu se s potvrzením termínu. ✦</p>
       </form>
     </div>
   </div>
@@ -680,7 +690,7 @@ img{display:block;max-width:100%}
         <div><label>E-mail</label><input type="email" id="fMail" placeholder="tvůj@email.cz" required></div>
         <div><label>O projektu</label><textarea id="fMsg" placeholder="Pár vět o tom, co potřebuješ…" required></textarea></div>
         <button type="submit" class="btn" data-cursor>Odeslat poptávku</button>
-        <p class="k-ok" id="kOk">Děkuju! Otevřela jsem ti e-mail — stačí odeslat a ozvu se. ✦</p>
+        <p class="k-ok" id="kOk">Děkuju za zprávu! Ozvu se co nejdřív. ✦</p>
       </form>
       <div class="k-info reveal">
         <div class="ki"><div class="l">E-mail</div><a href="mailto:niadobyshar@gmail.com" data-cursor>niadobyshar@gmail.com</a></div>
@@ -720,18 +730,22 @@ img{display:block;max-width:100%}
     });
   }
 })();
-var nav=document.getElementById('nav'),navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger');
+var nav=document.getElementById('nav'),navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger'),navScrim=document.getElementById('navScrim');
 window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
 var navScrollY=0;
+var isCoarse=window.matchMedia('(pointer:coarse)').matches;
 function setNavOpen(on){
   navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
   burger.setAttribute('aria-expanded',on?'true':'false');
   burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
+  if(navScrim){navScrim.hidden=!on;}
   if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
   else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
 }
-burger.addEventListener('click',function(e){e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));});
-document.addEventListener('click',function(e){if(!document.body.classList.contains('nav-open'))return;if(navLinks.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
+function onBurgerTap(e){e.preventDefault();e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));}
+burger.addEventListener('click',onBurgerTap);
+burger.addEventListener('touchend',onBurgerTap,{passive:false});
+if(navScrim)navScrim.addEventListener('click',function(){setNavOpen(false);});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
 navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNavOpen(false);});});
 
@@ -843,21 +857,25 @@ window.addEventListener('load',function(){fitHeroName();setTimeout(fitHeroName,1
 window.addEventListener('resize',fitHeroName);
 
 var parallaxEls=document.querySelectorAll('.studio-photo img');
-window.addEventListener('scroll',function(){
-  var y=window.scrollY;
-  parallaxEls.forEach(function(el){
-    var rect=el.getBoundingClientRect();
-    if(rect.top>window.innerHeight||rect.bottom<0)return;
-    var shift=(rect.top-window.innerHeight*.5)*0.035;
-    el.style.transform='translateY('+(shift)+'px) scale(1)';
-  });
-},{passive:true});
+if(!isCoarse){
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    parallaxEls.forEach(function(el){
+      var rect=el.getBoundingClientRect();
+      if(rect.top>window.innerHeight||rect.bottom<0)return;
+      var shift=(rect.top-window.innerHeight*.5)*0.035;
+      el.style.transform='translateY('+(shift)+'px) scale(1)';
+    });
+  },{passive:true});
+}
 
 var pgGallery=document.getElementById('projGallery');
 var pgGalleryIo=pgGallery?new IntersectionObserver(function(es){
   es.forEach(function(en){
     if(!en.isIntersecting)return;
-    document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
+    if(!isCoarse){
+      document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
+    }
     pgGalleryIo.unobserve(en.target);
   });
 },{threshold:.12}):null;
@@ -902,7 +920,9 @@ var liveIo=new IntersectionObserver(function(es){
     if(en.isIntersecting&&en.intersectionRatio>.35)mountIframe(en.target);
   });
 },{rootMargin:'120px',threshold:[0,.35]});
-document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
+if(!isCoarse){
+  document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
+}
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});

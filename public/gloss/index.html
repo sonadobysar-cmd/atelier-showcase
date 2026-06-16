@@ -47,9 +47,10 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .burger span{width:26px;height:2px;background:var(--ink);transition:.3s}
 @media(max-width:900px){
-  .nav-links{position:fixed;top:0;right:-100%;height:100vh;width:75%;max-width:340px;background:#fff;flex-direction:column;justify-content:center;gap:34px;font-size:1.1rem;transition:right .45s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(255,79,163,.18);z-index:101}
+  .nav-links{position:fixed;top:0;right:-100%;height:100vh;height:100dvh;width:75%;max-width:340px;background:#fff;flex-direction:column;justify-content:flex-start;gap:22px;font-size:1rem;transition:right .45s cubic-bezier(.16,1,.3,1);box-shadow:-20px 0 60px rgba(255,79,163,.18);z-index:101;padding:max(72px,env(safe-area-inset-top)) 5vw 40px;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .nav-links.open{right:0}
-  .burger{display:flex;z-index:102}
+  .burger{display:flex;z-index:102;min-width:44px;min-height:44px;align-items:center;justify-content:center;background:none;border:none}
+  .nav-links a{min-height:44px;display:flex;align-items:center}
   body.nav-open{overflow:hidden}
   body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(10,10,10,.35);z-index:100}
 }
@@ -99,9 +100,13 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .sc-form button{width:100%}
 }
 @media(max-width:520px){
-  #zrcadlo,#obory,#cenik,#galerie,#kontakt{padding:64px 0}
-  #rezervace{padding:64px 0 100px}
+  #zrcadlo,#obory,#cenik,#galerie,#kontakt{padding:56px 0}
+  #rezervace{padding:56px 0 88px}
   .hero-cta{flex-direction:column;align-items:stretch}
+  .hero-photo{height:48vh}
+  .hero-photo img{object-position:55% 18%}
+  .rez-form input,.rez-form select,.rez-form textarea{font-size:16px}
+  .sc-form input{font-size:16px}
   .btn-primary,.btn-ghost{display:flex;justify-content:center;text-align:center}
   .marquee-track{font-size:1.05rem}
   .sc-card{padding:32px 20px 28px}
@@ -327,7 +332,7 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <a href="#kontakt">Kontakt</a>
     <a href="#rezervace" class="nav-cta">Rezervovat</a>
   </div>
-  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  <button type="button" class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ============ HERO ============ -->
@@ -683,8 +688,17 @@ document.getElementById('rezSubmit').addEventListener('click',()=>{
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
 const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
-function setNavOpen(on){navLinks.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);}
-burger.addEventListener('click',()=>setNavOpen(!navLinks.classList.contains('open')));
+let navScrollY=0;
+function setNavOpen(on){
+  navLinks.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
+  burger.setAttribute('aria-expanded',on?'true':'false');
+  burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
+  if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
+  else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
+}
+burger.addEventListener('click',(e)=>{e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));});
+document.addEventListener('click',(e)=>{if(!document.body.classList.contains('nav-open'))return;if(navLinks.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
 navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setNavOpen(false)));
 
 /* ===== HERO FOTKA (čistá modelka na růžovém pozadí) ===== */

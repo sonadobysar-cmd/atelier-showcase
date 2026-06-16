@@ -77,10 +77,19 @@ a{color:inherit;text-decoration:none}
 .hd.scrolled .hd-nav a.lnk:hover{color:var(--gold-d)}
 .hd.scrolled .burger span{background:var(--ink)}
 @media(max-width:920px){
-  .hd-nav{position:fixed;inset:72px 0 auto 0;flex-direction:column;gap:0;background:var(--paper2);padding:10px 0 20px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .4s;align-items:stretch}
+  .hd-nav{position:fixed;inset:72px 0 0 0;flex-direction:column;gap:0;background:var(--paper2);padding:10px 0 max(20px,env(safe-area-inset-bottom));border-bottom:1px solid var(--line);transform:translateY(-110%);transition:transform .4s;align-items:stretch;z-index:80;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 24px 48px rgba(0,0,0,.12)}
   .hd-nav.open{transform:none}
-  .hd-nav a.lnk{padding:14px 8vw}.hd-nav .btn{margin:12px 8vw 0}
-  .burger{display:flex}
+  .hd-nav a.lnk{padding:14px 8vw;min-height:44px;display:flex;align-items:center}.hd-nav .btn{margin:12px 8vw 0}
+  .burger{display:flex;min-width:44px;min-height:44px;align-items:center;justify-content:center;z-index:90}
+  body.nav-open{overflow:hidden}
+  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,8,8,.35);z-index:70}
+}
+@media(max-width:760px){
+  .sec{padding:clamp(48px,8vw,72px) 0}
+  .hero-fluted{left:72%}
+  .rimg--studio,.rimg--svc{transform:scale(1.04)}
+  .tcard{padding:28px 22px}
+  .bform input,.bform select,.bform textarea{font-size:16px}
 }
 
 /* ===== hero = full-bleed magazine cover ===== */
@@ -577,9 +586,18 @@ a{color:inherit;text-decoration:none}
     '</article>';
   }).join('');
 
-  var burger=document.getElementById('burger'),nav=document.getElementById('nav');
-  burger.addEventListener('click',function(){nav.classList.toggle('open');});
-  nav.addEventListener('click',function(e){if(e.target.closest('a'))nav.classList.remove('open');});
+  var burger=document.getElementById('burger'),nav=document.getElementById('nav'),navScrollY=0;
+  function setNavOpen(on){
+    nav.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
+    if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
+    else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
+  }
+  burger.addEventListener('click',function(e){e.stopPropagation();setNavOpen(!nav.classList.contains('open'));});
+  document.addEventListener('click',function(e){if(!document.body.classList.contains('nav-open'))return;if(nav.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
+  nav.addEventListener('click',function(e){if(e.target.closest('a'))setNavOpen(false);});
 
   var hd=document.getElementById('hd'),hero=document.getElementById('top');
   function onScroll(){

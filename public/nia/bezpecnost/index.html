@@ -112,15 +112,18 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
-@media(max-width:760px){
-  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;background:var(--black);
-    flex-direction:column;justify-content:center;align-items:flex-start;padding:0 40px;gap:26px;transform:translateX(100%);
-    transition:transform .55s var(--ease);font-size:.95rem;z-index:205}
-  .nav-links.open{transform:translateX(0)}
+@media(max-width:980px){
+  .burger{display:flex;color:inherit;min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;height:100dvh;background:var(--black);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:max(88px,env(safe-area-inset-top)) 40px 40px;gap:22px;transform:translateX(100%);transition:transform .55s var(--ease),visibility .55s;font-size:.95rem;z-index:205;box-shadow:-12px 0 48px -16px rgba(0,0,0,.4);color:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch;letter-spacing:.18em;visibility:hidden;pointer-events:none}
+  .nav-links.open{transform:translateX(0);visibility:visible;pointer-events:auto}
+  .nav-links a.nav-cta{background:transparent;border-color:rgba(255,255,255,.35);opacity:1;width:100%;text-align:center;padding:14px 22px}
   body.nav-open{overflow:hidden}
   body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,6,6,.55);z-index:204}
-  .burger{display:flex}
+  .nav,.nav.scrolled{padding:18px 6vw}
+}
+@media(max-width:760px){
   .card-grid{grid-template-columns:1fr}
+  .sec{padding:clamp(48px,10vw,72px) 0}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
@@ -340,8 +343,17 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
   }
 })();
 var navLinks=document.getElementById('navLinks'),burger=document.getElementById('burger');
-function setNavOpen(on){navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);}
-burger.addEventListener('click',function(){setNavOpen(!navLinks.classList.contains('open'));});
+var navScrollY=0;
+function setNavOpen(on){
+  navLinks.classList.toggle('open',on);burger.classList.toggle('open',on);document.body.classList.toggle('nav-open',on);
+  burger.setAttribute('aria-expanded',on?'true':'false');
+  burger.setAttribute('aria-label',on?'Zavřít menu':'Otevřít menu');
+  if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
+  else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
+}
+burger.addEventListener('click',function(e){e.stopPropagation();setNavOpen(!navLinks.classList.contains('open'));});
+document.addEventListener('click',function(e){if(!document.body.classList.contains('nav-open'))return;if(navLinks.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
 navLinks.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setNavOpen(false);});});
 document.querySelectorAll('.reveal').forEach(function(el){
   if('IntersectionObserver' in window){

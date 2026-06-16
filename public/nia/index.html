@@ -201,6 +201,8 @@ img{display:block;max-width:100%}
 .live-poster:hover .play{transform:scale(1.06);background:var(--burgundy4)}
 .live.has-iframe .live-poster{opacity:0;pointer-events:none}
 .live[data-soon] .live-poster{opacity:1;pointer-events:auto;cursor:pointer}
+.live-static .live-poster{opacity:1!important;pointer-events:none;background:linear-gradient(180deg,transparent 40%,rgba(8,6,6,.75))}
+.live-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:1}
 
 /* WORK */
 .work{background:var(--white);padding:var(--section) 0}
@@ -891,6 +893,22 @@ img{display:block;max-width:100%}
   }
 })();
 var isCoarse=window.matchMedia('(pointer:coarse)').matches;
+function isMobilePreview(){return isCoarse||window.matchMedia('(max-width:1024px)').matches;}
+
+function applyStaticPreview(live,thumb){
+  if(!live||live.dataset.static)return;
+  live.dataset.static='1';
+  if(thumb){
+    var img=document.createElement('img');
+    img.className='live-thumb';
+    img.src=thumb;
+    img.alt='';
+    img.loading='eager';
+    live.insertBefore(img,live.firstChild);
+  }
+  live.classList.remove('is-loading');
+  live.classList.add('is-loaded','live-static');
+}
 
 (function(){
   var h1=document.getElementById('heroH1');if(!h1)return;
@@ -1013,17 +1031,19 @@ if(!isCoarse){
 }
 
 var pgGallery=document.getElementById('projGallery');
-var pgGalleryIo=pgGallery?new IntersectionObserver(function(es){
+var pgGalleryIo=pgGallery&&!isMobilePreview()?new IntersectionObserver(function(es){
   es.forEach(function(en){
     if(!en.isIntersecting)return;
-    document.querySelectorAll('.pg-live[data-src]').forEach(function(l){mountIframe(l);});
+    var on=document.querySelector('.pg-card.on .pg-live[data-src]');
+    if(on)mountIframe(on);
     pgGalleryIo.unobserve(en.target);
   });
 },{threshold:.12}):null;
 if(pgGallery&&pgGalleryIo)pgGalleryIo.observe(pgGallery);
 
 function mountIframe(live){
-  if(live.dataset.mounted)return;
+  if(isMobilePreview())return;
+  if(live.dataset.mounted||live.dataset.static)return;
   var src=live.getAttribute('data-src');if(!src)return;
   var vw=parseFloat(live.getAttribute('data-vw'))||1280;
   var f=document.createElement('iframe');
@@ -1047,24 +1067,31 @@ window.addEventListener('resize',fitLive);
 window.addEventListener('load',function(){setTimeout(fitLive,120);setTimeout(fitLive,900);});
 
 document.querySelectorAll('.live').forEach(function(live){
-  var poster=live.querySelector('.live-poster');
   if(live.hasAttribute('data-soon')){
+    var poster=live.querySelector('.live-poster');
     if(poster)poster.addEventListener('click',function(){document.getElementById('konzultace').scrollIntoView({behavior:'smooth'});});
     return;
   }
-  live.addEventListener('pointerup',function(e){
-    if(e.pointerType==='mouse'&&e.button!==0)return;
-    e.preventDefault();
-    mountIframe(live);
-  });
 });
-
-var liveIo=new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting&&en.intersectionRatio>.15)mountIframe(en.target);
+if(isMobilePreview()){
+  document.querySelectorAll('.feat-spot .live[data-src]').forEach(function(l){
+    applyStaticPreview(l,'/klic-estate/images/properties/01-vila-bazen-1.jpg');
   });
-},{rootMargin:'180px',threshold:[0,.15,.35]});
-document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
+}else{
+  document.querySelectorAll('.live:not([data-pg]):not([data-soon])').forEach(function(live){
+    live.addEventListener('pointerup',function(e){
+      if(e.pointerType==='mouse'&&e.button!==0)return;
+      e.preventDefault();
+      mountIframe(live);
+    });
+  });
+  var liveIo=new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(en.isIntersecting&&en.intersectionRatio>.35)mountIframe(en.target);
+    });
+  },{rootMargin:'80px',threshold:[0,.35]});
+  document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
+}
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});

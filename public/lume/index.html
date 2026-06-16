@@ -154,19 +154,19 @@ a{color:inherit;text-decoration:none}
 
 /* ===== SIGNATURE 2: glow analysis ===== */
 .an{border-radius:6px;overflow:hidden;box-shadow:0 30px 64px rgba(38,37,35,.2);background:#fff}
-.an-grid{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
-.an-view{position:relative;height:100%;width:100%;overflow:hidden;background:#fff}
-.an-view canvas,.an-view video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.an-grid{display:flex;align-items:stretch}
+.an-view{position:relative;flex:1 1 0;min-width:0;align-self:stretch;overflow:hidden;background:#fff}
+.an-view canvas,.an-view video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center}
 .an-view video{transform:scaleX(-1)}
 .an-ph{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:clamp(20px,5vw,36px);overflow:hidden}
-.an-ph::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(255,255,255,.08) 0%,rgba(244,242,236,.28) 60%,rgba(244,242,236,.45) 100%);pointer-events:none}
-.an-ph .ph-demo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;z-index:0}
+.an-ph::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(255,255,255,.06) 0%,rgba(244,242,236,.22) 65%,rgba(244,242,236,.38) 100%);pointer-events:none}
+.an-ph .ph-demo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center center;z-index:0}
 .an-ph .ph-cap{position:relative;z-index:2;font-family:var(--sans);font-weight:600;font-size:clamp(.82rem,2.5vw,1.02rem);letter-spacing:.22em;text-transform:uppercase;color:var(--ink);max-width:28ch;line-height:1.7;padding:16px 20px;background:rgba(244,242,236,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(38,37,35,.1);border-radius:4px}
 .an-scan{position:absolute;left:0;right:0;top:0;height:3px;z-index:4;opacity:0;
   background:linear-gradient(90deg,transparent,#f1deA0,#c8a24e,transparent);box-shadow:0 0 22px 7px rgba(231,201,120,.55)}
 .an-scan.run{animation:scan 1.9s ease-in-out}
 @keyframes scan{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
-.an-panel{padding:clamp(24px,3vw,42px);display:flex;flex-direction:column;justify-content:center;
+.an-panel{flex:1 1 0;min-width:0;padding:clamp(24px,3vw,42px);display:flex;flex-direction:column;justify-content:center;
   background:linear-gradient(165deg,var(--silver-top),var(--silver-mid) 30%,var(--silver-lo) 70%,var(--cream) 100%)}
 .an-panel .eyebrow{display:block;margin-bottom:14px}
 .an-intro{color:var(--ink2);line-height:1.7;max-width:38ch}
@@ -187,7 +187,7 @@ a{color:inherit;text-decoration:none}
 .an-disc{font-size:.72rem;color:var(--mut);margin-top:16px;line-height:1.5}
 .an-priv{font-size:.68rem;color:var(--mut);margin-top:6px}
 #anBook{margin-top:14px}
-@media(max-width:760px){.an-grid{grid-template-columns:1fr;align-items:start}.an-view{height:auto;aspect-ratio:1/1}}
+@media(max-width:760px){.an-grid{flex-direction:column}.an-view{flex:none;aspect-ratio:1/1;width:100%}}
 
 /* ===== editorial ===== */
 .edi{background:var(--paper2)}
@@ -372,7 +372,7 @@ a{color:inherit;text-decoration:none}
       <div class="an-grid">
         <div class="an-view" id="anView">
           <div class="an-ph" id="anPh">
-            <img class="ph-demo" src="/lume/img/an-selfie-model.jpg?v=2" alt="" loading="lazy" decoding="async">
+            <img class="ph-demo" src="/lume/img/an-selfie-model.jpg?v=3" alt="" loading="lazy" decoding="async">
             <p class="ph-cap">Vyfoťte se nebo použijte kameru a udělejte si orientační analýzu obličeje a pleti.</p>
           </div>
           <video id="anVideo" playsinline muted style="display:none"></video>

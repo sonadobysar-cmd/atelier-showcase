@@ -216,7 +216,81 @@ img{display:block;max-width:100%}
 .live{position:absolute;inset:0;overflow:hidden;background:var(--off)}
 .live iframe{position:absolute;top:0;left:0;border:0;pointer-events:none;transform-origin:0 0;max-width:none}
 
-/* STUDIO */
+/* RESPONSIVE THEATER — luxusní scéna desktop · tablet · mobil */
+.resp-theater{position:relative;background:var(--black);color:var(--white);padding:clamp(88px,11vw,128px) 0 clamp(96px,12vw,140px);overflow:hidden}
+.resp-theater-bg{position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 70% 55% at 50% 38%,rgba(122,61,84,.22) 0%,transparent 62%),
+  radial-gradient(ellipse 40% 30% at 12% 80%,rgba(92,42,62,.12) 0%,transparent 55%),
+  radial-gradient(ellipse 35% 28% at 88% 72%,rgba(158,77,106,.1) 0%,transparent 50%);
+  opacity:.95}
+.resp-theater-bg::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.35;mix-blend-mode:soft-light}
+.resp-theater-inner{position:relative;z-index:1}
+.resp-theater-head{text-align:center;max-width:640px;margin:0 auto clamp(48px,7vw,72px)}
+.resp-theater-head .eyebrow{color:rgba(255,255,255,.45)}
+.resp-theater-head h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.6rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.06;margin-top:14px;color:var(--white)}
+.resp-theater-head h2 .grad{color:var(--burgundy-glow);font-size:1.15em}
+.resp-theater-lead{margin-top:18px;font-size:.92rem;line-height:1.85;color:rgba(255,255,255,.55);font-weight:300}
+.resp-stage{position:relative}
+.resp-stage-meta{text-align:center;margin-bottom:clamp(28px,4vw,40px);min-height:5.5rem}
+.resp-cat{display:block;font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--burgundy-glow);font-weight:400;margin-bottom:10px;transition:opacity .4s}
+.resp-name{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.8vw,2.8rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.05;margin:0;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.resp-num{display:block;margin-top:8px;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.resp-stage-meta.is-switching .resp-name{opacity:0;transform:translateY(10px)}
+.resp-devices{position:relative;max-width:1040px;margin:0 auto;min-height:clamp(280px,42vw,460px);perspective:1400px}
+.resp-device{position:absolute;transition:transform .7s var(--ease),opacity .5s}
+.resp-device--desktop{left:0;top:0;width:min(72%,680px);z-index:1}
+.resp-device--tablet{right:clamp(8%,12vw,18%);top:14%;width:min(26%,220px);z-index:2;transform:translateZ(40px) rotateY(-8deg)}
+.resp-device--phone{right:0;bottom:0;width:min(15%,118px);z-index:3;transform:translateZ(80px) rotateY(-12deg)}
+.resp-bezel{position:relative;background:linear-gradient(145deg,#2a2a2e 0%,#121214 100%);border-radius:14px;padding:7px;box-shadow:0 40px 80px -24px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.12)}
+.resp-device--phone .resp-bezel{border-radius:28px;padding:5px}
+.resp-device--tablet .resp-bezel{border-radius:18px}
+.resp-viewport{position:relative;overflow:hidden;background:var(--off);border-radius:8px}
+.resp-device--phone .resp-viewport{border-radius:22px;aspect-ratio:9/19.2}
+.resp-device--tablet .resp-viewport{aspect-ratio:3/4;border-radius:12px}
+.resp-device--desktop .resp-viewport{aspect-ratio:16/10;border-radius:6px}
+.resp-viewport .live{position:absolute;inset:0}
+.resp-device-label{position:absolute;top:-26px;left:0;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:400}
+.resp-device--desktop .resp-device-label::after{content:' · 1440px'}
+.resp-device--tablet .resp-device-label::after{content:' · 768px'}
+.resp-device--phone .resp-device-label::after{content:' · 390px'}
+.resp-soon{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;position:absolute;inset:0;background:linear-gradient(165deg,#1e0c14,#3a1828);color:rgba(255,255,255,.7);font-family:var(--display);font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-align:center;padding:16px}
+.resp-controls{display:flex;align-items:center;justify-content:center;gap:clamp(12px,3vw,24px);margin-top:clamp(40px,6vw,56px);flex-wrap:wrap}
+.resp-nav{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:var(--white);font-size:1rem;cursor:pointer;transition:background .35s,border-color .35s,transform .35s var(--ease);flex:none}
+.resp-nav:hover{background:rgba(158,77,106,.25);border-color:rgba(158,77,106,.5);transform:scale(1.05)}
+.resp-picker{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:min(92vw,720px)}
+.resp-pill{border:none;border-radius:var(--r-pill);padding:10px 16px;background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);font-family:var(--b);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;cursor:pointer;transition:background .35s,color .35s,box-shadow .35s,transform .35s var(--ease);font-weight:400}
+.resp-pill:hover{color:var(--white);background:rgba(255,255,255,.1);transform:translateY(-1px)}
+.resp-pill.on{background:var(--burgundy3);color:var(--white);box-shadow:0 8px 28px -8px rgba(158,77,106,.55)}
+.resp-pill .n{opacity:.65;margin-right:6px}
+.resp-open{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;color:var(--burgundy-glow);border-bottom:1px solid rgba(158,77,106,.4);padding-bottom:5px;transition:color .35s,border-color .35s,gap .35s}
+.resp-open:hover{color:var(--white);border-color:var(--burgundy-glow);gap:12px}
+
+/* DEVICE SUITE — u každého projektu v seznamu */
+.device-suite{position:relative;padding:0 0 8% 0;transform-style:preserve-3d}
+.device-suite .ds-ambient{position:absolute;inset:10% 5% 0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 80%,rgba(92,42,62,.08),transparent 70%);pointer-events:none;border-radius:50%}
+.device-suite .ds-row{position:relative;display:grid;grid-template-columns:1fr;min-height:clamp(220px,32vw,340px)}
+.device-suite .ds-device{position:relative;z-index:1}
+.device-suite .ds-device--desktop{width:100%;max-width:100%}
+.device-suite .ds-device--tablet{position:absolute;right:14%;top:8%;width:28%;min-width:88px;max-width:140px;z-index:2;transform:translateZ(24px) rotateY(-6deg)}
+.device-suite .ds-device--phone{position:absolute;right:0;bottom:0;width:19%;min-width:72px;max-width:110px;z-index:3}
+.device-suite .ds-label{position:absolute;top:-22px;left:0;font-size:.48rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);font-weight:400;opacity:.85}
+.device-suite .ds-bezel{background:var(--black);border-radius:12px;padding:5px;box-shadow:0 28px 56px -20px rgba(8,6,6,.45),0 0 0 1px rgba(8,6,6,.08)}
+.device-suite .ds-device--phone .ds-bezel{border-radius:26px;padding:4px}
+.device-suite .ds-device--tablet .ds-bezel{border-radius:14px}
+.device-suite .ds-viewport{position:relative;overflow:hidden;background:var(--off);border-radius:6px}
+.device-suite .ds-device--desktop .ds-viewport{aspect-ratio:16/10;border-radius:4px}
+.device-suite .ds-device--tablet .ds-viewport{aspect-ratio:3/4;border-radius:8px}
+.device-suite .ds-device--phone .ds-viewport{aspect-ratio:9/19.2;border-radius:20px}
+.device-suite .ds-viewport .live{position:absolute;inset:0}
+.device-suite .ds-viewport .shine{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.22) 50%,transparent 58%);transform:translateX(-35%)}
+.device-suite .ds-tag{position:absolute;bottom:16px;left:18px;z-index:8;background:rgba(255,255,255,.9);backdrop-filter:blur(8px);color:var(--black);font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;padding:9px 14px;border-radius:var(--r-pill);box-shadow:var(--shadow)}
+.tilt:hover .ds-bezel{box-shadow:0 32px 64px -24px rgba(8,6,6,.4),0 0 0 1px rgba(8,6,6,.08)}
+.device-suite[data-soon] .ds-device--tablet,.device-suite[data-soon] .ds-device--phone{display:none}
+.work-item.is-active .work-meta h3{color:var(--burgundy3)}
+.work-item.is-active{position:relative}
+.work-item.is-active::before{content:'';position:absolute;left:-6vw;right:-6vw;top:0;bottom:0;background:linear-gradient(90deg,rgba(92,42,62,.04),transparent 40%,transparent 60%,rgba(92,42,62,.04));pointer-events:none;z-index:0}
+.work-item.is-active>*{position:relative;z-index:1}
+
 .studio{background:var(--burgundy);color:var(--white);padding:var(--section) 0}
 .studio .eyebrow{color:rgba(255,255,255,.5)}
 .studio .sec-head h2{color:var(--white)}
@@ -374,6 +448,14 @@ img{display:block;max-width:100%}
   .work-visual,.work-item.rev .work-visual{margin:0 auto}
   .frame{padding:0 0 36px 0}
   .frame .phone{right:4%;width:24%;max-width:96px}
+  .device-suite .ds-device--tablet{right:10%;width:26%;max-width:120px}
+  .device-suite .ds-device--phone{right:0;width:22%;max-width:96px}
+  .resp-device--desktop{width:88%;position:relative}
+  .resp-device--tablet{right:4%;top:18%;width:32%}
+  .resp-device--phone{width:20%;bottom:-4%}
+  .resp-devices{min-height:clamp(240px,55vw,380px)}
+  .resp-picker{gap:6px}
+  .resp-pill{padding:8px 12px;font-size:.52rem}
   .proj-gallery{--pg-w:clamp(200px,44vw,240px);--pg-h:clamp(255px,48vw,310px);--pg-r:clamp(32px,7vw,42px)}
   .proj-gallery-script{transform:translateX(-8%);font-size:clamp(2.8rem,12vw,5rem)}
   .proj-gallery-title{font-size:clamp(2.2rem,11vw,3.8rem)}
@@ -466,14 +548,39 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<section class="resp-theater" id="respTheater" aria-label="Responzivní ukázka projektů">
+  <div class="resp-theater-bg" aria-hidden="true"></div>
+  <div class="wrap resp-theater-inner">
+    <div class="resp-theater-head reveal">
+      <span class="eyebrow">Živé ukázky</span>
+      <h2>Jeden web · <span class="grad">všechna zařízení</span></h2>
+      <p class="resp-theater-lead">Každý projekt ladíme pixel po pixelu — od širokoúhlého monitoru přes tablet až po mobil v dlani. Vyber projekt nebo scrolluj dolů.</p>
+    </div>
+    <div class="resp-stage reveal">
+      <div class="resp-stage-meta" id="respMeta">
+        <span class="resp-cat" id="respCat">Architektura</span>
+        <h3 class="resp-name" id="respName">Atelier Void</h3>
+        <span class="resp-num" id="respNum">01 / 10</span>
+        <a href="#" class="resp-open" id="respOpen" target="_blank" rel="noopener" data-cursor>Otevřít živý web ↗</a>
+      </div>
+      <div class="resp-devices" id="respDevices" aria-live="polite"></div>
+      <div class="resp-controls">
+        <button type="button" class="resp-nav" id="respPrev" aria-label="Předchozí projekt">←</button>
+        <div class="resp-picker" id="respPicker" role="tablist" aria-label="Výběr projektu"></div>
+        <button type="button" class="resp-nav" id="respNext" aria-label="Další projekt">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="prace" class="work">
   <div class="wrap">
     <div class="sec-head centered reveal">
       <div>
-        <span class="eyebrow">Vybrané práce</span>
-        <h2>Projekty s <span class="grad">charakterem</span><span class="rule"></span></h2>
+        <span class="eyebrow">Case study</span>
+        <h2>Každý projekt <span class="grad">v detailu</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">10 projektů</span>
+      <span class="idx">scrolluj · scéna nahoře se synchronizuje</span>
     </div>
 
     <article class="work-item reveal" id="work-void" data-project="void">
@@ -888,8 +995,13 @@ function makePgCard(p,i){
   card.addEventListener('click',function(){
     document.querySelectorAll('.pg-card').forEach(function(c){c.classList.remove('on');});
     document.querySelectorAll('.pg-card[data-project="'+p.id+'"]').forEach(function(c){c.classList.add('on');});
-    var target=document.getElementById('work-'+p.id);
-    if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+    var idx=-1;
+    for(var i=0;i<PROJECTS.length;i++){if(PROJECTS[i].id===p.id){idx=i;break;}}
+    if(idx>=0&&typeof setRespProject==='function')setRespProject(idx,true);
+    else{
+      var target=document.getElementById('work-'+p.id);
+      if(target)target.scrollIntoView({behavior:'smooth',block:'center'});
+    }
   });
   return card;
 }
@@ -899,6 +1011,141 @@ if(pgTrack){
     PROJECTS.forEach(function(p,i){pgTrack.appendChild(makePgCard(p,i));});
   }
   pgTrack.style.setProperty('--pg-shift',-(100/PG_COPIES)+'%');
+}
+
+function upgradeDeviceSuites(){
+  document.querySelectorAll('.work-visual .frame:not([data-suite])').forEach(function(frame){
+    var screen=frame.querySelector('.screen');
+    var phone=frame.querySelector('.phone');
+    var dLive=screen&&screen.querySelector('.live');
+    if(!dLive)return;
+    var soon=dLive.hasAttribute('data-soon');
+    var pLive=phone&&phone.querySelector('.live');
+    var shine=screen&&screen.querySelector('.shine');
+    var tagEl=frame.querySelector('.frame-tag');
+    var tagText=tagEl?tagEl.textContent:'Živá ukázka ↗';
+    var src=dLive.getAttribute('data-src');
+    var suite=document.createElement('div');
+    suite.className='device-suite';
+    if(soon)suite.setAttribute('data-soon','');
+    suite.innerHTML='<div class="ds-ambient"></div><div class="ds-row">'+
+      '<div class="ds-device ds-device--desktop"><span class="ds-label">Desktop</span><div class="ds-bezel"><div class="ds-viewport ds-vp-d"></div></div></div>'+
+      (soon?'':
+      '<div class="ds-device ds-device--tablet"><span class="ds-label">Tablet</span><div class="ds-bezel"><div class="ds-viewport ds-vp-t"></div></div></div>'+
+      '<div class="ds-device ds-device--phone"><span class="ds-label">Mobil</span><div class="ds-bezel"><div class="ds-viewport ds-vp-p"></div></div></div>')+
+      '</div><span class="ds-tag">'+tagText+'</span>';
+    suite.querySelector('.ds-vp-d').appendChild(dLive);
+    if(shine)suite.querySelector('.ds-vp-d').appendChild(shine);
+    if(!soon){
+      if(pLive){suite.querySelector('.ds-vp-p').appendChild(pLive);}
+      else{
+        var pl=document.createElement('div');
+        pl.className='live is-loading';pl.setAttribute('data-src',src);pl.setAttribute('data-vw','430');
+        pl.innerHTML='<div class="live-poster"><span class="play">▶</span></div>';
+        suite.querySelector('.ds-vp-p').appendChild(pl);
+      }
+      var tl=document.createElement('div');
+      tl.className='live is-loading';tl.setAttribute('data-src',src);tl.setAttribute('data-vw','768');
+      tl.innerHTML='<div class="live-poster"><span class="play">▶</span></div>';
+      suite.querySelector('.ds-vp-t').appendChild(tl);
+    }
+    frame.innerHTML='';
+    frame.appendChild(suite);
+    frame.dataset.suite='1';
+  });
+}
+upgradeDeviceSuites();
+
+var respIdx=0,respLock=false;
+function buildRespDevices(p){
+  var box=document.getElementById('respDevices');
+  if(!box)return;
+  box.innerHTML='';
+  if(!p.url){
+    var dev=document.createElement('div');
+    dev.className='resp-device resp-device--desktop';
+    dev.style.cssText='position:relative;width:min(88%,640px);margin:0 auto;left:auto;top:auto';
+    dev.innerHTML='<span class="resp-device-label">Ve vývoji</span><div class="resp-bezel"><div class="resp-viewport" style="aspect-ratio:16/10"><div class="resp-soon"><span>✦</span><span>'+p.name+'</span><span>Ukázka brzy</span></div></div></div>';
+    box.appendChild(dev);
+    return;
+  }
+  [['desktop',1340,'Desktop'],['tablet',768,'Tablet'],['phone',430,'Mobil']].forEach(function(s){
+    var dev=document.createElement('div');
+    dev.className='resp-device resp-device--'+s[0];
+    dev.innerHTML='<span class="resp-device-label">'+s[2]+'</span><div class="resp-bezel"><div class="resp-viewport"><div class="live is-loading" data-src="'+p.url+'" data-vw="'+s[1]+'" data-resp="1"><div class="live-poster"><span class="play">▶</span></div></div></div></div>';
+    box.appendChild(dev);
+  });
+  setTimeout(function(){box.querySelectorAll('.live[data-src]').forEach(function(l){mountIframe(l);});},60);
+}
+function setRespProject(idx,scrollTo){
+  if(idx<0)idx=PROJECTS.length-1;
+  if(idx>=PROJECTS.length)idx=0;
+  respIdx=idx;
+  var p=PROJECTS[idx];
+  var meta=document.getElementById('respMeta');
+  if(meta){
+    meta.classList.add('is-switching');
+    setTimeout(function(){
+      document.getElementById('respCat').textContent=p.cat;
+      document.getElementById('respName').textContent=p.name;
+      document.getElementById('respNum').textContent=p.num+' / 10';
+      var op=document.getElementById('respOpen');
+      if(p.url){op.href=p.url;op.style.display='';}
+      else{op.style.display='none';}
+      meta.classList.remove('is-switching');
+    },160);
+  }
+  buildRespDevices(p);
+  document.querySelectorAll('.resp-pill').forEach(function(b){
+    b.classList.toggle('on',parseInt(b.dataset.idx,10)===idx);
+  });
+  document.querySelectorAll('.pg-card').forEach(function(c){
+    c.classList.toggle('on',c.dataset.project===p.id);
+  });
+  document.querySelectorAll('.work-item').forEach(function(w){
+    w.classList.toggle('is-active',w.dataset.project===p.id);
+  });
+  if(scrollTo){
+    respLock=true;
+    var el=document.getElementById('work-'+p.id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){respLock=false;},1000);
+  }
+}
+function initRespTheater(){
+  var picker=document.getElementById('respPicker');
+  if(!picker)return;
+  PROJECTS.forEach(function(p,i){
+    var b=document.createElement('button');
+    b.type='button';
+    b.className='resp-pill'+(i===0?' on':'');
+    b.dataset.idx=String(i);
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-selected',i===0?'true':'false');
+    var short=p.name.length>14?p.name.split(' ')[0]:p.name;
+    b.innerHTML='<span class="n">'+p.num+'</span>'+short;
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.resp-pill').forEach(function(x){x.setAttribute('aria-selected','false');});
+      b.setAttribute('aria-selected','true');
+      setRespProject(i,true);
+    });
+    picker.appendChild(b);
+  });
+  var prev=document.getElementById('respPrev'),next=document.getElementById('respNext');
+  if(prev)prev.addEventListener('click',function(){setRespProject(respIdx-1,true);});
+  if(next)next.addEventListener('click',function(){setRespProject(respIdx+1,true);});
+  setRespProject(0,false);
+  var respIo=new IntersectionObserver(function(es){
+    if(respLock)return;
+    es.forEach(function(en){
+      if(!en.isIntersecting||en.intersectionRatio<.42)return;
+      var id=en.target.dataset.project;
+      var idx=-1;
+      for(var i=0;i<PROJECTS.length;i++){if(PROJECTS[i].id===id){idx=i;break;}}
+      if(idx>=0&&idx!==respIdx)setRespProject(idx,false);
+    });
+  },{threshold:[.42,.55],rootMargin:'-12% 0 -38% 0'});
+  document.querySelectorAll('.work-item[data-project]').forEach(function(el){respIo.observe(el);});
 }
 
 var pgGallery=document.getElementById('projGallery');
@@ -935,6 +1182,21 @@ function fitLive(){document.querySelectorAll('.live.has-iframe').forEach(fitOne)
 window.addEventListener('resize',fitLive);
 window.addEventListener('load',function(){setTimeout(fitLive,120);setTimeout(fitLive,900);});
 
+initRespTheater();
+
+function handleProjHash(){
+  var h=location.hash;
+  if(!h||h.length<2)return;
+  var el=document.querySelector(h);
+  if(!el||!el.id||el.id.indexOf('work-')!==0)return;
+  var id=el.id.replace('work-','');
+  for(var i=0;i<PROJECTS.length;i++){
+    if(PROJECTS[i].id===id){setRespProject(i,false);break;}
+  }
+  setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});},280);
+}
+window.addEventListener('load',handleProjHash);
+
 document.querySelectorAll('.live').forEach(function(live){
   var poster=live.querySelector('.live-poster');
   if(live.hasAttribute('data-soon')){
@@ -951,6 +1213,12 @@ var liveIo=new IntersectionObserver(function(es){
   });
 },{rootMargin:'120px',threshold:[0,.35]});
 document.querySelectorAll('.live[data-src]:not([data-pg])').forEach(function(l){liveIo.observe(l);});
+document.getElementById('respTheater')&&new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting)return;
+    document.querySelectorAll('.live[data-resp]').forEach(function(l){if(!l.dataset.mounted)mountIframe(l);});
+  });
+},{threshold:.15}).observe(document.getElementById('respTheater'));
 
 var activeIo=new IntersectionObserver(function(es){
   es.forEach(function(en){

@@ -16,7 +16,7 @@
   --serif:'Bodoni Moda',serif; --disp:'Anton',sans-serif; --sans:'Jost',sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
+html{scroll-behavior:smooth;scroll-padding-top:80px;background:var(--paper2);overflow-x:clip}
 body{font-family:var(--sans);font-weight:400;background:var(--paper);color:var(--ink2);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.04;color:var(--ink)}
 a{color:inherit;text-decoration:none}
@@ -59,19 +59,19 @@ a{color:inherit;text-decoration:none}
 .glass{background:rgba(255,255,255,.2);backdrop-filter:blur(14px) saturate(135%);-webkit-backdrop-filter:blur(14px) saturate(135%);border:1px solid rgba(255,255,255,.55);box-shadow:0 18px 50px rgba(38,37,35,.18)}
 
 /* ===== header ===== */
-.hd{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,backdrop-filter .4s;
+.hd{position:fixed;top:0;left:0;right:0;z-index:80;transition:background .4s,border-color .4s,backdrop-filter .4s;
   background:rgba(15,15,14,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);
-  padding-top:env(safe-area-inset-top,0px)}
+  padding-top:env(safe-area-inset-top,0)}
 .hd.scrolled{background:rgba(231,229,223,.88);backdrop-filter:blur(12px);border-color:var(--line)}
-.hd-in{display:flex;align-items:center;justify-content:space-between;height:72px;position:relative;z-index:102}
-.logo{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.14em;color:var(--cream);transition:color .35s;position:relative;z-index:1}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:72px;position:relative;z-index:92}
+.logo{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.14em;color:var(--cream);transition:color .35s}
 .logo span{font-family:var(--sans);font-weight:400;font-size:.5rem;letter-spacing:.42em;display:block;text-align:center;color:rgba(244,242,236,.68);margin-top:-2px;transition:color .35s}
 .hd-nav{display:flex;align-items:center;gap:32px}
 .hd-nav a.lnk{font-family:var(--sans);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,242,236,.92);transition:color .35s}
 .hd-nav a.lnk:hover{color:#e6cf8f}
 .hd .btn{padding:12px 22px}
-.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;position:relative;z-index:103;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.burger span{width:24px;height:2px;background:var(--cream);transition:transform .25s,opacity .25s,background .35s}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;position:relative;z-index:93;-webkit-tap-highlight-color:transparent}
+.burger span{width:24px;height:2px;background:var(--cream);transition:transform .25s,opacity .2s,background .35s}
 .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
@@ -81,12 +81,12 @@ a{color:inherit;text-decoration:none}
 .hd.scrolled .hd-nav a.lnk:hover{color:var(--gold-d)}
 .hd.scrolled .burger span{background:var(--ink)}
 @media(max-width:920px){
-  .hd-nav{position:fixed;top:0;left:0;right:0;bottom:0;flex-direction:column;gap:0;background:var(--paper2);padding:calc(72px + env(safe-area-inset-top,0px)) 0 max(20px,env(safe-area-inset-bottom));border-bottom:none;transform:translateY(-100%);transition:transform .4s cubic-bezier(.16,1,.3,1);align-items:stretch;z-index:101;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 24px 48px rgba(0,0,0,.12);visibility:hidden;pointer-events:none}
-  .hd-nav.open{transform:translateY(0);visibility:visible;pointer-events:auto}
-  .hd-nav a.lnk{padding:14px 8vw;min-height:44px;display:flex;align-items:center;color:var(--ink2)}.hd-nav .btn{margin:12px 8vw 0}
+  .hd-nav{position:fixed;top:calc(72px + env(safe-area-inset-top,0));left:0;right:0;bottom:0;flex-direction:column;gap:0;background:var(--paper2);padding:10px 0 max(20px,env(safe-area-inset-bottom));border-bottom:1px solid var(--line);transform:translateY(-105%);opacity:0;visibility:hidden;pointer-events:none;transition:transform .4s,opacity .3s,visibility 0s .4s;align-items:stretch;z-index:85;overflow-y:auto;-webkit-overflow-scrolling:touch;box-shadow:0 24px 48px rgba(0,0,0,.12)}
+  .hd-nav.open{transform:none;opacity:1;visibility:visible;pointer-events:auto;transition:transform .4s,opacity .3s,visibility 0s 0s}
+  .hd-nav a.lnk{padding:14px 8vw;min-height:44px;display:flex;align-items:center}.hd-nav .btn{margin:12px 8vw 0}
   .burger{display:flex;min-width:44px;min-height:44px;align-items:center;justify-content:center}
   body.nav-open{overflow:hidden}
-  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,8,8,.35);z-index:98;pointer-events:auto}
+  body.nav-open::before{content:'';position:fixed;inset:0;background:rgba(8,8,8,.35);z-index:75;pointer-events:auto}
 }
 @media(max-width:760px){
   .sec{padding:clamp(48px,8vw,72px) 0}
@@ -96,56 +96,27 @@ a{color:inherit;text-decoration:none}
   .bform input,.bform select,.bform textarea{font-size:16px}
 }
 @media(max-width:768px){
-  html{overflow-x:clip;background:var(--paper2)}
-  body{padding-bottom:0;margin-bottom:0;overflow-x:clip}
-  .ft{margin-bottom:0;padding-bottom:max(30px,env(safe-area-inset-bottom,0px))}
-  .cross{overflow:hidden}
-  .mq{max-width:100vw}
-  /* hero — nápis výš v šedé zóně vlevo */
-  .hero{
-    min-height:max(620px,100svh);
-    align-items:stretch;
-    justify-content:flex-end;
-    padding-top:calc(72px + env(safe-area-inset-top,0px));
-  }
-  .hero-fluted{left:54%}
-  .hero-photo .rimg,.rimg--hero{object-position:76% 18%}
-  .hero-caps,.hero-date{display:none}
+  html,body{overflow-x:clip;background:var(--paper2)}
+  body{margin-bottom:0;padding-bottom:0}
+  /* hero — nápis vlevo v šedém poli, tlačítka stejně velká */
+  .hero{align-items:stretch;justify-content:flex-start}
+  .hero-photo .rimg,.rimg--hero{object-position:78% 24%}
+  .hero-fluted{left:82%;opacity:.92}
+  .hero::before{height:38%;background:linear-gradient(to top,#fbfaf6 4%,rgba(251,250,246,.5) 28%,transparent 70%)}
   .hero-inner{
-    width:min(52%,240px);
-    margin:0 0 30vh 5vw;
-    padding-bottom:0;
-    align-self:flex-end;
+    position:absolute;left:5vw;right:auto;top:calc(72px + env(safe-area-inset-top,0px) + 10vh);
+    width:min(54vw,300px);margin:0;padding-bottom:0;z-index:6;
   }
-  .hero-title{font-size:clamp(1.9rem,8.5vw,2.8rem);line-height:.86}
-  .hero-sub{font-size:.9rem;margin-top:14px;max-width:none;line-height:1.5}
-  .hero-cta{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
-    width:100%;
-    margin-top:18px;
-  }
-  .hero-cta .btn{
-    width:100%;
-    min-height:48px;
-    padding:13px 14px;
-    font-size:.64rem;
-    letter-spacing:.16em;
-    justify-content:center;
-    text-align:center;
-  }
-  /* exclusive — bez černých pruhů nahoře/dole */
-  .excl{
-    padding:clamp(48px,8vw,72px) 0;
-    background:var(--paper2);
-    overflow:visible;
-  }
-  .excl-bg{opacity:.42}
-  .excl-bg::after{
-    background:linear-gradient(180deg,rgba(231,229,223,.92) 0%,rgba(231,229,223,.15) 22%,rgba(231,229,223,.15) 78%,rgba(231,229,223,.92) 100%);
-  }
-  .excl-card p{color:var(--ink2)}
+  .hero-title{font-size:clamp(2.15rem,9.5vw,3.1rem);line-height:.88}
+  .hero-sub{font-size:.92rem;margin-top:14px;max-width:none;line-height:1.55}
+  .hero-cta{flex-direction:column;align-items:stretch;width:100%;max-width:280px;margin-top:18px;gap:10px}
+  .hero-cta .btn{width:100%;min-height:48px;padding:14px 18px;justify-content:center;text-align:center}
+  /* exclusive — bez tmavých pruhů nahoře/dole */
+  .excl{padding:clamp(56px,12vw,88px) 0}
+  .excl-bg::after{display:none}
+  .rimg--excl{transform:scale(1.12);object-position:center 42%}
+  /* patička — bez šedého pruhu pod ní */
+  .ft{margin-bottom:0;padding-bottom:max(30px,env(safe-area-inset-bottom,0px))}
 }
 
 /* ===== hero = full-bleed magazine cover ===== */
@@ -385,7 +356,7 @@ a{color:inherit;text-decoration:none}
       <a class="lnk" href="#rezervace">Kontakt</a>
       <a class="btn btn-gold" href="#rezervace">Rezervovat</a>
     </nav>
-    <button class="burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -393,7 +364,7 @@ a{color:inherit;text-decoration:none}
 <section class="hero" id="top">
   <div class="hero-photo">
     <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka modelky</span></div>
-    <img class="rimg rimg--hero" src="/lume/img/hero-model.jpg?v=9" alt="LUMÉ — beauty model" loading="eager" decoding="async">
+    <img class="rimg rimg--hero" src="/lume/img/hero-model.jpg?v=10" alt="LUMÉ — beauty model" loading="eager" decoding="async">
   </div>
   <div class="hero-fluted" aria-hidden="true"></div>
 
@@ -650,7 +621,7 @@ a{color:inherit;text-decoration:none}
     if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
     else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
   }
-  burger.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();setNavOpen(!nav.classList.contains('open'));});
+  burger.addEventListener('click',function(e){e.stopPropagation();setNavOpen(!nav.classList.contains('open'));});
   document.addEventListener('click',function(e){if(!document.body.classList.contains('nav-open'))return;if(nav.contains(e.target)||burger.contains(e.target))return;setNavOpen(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('nav-open'))setNavOpen(false);});
   nav.addEventListener('click',function(e){if(e.target.closest('a'))setNavOpen(false);});

@@ -111,7 +111,7 @@ a{color:inherit;text-decoration:none}
 /* ===== hero = full-bleed magazine cover ===== */
 .hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;display:flex;align-items:flex-end;
   background:linear-gradient(165deg,var(--silver-top) 0%,var(--silver-mid) 24%,var(--silver-lo) 58%,var(--cream) 86%,#fbfaf6 100%)}
-.hero-photo{position:absolute;inset:0;z-index:1}
+.hero-photo{position:absolute;inset:0;z-index:1;overflow:hidden}
 .hero-photo .ph{position:absolute;inset:0;background:linear-gradient(160deg,#b7b9b6 0%,#cfd0cb 48%,#eceae4 100%)}
 .hero-photo .rimg{object-position:58% 30%}
 /* white fade at the bottom so the gold title sits on light */
@@ -358,9 +358,9 @@ a{color:inherit;text-decoration:none}
     padding-top:calc(72px + env(safe-area-inset-top,0px));
     background:linear-gradient(180deg,var(--silver-mid) 0%,var(--silver-lo) 42%,var(--cream) 100%);
   }
-  .hero-photo{position:relative;inset:auto;height:min(52vh,480px);z-index:1}
+  .hero-photo{position:relative;inset:auto;height:min(52vh,480px);z-index:1;overflow:hidden}
   .hero-photo .rimg,.rimg--hero{object-position:72% 22%}
-  .hero-fluted{display:none}
+  .hero-fluted{left:56%;z-index:2;pointer-events:none}
   .hero::before{display:none}
   .hero-inner{
     position:relative;left:auto;top:auto;width:100%;max-width:none;margin:0;
@@ -374,6 +374,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:768px){
   .hero-photo{height:min(48vh,420px)}
   .hero-photo .rimg,.rimg--hero{object-position:76% 20%}
+  .hero-fluted{left:62%}
   .hero-title{font-size:clamp(2.1rem,11vw,3rem);max-width:72vw}
   .hero-inner{padding:26px 5vw 36px}
 }
@@ -402,8 +403,8 @@ a{color:inherit;text-decoration:none}
   <div class="hero-photo">
     <div class="ph"><svg class="figure" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="1.1"/><path d="M4 22c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg><span class="ph-tag">Sem přijde fotka modelky</span></div>
     <img class="rimg rimg--hero" src="/lume/img/hero-model.jpg?v=10" alt="LUMÉ — beauty model" loading="eager" decoding="async">
+    <div class="hero-fluted" aria-hidden="true"></div>
   </div>
-  <div class="hero-fluted" aria-hidden="true"></div>
 
   <div class="hero-inner">
     <div class="hero-title gold"><span>BEAUTY</span><span>&amp; CARE</span><span>STUDIO</span></div>

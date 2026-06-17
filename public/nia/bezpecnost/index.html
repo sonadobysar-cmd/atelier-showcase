@@ -56,6 +56,7 @@ a{color:inherit;text-decoration:none}
 .page-head{background:var(--black);color:var(--white);padding:clamp(120px,14vw,150px) 0 clamp(40px,7vw,64px);text-align:center}
 .page-head .wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
 .page-head h1{font-family:var(--display);font-weight:500;font-size:clamp(2.2rem,5.5vw,3.8rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.06;margin-top:8px}
+.page-head h1 .grad-data{text-transform:lowercase;letter-spacing:.04em}
 .page-head .lead{max-width:52ch;font-size:1rem;color:rgba(255,255,255,.62);margin-top:8px;line-height:1.7}
 .page-head .eyebrow{color:rgba(255,255,255,.5)}
 .page-back{align-self:flex-start;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.65;margin-bottom:16px;transition:opacity .3s}
@@ -103,7 +104,7 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
 
 .footer{background:var(--burgundy2);color:rgba(255,255,255,.75);padding:64px 0 36px}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:36px}
-.foot-brand{font-family:var(--display);font-size:clamp(2rem,6vw,3.5rem);line-height:1.04;color:var(--white);display:flex;flex-direction:column}
+.foot-brand{font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.4rem);line-height:1.1;color:var(--white);display:block;white-space:nowrap;letter-spacing:.06em}
 .foot-brand::after{content:'';display:block;width:min(90px,20vw);height:2px;margin-top:14px;background:var(--burgundy-glow);opacity:.7;border-radius:var(--r-pill)}
 .foot-links{display:flex;gap:22px;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap}
 .foot-links a{color:rgba(255,255,255,.65)}
@@ -155,7 +156,7 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
   <div class="wrap">
     <a href="/nia" class="page-back" data-cursor>← Zpět na hlavní</a>
     <span class="eyebrow">Transparentně &amp; zodpovědně</span>
-    <h1>Bezpečnost &amp; <span class="grad">data</span></h1>
+    <h1>Bezpečnost &amp; <span class="grad grad-data">data</span></h1>
     <p class="lead">Jak chráníme weby, které stavíme — od ukázkových dem po ostrý provoz u klientů. Bez strašení, ale s jasnými pravidly.</p>
     <p class="page-updated">Poslední aktualizace: červen 2026</p>
   </div>
@@ -200,8 +201,6 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
       <li>neodesílají reálné objednávky, registrace ani platby.</li>
     </ul>
     <p class="note"><b>Demo badge</b> — u ukázkových webů je v patičce upozornění, že jde o prezentaci. Při ostrém spuštění u klienta demo režim vypínáme a napojíme reálné služby.</p>
-    <h3>Tento web (nia.cz / portfolio Nia)</h3>
-    <p>Kontaktní a konzultační formuláře otevřou <strong>e-mailového klienta</strong> (mailto) — zpráva odejde až po tvém potvrzení v mailu. Neukládáme ji do databáze na serveru.</p>
   </div>
 </section>
 
@@ -315,7 +314,7 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
 <footer class="footer">
   <div class="wrap" style="max-width:1180px">
     <div class="foot-top">
-      <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
+      <div class="foot-brand">Nia Dobyšar</div>
       <div class="foot-links">
         <a href="/nia/projekty">Práce</a>
         <a href="/nia#studio">Studio</a>
@@ -328,7 +327,6 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
     </div>
     <div class="foot-bot">
       <span>© Nia Dobyšar — Webdesign studio</span>
-      <span>Navrženo &amp; postaveno s láskou ✦</span>
     </div>
   </div>
 </footer>

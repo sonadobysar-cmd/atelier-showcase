@@ -368,7 +368,7 @@ img{display:block;max-width:100%}
 .foot-links a{color:rgba(255,255,255,.65)}
 .foot-links a:hover{color:var(--white)}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:44px}
-.foot-brand{font-family:var(--display);font-size:clamp(2.2rem,6.5vw,4.5rem);line-height:1.04;display:flex;flex-direction:column;align-items:flex-start;gap:.1em}
+.foot-brand{font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.8rem);line-height:1.1;display:block;white-space:nowrap;letter-spacing:.06em;color:var(--white)}
 .foot-brand::after{content:'';display:block;width:min(110px,22vw);height:2px;margin-top:16px;border-radius:var(--r-pill)}
 .foot-links{display:flex;gap:28px;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;flex-wrap:wrap}
 .foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.08em;font-weight:300}
@@ -491,6 +491,14 @@ img{display:block;max-width:100%}
   .work-item{margin-bottom:56px;padding-bottom:48px}
   .work-item.is-active::before{left:0;right:0}
   .studio-photo{margin:0 auto}
+}
+@media(max-width:768px){
+  .work-mobile-head{margin-bottom:24px}
+  .work-mobile-head .idx{margin-top:2px}
+  .work-mobile-head h2{margin-top:8px}
+  .work .sec-head.centered{margin-bottom:28px}
+  .work{padding-top:clamp(48px,10vw,72px)}
+  .work-item:first-of-type{margin-top:0;padding-top:0}
 }
 @media(max-width:760px){
   .device-suite .ds-row{min-height:clamp(200px,52vw,280px)}
@@ -865,7 +873,7 @@ img{display:block;max-width:100%}
   <footer class="footer">
     <div class="wrap">
       <div class="foot-top">
-        <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
+        <div class="foot-brand">Nia Dobyšar</div>
         <div class="foot-links">
           <a href="/nia/projekty">Práce</a><a href="/nia#studio">Studio</a><a href="/nia#sluzby">Ceník</a><a href="/nia#konzultace">Konzultace</a><a href="/nia#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
@@ -873,7 +881,6 @@ img{display:block;max-width:100%}
       </div>
       <div class="foot-bot">
         <span>© Nia Dobyšar — Webdesign studio</span>
-        <span>Navrženo &amp; postaveno s láskou ✦</span>
       </div>
     </div>
   </footer>

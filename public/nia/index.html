@@ -261,6 +261,10 @@ img{display:block;max-width:100%}
 .studio-lead{font-family:var(--display);font-weight:500;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.3;letter-spacing:.03em;text-transform:uppercase;color:var(--white)}
 .studio-lead::after{width:56px;background:var(--burgundy-glow);opacity:.75}
 .studio-text{margin-top:28px;font-size:.94rem;line-height:1.9;color:rgba(255,255,255,.68);max-width:480px;font-weight:300}
+.studio-original{margin-top:22px;font-size:.94rem;line-height:1.85;color:rgba(255,255,255,.78);max-width:520px;font-weight:300}
+.studio-keys{display:flex;flex-wrap:wrap;gap:8px 0;margin-top:18px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--burgundy-glow);font-weight:400}
+.studio-keys span{display:inline-flex;align-items:center}
+.studio-keys span:not(:last-child)::after{content:'·';margin:0 14px;opacity:.55}
 .studio-quote{margin-top:40px;padding:32px 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
 .studio-quote p{font-family:var(--script);font-style:normal;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1.2;color:var(--white);font-weight:400}
 .studio-shots figure{border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
@@ -281,14 +285,18 @@ img{display:block;max-width:100%}
 .price .pbtn{border:none;border-radius:var(--r-pill);border-bottom:none;padding:14px 24px;background:var(--burgundy3);color:var(--white);transition:background .35s,transform .35s var(--ease)}
 .price .pbtn:hover{background:var(--burgundy4);color:var(--white);border-color:transparent;transform:translateY(-2px)}
 .price-note{text-align:center;margin-top:36px;font-size:.86rem;color:var(--muted);font-weight:300}
-.sluzby-sub{margin-top:clamp(72px,10vw,104px);padding-top:clamp(48px,8vw,72px);border-top:1px solid var(--line)}
-.obsah-kluc{margin-top:clamp(56px,8vw,80px);padding:clamp(40px,6vw,56px) clamp(28px,5vw,48px);background:var(--white);border-radius:var(--r-xl);box-shadow:var(--shadow)}
+.sluzby-sub{margin-top:clamp(72px,10vw,104px);padding-top:clamp(48px,8vw,72px);border-top:1px solid var(--line);padding-bottom:0}
+.obsah-kluc{margin-top:clamp(48px,7vw,72px);padding:clamp(40px,6vw,56px) clamp(28px,5vw,48px);background:var(--white);border-radius:var(--r-xl);box-shadow:var(--shadow)}
 .obsah-kluc-inner{max-width:640px;margin:0 auto;text-align:center}
 .obsah-kluc h2{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.8vw,2.4rem);line-height:1.12;letter-spacing:.02em;text-transform:uppercase;color:var(--black);margin-top:12px}
 .obsah-kluc h2 .grad{font-size:1.15em}
 .obsah-kluc ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin:28px auto 0;max-width:460px;text-align:left}
 .obsah-kluc li{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;line-height:1.55;color:var(--ink);font-weight:300}
 .obsah-kluc li::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--burgundy3);flex:none;margin-top:8px;opacity:.8}
+.obsah-kluc-list{max-width:520px}
+.obsah-kluc-list li{justify-content:space-between;gap:16px}
+.obsah-kluc-list li span:first-child{flex:1}
+.obsah-kluc-list li strong{font-weight:500;color:var(--burgundy3);white-space:nowrap;font-size:.86rem}
 .obsah-kluc-price{font-size:.88rem;color:var(--muted);margin:24px 0 20px;line-height:1.65;font-weight:300}
 .obsah-kluc .btn{background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;padding:16px 32px}
 .obsah-kluc .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
@@ -352,7 +360,7 @@ img{display:block;max-width:100%}
 .foot-links a{color:rgba(255,255,255,.65)}
 .foot-links a:hover{color:var(--white)}
 .foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:44px}
-.foot-brand{font-family:var(--display);font-size:clamp(2.2rem,6.5vw,4.5rem);line-height:1.04;display:flex;flex-direction:column;align-items:flex-start;gap:.1em}
+.foot-brand{font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.8rem);line-height:1.1;display:block;white-space:nowrap;letter-spacing:.06em;color:var(--white)}
 .foot-brand::after{content:'';display:block;width:min(110px,22vw);height:2px;margin-top:16px;border-radius:var(--r-pill)}
 .foot-links{display:flex;gap:28px;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;flex-wrap:wrap}
 .foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:32px;border-top:1px solid rgba(255,255,255,.08);font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.08em;font-weight:300}
@@ -495,6 +503,28 @@ img{display:block;max-width:100%}
   .price .pk{letter-spacing:.12em}
   .price .pbtn{padding:9px 6px;font-size:.46rem}
 }
+@media(max-width:768px){
+  .feat-spot{grid-template-columns:1fr;gap:20px;padding-bottom:clamp(32px,7vw,48px)}
+  .feat-spot-thumb{order:1;aspect-ratio:16/10}
+  .feat-spot-copy{order:2;position:relative;z-index:2;padding-top:4px}
+  .feat-spot-thumb .live-poster b,.feat-spot-thumb .live-poster span:not(.play):not(.live-spin){display:none}
+  .feat-spot-title{margin-top:8px}
+  .studio{padding-top:clamp(52px,10vw,80px);padding-bottom:clamp(52px,10vw,80px)}
+  .studio .sec-head.centered{margin-bottom:36px}
+  .studio-grid{gap:28px}
+  .studio-shots{margin-top:28px;gap:12px}
+  .studio-shots img{object-fit:cover;object-position:center top}
+  .price-carousel{margin:0 calc(-1 * clamp(12px,3vw,6vw));padding:0 clamp(12px,3vw,6vw);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+  .price-carousel::-webkit-scrollbar{display:none}
+  .price-carousel .price-grid{display:flex;width:max-content;gap:12px;align-items:stretch}
+  .price-carousel .price{flex:0 0 min(86vw,300px);scroll-snap-align:center;min-height:100%}
+  .price-carousel .price .pdesc{display:block;font-size:.82rem}
+  .splatky{padding-bottom:clamp(36px,8vw,52px)}
+  .konzultace{padding-top:clamp(40px,8vw,56px)}
+  .proj-gallery-head{padding-bottom:clamp(28px,6vw,40px)}
+  .proj-gallery{padding-top:clamp(56px,10vw,88px);padding-bottom:clamp(48px,8vw,72px)}
+  .proj-teaser-cta{margin-top:clamp(32px,6vw,48px);padding-bottom:clamp(32px,6vw,48px)}
+}
 @media(max-width:760px){
   .hero-name-layer{padding:48px 0 12vh}
   .hero-name-marquee-track span{font-size:clamp(3rem,22vw,6rem)}
@@ -502,7 +532,6 @@ img{display:block;max-width:100%}
   .hero-stage{padding:88px 4vw 28px}
   .proj-gallery-script{transform:none}
   .editorial-intro{padding:clamp(48px,10vw,72px) 6vw}
-  .feat-spot{padding-bottom:clamp(40px,8vw,56px)}
   .foot-top{flex-direction:column;align-items:flex-start;gap:24px}
   .konz-tabs{flex-direction:column}
   .konz-tab{min-width:0}
@@ -651,6 +680,8 @@ img{display:block;max-width:100%}
       <div class="reveal">
         <p class="studio-lead">Navrhuju a stavím weby, které vypadají, jako by je dělala velká značka — i když za nimi stojí jeden člověk.</p>
         <p class="studio-text">Každý projekt je čistý, moderní a do detailu promyšlený. Vlastní typografie, vlastní identita, žádné šablony. Od prázdné stránky po hotový web, který prodává dřív, než se dočte.</p>
+        <p class="studio-original">Nedělám weby ze šablon. Každý vzniká od nuly — s vlastním nápadem, kreativitou a rukopisem, aby vypadal jako vy, ne jako kdokoli jiný.</p>
+        <p class="studio-keys" aria-label="Klíčové hodnoty"><span>Originalita</span><span>Kreativita</span><span>Vlastní rukopis</span></p>
         <blockquote class="studio-quote">
           <p>„Web má být krásný ještě předtím, než někdo přečte první větu.“</p>
           <cite>— Nia</cite>
@@ -682,6 +713,7 @@ img{display:block;max-width:100%}
       </div>
       <span class="idx">ceny orientační</span>
     </div>
+    <div class="price-carousel">
     <div class="price-grid">
       <div class="price reveal">
         <span class="pk">Landing</span>
@@ -711,33 +743,18 @@ img{display:block;max-width:100%}
         <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
       </div>
     </div>
-    <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
-
-    <div class="obsah-kluc reveal">
-      <div class="obsah-kluc-inner">
-        <span class="eyebrow">Doplněk</span>
-        <h2>Nemáte texty ani fotky? <span class="grad">Vyřeším to za vás.</span></h2>
-        <p class="sec-lead">Obsah na klíč — napíšu texty, vyberu nebo zajistím fotky. Web bude hotový, i když přijdete s prázdnýma rukama.</p>
-        <ul>
-          <li>Texty na web na míru (copywriting)</li>
-          <li>Výběr a úprava fotek (AI, stock i vaše vlastní)</li>
-          <li>Zajištění focení (fotograf na míru — kavárna, produkty, portrét)</li>
-          <li>Jednoduchá grafika a sociální šablony</li>
-        </ul>
-        <p class="obsah-kluc-price">Příplatek od 3 000 Kč podle rozsahu — upřesníme na konzultaci.</p>
-        <a href="#konzultace" class="btn" data-cursor>Mám zájem</a>
-      </div>
     </div>
+    <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
 
     <div class="sluzby-sub">
       <div class="sec-head centered reveal">
         <div>
           <span class="eyebrow">Paušál</span>
           <h2>Správa <span class="grad">webu</span><span class="rule"></span></h2>
-          <p class="sec-lead">aby web žil a vy měli klid</p>
         </div>
         <span class="idx">měsíční péče</span>
       </div>
+      <div class="price-carousel">
       <div class="price-grid">
         <div class="price reveal">
           <span class="pk">Paušál</span>
@@ -782,7 +799,28 @@ img{display:block;max-width:100%}
           <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
         </div>
       </div>
+      </div>
       <p class="price-note">Větší úpravy nad rámec paušálu: 700 Kč / hodina.</p>
+    </div>
+
+    <div class="obsah-kluc reveal">
+      <div class="obsah-kluc-inner">
+        <span class="eyebrow">Doplněk</span>
+        <h2>Nemáte texty ani fotky? <span class="grad">Vyřeším to za vás.</span></h2>
+        <p class="sec-lead">Obsah na klíč — napíšu texty, vyberu nebo zajistím fotky. Web bude hotový, i když přijdete s prázdnýma rukama.</p>
+        <ul class="obsah-kluc-list">
+          <li><span>Texty na web na míru</span><strong>od 2 000 Kč</strong></li>
+          <li><span>5 AI fotek</span><strong>od 500 Kč</strong></li>
+          <li><span>10 AI fotek</span><strong>od 900 Kč</strong></li>
+          <li><span>Pomoc s nafocením / natáčením kontentu</span><strong>od 2 500 Kč</strong></li>
+          <li><span>Výběr a nákup stock fotek</span><strong>od 300 Kč</strong></li>
+          <li><span>Grafika na míru</span><strong>od 800 Kč</strong></li>
+          <li><span>Šablony na sociální sítě</span><strong>od 800 Kč</strong></li>
+          <li><span>Loga a další</span><strong>od 800 Kč</strong></li>
+        </ul>
+        <p class="obsah-kluc-price">Finální cenu doplnění upřesníme na konzultaci podle rozsahu.</p>
+        <a href="#konzultace" class="btn" data-cursor>Mám zájem</a>
+      </div>
     </div>
   </div>
 </section>
@@ -791,7 +829,7 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <div class="sec-head centered reveal">
       <div>
-        <span class="eyebrow">Web jako služba</span>
+        <span class="eyebrow">Web na splátky</span>
         <h2>Web bez <span class="grad">starostí</span><span class="rule"></span></h2>
         <p class="sec-lead">Nový web na splátky — od 2 000 Kč měsíčně. Tvorba, hosting i správa v jednom.</p>
       </div>
@@ -887,7 +925,7 @@ img{display:block;max-width:100%}
   <footer class="footer">
     <div class="wrap">
       <div class="foot-top">
-        <div class="foot-brand"><span class="sig">Nia</span>Dobyšar</div>
+        <div class="foot-brand">Nia Dobyšar</div>
         <div class="foot-links">
           <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
@@ -895,7 +933,6 @@ img{display:block;max-width:100%}
       </div>
       <div class="foot-bot">
         <span>© Nia Dobyšar — Webdesign studio</span>
-        <span>Navrženo &amp; postaveno s láskou ✦</span>
       </div>
     </div>
   </footer>
@@ -916,6 +953,11 @@ img{display:block;max-width:100%}
 })();
 var isCoarse=window.matchMedia('(pointer:coarse)').matches;
 function isMobilePreview(){return isCoarse||window.matchMedia('(max-width:1024px)').matches;}
+function isMobileLayout(){return window.matchMedia('(max-width:768px)').matches;}
+function pgIframeAllowed(){
+  if(!isMobilePreview())return true;
+  return isMobileLayout();
+}
 
 function applyStaticPreview(live,thumb){
   if(!live||live.dataset.static)return;
@@ -1083,8 +1125,10 @@ function unmountIframe(live){
 }
 
 function mountIframe(live){
-  if(isMobilePreview())return;
   if(!live||live.dataset.mounted||live.dataset.static)return;
+  var isPg=live.hasAttribute('data-pg');
+  if(isPg&&!pgIframeAllowed())return;
+  if(!isPg&&isMobilePreview())return;
   var src=live.getAttribute('data-src');if(!src)return;
   ensureLiveThumb(live);
   live.classList.remove('pg-idle');
@@ -1137,7 +1181,7 @@ function getCenterPgLive(){
 }
 
 function syncPgActiveIframe(){
-  if(isMobilePreview())return;
+  if(!pgIframeAllowed())return;
   var live=getCenterPgLive();
   if(!live&&pgMountedLive)return;
   if(live===pgMountedLive)return;
@@ -1161,7 +1205,7 @@ function tickPgWatch(ts){
 }
 
 function startPgWatch(){
-  if(pgWatchOn||isMobilePreview())return;
+  if(pgWatchOn||!pgIframeAllowed())return;
   pgWatchOn=true;
   pgWatchLast=0;
   syncPgActiveIframe();
@@ -1177,7 +1221,7 @@ function stopPgWatch(){
 }
 
 var pgGallery=document.getElementById('projGallery');
-if(pgGallery&&!isMobilePreview()){
+if(pgGallery){
   new IntersectionObserver(function(es){
     es.forEach(function(en){
       if(en.isIntersecting)startPgWatch();
@@ -1209,11 +1253,13 @@ if(isMobilePreview()){
   document.querySelectorAll('.feat-spot .live[data-src]').forEach(function(l){
     applyStaticPreview(l,l.getAttribute('data-thumb'));
   });
+}
+if(isMobilePreview()&&!isMobileLayout()){
   document.querySelectorAll('.pg-live[data-src]').forEach(function(l){
     ensureLiveThumb(l);
     applyStaticPreview(l,l.getAttribute('data-thumb')||'');
   });
-}else{
+}else if(!isMobilePreview()){
   document.querySelectorAll('.feat-spot .live[data-src]').forEach(function(live){
     ensureLiveThumb(live);
     var poster=live.querySelector('.live-poster');

@@ -134,7 +134,7 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   #obory{padding:48px 0}
   #cenik{padding:56px 0 32px}
   #galerie{padding:32px 0 56px}
-  #rezervace{padding:56px 0 72px}
+  #rezervace{padding:56px 0 48px}
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-photo{height:48vh}
   .hero-photo img{object-position:55% 18%}
@@ -351,12 +351,19 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
 .sc-spark{position:absolute;pointer-events:none;font-size:1rem;z-index:5;animation:scPop .8s ease-out forwards}
 @keyframes scPop{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1.4) translateY(-30px) rotate(40deg);opacity:0}}
 
-/* Najdi svůj look — popisek mobil/tablet vs desktop (na konci kvůli pořadí v CSS) */
-.mirror-head-desc--desktop{display:block}
-.mirror-head-desc--mobile{display:none}
+/* mobil + tablet — patička bez bílého pruhu, bez horizontálního scrollu */
 @media(max-width:1024px){
-  .mirror-head-desc--desktop{display:none}
-  .mirror-head-desc--mobile{display:block}
+  html,body{max-width:100%;overflow-x:clip;background:var(--ink)}
+  body{padding-bottom:0!important;margin-bottom:0!important;min-height:0}
+  footer{
+    margin-bottom:0;
+    padding-bottom:max(36px,env(safe-area-inset-bottom,0px));
+    position:relative;
+    z-index:2;
+  }
+  .marquee{width:100%;max-width:100%;margin:28px 0 52px;left:0;right:0;transform:rotate(-1.5deg)}
+  #rezervace{padding-bottom:48px}
+  .sc-fab{bottom:calc(18px + env(safe-area-inset-bottom,0px))}
 }
 </style>
 </head>
@@ -432,8 +439,15 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <div class="mirror-head">
       <span class="eyebrow">Signature experience</span>
       <h2 class="section-title">Najdi svůj <em>look</em></h2>
-      <p class="mirror-head-desc mirror-head-desc--desktop">Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.</p>
-      <p class="mirror-head-desc mirror-head-desc--mobile">Klikni na službu a sjeď prstem dolů k zrcadlu. Uvidíš, jak služba reálně vypadá. Líbí se ti? Rezervuješ jedním klikem! 🩷</p>
+      <p class="mirror-head-desc" id="mirrorHeadDesc">Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.</p>
+      <script>
+      (function(){
+        var MOBILE='Klikni na službu a sjeď prstem dolů k zrcadlu. Uvidíš, jak služba reálně vypadá. Líbí se ti? Rezervuješ jedním klikem! 🩷';
+        var DESKTOP='Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.';
+        var el=document.getElementById('mirrorHeadDesc');
+        if(el)el.textContent=matchMedia('(max-width:1024px)').matches?MOBILE:DESKTOP;
+      })();
+      </script>
     </div>
     <div class="look-grid">
       <div class="look-list" id="lookList"></div>
@@ -745,6 +759,18 @@ navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setNavO
 
 /* ===== HERO FOTKA (čistá modelka na růžovém pozadí) ===== */
 (function(){var h=document.getElementById('img-hero');if(h)h.src=BEAUTY['hero_model_pink']||ph('GLOSS',800,1000);})();
+
+/* mirror head — popisek mobil/tablet (≤1024px) vs desktop */
+(function(){
+  const MOBILE='Klikni na službu a sjeď prstem dolů k zrcadlu. Uvidíš, jak služba reálně vypadá. Líbí se ti? Rezervuješ jedním klikem! 🩷';
+  const DESKTOP='Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.';
+  const mq=window.matchMedia('(max-width:1024px)');
+  const el=document.getElementById('mirrorHeadDesc');
+  function sync(){if(el)el.textContent=mq.matches?MOBILE:DESKTOP;}
+  sync();
+  mq.addEventListener('change',sync);
+  window.addEventListener('resize',sync);
+})();
 
 /* ===== SCRATCH CARD ===== */
 (function(){

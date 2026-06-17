@@ -101,8 +101,6 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 @media(max-width:1024px){
   html{overflow-x:clip;background:var(--ink)}
   body{overflow-x:clip;margin-bottom:0;padding-bottom:0}
-  .mirror-head-desc--mobile{display:block}
-  .mirror-head-desc--desktop{display:none}
   #cenik{padding-bottom:44px}
   #galerie{padding-top:44px}
   #obory{padding:64px 0}
@@ -111,10 +109,6 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .obor-body{padding:18px 20px}
   nav{z-index:110}
   .burger{z-index:112}
-}
-@media(min-width:1025px){
-  .mirror-head-desc--mobile{display:none}
-  .mirror-head-desc--desktop{display:block}
 }
 @media(max-width:768px){
   html{overflow-x:clip;background:var(--ink)}
@@ -162,7 +156,6 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .mirror-head{text-align:center;max-width:680px;margin:0 auto 54px}
 .mirror-head .eyebrow{display:block;margin-bottom:14px}
 .mirror-head p{color:#666;margin-top:16px}
-.mirror-head-desc--mobile{display:none}
 .look-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:center;max-width:1080px;margin:0 auto}
 /* left: look chooser */
 .look-list{display:flex;flex-direction:column;gap:10px}
@@ -357,6 +350,14 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
 .sc-book:hover{transform:translateY(-2px)}
 .sc-spark{position:absolute;pointer-events:none;font-size:1rem;z-index:5;animation:scPop .8s ease-out forwards}
 @keyframes scPop{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1.4) translateY(-30px) rotate(40deg);opacity:0}}
+
+/* Najdi svůj look — popisek mobil/tablet vs desktop (na konci kvůli pořadí v CSS) */
+.mirror-head-desc--desktop{display:block}
+.mirror-head-desc--mobile{display:none}
+@media(max-width:1024px){
+  .mirror-head-desc--desktop{display:none}
+  .mirror-head-desc--mobile{display:block}
+}
 </style>
 </head>
 <body>

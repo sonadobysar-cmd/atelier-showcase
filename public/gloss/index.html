@@ -99,6 +99,8 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .sc-form button{width:100%}
 }
 @media(max-width:1024px){
+  html{overflow-x:clip;background:var(--ink)}
+  body{overflow-x:clip;margin-bottom:0;padding-bottom:0}
   .mirror-head-desc--mobile{display:block}
   .mirror-head-desc--desktop{display:none}
   #cenik{padding-bottom:44px}
@@ -107,12 +109,17 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .obory-head{margin-bottom:32px}
   .obory-grid{gap:18px}
   .obor-body{padding:18px 20px}
+  nav{z-index:110}
+  .burger{z-index:112}
 }
 @media(min-width:1025px){
   .mirror-head-desc--mobile{display:none}
   .mirror-head-desc--desktop{display:block}
 }
 @media(max-width:768px){
+  html{overflow-x:clip;background:var(--ink)}
+  body{overflow-x:clip;margin-bottom:0}
+  footer{margin-bottom:0}
   #cenik{padding-bottom:36px}
   #galerie{padding-top:36px}
   #obory{padding:52px 0}

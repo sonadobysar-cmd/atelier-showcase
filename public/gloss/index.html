@@ -92,16 +92,48 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .hero-stripe{display:none}
   .hero-photo{position:relative;width:100%;height:54vh;clip-path:polygon(0 0,100% 0,100% 88%,0 100%)}
   .hero-photo img{object-position:55% 14%}
-  .hero-spark{top:24px;left:auto;right:32px}
+  .hero-spark{top:calc(env(safe-area-inset-top,0px) + 82px);left:auto;right:20px;z-index:1;font-size:1.55rem;pointer-events:none}
   .hero-grid{padding:40px 7vw 64px}
   .hero-badge{position:static;margin-top:22px;box-shadow:0 8px 24px rgba(255,79,163,.2)}
-  body{padding-bottom:88px}
   .sc-form{flex-direction:column}
   .sc-form button{width:100%}
 }
+@media(max-width:1024px){
+  .mirror-head-desc--mobile{display:block}
+  .mirror-head-desc--desktop{display:none}
+  #cenik{padding-bottom:44px}
+  #galerie{padding-top:44px}
+  #obory{padding:64px 0}
+  .obory-head{margin-bottom:32px}
+  .obory-grid{gap:18px}
+  .obor-body{padding:18px 20px}
+}
+@media(min-width:1025px){
+  .mirror-head-desc--mobile{display:none}
+  .mirror-head-desc--desktop{display:block}
+}
+@media(max-width:768px){
+  #cenik{padding-bottom:36px}
+  #galerie{padding-top:36px}
+  #obory{padding:52px 0}
+  .obory-head{margin-bottom:24px}
+  .obory-head p{margin-top:10px}
+  .obory-grid{gap:12px}
+  .obor-body{padding:14px 16px 16px}
+  .obor-photo{aspect-ratio:5/4}
+  .obor-toggle{margin-top:10px}
+  .obor-procs-inner{padding-top:12px;margin-top:12px}
+  .obor-proc{padding:6px 0}
+  footer{padding-bottom:calc(36px + env(safe-area-inset-bottom,0px))}
+  body{padding-bottom:0}
+  .hero-spark{top:calc(env(safe-area-inset-top,0px) + 78px);right:16px;font-size:1.35rem}
+}
 @media(max-width:520px){
-  #zrcadlo,#obory,#cenik,#galerie,#kontakt{padding:56px 0}
-  #rezervace{padding:56px 0 88px}
+  #zrcadlo,#kontakt{padding:56px 0}
+  #obory{padding:48px 0}
+  #cenik{padding:56px 0 32px}
+  #galerie{padding:32px 0 56px}
+  #rezervace{padding:56px 0 72px}
   .hero-cta{flex-direction:column;align-items:stretch}
   .hero-photo{height:48vh}
   .hero-photo img{object-position:55% 18%}
@@ -123,6 +155,7 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .mirror-head{text-align:center;max-width:680px;margin:0 auto 54px}
 .mirror-head .eyebrow{display:block;margin-bottom:14px}
 .mirror-head p{color:#666;margin-top:16px}
+.mirror-head-desc--mobile{display:none}
 .look-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:center;max-width:1080px;margin:0 auto}
 /* left: look chooser */
 .look-list{display:flex;flex-direction:column;gap:10px}
@@ -391,7 +424,8 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
     <div class="mirror-head">
       <span class="eyebrow">Signature experience</span>
       <h2 class="section-title">Najdi svůj <em>look</em></h2>
-      <p>Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.</p>
+      <p class="mirror-head-desc mirror-head-desc--desktop">Klikni na styl a ve vlnitém zrcadle uvidíš přesně, jak budeš vypadat. Líbí se ti? Rezervuj si ho jedním klikem.</p>
+      <p class="mirror-head-desc mirror-head-desc--mobile">Klikni na službu a sjeď prstem dolů k zrcadlu. Uvidíš, jak služba reálně vypadá. Líbí se ti? Rezervuješ jedním klikem! 🩷</p>
     </div>
     <div class="look-grid">
       <div class="look-list" id="lookList"></div>

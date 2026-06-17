@@ -209,7 +209,8 @@ img{display:block;max-width:100%}
 .live-static .live-poster{opacity:1!important;pointer-events:none;background:linear-gradient(180deg,transparent 40%,rgba(8,6,6,.75))}
 .live-static .live-poster .live-spin,.live-static .live-poster .play{display:none!important}
 .live-thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:1}
-.pg-live .live-poster{background:linear-gradient(165deg,#120810,#3a1828)}
+.pg-live.pg-idle{background:transparent;animation:none}
+.pg-live.is-loading{background:linear-gradient(110deg,var(--paper) 8%,#fff 18%,var(--paper) 33%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
 
 /* WORK */
 .work{background:var(--white);padding:var(--section) 0}
@@ -1005,7 +1006,7 @@ function makePgCard(p,i){
   var screen=document.createElement('div');screen.className='pg-card-screen';
   if(p.url){
     var live=document.createElement('div');
-    live.className='live is-loading pg-live';
+    live.className='live pg-live pg-idle';
     live.setAttribute('data-vw','430');
     live.setAttribute('data-src',p.url);
     live.setAttribute('data-pg','1');
@@ -1076,8 +1077,8 @@ function unmountIframe(live){
   var f=live.querySelector('iframe');
   if(f)f.remove();
   delete live.dataset.mounted;
-  live.classList.remove('is-loaded','has-iframe','iframe-ready');
-  live.classList.add('is-loading');
+  live.classList.remove('is-loaded','has-iframe','iframe-ready','is-loading');
+  live.classList.add('pg-idle');
   if(pgMountedLive===live)pgMountedLive=null;
 }
 
@@ -1086,6 +1087,8 @@ function mountIframe(live){
   if(!live||live.dataset.mounted||live.dataset.static)return;
   var src=live.getAttribute('data-src');if(!src)return;
   ensureLiveThumb(live);
+  live.classList.remove('pg-idle');
+  live.classList.add('is-loading');
   var vw=parseFloat(live.getAttribute('data-vw'))||1280;
   var f=document.createElement('iframe');
   f.title='Živá ukázka';
@@ -1100,14 +1103,22 @@ function mountIframe(live){
     live.classList.add('iframe-ready');
     fitOne(live);
   });
+  f.addEventListener('error',function(){
+    live.classList.remove('is-loading','has-iframe','iframe-ready');
+    delete live.dataset.mounted;
+    f.remove();
+    live.classList.add('pg-idle');
+  });
   f.src=src;
   requestAnimationFrame(function(){fitOne(live);});
 }
 
 function getCenterPgLive(){
   var viewport=document.querySelector('.proj-gallery-viewport');
+  var wrap=document.querySelector('.proj-gallery-track-wrap');
   if(!viewport)return null;
   var vr=viewport.getBoundingClientRect();
+  var wr=wrap?wrap.getBoundingClientRect():vr;
   var cx=vr.left+vr.width/2;
   var cy=vr.top+vr.height/2;
   var best=null,bestDist=Infinity;
@@ -1115,7 +1126,8 @@ function getCenterPgLive(){
     var card=live.closest('.pg-card');
     if(!card)return;
     var r=card.getBoundingClientRect();
-    if(r.right<vr.left-40||r.left>vr.right+40)return;
+    if(r.bottom<wr.top||r.top>wr.bottom)return;
+    if(r.right<vr.left-80||r.left>vr.right+80)return;
     var dx=(r.left+r.width/2)-cx;
     var dy=(r.top+r.height/2)-cy;
     var d=dx*dx+dy*dy;
@@ -1127,6 +1139,7 @@ function getCenterPgLive(){
 function syncPgActiveIframe(){
   if(isMobilePreview())return;
   var live=getCenterPgLive();
+  if(!live&&pgMountedLive)return;
   if(live===pgMountedLive)return;
   if(pgMountedLive)unmountIframe(pgMountedLive);
   document.querySelectorAll('.pg-card').forEach(function(c){c.classList.remove('on');});
@@ -1203,14 +1216,16 @@ if(isMobilePreview()){
 }else{
   document.querySelectorAll('.feat-spot .live[data-src]').forEach(function(live){
     ensureLiveThumb(live);
+    var poster=live.querySelector('.live-poster');
+    if(poster){
+      poster.addEventListener('click',function(){mountIframe(live);});
+    }
   });
   var featIo=new IntersectionObserver(function(es){
     es.forEach(function(en){
-      if(!en.isIntersecting)return;
-      mountIframe(en.target);
-      featIo.unobserve(en.target);
+      if(en.isIntersecting)mountIframe(en.target);
     });
-  },{rootMargin:'100px',threshold:.2});
+  },{rootMargin:'80px',threshold:.15});
   document.querySelectorAll('.feat-spot .live[data-src]').forEach(function(l){featIo.observe(l);});
 }
 

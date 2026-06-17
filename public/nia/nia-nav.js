@@ -9,11 +9,14 @@
   style.textContent =
     "@media(max-width:980px){" +
     "html.nav-open,body.nav-open{overflow:hidden}" +
-    ".nav-links.open{z-index:300!important;pointer-events:auto!important;touch-action:manipulation}" +
-    ".nav-scrim{z-index:290!important;touch-action:manipulation}" +
-    ".burger.open{z-index:301!important}" +
+  /* scrim must stay BELOW the open drawer — drawer lives inside .nav (z-index 200) */
+    "body.nav-open .nav{z-index:320!important}" +
+    "body.nav-open .nav-scrim{z-index:310!important;display:block!important}" +
+    ".nav-links.open{z-index:321!important;pointer-events:auto!important;touch-action:manipulation}" +
+    ".burger.open{z-index:322!important;position:relative}" +
     ".nav-links.open a{display:flex;align-items:center;min-height:44px;width:100%;" +
-    "pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;cursor:pointer}" +
+    "position:relative;z-index:1;pointer-events:auto;touch-action:manipulation;" +
+    "-webkit-tap-highlight-color:rgba(255,255,255,.12);cursor:pointer}" +
     "}";
   document.head.appendChild(style);
 
@@ -56,50 +59,19 @@
     var h = (href || "").trim();
     if (!h || h === "#") return null;
     if (h.charAt(0) === "#") {
-      return { path: currentPath(), hash: h.slice(1), external: false };
+      return { path: currentPath(), hash: h.slice(1), samePage: true };
     }
     var i = h.indexOf("#");
     if (i > -1) {
+      var path = normalizePath(h.slice(0, i));
       return {
-        path: normalizePath(h.slice(0, i)),
+        path: path,
         hash: h.slice(i + 1),
-        external: normalizePath(h.slice(0, i)) !== currentPath(),
+        samePage: path === currentPath(),
       };
     }
-    return { path: normalizePath(h), hash: "", external: normalizePath(h) !== currentPath() };
-  }
-
-  function followLink(a) {
-    var href = (a.getAttribute("href") || "").trim();
-    var dest = parseLink(href);
-    if (!dest) return;
-
-    var wasOpen = navLinks.classList.contains("open");
-    if (wasOpen) setMenuOpen(false);
-
-    if (dest.path === currentPath() && dest.hash) {
-      setTimeout(function () {
-        scrollToHash(dest.hash);
-        if (history.replaceState) {
-          history.replaceState(null, "", "#" + dest.hash);
-        } else {
-          location.hash = dest.hash;
-        }
-      }, wasOpen ? 60 : 0);
-      return;
-    }
-
-    if (dest.external || dest.path !== currentPath()) {
-      var target = a.href;
-      if (wasOpen) {
-        setTimeout(function () {
-          window.location.assign(target);
-        }, 40);
-      } else {
-        window.location.assign(target);
-      }
-      return;
-    }
+    var pathOnly = normalizePath(h);
+    return { path: pathOnly, hash: "", samePage: pathOnly === currentPath() };
   }
 
   if (nav) {
@@ -128,17 +100,38 @@
     if (e.key === "Escape" && navLinks.classList.contains("open")) setMenuOpen(false);
   });
 
-  function onNavLinkActivate(e) {
-    var a = e.target.closest("a[href]");
-    if (!a || !navLinks.contains(a)) return;
-    var href = (a.getAttribute("href") || "").trim();
-    var dest = parseLink(href);
-    if (!dest) return;
-    e.preventDefault();
-    followLink(a);
-  }
+  navLinks.addEventListener(
+    "click",
+    function (e) {
+      var a = e.target.closest("a[href]");
+      if (!a || !navLinks.contains(a)) return;
 
-  navLinks.addEventListener("click", onNavLinkActivate, false);
+      var dest = parseLink((a.getAttribute("href") || "").trim());
+      if (!dest) return;
+
+      var menuWasOpen = navLinks.classList.contains("open");
+      if (menuWasOpen) setMenuOpen(false);
+
+      if (dest.samePage && dest.hash) {
+        e.preventDefault();
+        scrollToHash(dest.hash);
+        if (history.replaceState) {
+          history.replaceState(null, "", "#" + dest.hash);
+        } else {
+          location.hash = dest.hash;
+        }
+        return;
+      }
+
+      if (dest.samePage && !dest.hash) {
+        e.preventDefault();
+        return;
+      }
+
+      /* cross-page: native <a> navigation — most reliable on iOS Safari */
+    },
+    false,
+  );
 
   if (location.hash.length > 1) {
     var runHash = function () {

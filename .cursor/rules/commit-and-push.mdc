@@ -1,0 +1,30 @@
+---
+description: Po každé změně kódu vždy commit a push na remote
+alwaysApply: true
+---
+
+# Commit a push po každé změně
+
+Po **každé** úpravě souborů v repozitáři:
+
+1. Ověř `git status` a `git diff` — necommituj `.env`, klíče ani credentials.
+2. Přidej relevantní soubory (`git add`).
+3. Vytvoř commit s výstižnou zprávou (HEREDOC).
+4. **Pushni na remote** (`git push`) — bez čekání na výzvu uživatele.
+
+## Výjimky
+
+- Čistě informativní odpověď bez změny souborů → commit není potřeba.
+- Uživatel výslovně řekne „necommituj“ nebo „bez push“.
+- Commit selže kvůli hooku → oprav a vytvoř **nový** commit (ne amend, pokud to pravidla neumožňují).
+
+## Git safety
+
+- Nikdy neměň git config, nepoužívej `--force` na main/master, nepřeskakuj hooky.
+- Nepushuj, pokud uživatel explicitně zakáže push v dané zprávě.
+
+## Deploy
+
+Tento repozitář je napojený na Vercel (`atelier-showcase-cyan.vercel.app`) — push na `main` nasadí změny během ~1–2 minut.
+
+Po pushi stručně napiš commit hash a že změna je na cestě na Vercel.

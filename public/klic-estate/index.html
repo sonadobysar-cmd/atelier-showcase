@@ -63,6 +63,9 @@ a{color:inherit;text-decoration:none}
 .hd-mob a{font-size:1rem;font-weight:600;padding:4px 0}
 .hd-mob .btn{align-self:flex-start;margin-top:6px}
 body.menu-open{overflow:hidden}
+@media(max-width:768px){
+  .hd-mob .btn.btn-dark{min-height:48px;padding:14px 32px;border-radius:999px;font-size:.92rem;line-height:1.35;align-self:stretch;width:100%;max-width:100%;text-align:center;white-space:normal}
+}
 @media(max-width:1000px){.hd-nav,.hd-right .tel,.hd-right .btn{display:none}.hd-burger{display:flex}}
 
 /* hero */
@@ -216,6 +219,8 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .cinfo{display:flex;gap:30px;flex-wrap:wrap;margin-top:24px}
 .cinfo div small{display:block;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);font-weight:600;margin-bottom:3px}
 .cinfo div b{font-weight:700}
+.cinfo a{color:inherit;text-decoration:none}
+.cinfo a:hover{text-decoration:underline}
 .cform{background:#fff;border-radius:20px;padding:clamp(22px,2.6vw,30px)}
 .cform .field{margin-bottom:14px}
 .cform label{display:block;font-size:.74rem;font-weight:600;color:var(--mut);margin-bottom:7px}
@@ -436,7 +441,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
         <h2>Rádi s vámi vše probereme.</h2>
         <p class="lead">Koupě, prodej, pronájem nebo jen rada — ozvěte se a my se ozveme zpět do 24 hodin.</p>
         <div class="cinfo">
-          <div><small>E-mail</small><b>kontakt@ukazka-reality.cz</b></div>
+          <div><small>E-mail</small><b><a href="mailto:kontakt@ukazka-reality.cz">kontakt@ukazka-reality.cz</a></b></div>
           <div><small>Telefon</small><b>+420 777 123 456</b></div>
           <div><small>Kancelář</small><b>Pařížská 4, Praha 1</b></div>
         </div>

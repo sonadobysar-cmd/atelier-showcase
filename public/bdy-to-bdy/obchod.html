@@ -159,7 +159,13 @@ img{display:block;max-width:100%}
 .ft-col a:hover{color:#fff}
 .ft-bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.5)}
 .ft-bot a{color:#fff;font-weight:600}
-@media(max-width:780px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:780px){.ft-grid{grid-template-columns:1fr;gap:24px}}
+@media(max-width:560px){.pgrid{grid-template-columns:1fr;gap:20px}}
+@media(max-width:760px){
+  .announce{font-size:.6rem;line-height:1.5;padding:10px 8px;word-break:break-word}
+  .drawer-h button,.hd-icons button,.burger{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center}
+  .news-form input,.field input{font-size:16px}
+}
 
 /* velvet dark editorial */
 .edi-dark{background:radial-gradient(120% 120% at 28% -10%,#1d1d1d,#0c0c0c 62%);color:#fff}

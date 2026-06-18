@@ -69,7 +69,19 @@ a{color:inherit;text-decoration:none}
 .hd .when{font-size:.86rem;color:var(--mut);font-weight:500}
 .hd .when b{color:#fff}
 .hd .btn{padding:11px 20px;font-size:.9rem}
-@media(max-width:900px){.hd-nav a.lnk,.hd .when{display:none}}
+.hd-burger{display:none;flex-direction:column;justify-content:center;gap:6px;width:44px;height:44px;padding:0;border:none;background:transparent;cursor:pointer;margin-left:auto;color:#fff;flex:none}
+.hd-burger span{display:block;width:24px;height:2px;background:currentColor;transition:transform .3s,opacity .3s}
+.hd-burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.hd-burger.open span:nth-child(2){opacity:0}
+.hd-burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.hd-mob{position:fixed;top:104px;left:0;right:0;z-index:79;background:rgba(10,6,19,.98);border-bottom:1px solid var(--br);padding:18px 6vw 22px;display:flex;flex-direction:column;gap:14px;transform:translateY(-110%);opacity:0;pointer-events:none;transition:transform .35s ease,opacity .35s}
+.hd-mob.open{transform:none;opacity:1;pointer-events:auto}
+.hd-mob a{font-size:1rem;font-weight:600;padding:4px 0;color:var(--tx)}
+.hd-mob .when{display:block;font-size:.92rem;color:var(--mut);padding:4px 0}
+.hd-mob .when b{color:#fff}
+.hd-mob .btn{align-self:stretch;justify-content:center;margin-top:6px}
+body.menu-open{overflow:hidden}
+@media(max-width:900px){.hd-nav{display:none}.hd-burger{display:flex}}
 
 /* hero */
 .hero{padding:130px 0 84px;text-align:center;overflow:hidden}
@@ -316,6 +328,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
   :root{--promo-h:44px}
   .promo{z-index:90;background:#1a0a2e;isolation:isolate;min-height:var(--promo-h);border-bottom:1px solid rgba(168,85,247,.35)}
   .hd{top:var(--promo-h);z-index:80;background:rgba(10,6,19,.97);backdrop-filter:blur(16px)}
+  .hd-mob{top:calc(var(--promo-h) + 64px)}
   html{scroll-padding-top:calc(var(--promo-h) + 64px)}
   .hero{padding-top:calc(var(--promo-h) + 64px + 24px)}
   .hero-wrap{display:flex;flex-direction:column}
@@ -390,8 +403,16 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
       <span class="when">Živě <b class="evDate">…</b></span>
       <a class="btn btn-primary pulse" href="#registrace">Rezervovat zdarma</a>
     </nav>
+    <button class="hd-burger" id="hdBurger" type="button" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </header>
+<nav class="hd-mob" id="hdMob" aria-label="Mobilní menu">
+  <a href="#dozvis">Co získám</a>
+  <a href="#lektor">Lektorka</a>
+  <a href="#faq">Dotazy</a>
+  <span class="when">Živě <b class="evDate">…</b></span>
+  <a class="btn btn-primary pulse" href="#registrace">Rezervovat zdarma</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -672,6 +693,19 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
   }
   onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
+
+  var burger=document.getElementById('hdBurger'), mob=document.getElementById('hdMob');
+  function setMenu(on){
+    if(!burger||!mob)return;
+    burger.classList.toggle('open',on);
+    mob.classList.toggle('open',on);
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    document.body.classList.toggle('menu-open',on);
+  }
+  if(burger){
+    burger.addEventListener('click',function(){setMenu(!mob.classList.contains('open'));});
+    mob.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){setMenu(false);});});
+  }
 
   // reveal
   var rv=document.querySelectorAll('.rv');

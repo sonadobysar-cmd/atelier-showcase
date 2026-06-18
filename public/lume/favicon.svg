@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="LUMÉ">
+  <rect width="32" height="32" rx="6" fill="#E7E5DF"/>
+  <text x="16" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="14" font-weight="600" fill="#262523">L</text>
+  <line x1="9" y1="26" x2="23" y2="26" stroke="#B8923F" stroke-width="1.3" stroke-linecap="round"/>
+</svg>

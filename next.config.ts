@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
       { source: "/realitka", destination: "/klic-estate/index.html" },
       { source: "/lume", destination: "/lume/index.html" },
       { source: "/klinika", destination: "/lume/index.html" },
+      { source: "/bdy", destination: "/bdy-to-bdy/index.html" },
     ];
   },
 };

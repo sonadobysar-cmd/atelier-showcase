@@ -310,8 +310,8 @@ img{display:block;max-width:100%}
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     <a class="logo" href="index.html">BDY <span class="to">to</span> BDY</a>
     <div class="hd-icons">
-      <button aria-label="Hledat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
-      <button aria-label="Účet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
+      <button id="searchBtn" aria-label="Hledat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
+      <button id="accountBtn" aria-label="Účet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
       <button id="cartBtn" aria-label="Košík"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg><span class="cart-count" id="cartCount" data-n="0"></span></button>
     </div>
   </div>
@@ -330,7 +330,7 @@ img{display:block;max-width:100%}
         <p>Dámská fitness móda stvořená pro pohyb. Navrženo a vyrobeno s důrazem na kvalitu a detail.</p>
       </div>
       <div class="ft-col"><h4>Obchod</h4><a href="obchod.html">Legíny</a><a href="obchod.html">Podprsenky</a><a href="obchod.html">Topy</a><a href="obchod.html">Mikiny</a></div>
-      <div class="ft-col"><h4>Pomoc</h4><a href="#">Doprava</a><a href="#">Vrácení</a><a href="#">Velikosti</a><a href="index.html#kontakt">Kontakt</a></div>
+      <div class="ft-col"><h4>Pomoc</h4><a href="mailto:servis@bdytobdy.cz">Servis &amp; reklamace</a><a href="tel:+420608123456">+420 608 123 456</a><a href="index.html#kontakt">Kontakt</a></div>
       <div class="ft-col"><h4>Sledujte nás</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a></div>
     </div>
     <div class="ft-bot">
@@ -351,6 +351,7 @@ img{display:block;max-width:100%}
 </div>
 
 <script src="js/shop-core.js"></script>
+<script src="js/shop-ui.js"></script>
 <script>
 (function(){
   function find(id){for(var i=0;i<PRODUCTS.length;i++){if(PRODUCTS[i].id==id)return PRODUCTS[i];}return null;}
@@ -525,6 +526,7 @@ img{display:block;max-width:100%}
 
   document.getElementById('cartBtn').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
   render();
+  BDY_UI.init({spots:false});
 })();
 </script>
 <script>/*navmenu*/

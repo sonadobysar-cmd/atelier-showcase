@@ -244,8 +244,8 @@ img{display:block;max-width:100%}
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     <a class="logo" href="index.html">BDY <span class="to">to</span> BDY</a>
     <div class="hd-icons">
-      <button aria-label="Hledat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
-      <button aria-label="Účet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
+      <button id="searchBtn" aria-label="Hledat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button>
+      <button id="accountBtn" aria-label="Účet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg></button>
       <button id="cartBtn" aria-label="Košík"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg><span class="cart-count" id="cartCount" data-n="0"></span></button>
     </div>
   </div>
@@ -255,8 +255,8 @@ img{display:block;max-width:100%}
 <section class="hero">
   <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 16l5-5 4 4 5-6 4 5"/><circle cx="8" cy="7" r="1.6"/></svg><span class="ph-tag">Sem přijde hero fotka</span></div>
   <img class="rimg" src="img/hero.jpg" alt="">
-  <button class="spot" data-pid="1" style="left:25%;top:74%"><i></i></button>
-  <button class="spot" data-pid="2" style="left:47%;top:52%"><i></i></button>
+  <button class="spot" data-pid="1" style="left:32%;top:58%" aria-label="Legíny Sculpt"><i></i></button>
+  <button class="spot" data-pid="2" style="left:61%;top:38%" aria-label="Podprsenka Air"><i></i></button>
   <div class="hero-c">
     <span class="eyebrow">Nová kolekce · 2026</span>
     <h1>Designed <span class="it">to move.</span></h1>
@@ -284,9 +284,9 @@ img{display:block;max-width:100%}
   <div class="wrap">
     <div class="shead"><div><span class="eyebrow">Kolekce</span><h2>Shop by collection</h2></div></div>
     <div class="cols">
-      <a class="col rv" href="obchod.html"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-1.jpg" alt=""><div class="cc"><span>Léto 2026</span><h3>Summer Collection</h3></div></a>
-      <a class="col rv" href="obchod.html"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-2.jpg" alt=""><div class="cc"><span>Limitovaná edice</span><h3>Limited Edition</h3></div></a>
-      <a class="col rv" href="obchod.html"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-3.jpg" alt=""><div class="cc"><span>Novinky</span><h3>New Collection</h3></div></a>
+      <div class="col rv"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-1.jpg" alt=""><button type="button" class="spot" data-pid="1" style="left:44%;top:62%" aria-label="Legíny Sculpt"><i></i></button><a class="cc" href="obchod.html"><span>Léto 2026</span><h3>Summer Collection</h3></a></div>
+      <div class="col rv"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-2.jpg" alt=""><button type="button" class="spot" data-pid="2" style="left:50%;top:36%" aria-label="Podprsenka Air"><i></i></button><a class="cc" href="obchod.html"><span>Limitovaná edice</span><h3>Limited Edition</h3></a></div>
+      <div class="col rv"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/col-3.jpg" alt=""><button type="button" class="spot" data-pid="5" style="left:48%;top:44%" aria-label="Mikina Oversize"><i></i></button><a class="cc" href="obchod.html"><span>Novinky</span><h3>New Collection</h3></a></div>
     </div>
   </div>
 </section>
@@ -307,7 +307,7 @@ img{display:block;max-width:100%}
 <!-- EDITORIAL 2 -->
 <section class="sec">
   <div class="wrap edi rev rv">
-    <div class="edi-img"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/editorial-2.jpg" alt=""><button class="spot" data-pid="1" style="left:30%;top:72%"><i></i></button></div>
+    <div class="edi-img"><div class="ph"><span class="ph-tag">Foto</span></div><img class="rimg" src="img/editorial-2.jpg" alt=""><button type="button" class="spot" data-pid="1" style="left:34%;top:66%" aria-label="Legíny Sculpt"><i></i></button><button type="button" class="spot" data-pid="5" style="left:54%;top:30%" aria-label="Mikina Oversize"><i></i></button></div>
     <div class="edi-c">
       <span class="eyebrow">O nás</span>
       <h2>Studio to <span class="it">street.</span></h2>
@@ -328,6 +328,14 @@ img{display:block;max-width:100%}
       <button class="btn btn-dark" id="nlBtn" type="button">Přihlásit se</button>
     </div>
     <p class="ok" id="nlOk" role="status"></p>
+    <div class="contact-servis">
+      <h3>Servis &amp; reklamace</h3>
+      <p>
+        <a href="mailto:servis@bdytobdy.cz">servis@bdytobdy.cz</a><br>
+        <a href="tel:+420608123456">+420 608 123 456</a> · Po–Pá 9:00–17:00<br>
+        Vrácení do 30 dnů · reklamace do 14 dnů od doručení
+      </p>
+    </div>
   </div>
 </section>
 
@@ -339,7 +347,7 @@ img{display:block;max-width:100%}
         <p>Dámská fitness móda stvořená pro pohyb. Navrženo a vyrobeno s důrazem na kvalitu a detail.</p>
       </div>
       <div class="ft-col"><h4>Obchod</h4><a href="obchod.html">Legíny</a><a href="obchod.html">Podprsenky</a><a href="obchod.html">Topy</a><a href="obchod.html">Mikiny</a></div>
-      <div class="ft-col"><h4>Pomoc</h4><a href="#">Doprava</a><a href="#">Vrácení</a><a href="#">Velikosti</a><a href="#kontakt">Kontakt</a></div>
+      <div class="ft-col"><h4>Pomoc</h4><a href="mailto:servis@bdytobdy.cz">Servis &amp; reklamace</a><a href="tel:+420608123456">+420 608 123 456</a><a href="#kontakt">Kontakt</a></div>
       <div class="ft-col"><h4>Sledujte nás</h4><a href="#">Instagram</a><a href="#">TikTok</a><a href="#">Pinterest</a></div>
     </div>
     <div class="ft-bot">
@@ -358,6 +366,7 @@ img{display:block;max-width:100%}
 </aside>
 
 <script src="js/shop-core.js"></script>
+<script src="js/shop-ui.js"></script>
 <script>
 (function(){
   // ---- shared shop data (same array will be used on catalog/product/cart pages) ----
@@ -396,7 +405,9 @@ img{display:block;max-width:100%}
   }).join('');
   document.getElementById('bestGrid').addEventListener('click',function(e){
     var add=e.target.closest('.add');
-    if(add){e.preventDefault();addToCart(+add.dataset.id);return;}
+    if(add){e.preventDefault();e.stopPropagation();
+      BDY_UI.showSizePicker(+add.dataset.id,function(sz){addToCart(+add.dataset.id,sz);});
+      return;}
     var im=e.target.closest('.pcard-img');
     if(im){window.location.href='produkt.html?id='+im.dataset.id;}
   });
@@ -432,17 +443,7 @@ img{display:block;max-width:100%}
   });
   renderCart();
 
-  // ---- shop the look hotspots ----
-  function popHTML(p){return '<div class="spot-pop"><div class="thumb"><div class="ph"></div><img class="rimg" src="'+IMG[p.id]+'" alt="" onerror="this.remove()"></div><div class="info"><h5>'+p.name+'</h5><div class="pp">'+czk(p.price)+'</div><button class="btn btn-dark add" data-id="'+p.id+'">Přidat do košíku</button></div></div>';}
-  Array.prototype.forEach.call(document.querySelectorAll('.spot'),function(sp){
-    var p=find(+sp.dataset.pid);if(!p)return;sp.insertAdjacentHTML('beforeend',popHTML(p));
-    sp.addEventListener('click',function(e){
-      var add=e.target.closest('.add');
-      if(add){e.preventDefault();e.stopPropagation();addToCart(+add.dataset.id);return;}
-      Array.prototype.forEach.call(document.querySelectorAll('.spot.open'),function(o){if(o!==sp)o.classList.remove('open');});
-      sp.classList.toggle('open');
-    });
-  });
+  BDY_UI.init({onAddToCart:addToCart,spotsRoot:null});
 
   // ---- newsletter ----
   var nb=document.getElementById('nlBtn'),no=document.getElementById('nlOk');

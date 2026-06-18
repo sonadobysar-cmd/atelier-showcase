@@ -66,7 +66,7 @@ a{color:inherit;text-decoration:none}
 .wstrip{background:var(--caramel);overflow:hidden;line-height:0}
 .wstrip svg{display:block;width:100%;height:110px;-webkit-mask:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%)}
 .wstrip text{font-family:var(--d);font-style:italic;font-size:19px;fill:var(--cream);letter-spacing:.02em}
-@media(max-width:760px){.wstrip svg{height:84px}.wstrip text{font-size:15px}}
+@media(max-width:768px){.wstrip svg{height:92px}.wstrip text{font-size:12.5px;letter-spacing:.04em}}
 
 /* SECTION head */
 .sec{padding:110px 0}
@@ -93,8 +93,13 @@ a{color:inherit;text-decoration:none}
 .mixer-preview svg{width:100%;max-width:300px;height:auto;display:block;margin:0 auto;overflow:visible}
 .mx-name{font-family:var(--d);font-style:italic;font-size:1.5rem;color:var(--pale);margin-top:14px;min-height:1.4em}
 .mx-price{font-family:var(--d);font-weight:700;font-size:2.3rem;color:var(--gold);margin-top:2px}
-.mx-cta{margin-top:18px;font-family:var(--b);font-weight:600;font-size:.82rem;letter-spacing:.04em;color:#1d2412;background:var(--matcha);border:none;border-radius:99px;padding:14px 26px;cursor:pointer;transition:transform .2s,background .25s;width:100%;max-width:300px}
-.mx-cta:hover{background:var(--pale);transform:translateY(-2px)}
+.mx-mix-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin:18px auto 0;font-family:var(--b);color:#1d2412;background:var(--matcha);border:none;border-radius:99px;padding:15px 26px 13px;cursor:default;width:100%;max-width:300px;text-align:center}
+.mx-mix-main{font-weight:600;font-size:.9rem;line-height:1.2;letter-spacing:.03em}
+.mx-mix-sub{font-weight:500;font-size:.68rem;line-height:1.25;letter-spacing:.08em;opacity:.88}
+.mx-deliver-info{display:block;margin:14px auto 0;max-width:300px;padding:12px 18px;border-radius:12px;background:rgba(199,126,58,.16);border:1px solid rgba(199,126,58,.42);color:var(--pale);font-family:var(--b);font-size:.78rem;font-weight:600;line-height:1.45;text-align:center;cursor:default;user-select:none}
+.mx-cart-wrap{margin-top:6px;padding-top:24px;border-top:1px solid var(--line-l)}
+.mx-add-cart{width:100%;font-family:var(--b);font-weight:600;font-size:.88rem;letter-spacing:.03em;color:#1d2412;background:var(--matcha);border:none;border-radius:99px;padding:16px 22px;cursor:pointer;transition:transform .2s,background .25s}
+.mx-add-cart:hover{background:var(--pale);transform:translateY(-2px)}
 .mx-ok{font-family:var(--b);font-size:.82rem;color:var(--matcha);margin-top:12px;opacity:0;transition:opacity .4s;min-height:1.2em}
 .mx-ok.show{opacity:1}
 .mx-row{margin-bottom:26px}
@@ -364,7 +369,11 @@ a{color:inherit;text-decoration:none}
         </svg>
         <div class="mx-name" id="mxName">Matcha latte</div>
         <div class="mx-price" id="mxPrice">95&nbsp;Kč</div>
-        <button class="mx-cta" id="mxCta" type="button">Objednat &middot; rozvoz po Brně zdarma</button>
+        <div class="mx-mix-btn" aria-label="Namixuj si matchu — Tvoje matcha na míru">
+          <span class="mx-mix-main">Namixuj si matchu</span>
+          <span class="mx-mix-sub">Tvoje matcha na m&iacute;ru</span>
+        </div>
+        <p class="mx-deliver-info" role="note">U n&aacute;s m&aacute;&scaron; rozvoz po Brně zdarma!</p>
         <div class="mx-ok" id="mxOk">P&rcaron;id&aacute;no! &#10022; Rozvoz po Brně zdarma.</div>
       </div>
       <div class="mixer-opts reveal">
@@ -373,6 +382,9 @@ a{color:inherit;text-decoration:none}
         <div class="mx-row"><span class="mx-label">P&rcaron;&iacute;chu&tcaron;</span><div class="mx-pills" data-group="flavor"></div></div>
         <div class="mx-row"><span class="mx-label">Sladkost</span><div class="mx-pills" data-group="sweet"></div></div>
         <div class="mx-row"><span class="mx-label">Topping</span><div class="mx-pills" data-group="top"></div></div>
+        <div class="mx-cart-wrap">
+          <button class="mx-add-cart" id="mxAddCart" type="button">Takhle jsem spoko! Přidat do košíku</button>
+        </div>
       </div>
     </div>
   </div>
@@ -539,20 +551,21 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
    t.style.visibility='hidden';t.textContent=PHRASE;
    svg.appendChild(t);var u=t.getComputedTextLength()||300;svg.removeChild(t);return u;
  }
- function build(){
-   var r=svg.getBoundingClientRect();var W=Math.max(320,Math.round(r.width)),H=Math.round(r.height)||110;
-   svg.setAttribute('viewBox','0 0 '+W+' '+H);
-   var R=2;                                                   // phrases per repeat block
-   var fs=parseFloat(getComputedStyle(txt).fontSize)||30;
-   var T=fs*0.22;                                             // airy base tracking for legibility on the curve
-   txt.style.letterSpacing=T+'px';
-   var LpT=measure();                                         // one phrase WITH the airy tracking
-   var target=Math.max(W,Math.round(R*LpT/W)*W);              // block = whole number of wave-widths -> seamless
-   var corr=(target-R*LpT)/(R*PHRASE.length);                 // tiny correction so the loop sits on the wave grid
-   txt.style.letterSpacing=(T+corr).toFixed(3)+'px';
-   unit=target;
-   // EXACT replica of the .wv decorative wave (identical control points), mapped into the band, tiled every W
-   var sx=W/1200, mid=H*0.55;
+  function build(){
+    var r=svg.getBoundingClientRect();var W=Math.max(320,Math.round(r.width)),H=Math.round(r.height)||110;
+    svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    var mobile=window.matchMedia&&window.matchMedia('(max-width:768px)').matches;
+    var R=mobile?1:2;                                         // one phrase per block on mobile -> smoother curve follow
+    var fs=parseFloat(getComputedStyle(txt).fontSize)||30;
+    var T=mobile?fs*0.1:fs*0.22;                             // tighter tracking on mobile keeps the wave fluid
+    txt.style.letterSpacing=T+'px';
+    var LpT=measure();                                         // one phrase WITH the airy tracking
+    var target=Math.max(W,Math.round(R*LpT/W)*W);              // block = whole number of wave-widths -> seamless
+    var corr=(target-R*LpT)/(R*PHRASE.length);                 // tiny correction so the loop sits on the wave grid
+    txt.style.letterSpacing=Math.max(mobile?0.02:0,T+corr).toFixed(3)+'px';
+    unit=target;
+    // EXACT replica of the .wv decorative wave (identical control points), mapped into the band, tiled every W
+    var sx=W/1200, mid=mobile?H*0.5:H*0.55;
    function PX(x){return (x*sx).toFixed(1);} function PY(y){return (mid+(y-38)).toFixed(1);}
    var SEG=[[[100,64],[200,12],[300,38]],[[400,64],[500,64],[600,38]],[[700,12],[800,12],[900,38]],[[1000,64],[1100,64],[1200,38]]];
    var bmin=Math.floor((-unit)/W)-1, bmax=Math.ceil((W+unit)/W)+1;
@@ -744,12 +757,13 @@ var ILL2={"matcha":"data:image/webp;base64,UklGRlQ/AABXRUJQVlA4WAoAAAAQAAAAywEAy
     d.appendChild(b);
   });
 
-  // wire mixer CTA to add the configured drink
-  var mxCta=document.getElementById('mxCta');
-  if(mxCta){
-    mxCta.addEventListener('click',function(){
-      var nm=document.getElementById('mxName'), pr=document.getElementById('mxPrice');
+  // wire mixer add-to-cart (under Topping)
+  var mxAddCart=document.getElementById('mxAddCart');
+  if(mxAddCart){
+    mxAddCart.addEventListener('click',function(){
+      var nm=document.getElementById('mxName'), pr=document.getElementById('mxPrice'), mxOk=document.getElementById('mxOk');
       if(nm&&pr){ add(nm.textContent.trim(), parsePrice(pr.textContent)); }
+      if(mxOk) mxOk.classList.add('show');
       open();
     });
   }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%237C3AED%22/><path d=%22M12 9v14l12-8z%22 fill=%22white%22/></svg>" type="image/svg+xml">
-<title>Zákazníci z internetu — bezplatná živá masterclass</title>
+<title>Konverzní trychtýř — Prodejní funnel | živá masterclass</title>
 <meta name="description" content="Bezplatná živá online masterclass: jak získat stálý přísun zákazníků z internetu — bez placené reklamy a bez složitostí. Rezervuj si místo zdarma.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,7 +59,10 @@ a{color:inherit;text-decoration:none}
 .hd.scrolled{border-color:var(--br);background:rgba(10,6,19,.9)}
 .hd-in{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{font-family:var(--d);font-weight:700;font-size:1.16rem;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
-.logo .mk{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px var(--glow)}
+.logo .mk{width:30px;height:30px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px var(--glow);flex:none}
+.logo-txt{display:flex;flex-direction:column;line-height:1.12}
+.logo-main{font-weight:700;font-size:1.02rem;letter-spacing:-.02em}
+.logo-sub{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);font-weight:600}
 .hd-nav{display:flex;align-items:center;gap:30px}
 .hd-nav a.lnk{font-size:.92rem;color:var(--mut);font-weight:500;transition:color .2s}
 .hd-nav a.lnk:hover{color:#fff}
@@ -308,16 +311,44 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 .guarantee p{font-size:.92rem;color:var(--mut);margin:0}
 @media(max-width:900px){.statbar{grid-template-columns:repeat(2,1fr)}.pain,.stack-grid{grid-template-columns:1fr}.pain-img img{aspect-ratio:16/11}}
 
+/* mobile funnel layout (≤768px) */
+@media(max-width:768px){
+  :root{--promo-h:44px}
+  .promo{z-index:90;background:#1a0a2e;isolation:isolate;min-height:var(--promo-h);border-bottom:1px solid rgba(168,85,247,.35)}
+  .hd{top:var(--promo-h);z-index:80;background:rgba(10,6,19,.97);backdrop-filter:blur(16px)}
+  html{scroll-padding-top:calc(var(--promo-h) + 64px)}
+  .hero{padding-top:calc(var(--promo-h) + 64px + 24px)}
+  .hero-wrap{display:flex;flex-direction:column}
+  .hero-copy,.hero-aside{display:contents}
+  .hero-lead{order:1}
+  .hero-visual{order:2;width:100%;max-width:min(460px,100%);margin:18px auto 0}
+  .hero-visual img{aspect-ratio:16/11;max-height:min(52vw,300px);object-position:center 18%}
+  .hero-body{order:3}
+  .hero-countdown{order:4;width:100%;max-width:min(460px,100%);margin:20px auto 0}
+  .statbar{margin-top:16px;margin-bottom:36px}
+  .marquee-wrap{margin-top:0}
+  .pain{display:flex;flex-direction:column;gap:26px}
+  .pain-img{order:-1}
+  .pain-img img{aspect-ratio:4/5;object-fit:cover;object-position:center top;max-height:min(78vw,440px)}
+  .pain-copy{text-align:left}
+  .pain ul{margin:20px auto 26px;padding:0;max-width:36ch;display:flex;flex-direction:column;gap:14px}
+  .pain li{margin-bottom:0;align-items:flex-start;line-height:1.55}
+  .pain-cta{display:flex;justify-content:center;margin-top:4px}
+  #lektor .host-cta{text-align:center;margin-top:30px}
+  #lektor .host-cta .btn{display:inline-flex}
+}
+@media(max-width:540px){
+  :root{--promo-h:52px}
+}
 
 /* responsive polish */
 @media(max-width:540px){
   .hero-countdown .cell{min-width:64px;padding:12px 6px}
   .hero-countdown .cell .n{font-size:1.75rem}
   .hero-countdown .clock{gap:8px;flex-wrap:wrap}
-  .promo{flex-wrap:wrap;justify-content:center;row-gap:4px;min-height:auto;padding:8px 12px}
-  .hd{top:0}
-  html{scroll-padding-top:96px}
-  .hero{padding-top:108px}
+  .promo{flex-wrap:wrap;justify-content:center;row-gap:4px;min-height:var(--promo-h,44px);padding:8px 12px}
+  html{scroll-padding-top:calc(var(--promo-h,44px) + 64px)}
+  .hero{padding-top:calc(var(--promo-h,44px) + 64px + 20px)}
   .hero-cta .btn{width:100%}
   .hero-cta .btn-ghost{width:100%}
   .marquee span{font-size:.74rem}
@@ -350,7 +381,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
   <div class="wrap hd-in">
     <a class="logo" href="#top">
       <span class="mk"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 5v14l11-7z" fill="#fff"/></svg></span>
-      Masterclass
+      <span class="logo-txt"><span class="logo-main">Konverzní trychtýř</span><span class="logo-sub">Prodejní funnel</span></span>
     </a>
     <nav class="hd-nav">
       <a class="lnk" href="#dozvis">Co získám</a>
@@ -366,27 +397,31 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <section class="hero" id="top">
   <div class="wrap hero-wrap">
     <div class="hero-copy">
-      <span class="live rv in"><span class="ld"></span> Živě · max. 200 míst · vstup zdarma</span>
-      <h1 class="rv in">Přestaň spoléhat jen na doporučení. <span class="grad">Přiváděj zákazníky z internetu</span> — bez placené reklamy.</h1>
-      <p class="sub rv in">90minutová živá masterclass: ukážu ti krok za krokem systém, díky kterému k tobě chodí poptávky samy. Bez agentury, bez složité techniky a bez placených reklam.</p>
-      <p class="hook rv in">Běžná cena programu je 4 990 Kč. Dnes se můžeš přihlásit zdarma — dokud není kapacita plná.</p>
-      <div class="rv in"><span class="hero-badge"><span class="was">4 990 Kč</span> <span class="free">zdarma</span> · bez platební karty</span></div>
-      <div class="rv in">
-        <span class="when-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> <span class="evDate">…</span> <span class="tz">(SEČ)</span></span>
+      <div class="hero-lead">
+        <span class="live rv in"><span class="ld"></span> Živě · max. 200 míst · vstup zdarma</span>
+        <h1 class="rv in">Přestaň spoléhat jen na doporučení. <span class="grad">Přiváděj zákazníky z internetu</span> — bez placené reklamy.</h1>
       </div>
-      <div class="hero-cta rv in">
-        <a class="btn btn-primary pulse" href="#registrace">Chci rezervovat místo zdarma →</a>
-        <a class="btn btn-ghost" href="#dozvis">Co přesně získám</a>
-        <span class="micro-cta">Registrace trvá asi 20 sekund · zbývá <b id="heroSeats" style="color:#fff">37</b> míst</span>
-      </div>
-      <div class="trust rv in">
-        <span class="avs">
-          <img src="/masterclass/images/avatar-tereza.jpg" alt="" width="30" height="30" loading="lazy">
-          <img src="/masterclass/images/avatar-jan.jpg" alt="" width="30" height="30" loading="lazy">
-          <img src="/masterclass/images/avatar-marketa.jpg" alt="" width="30" height="30" loading="lazy">
-          <img src="/masterclass/images/host-klara.jpg" alt="" width="30" height="30" loading="lazy">
-        </span>
-        <span>Už <b>1 842</b> registrací · vstup <b>zdarma</b></span>
+      <div class="hero-body">
+        <p class="sub rv in">90minutová živá masterclass: ukážu ti krok za krokem systém, díky kterému k tobě chodí poptávky samy. Bez agentury, bez složité techniky a bez placených reklam.</p>
+        <p class="hook rv in">Běžná cena programu je 4 990 Kč. Dnes se můžeš přihlásit zdarma — dokud není kapacita plná.</p>
+        <div class="rv in"><span class="hero-badge"><span class="was">4 990 Kč</span> <span class="free">zdarma</span> · bez platební karty</span></div>
+        <div class="rv in">
+          <span class="when-pill"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> <span class="evDate">…</span> <span class="tz">(SEČ)</span></span>
+        </div>
+        <div class="hero-cta rv in">
+          <a class="btn btn-primary pulse" href="#registrace">Chci rezervovat místo zdarma →</a>
+          <a class="btn btn-ghost" href="#dozvis">Co přesně získám</a>
+          <span class="micro-cta">Registrace trvá asi 20 sekund · zbývá <b id="heroSeats" style="color:#fff">37</b> míst</span>
+        </div>
+        <div class="trust rv in">
+          <span class="avs">
+            <img src="/masterclass/images/avatar-tereza.jpg" alt="" width="30" height="30" loading="lazy">
+            <img src="/masterclass/images/avatar-jan.jpg" alt="" width="30" height="30" loading="lazy">
+            <img src="/masterclass/images/avatar-marketa.jpg" alt="" width="30" height="30" loading="lazy">
+            <img src="/masterclass/images/host-klara.jpg" alt="" width="30" height="30" loading="lazy">
+          </span>
+          <span>Už <b>1 842</b> registrací · vstup <b>zdarma</b></span>
+        </div>
       </div>
     </div>
     <div class="hero-aside">
@@ -447,7 +482,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <section class="sec" id="bolest" style="background:var(--bg2)">
   <div class="wrap pain">
     <div class="pain-img rv"><img src="/masterclass/images/results-win.jpg" alt="Úspěšná podnikatelka po aplikaci systému" loading="lazy"></div>
-    <div class="rv">
+    <div class="pain-copy rv">
       <span class="eyebrow">Proč ti teď nechodí poptávky</span>
       <h2>V oboru jsi dobrý/á. Jen tě <span class="grad">na internetu nikdo nevidí.</span></h2>
       <p>Každý den přicházíš o klienty, kteří hledají přesně to, co děláš — ale končí u konkurence, protože má jasnější nabídku a viditelnost.</p>
@@ -456,7 +491,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
         <li>Na sociálních sítích <b>mluvíš, ale nikdo nereaguje</b></li>
         <li>Spoléháš na doporučení, takže <b>příjem skáče jako na houpačce</b></li>
       </ul>
-      <a class="btn btn-primary pulse" href="#registrace">Chci to změnit ještě tento týden →</a>
+      <div class="pain-cta"><a class="btn btn-primary pulse" href="#registrace">Chci to změnit ještě tento týden →</a></div>
     </div>
   </div>
 </section>
@@ -511,7 +546,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
         <span class="cred">Bez placené reklamy</span>
         <span class="cred">Autorka newsletteru</span>
       </div>
-      <div class="cta-row rv" style="text-align:left;margin-top:30px"><a class="btn btn-primary pulse" href="#registrace">Rezervovat místo u Kláry →</a></div>
+      <div class="cta-row host-cta rv"><a class="btn btn-primary pulse" href="#registrace">Rezervovat místo u Kláry →</a></div>
     </div>
   </div>
 </section>
@@ -613,7 +648,7 @@ body.sticky-on{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
 <footer class="ft">
   <div class="wrap">
     <div class="ft-in">
-      <span>© 2026 Zákazníci z internetu</span>
+      <span>© 2026 Konverzní trychtýř / Prodejní funnel</span>
       <span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span>
     </div>
     <p class="ft-demo">Ukázkový web v demo režimu — registrace se reálně neodesílá, slouží jen k prezentaci funnelu.</p>

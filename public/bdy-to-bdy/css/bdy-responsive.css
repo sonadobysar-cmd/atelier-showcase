@@ -90,8 +90,8 @@ body {
     top: 72% !important;
   }
   .hero > .spot[data-pid="2"] {
-    left: 86% !important;
-    top: 48% !important;
+    left: 80% !important;
+    top: 54% !important;
   }
   .shead {
     flex-direction: column;
@@ -286,8 +286,8 @@ body {
     top: 76% !important;
   }
   .hero > .spot[data-pid="2"] {
-    left: 90% !important;
-    top: 46% !important;
+    left: 82% !important;
+    top: 53% !important;
   }
 }
 

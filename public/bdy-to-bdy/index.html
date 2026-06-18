@@ -84,7 +84,10 @@ img{display:block;max-width:100%}
 .hero-c p{color:rgba(255,255,255,.92);max-width:46ch;margin:0 auto 26px;font-size:1.05rem;text-shadow:0 1px 18px rgba(0,0,0,.45)}
 .hero-c .btn-dark{background:#fff;color:var(--ink)}
 .hero-c .btn-dark:hover{background:var(--bg)}
-.hero>.spot[data-pid="2"]{left:76%!important;top:35%!important}
+.hero>.spot[data-pid="1"]{left:20%!important;top:70%!important}
+.hero>.spot[data-pid="1"] .spot-pop{bottom:auto;top:calc(100% + 12px);left:0;right:auto;transform:translateY(6px)}
+.hero>.spot[data-pid="1"]:hover .spot-pop,.hero>.spot[data-pid="1"].open .spot-pop{transform:translateY(0)}
+.hero>.spot[data-pid="2"]{left:83%!important;top:50%!important}
 .hero>.spot[data-pid="2"] .spot-pop{bottom:auto;top:calc(100% + 12px);left:auto;right:0;transform:translateY(6px)}
 .hero>.spot[data-pid="2"]:hover .spot-pop,.hero>.spot[data-pid="2"].open .spot-pop{transform:translateY(0)}
 
@@ -258,8 +261,8 @@ img{display:block;max-width:100%}
 <section class="hero">
   <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 16l5-5 4 4 5-6 4 5"/><circle cx="8" cy="7" r="1.6"/></svg><span class="ph-tag">Sem přijde hero fotka</span></div>
   <img class="rimg" src="img/hero.jpg" alt="">
-  <button class="spot" data-pid="1" style="left:32%;top:58%" aria-label="Legíny Sculpt"><i></i></button>
-  <button class="spot" data-pid="2" style="left:76%;top:35%" aria-label="Podprsenka Air"><i></i></button>
+  <button class="spot" data-pid="1" style="left:20%;top:70%" aria-label="Legíny Sculpt"><i></i></button>
+  <button class="spot" data-pid="2" style="left:83%;top:50%" aria-label="Podprsenka Air"><i></i></button>
   <div class="hero-c">
     <span class="eyebrow">Nová kolekce · 2026</span>
     <h1>Designed <span class="it">to move.</span></h1>

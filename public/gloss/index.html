@@ -83,10 +83,13 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
 .btn-primary:hover{background:var(--bubble-deep);transform:translateY(-3px);box-shadow:0 16px 40px rgba(255,79,163,.45)}
 .btn-ghost{padding:16px 30px;border-radius:44px;font-weight:600;font-size:.95rem;border:2px solid var(--bubble);color:var(--bubble);transition:.3s;background:#fff;box-shadow:0 8px 24px rgba(255,79,163,.15)}
 .btn-ghost:hover{background:var(--bubble);color:#fff}
-.hero-badge{position:fixed;right:22px;bottom:98px;z-index:55;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-radius:16px;padding:9px 14px;box-shadow:0 12px 30px rgba(255,79,163,.28)}
+.hero-badge{position:fixed;right:clamp(18px,3.5vw,42px);bottom:clamp(132px,18vh,176px);z-index:25;display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-radius:16px;padding:10px 15px;box-shadow:0 12px 30px rgba(255,79,163,.28);max-width:min(220px,calc(100% - 24px))}
 .hero-badge .heart{width:32px;height:32px;border-radius:50%;background:var(--bubble-soft);display:flex;align-items:center;justify-content:center;color:var(--bubble);font-size:.95rem;flex:none}
 .hero-badge b{font-family:'Noto Serif Display';font-size:.8rem;display:block;color:var(--ink);line-height:1.1}
 .hero-badge span{font-size:.68rem;color:#888}
+@media(min-width:901px) and (max-width:1200px){
+  .hero-badge{bottom:clamp(140px,19vh,184px);right:clamp(16px,3vw,32px)}
+}
 @media(max-width:900px){
   #top{flex-direction:column;min-height:auto;display:block}
   .hero-stripe{display:none}
@@ -94,7 +97,7 @@ nav.scrolled{background:rgba(255,255,255,.72);backdrop-filter:blur(22px) saturat
   .hero-photo img{object-position:55% 14%}
   .hero-spark{top:calc(env(safe-area-inset-top,0px) + 82px);left:auto;right:20px;z-index:1;font-size:1.55rem;pointer-events:none}
   .hero-grid{padding:40px 7vw 64px}
-  .hero-badge{position:static;margin-top:22px;box-shadow:0 8px 24px rgba(255,79,163,.2)}
+  .hero-badge{position:static;bottom:auto;right:auto;width:fit-content;margin:22px 7vw 0;max-width:none;box-shadow:0 8px 24px rgba(255,79,163,.2)}
   .sc-form{flex-direction:column}
   .sc-form button{width:100%}
 }
@@ -397,11 +400,11 @@ footer{background:var(--ink);color:#fff;padding:60px 5vw 36px;text-align:center}
         <a href="#rezervace" class="btn-primary">Rezervovat termín</a>
         <a href="#zrcadlo" class="btn-ghost">Vyzkoušej si look ✦</a>
       </div>
-      <div class="hero-badge">
-        <span class="heart">♥</span>
-        <div><b>Welcome drink</b><span>vždy zdarma</span></div>
-      </div>
     </div>
+  </div>
+  <div class="hero-badge" aria-label="Welcome drink vždy zdarma">
+    <span class="heart">♥</span>
+    <div><b>Welcome drink</b><span>vždy zdarma</span></div>
   </div>
 </section>
 

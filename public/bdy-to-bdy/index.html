@@ -2,13 +2,14 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <base href="/bdy-to-bdy/">
 <title>BDY to BDY — activewear designed to move</title>
 <meta name="description" content="Dámská fitness móda. Legíny, sportovní podprsenky, topy a mikiny stvořené pro pohyb. Minimalistický střih, maximální pohodlí.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/bdy-responsive.css">
 <style>
 :root{
   --bg:#F6F6F4; --bg2:#FFFFFF; --card:#EFEFED; --ink:#0D0D0C; --ink2:#2A2A28; --mut:#8E8E88; --line:#E5E5E2;
@@ -261,7 +262,7 @@ img{display:block;max-width:100%}
 <!-- HERO -->
 <section class="hero">
   <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 16l5-5 4 4 5-6 4 5"/><circle cx="8" cy="7" r="1.6"/></svg><span class="ph-tag">Sem přijde hero fotka</span></div>
-  <img class="rimg" src="img/hero.jpg" alt="">
+  <img class="rimg" src="img/hero.jpg" alt="BDY to BDY — dámská activewear kolekce">
   <button class="spot" data-pid="1" style="left:20%;top:70%" aria-label="Legíny Sculpt"><i></i></button>
   <button class="spot" data-pid="2" style="left:83%;top:50%" aria-label="Podprsenka Air"><i></i></button>
   <div class="hero-c">
@@ -467,21 +468,6 @@ img{display:block;max-width:100%}
   else{rv.forEach(function(el){el.classList.add('in');});}
 })();
 </script>
-<script>/*navmenu*/
-(function(){var b=document.getElementById('burger'),h=document.querySelector('.hd');if(!b||!h)return;
-  var navScrollY=0;
-  function setNav(on){
-    h.classList.toggle('navopen',on);document.body.classList.toggle('navopen',on);
-    b.setAttribute('aria-expanded',on?'true':'false');
-    b.setAttribute('aria-label',on?'Zavřít menu':'Menu');
-    if(on){navScrollY=window.scrollY;document.body.style.position='fixed';document.body.style.top='-'+navScrollY+'px';document.body.style.left='0';document.body.style.right='0';}
-    else{document.body.style.position='';document.body.style.top='';document.body.style.left='';document.body.style.right='';window.scrollTo(0,navScrollY);}
-  }
-  b.addEventListener('click',function(e){e.stopPropagation();setNav(!h.classList.contains('navopen'));});
-  document.addEventListener('click',function(e){if(!h.classList.contains('navopen'))return;if(h.contains(e.target))return;setNav(false);});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&h.classList.contains('navopen'))setNav(false);});
-  Array.prototype.forEach.call(h.querySelectorAll('.hd-nav a'),function(a){a.addEventListener('click',function(){setNav(false);});});
-})();
-</script>
+<script src="js/nav.js"></script>
 </body>
 </html>

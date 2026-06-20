@@ -4,7 +4,7 @@
 <link rel="icon" href="/vini-d-elite/favicon.svg?v=1" type="image/svg+xml">
 <meta name="theme-color" content="#2F1116">
 
-<title>La Cantina Club — Vini d'Elite</title><meta name="description" content="La Cantina Club — italská cantina, komunita milovníků vína, privátní degustace a přednostní výběr lahví.">
+<title>La Cantina Club — Vini d'Elite</title><meta name="description" content="La Cantina Club — exkluzivní komunita milovníků italského vína. Privátní degustace, přednostní výběr lahví a osobní péče zakladatele Vini d'Elite.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&family=Ballet:opsz@16..72&display=swap" rel="stylesheet">
 <style>
@@ -347,34 +347,58 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 @media(max-width:640px){.shop-bar{flex-direction:column;align-items:stretch}.shop-tabs{justify-content:flex-start;overflow-x:auto}}
 
 /* club landing page */
-.club-hero{position:relative;min-height:72vh;display:flex;align-items:center;background:#2F1116;overflow:hidden}
-.club-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(120% 130% at 50% 40%,transparent 35%,rgba(9,3,6,.82))}
-.club-hero-in{position:relative;z-index:2;width:min(1240px,90vw);margin:0 auto;padding:clamp(80px,10vw,120px) 0}
+.club-hero{position:relative;min-height:78vh;display:flex;align-items:center;background:#2F1116;overflow:hidden}
+.club-hero::before{content:'';position:absolute;inset:0;background:url('images/club/club-zakladatel.png') center/cover no-repeat;opacity:.28}
+.club-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(9,3,6,.92) 42%,rgba(9,3,6,.55) 100%)}
+.club-hero-in{position:relative;z-index:2;width:min(1240px,90vw);margin:0 auto;padding:clamp(90px,11vw,130px) 0}
 .club-hero-in .eyebrow{display:block;margin-bottom:16px}
-.club-hero-in h1{font-size:clamp(2.8rem,6vw,5rem);color:var(--parch);max-width:14ch;line-height:1.02;margin-bottom:18px}
-.club-hero-in .lead{max-width:52ch;font-size:clamp(1.05rem,1.35vw,1.18rem);color:var(--parch-d);margin-bottom:28px}
-.club-note{font-size:.82rem;color:var(--gold-l);letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;opacity:.9}
-.club-gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:clamp(34px,5vw,54px)}
-.club-shot .ph{position:absolute;inset:0}
-.club-shot{position:relative;overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,#3a0f1c,#1c0810);aspect-ratio:4/3}
-.club-shot.tall{aspect-ratio:3/4}
-.club-shot.wide{grid-column:span 7}
-.club-shot.mid{grid-column:span 5}
-.club-shot.third{grid-column:span 4}
-.club-shot.half{grid-column:span 6}
-.club-shot .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 18px;background:linear-gradient(180deg,transparent,rgba(14,5,8,.88));font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--parch-d)}
-.club-shot .cap b{display:block;font-family:var(--serif);font-size:1.05rem;color:var(--parch);letter-spacing:0;text-transform:none;margin-top:4px;font-weight:500}
+.club-hero-in h1{font-size:clamp(2.8rem,6vw,5.2rem);color:var(--parch);max-width:13ch;line-height:1.02;margin-bottom:20px}
+.club-hero-in .lead{max-width:58ch;font-size:clamp(1.05rem,1.4vw,1.22rem);color:var(--parch-d);margin-bottom:12px;line-height:1.75}
+.club-hero-in .lead2{max-width:58ch;font-size:clamp(.95rem,1.2vw,1.05rem);color:var(--ink2);margin-bottom:32px;line-height:1.75}
+.club-intro{max-width:780px;margin:0 auto;text-align:center;padding:clamp(48px,7vw,80px) 0 clamp(20px,4vw,36px)}
+.club-intro p{font-size:clamp(1rem,1.25vw,1.12rem);color:var(--parch-d);line-height:1.85;margin-top:18px}
+.club-editorial{display:flex;flex-direction:column;gap:clamp(56px,8vw,96px);margin-top:clamp(36px,5vw,56px)}
+.club-ed{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,4vw,56px);align-items:center}
+.club-ed.flip{direction:rtl}
+.club-ed.flip > *{direction:ltr}
+.club-ed-img{position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(217,192,138,.28);box-shadow:var(--shadow)}
+.club-ed-img.wide{aspect-ratio:16/11}
+.club-ed-img .ph{position:absolute;inset:0}
+.club-ed-img .frame-cap{position:absolute;left:16px;bottom:16px;right:16px;padding:14px 16px;background:rgba(14,5,8,.78);border:1px solid rgba(217,192,138,.22);font-family:var(--engrave);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-l)}
+.club-ed-copy .eyebrow{display:block;margin-bottom:12px}
+.club-ed-copy h3{font-family:var(--serif);font-size:clamp(1.9rem,3.2vw,2.6rem);color:var(--parch);font-weight:500;line-height:1.12;margin-bottom:16px}
+.club-ed-copy p{font-size:.95rem;color:var(--parch-d);line-height:1.8;margin-bottom:14px}
+.club-ed-copy p:last-child{margin-bottom:0}
+.club-ed-copy .pull{margin:22px 0;padding-left:18px;border-left:2px solid var(--gold-l);font-family:var(--serif);font-size:1.15rem;color:var(--parch);line-height:1.55;font-style:italic}
+.club-mosaic{margin:clamp(56px,8vw,88px) 0 0;border:1px solid rgba(217,192,138,.25);overflow:hidden;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:220px 220px;gap:3px;background:rgba(217,192,138,.15)}
+.club-mosaic .m{position:relative;overflow:hidden;min-height:100%}
+.club-mosaic .m .ph{position:absolute;inset:0}
+.club-mosaic .m1{grid-column:span 5;grid-row:span 2}
+.club-mosaic .m2{grid-column:span 4}
+.club-mosaic .m3{grid-column:span 3}
+.club-mosaic .m4{grid-column:span 7}
+.club-pull{margin:clamp(56px,7vw,80px) 0 0;padding:clamp(36px,5vw,52px);text-align:center;background:rgba(235,221,188,.04);border:1px solid rgba(217,192,138,.22)}
+.club-pull blockquote{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--parch);line-height:1.45;max-width:28ch;margin:0 auto;font-weight:500}
+.club-pull cite{display:block;margin-top:16px;font-family:var(--engrave);font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-l);font-style:normal}
 .benefits-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:clamp(34px,4vw,48px)}
 .benefit{background:rgba(235,221,188,.04);border:1px solid rgba(217,192,138,.22);padding:clamp(22px,3vw,30px)}
 .benefit .num{font-family:var(--engrave);font-size:.68rem;letter-spacing:.28em;color:var(--gold-l);margin-bottom:10px;display:block}
 .benefit h3{font-family:var(--serif);font-size:1.45rem;color:var(--parch);font-weight:500;margin-bottom:10px;line-height:1.15}
-.benefit p{font-size:.9rem;color:var(--parch-d);line-height:1.65}
+.benefit p{font-size:.9rem;color:var(--parch-d);line-height:1.72}
 .club-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
 .club-step{border-top:1px solid rgba(217,192,138,.28);padding-top:18px}
 .club-step b{font-family:var(--engrave);font-size:.72rem;letter-spacing:.22em;color:var(--gold-l);display:block;margin-bottom:8px}
-.club-step p{font-size:.88rem;color:var(--parch-d)}
+.club-step p{font-size:.88rem;color:var(--parch-d);line-height:1.65}
 .club-join{scroll-margin-top:172px}
-@media(max-width:920px){.benefits-grid,.club-steps{grid-template-columns:1fr}.club-shot.wide,.club-shot.mid,.club-shot.third,.club-shot.half{grid-column:span 12}}
+@media(max-width:920px){
+  .benefits-grid,.club-steps{grid-template-columns:1fr}
+  .club-ed,.club-ed.flip{grid-template-columns:1fr;direction:ltr}
+  .club-mosaic{grid-template-rows:auto;grid-template-columns:1fr}
+  .club-mosaic .m1,.club-mosaic .m2,.club-mosaic .m3,.club-mosaic .m4{grid-column:span 1;grid-row:span 1;aspect-ratio:16/10}
+  .club-mosaic .m1{aspect-ratio:3/4}
+}
+
+@media(max-width:920px){.benefits-grid,.club-steps{grid-template-columns:1fr}}
 
 </style>
 <body>
@@ -400,42 +424,108 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   <div class="club-hero-in">
     <span class="eyebrow club-label">La Cantina Club</span>
     <h1>Vstupte do <em>Vini d'Elite</em></h1>
-    <p class="lead">Italské víno není jen nápoj — je za ním půda, ročník, ruce vinaře a příběh, který si zaslouží pozornost. La Cantina Club je komunita lidí, kteří to chtějí poznat v dobré společnosti: ochutnávat spolu, ptát se, sdílet stůl a úctu k tomu, odkud každá láhev přišla.</p>
+    <p class="lead">Ne další věrnostní program. Ne sleva za e-mail. La Cantina Club je komunita lidí, kteří chtějí italské víno poznat opravdu — u stolu, s příběhem, s respektem k tomu, odkud každá láhev přišla.</p>
+    <p class="lead2">Za každou lahví stojím já. Osobně ji vybírám u vinařů v Itálii, ochutnávám, ptám se — a domů přivážím jen to, za čím si stojím. Klub je pro ty, kdo chtějí být u toho dřív než ostatní.</p>
     <div class="cta" style="display:flex;gap:14px;flex-wrap:wrap">
       <a class="btn btn-gold" href="#join">Chci být v klubu</a>
-      <a class="btn btn-ghost" href="obchod.html">Prohlédnout vína</a>
+      <a class="btn btn-ghost" href="#pribeh">Proč to dává smysl</a>
     </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="pribeh">
   <div class="wrap">
-    <div class="shead"><span class="eyebrow">Atmosféra klubu</span><h2>Stůl, sklep, <em>příběh</em></h2><p>Komorní setkání, kde se víno nepije na ex — ale poznává s respektem k tomu, kdo ho vyrobil.</p></div>
-    <div class="club-gallery">
-      <div class="club-shot wide tall"><div class="ph"><img class="rimg" src="images/club/club-degustace.png" alt="Večer u stolu — privátní degustace"></div><div class="cap">Večer u stolu<small><b>Privátní degustace</b></small></div></div>
-      <div class="club-shot mid"><div class="ph"><img class="rimg" src="images/club/club-sklep.png" alt="Sklep v Itálii — původ každé lahve"></div><div class="cap">Sklep v Itálii<small><b>Původ každé lahve</b></small></div></div>
-      <div class="club-shot third"><div class="ph"><img class="rimg" src="images/club/club-zakladatel.jpg" alt="Zakladatel Vini d'Elite"></div><div class="cap">Zakladatel<small><b>Tvář za Vini d'Elite</b></small></div></div>
-      <div class="club-shot half"><div class="ph"><img class="rimg" src="images/club/club-lahve.png" alt="Limitované dovozy"></div><div class="cap">Limitované dovozy<small><b>Nové lahve mezi prvními</b></small></div></div>
-      <div class="club-shot half"><div class="ph"><img class="rimg" src="images/club/club-komunita.png" alt="La Cantina Club — komunita"></div><div class="cap">La Cantina Club<small><b>Komunita, ne databáze</b></small></div></div>
+    <div class="club-intro rv">
+      <span class="eyebrow">O klubu</span>
+      <h2 style="font-size:clamp(2.2rem,4vw,3.4rem);color:var(--parch);font-weight:500;line-height:1.1;margin-top:14px">Víno, které má <em>tvář</em> a příběh</h2>
+      <p>Vini d'Elite není supermarket s etiketami. Každá láhev prošla mýma rukama — seděl jsem s vinařem, ochutnal ročník, pochopil půdu a práci, která je stála. La Cantina Club je způsob, jak tyto příběhy sdílet s lidmi, pro které víno není jen doplněk večeře, ale zážitek.</p>
+      <p>Členové klubu mají přístup k tomu, co se na veřejnosti neobjeví: limitované dovozy, komorní večery, setkání s hosty z Itálie a doporučení, která vycházejí z vaší chuti — ne z algoritmu.</p>
+    </div>
+
+    <div class="club-editorial">
+      <article class="club-ed rv">
+        <div class="club-ed-img">
+          <div class="ph"><img class="rimg" src="images/club/club-zakladatel.png" alt="Zakladatel Vini d'Elite ve vinařské oblasti"></div>
+          <span class="frame-cap">Zakladatel · osobní výběr</span>
+        </div>
+        <div class="club-ed-copy">
+          <span class="eyebrow">Tvář za každou lahví</span>
+          <h3>Stojím za tím,<br>co <em>podáváte</em></h3>
+          <p>Začalo to cestami po italských vinařských oblastech — Piemonte, Puglia, Toscana. Dnes je každá láhev v naší nabídce výsledkem rozhovoru, ochutnávky a rozhodnutí, že stojí za to ji přivézt do Česka.</p>
+          <p class="pull">„Nenabízím víno, které bych sám nepil u stolu s přáteli."</p>
+          <p>Členové klubu vědí, kdo stojí za výběrem. Ne anonymní e-shop — ale člověk, který se ozve, když přijede něco výjimečného, a rád vysvětlí, proč právě tato láhev, z právě této vinice, z právě toho ročníku.</p>
+        </div>
+      </article>
+
+      <article class="club-ed flip rv">
+        <div class="club-ed-img wide">
+          <div class="ph"><img class="rimg" src="images/club/club-degustace.png" alt="Privátní degustace u stolu"></div>
+          <span class="frame-cap">Večer u stolu</span>
+        </div>
+        <div class="club-ed-copy">
+          <span class="eyebrow">Večery u stolu</span>
+          <h3>Komorní degustace,<br>ne <em>fronta</em> u pultu</h3>
+          <p>Naše akce jsou malé — deset až patnáct lidí u jednoho stolu. Bez spěchu, bez davu, bez hlasité hudby. Otevřeme lahve, které běžně neprodáváme, a povídáme si o nich — o oblasti, o ročníku, o tom, co se děje ve sklepě.</p>
+          <p>Hosté z Itálie, sommeliéři, příběhy přímo od vinařů. Prostor na otázky, na sdílení dojmů, na to, aby víno nebylo jen vypité, ale pochopené. Přesně tak, jak se víno pije v Itálii — v dobré společnosti, s respektem.</p>
+        </div>
+      </article>
+
+      <article class="club-ed rv">
+        <div class="club-ed-img wide">
+          <div class="ph"><img class="rimg" src="images/club/club-lahve.png" alt="Limitované lahve pro členy klubu"></div>
+          <span class="frame-cap">Nové lahve mezi prvními</span>
+        </div>
+        <div class="club-ed-copy">
+          <span class="eyebrow">Přednostní přístup</span>
+          <h3>Lahve, které se<br>neobjeví <em>všude</em></h3>
+          <p>Limitované dovozy, vzácné ročníky, lahve z malých vinic — to vše nabízíme nejdřív členům klubu. Ne hromadný newsletter tisícům adres. Osobní pozvánka, když přijede něco, co stojí za pozornost.</p>
+          <p>Víte o nové lahvi dřív než ostatní. Máte čas se rozhodnout v klidu. A víte, že za doporučením stojí člověk, který tu láhev ochutnal a věří jí — ne marketingový tým.</p>
+        </div>
+      </article>
+
+      <article class="club-ed flip rv">
+        <div class="club-ed-img">
+          <div class="ph"><img class="rimg" src="images/club/club-komunita.png" alt="Komunita La Cantina Club"></div>
+          <span class="frame-cap">La Cantina Club</span>
+        </div>
+        <div class="club-ed-copy">
+          <span class="eyebrow">Komunita</span>
+          <h3>Lidé, pro které<br>je Itálie <em>víc</em></h3>
+          <p>La Cantina Club spojuje lidi, kteří chtějí víno žít — ne jen kupovat. Společné ochutnávky, sdílení dojmů, setkání s lidmi, pro které je Toskánsko víc než bod na mapě.</p>
+          <p>Není to databáze kontaktů. Je to stůl, kolem kterého se scházejí lidé se stejnou vášní. A právě proto jsou místa na akcích vždy omezená — protože jde o vztah, ne o objem.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="club-mosaic rv" aria-hidden="true">
+      <div class="m m1"><div class="ph"><img class="rimg" src="images/club/club-sklep.png" alt=""></div></div>
+      <div class="m m2"><div class="ph"><img class="rimg" src="images/club/club-degustace.png" alt=""></div></div>
+      <div class="m m3"><div class="ph"><img class="rimg" src="images/club/club-lahve.png" alt=""></div></div>
+      <div class="m m4"><div class="ph"><img class="rimg" src="images/club/club-komunita.png" alt=""></div></div>
+    </div>
+
+    <div class="club-pull rv">
+      <blockquote>Italské víno není jen nápoj — je za ním půda, ročník, ruce vinaře a příběh, který si zaslouží pozornost.</blockquote>
+      <cite>La Cantina Club · Vini d'Elite</cite>
     </div>
   </div>
 </section>
 
 <section class="sec cantina" style="border-top:1px solid var(--line)">
   <div class="wrap">
-    <div class="shead"><span class="eyebrow">Co získáte</span><h2>Benefity <em>klubu</em></h2><p>Ne sleva za masovou registraci — ale skutečný přístup, pozvánky a péči, kterou u běžného e-shopu nečekáte.</p></div>
+    <div class="shead"><span class="eyebrow">Co získáte</span><h2>Vše, co klub <em>nabízí</em></h2><p>Ne sleva za masovou registraci — ale skutečný přístup, pozvánky a péči, kterou u běžného e-shopu nečekáte. Tady je vše podrobně.</p></div>
     <div class="benefits-grid">
-      <article class="benefit rv"><span class="num">01</span><h3>Nové lahve mezi prvními</h3><p>Limitované dovozy a vzácné ročníky nabízíme nejdřív členům klubu. Ne hromadný newsletter — osobní pozvánka, když přijede láhev, která stojí za pozornost.</p></article>
-      <article class="benefit rv"><span class="num">02</span><h3>Večery u stolu</h3><p>Komorní degustace s vinaři a sommeliéry. Příběhy z Piemonte, Puglie nebo Toscany, prostor na otázky a společné objevování — bez spěchu a bez davu.</p></article>
-      <article class="benefit rv"><span class="num">03</span><h3>Výběr s respektem</h3><p>Doporučím lahve podle chuti, jídla i příležitosti — s úctou k oblasti, ročníku a práci, která je stála. Klidně k dárku, sbírce nebo večeru, na který chcete udělat dojem.</p></article>
-      <article class="benefit rv"><span class="num">04</span><h3>Osobní onboarding</h3><p>Po registraci se ozvu já — ne automat. Krátce si popovídáme o tom, co vás u italského vína baví, abych vás zval na akce a lahve, které dávají smysl právě vám.</p></article>
-      <article class="benefit rv"><span class="num">05</span><h3>Komunita, ne databáze</h3><p>La Cantina Club spojuje lidi, kteří chtějí víno žít — ne jen kupovat. Společné ochutnávky, sdílení dojmů a setkání s lidmi, pro které je Itálie víc než destinace na mapě.</p></article>
-      <article class="benefit rv"><span class="num">06</span><h3>Přednost u akcí</h3><p>Exkluzivní večery, představení nových oblastí a setkání s hosty z Itálie — místa jsou vždy omezená. Členové klubu mají přednost, protože jde o vztah, ne o objem prodeje.</p></article>
+      <article class="benefit rv"><span class="num">01</span><h3>Nové lahve mezi prvními</h3><p>Limitované dovozy a vzácné ročníky nabízíme nejdřív členům klubu. Ne hromadný newsletter — osobní pozvánka, když přijede láhev, která stojí za pozornost. Máte čas se rozhodnout v klidu, dřív než se vyprodá.</p></article>
+      <article class="benefit rv"><span class="num">02</span><h3>Večery u stolu</h3><p>Komorní degustace s vinaři a sommeliéry. Příběhy z Piemonte, Puglie nebo Toscany, prostor na otázky a společné objevování — bez spěchu a bez davu. Akce pro deset až patnáct lidí, ne fronta u pultu.</p></article>
+      <article class="benefit rv"><span class="num">03</span><h3>Výběr s respektem</h3><p>Doporučím lahve podle chuti, jídla i příležitosti — s úctou k oblasti, ročníku a práci, která je stála. Klidně k dárku, sbírce nebo večeru, na který chcete udělat dojem. Ne algoritmus — můj osobní výběr.</p></article>
+      <article class="benefit rv"><span class="num">04</span><h3>Osobní onboarding</h3><p>Po registraci se ozvu já — ne automat. Krátce si popovídáme o tom, co vás u italského vína baví, abych vás zval na akce a lahve, které dávají smysl právě vám. Bez formulářů a bez spamu.</p></article>
+      <article class="benefit rv"><span class="num">05</span><h3>Komunita, ne databáze</h3><p>La Cantina Club spojuje lidi, kteří chtějí víno žít — ne jen kupovat. Společné ochutnávky, sdílení dojmů a setkání s lidmi, pro které je Itálie víc než destinace na mapě. Stůl, ne mailing list.</p></article>
+      <article class="benefit rv"><span class="num">06</span><h3>Přednost u akcí</h3><p>Exkluzivní večery, představení nových oblastí a setkání s hosty z Itálie — místa jsou vždy omezená. Členové klubu mají přednost, protože jde o vztah, ne o objem prodeje. Víte o akci dřív a máte jistotu místa.</p></article>
     </div>
     <div class="club-steps">
-      <div class="club-step"><b>Krok 1</b><p>Vyplníte krátký formulář — jméno, e-mail a pár slov o tom, co vás u vína baví.</p></div>
-      <div class="club-step"><b>Krok 2</b><p>Ozvu se osobně do 48 hodin. Bez spamu, jen když dává smysl se potkat u vína.</p></div>
-      <div class="club-step"><b>Krok 3</b><p>Pozvu vás na první akci nebo doporučím láhev na míru — a klub začne žít u stolu.</p></div>
+      <div class="club-step rv"><b>Krok 1</b><p>Vyplníte krátký formulář — jméno, e-mail a pár slov o tom, co vás u vína baví. Trvá to minutu.</p></div>
+      <div class="club-step rv"><b>Krok 2</b><p>Ozvu se osobně do 48 hodin. Bez spamu, bez automatických kampaní — jen když dává smysl se potkat u vína.</p></div>
+      <div class="club-step rv"><b>Krok 3</b><p>Pozvu vás na první akci nebo doporučím láhev na míru. Klub začne žít u stolu — ne v inboxu.</p></div>
     </div>
   </div>
 </section>
@@ -446,7 +536,8 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
     <div class="cantina-c">
       <span class="eyebrow club-label">Přidejte se</span>
       <h2>Staňte se součástí <em>La Cantina</em></h2>
-      <p>U nás je to klub lidí, kteří chtějí příběhy za láhvemi sdílet. Registrace je nezávazná; ozvu se osobně.</p>
+      <p>Registrace je nezávazná a zdarma. Žádný poplatek za vstup — jen respekt k vínu a společnosti. Ozvu se osobně a společně najdeme, jak vám klub může dávat smysl.</p>
+      <p style="margin-top:14px">Místa na akcích jsou vždy omezená. Čím dřív se přidáte, tím dřív vás můžu zvat — na první degustaci, na novou láhev, na večer, který stojí za to.</p>
       <div class="cantina-list">
         <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M12 3.2l2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 18.8l-4.7 2.4.9-5.1L4.4 8.7l5.2-.8z" fill="url(#goldGrad)" stroke="none"/></svg><div><b>Bez spamu</b><small>Píšu jen když je co sdílet — nová láhev, večer, pozvánka.</small></div></div>
         <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1"><path d="M8 4.2h8l-.8 6a3.3 3.3 0 0 1-6.4 0z"/><path d="M12 13.5V20M8.7 20h6.6"/></svg><div><b>Malé akce</b><small>Komorní formát — prostor na rozhovor, ne fronta u stolu.</small></div></div>

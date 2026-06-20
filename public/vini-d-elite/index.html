@@ -37,6 +37,7 @@ img{display:block;max-width:100%}
 .wrap{width:min(1240px,90vw);margin:0 auto;position:relative;z-index:2}
 .sec{padding:clamp(64px,8vw,128px) 0;position:relative;z-index:2}
 .eyebrow{font-family:var(--sans);font-weight:500;font-size:.68rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold-l)}
+.club-label{font-family:var(--engrave);font-size:.82rem;letter-spacing:.42em;color:var(--gold-l);text-shadow:0 0 24px rgba(217,192,138,.35);display:block;margin-bottom:18px}
 .lead{font-size:clamp(1.05rem,1.4vw,1.2rem);font-weight:300;line-height:1.85;color:var(--ink2)}
 .serif-lead{font-family:var(--serif);font-size:clamp(1.3rem,2vw,1.7rem);font-weight:400;font-style:italic;color:var(--parch-d);line-height:1.5}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;border-radius:0;padding:17px 36px;transition:background .3s,color .3s,border-color .3s,transform .3s,box-shadow .3s;line-height:1}
@@ -291,7 +292,7 @@ img{display:block;max-width:100%}
 .drawer-h button{background:none;border:none;cursor:pointer;color:var(--dark-ink);font-size:1.5rem;line-height:1}
 .drawer-body{flex:1;overflow-y:auto;padding:16px 24px}
 .citem{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid rgba(42,12,20,.12)}
-.citem .ci-img{aspect-ratio:1;background:linear-gradient(160deg,#5a1626,#1c0810)}
+.citem .ci-img{position:relative;overflow:hidden;aspect-ratio:1;width:56px;height:56px;background:linear-gradient(160deg,#5a1626,#1c0810)}
 .citem h4{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--dark-ink);line-height:1.1}
 .citem small{font-size:.78rem;color:#8a7553}
 .citem .ci-q{display:flex;align-items:center;gap:8px;margin-top:6px}
@@ -366,7 +367,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
       <a href="#finder">Najdi své víno</a><a href="obchod.html">Obchod</a><a href="#primitivo">Primitivo</a><a href="#cantina">La Cantina</a><a href="#gastro">Pro gastronomii</a>
     </nav>
     <div class="hd-r">
-      <button class="icbtn" id="cartBtn" aria-label="Sklep / košík">
+      <button class="icbtn" id="cartBtn" aria-label="Košík">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 2l1.5 4M18 2l-1.5 4M4 6h16l-1.5 9a3 3 0 0 1-3 2.5H8.5a3 3 0 0 1-3-2.5L4 6z"/><path d="M9 11v4M15 11v4"/></svg>
         <span class="cart-count" id="cartCount" style="display:none">0</span>
       </button>
@@ -450,8 +451,8 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   <span class="mono-emboss" aria-hidden="true">V</span>
   <div class="wrap cantina-in">
     <div class="cantina-c">
-      <span class="eyebrow">La Cantina · soukromý sklep</span>
-      <h2>Vstupte do <em>sklepa</em></h2>
+      <span class="eyebrow club-label">La Cantina Club</span>
+      <h2>Vstupte do <em>Vini d'Elite</em></h2>
       <p>Nejvzácnější lahve dovážím v malých množstvích — a nabízím je nejdřív lidem ze sklepa. Zapište se a získáte přednost tam, kde záleží na každé láhvi.</p>
       <div class="cantina-list">
         <div class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l2.3 4.7 5.2.8-3.8 3.6.9 5.1L12 18.8l-4.7 2.4.9-5.1L4.4 8.7l5.2-.8z" fill="url(#goldGrad)" stroke="none"/></svg><div><b>Přednostní výběr</b><small>První právo na nové a limitované dovozy, dřív než jdou ven.</small></div></div>
@@ -460,7 +461,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
       </div>
     </div>
     <div class="cantina-form">
-      <h3>Zápis do sklepa</h3>
+      <h3>Zápis do klubu</h3>
       <p class="s">Nezávazně. Ozvu se osobně a domluvíme, co vás baví.</p>
       <div class="field"><label>Jméno</label><input id="c_name" placeholder="Vaše jméno"></div>
       <div class="field"><label>E-mail</label><input id="c_mail" type="email" placeholder="vas@email.cz"></div>
@@ -533,7 +534,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 <!-- CART -->
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="Košík">
-  <div class="drawer-h"><h3>Váš sklep</h3><button id="cartClose" aria-label="Zavřít">×</button></div>
+  <div class="drawer-h"><h3>Váš košík</h3><button id="cartClose" aria-label="Zavřít">×</button></div>
   <div class="drawer-body" id="cartItems"></div>
   <div class="drawer-f">
     <div class="row"><span>Celkem</span><b id="cartTotal">0 Kč</b></div>
@@ -661,7 +662,7 @@ function finish(){
         '</div>'+
         '<div class="wfr-why">Proč sedí: '+whyTxt+'</div>'+
         '<div class="wfr-foot"><span class="wfr-price">'+w.price.toLocaleString('cs-CZ')+' Kč</span>'+
-          '<button class="btn btn-gold" style="padding:13px 24px" onclick="addToCart('+w.id+');openCart()">Přidat do sklepa</button></div>'+
+          '<button class="btn btn-gold" style="padding:13px 24px" onclick="addToCart('+w.id+');openCart()">Přidat do košíku</button></div>'+
       '</div>'+
     '</div>'+
     '<div class="wfr-alts">'+alts.map(function(a){return '<button class="wfr-alt" onclick="addToCart('+a.w.id+');openCart()"><b>'+a.w.name+'</b><small>shoda '+a.pct+' %</small></button>';}).join('')+'</div>'+
@@ -696,7 +697,7 @@ renderStep();
     c.innerHTML='<div class="wcard-img"><div class="ph"><span class="ph-tag">Foto láhve</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="" onerror="this.remove()"><span class="badge">Primitivo</span></div>'+
       '<div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div>'+
       '<div class="desc">'+w.desc+'</div>'+
-      '<div class="wcard-foot"><span class="wcard-price">'+w.price.toLocaleString('cs-CZ')+' Kč</span><button onclick="addToCart('+w.id+');openCart()">Do sklepa</button></div></div>';
+      '<div class="wcard-foot"><span class="wcard-price">'+w.price.toLocaleString('cs-CZ')+' Kč</span><button onclick="addToCart('+w.id+');openCart()">Přidat do košíku</button></div></div>';
     g.appendChild(c);
   });
 })();
@@ -723,7 +724,7 @@ document.getElementById('checkout').addEventListener('click',function(){
 function renderCart(){
   var c=getCart(),box=document.getElementById('cartItems'),total=0,n=0,html='';
   var ids=Object.keys(c);
-  if(!ids.length){ box.innerHTML='<div class="cart-empty">Váš sklep je zatím prázdný.</div>'; }
+  if(!ids.length){ box.innerHTML='<div class="cart-empty">Váš košík je zatím prázdný.</div>'; }
   else{
     ids.forEach(function(id){var w=findW(+id);if(!w)return;var q=c[id];total+=w.price*q;n+=q;
       html+='<div class="citem"><div class="ci-img"><img class="rimg" src="'+wimg(w.id)+'" alt="" onerror="this.remove()"></div>'+

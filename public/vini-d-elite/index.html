@@ -289,9 +289,17 @@ img{display:block;max-width:100%}
 .news-form input::placeholder{color:var(--mut)}
 .news-form input:focus{outline:none;border-color:var(--gold-l)}
 
+/* cookie bar */
+.cookie-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;padding:clamp(16px,3vw,22px) clamp(18px,4vw,32px);background:rgba(14,5,8,.97);border-top:1px solid rgba(217,192,138,.35);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;transform:translateY(110%);transition:transform .45s ease;box-shadow:0 -8px 40px rgba(0,0,0,.45)}
+.cookie-bar.on{transform:translateY(0)}
+.cookie-bar p{font-size:.88rem;color:var(--parch-d);max-width:62ch;margin:0;line-height:1.55}
+.cookie-bar a{color:var(--gold-l);text-decoration:underline;text-underline-offset:3px}
+.cookie-actions{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
+.cookie-actions .btn{padding:11px 22px;font-size:.62rem}
+
 /* footer */
 .ft{background:var(--noir);color:var(--parch-d);padding:64px 0 30px;border-top:1px solid var(--line)}
-.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+.ft-grid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:24px;padding-bottom:34px;border-bottom:1px solid var(--line)}
 .ft .brand{align-items:flex-start;margin-bottom:12px}.ft .brand .bm{font-size:1.4rem}
 .ft p{font-size:.88rem;color:var(--parch-d);max-width:30ch}
 .ft h4{font-family:var(--sans);font-weight:500;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--parch);margin-bottom:15px}
@@ -299,7 +307,7 @@ img{display:block;max-width:100%}
 .ft a.fl:hover{color:var(--gold-l)}
 .ft-bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);padding-top:24px}
 .ft-bot a{color:var(--parch);font-weight:400}
-@media(max-width:820px){.ft-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:1020px){.ft-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.ft-grid{grid-template-columns:1fr}}
 
 /* cart — parchment */
 .scrim{position:fixed;inset:0;background:rgba(14,5,8,.6);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:90}
@@ -544,7 +552,8 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
       <div><a class="brand" href="#"><span class="bm">Vini d'Elite</span></a><p>Ručně vybíraná italská vína z prémiových oblastí. Přímý dovoz, soukromý sklep a privátní degustace.</p></div>
       <div><h4>Objevit</h4><a class="fl" href="#finder">Najdi své víno</a><a class="fl" href="obchod.html">Obchod</a><a class="fl" href="#kolekce">Kolekce</a><a class="fl" href="#primitivo">Primitivo</a><a class="fl" href="la-cantina.html">La Cantina Club</a></div>
       <div><h4>Obchod</h4><a class="fl" href="#gastro">Pro gastronomii</a><a class="fl" href="#pribeh">Příběh</a><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a></div>
-      <div><h4>Kontakt</h4><a class="fl" href="tel:+420777123456">+420 777 123 456</a><a class="fl" href="#">Instagram</a><a class="fl" href="#">Praha, CZ</a></div>
+            <div><h4>Právní informace</h4><a class="fl" href="obchodni-podminky.html">Obchodní podmínky</a><a class="fl" href="doprava.html">Doprava</a><a class="fl" href="reklamacni-rad.html">Reklamační řád</a><a class="fl" href="gdpr.html">GDPR</a><a class="fl" href="cookies.html">Cookies</a></div>
+      <div><h4>Kontakt</h4><a class="fl" href="tel:+420777123456">+420 777 123 456</a><a class="fl" href="#">Instagram</a><a class="fl" href="#">Brno, CZ</a></div>
     </div>
     <div class="ft-bot"><span>© 2026 Vini d'Elite · ukázkový web · alkohol prodáváme pouze osobám nad 18 let</span><span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span></div>
   </div>
@@ -680,5 +689,14 @@ n.addEventListener('click',function(e){if(e.target.tagName==='A')n.classList.rem
 setTimeout(function(){document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});},100);})();
 </script>
 <script src="/vini-d-elite/js/wine-finder.js"></script>
+
+<div class="cookie-bar" id="cookieBar" role="dialog" aria-label="Souhlas s cookies" aria-live="polite">
+  <p>Tento web používá cookies pro základní fungování košíku a anonymní statistiky návštěvnosti. Více v <a href="cookies.html">zásadách cookies</a>.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-line" type="button" id="cookieReject">Odmítnout</button>
+    <button class="btn btn-gold" type="button" id="cookieAccept">Souhlasím</button>
+  </div>
+</div>
+<script src="js/cookies.js"></script>
 </body>
 </html>

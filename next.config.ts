@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
       { source: "/klinika", destination: "/lume/index.html" },
       { source: "/bdy", destination: "/bdy-to-bdy/index.html" },
       { source: "/vini-d-elite", destination: "/vini-d-elite/index.html" },
+      { source: "/vini-d-elite/la-cantina", destination: "/vini-d-elite/la-cantina.html" },
       { source: "/vinidelite", destination: "/vini-d-elite/index.html" },
     ];
   },

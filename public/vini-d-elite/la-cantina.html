@@ -355,14 +355,6 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 @media(max-width:640px){.shop-bar{flex-direction:column;align-items:stretch}.shop-tabs{justify-content:flex-start;overflow-x:auto}}
 
 /* club landing page */
-.club-hero{position:relative;min-height:78vh;display:flex;align-items:center;background:#2F1116;overflow:hidden}
-.club-hero::before{content:'';position:absolute;inset:0;background:url('images/club/club-zakladatel.png') center/cover no-repeat;opacity:.28}
-.club-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(105deg,rgba(9,3,6,.92) 42%,rgba(9,3,6,.55) 100%)}
-.club-hero-in{position:relative;z-index:2;width:min(1240px,90vw);margin:0 auto;padding:clamp(90px,11vw,130px) 0}
-.club-hero-in .eyebrow{display:block;margin-bottom:16px}
-.club-hero-in h1{font-size:clamp(2.8rem,6vw,5.2rem);color:var(--parch);max-width:13ch;line-height:1.02;margin-bottom:20px}
-.club-hero-in .lead{max-width:58ch;font-size:clamp(1.05rem,1.4vw,1.22rem);color:var(--parch-d);margin-bottom:12px;line-height:1.75}
-.club-hero-in .lead2{max-width:58ch;font-size:clamp(.95rem,1.2vw,1.05rem);color:var(--ink2);margin-bottom:32px;line-height:1.75}
 .club-intro{max-width:780px;margin:0 auto;text-align:center;padding:clamp(48px,7vw,80px) 0 clamp(20px,4vw,36px)}
 .club-intro p{font-size:clamp(1rem,1.25vw,1.12rem);color:var(--parch-d);line-height:1.85;margin-top:18px}
 .club-editorial{display:flex;flex-direction:column;gap:clamp(56px,8vw,96px);margin-top:clamp(36px,5vw,56px)}
@@ -427,7 +419,7 @@ body.modal-open{overflow:hidden}
 .club-fee-card ul{margin:14px 0 0;padding:0;list-style:none}
 .club-fee-card li{font-size:.86rem;color:var(--parch-d);padding:6px 0 6px 18px;position:relative;line-height:1.55}
 .club-fee-card li::before{content:'';position:absolute;left:0;top:.75em;width:6px;height:6px;background:var(--gold-l);border-radius:50%;opacity:.7}
-.club-event-spot{margin-top:clamp(48px,6vw,64px);padding:clamp(28px,4vw,40px);border:1px solid rgba(217,192,138,.28);background:rgba(235,221,188,.03);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.club-event-spot{margin:clamp(32px,4vw,44px) 0 clamp(48px,6vw,64px);padding:clamp(28px,4vw,40px);border:1px solid rgba(217,192,138,.28);background:rgba(235,221,188,.03);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
 .club-event-spot .tag{font-family:var(--engrave);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-l);display:block;margin-bottom:8px}
 .club-event-spot h3{font-family:var(--serif);font-size:clamp(1.5rem,2.5vw,2rem);color:var(--parch);font-weight:500;line-height:1.15}
 .club-event-spot p{font-size:.9rem;color:var(--parch-d);margin-top:10px;max-width:48ch;line-height:1.65}
@@ -463,20 +455,8 @@ body.modal-open{overflow:hidden}
     </div>
   </div>
 </header>
-<section class="club-hero">
-  <div class="club-hero-in">
-    <span class="eyebrow club-label">La Cantina Club</span>
-    <h1>Vstupte do <em>Vini d'Elite</em></h1>
-    <p class="lead">Ne další věrnostní program. Ne sleva za e-mail. La Cantina Club je komunita lidí, kteří chtějí italské víno poznat opravdu — u stolu, s příběhem, s respektem k tomu, odkud každá láhev přišla.</p>
-    <p class="lead2">Za každou lahví stojím já. Osobně ji vybírám u vinařů v Itálii, ochutnávám, ptám se — a domů přivážím jen to, za čím si stojím. Klub je pro ty, kdo chtějí být u toho dřív než ostatní.</p>
-    <div class="cta" style="display:flex;gap:14px;flex-wrap:wrap">
-      <a class="btn btn-gold" href="#join">Chci být v klubu</a>
-      <a class="btn btn-ghost" href="#pribeh">Proč to dává smysl</a>
-    </div>
-  </div>
-</section>
 
-<section class="sec" id="pribeh">
+<section class="sec" id="pribeh" style="padding-top:clamp(100px,12vw,140px)">
   <div class="wrap">
     <div class="club-intro rv">
       <span class="eyebrow">O klubu</span>
@@ -577,6 +557,17 @@ body.modal-open{overflow:hidden}
 <section class="sec cantina" id="clenstvi" style="border-top:1px solid var(--line)">
   <div class="wrap">
     <div class="shead"><span class="eyebrow">Členství</span><h2>Jak to <em>funguje</em></h2><p>Registrace je zdarma. První měsíc členství taky — ať v klidu poznáte, jestli vám to sedí. Potom malý symbolický poplatek, který není o zisku — ale o tom, aby u stolu seděli lidé, kteří opravdu chtějí přijít.</p></div>
+
+    <div class="club-event-spot rv" id="akce">
+      <div>
+        <span class="tag">Nejbližší akce · jen pro členy klubu</span>
+        <h3>Primitivo večer u stolu</h3>
+        <p>Brno · úterý 15. 7. 2026 · 18:30<br>Komorní degustace pěti lahví z Puglie, příběhy vinařů a večeře ve skleničce. Max. 12 míst.</p>
+        <p style="margin-top:12px;font-size:.82rem;color:var(--gold-l)">Vstup 890 Kč · klubový kredit se odečítá automaticky</p>
+      </div>
+      <a class="btn btn-gold" href="#join">Rezervovat místo</a>
+    </div>
+
     <div class="club-fee-grid">
       <article class="club-fee-card rv">
         <h3>První měsíc</h3>
@@ -600,16 +591,6 @@ body.modal-open{overflow:hidden}
       </article>
     </div>
     <p class="rv" style="margin-top:28px;font-size:.9rem;color:var(--ink2);max-width:62ch;line-height:1.75">Malý měsíční poplatek není o penězích — stojí méně než jedna sklenka dobrého vína. Jde o respekt k místu u stolu: akce jsou pro deset až patnáct lidí a každé místo má hodnotu. Kdo nechodí, klub zruší — bez výčitek.</p>
-
-    <div class="club-event-spot rv" id="akce">
-      <div>
-        <span class="tag">Nejbližší akce · jen pro členy klubu</span>
-        <h3>Primitivo večer u stolu</h3>
-        <p>Brno · úterý 15. 7. 2026 · 18:30<br>Komorní degustace pěti lahví z Puglie, příběhy vinařů a večeře ve skleničce. Max. 12 míst.</p>
-        <p style="margin-top:12px;font-size:.82rem;color:var(--gold-l)">Vstup 890 Kč · klubový kredit se odečítá automaticky</p>
-      </div>
-      <a class="btn btn-gold" href="#join">Rezervovat místo</a>
-    </div>
   </div>
 </section>
 

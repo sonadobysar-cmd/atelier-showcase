@@ -6,105 +6,105 @@
   var WF_STEPS = [
     {
       key: "type",
-      q: "Jakou barvu dnes máte chuť?",
-      hint: "První krok — barva určuje směr celého profilu.",
+      q: "Jaké víno dnes otevřete?",
+      hint: "Začneme barvou — stejně jako u italského menu: antipasto, primi nebo grigliata.",
       opts: [
-        { b: "Červené", s: "Struktura, tanin, hloubka", v: "red" },
-        { b: "Bílé", s: "Svěžest, lehkost, minerál", v: "white" },
-        { b: "Růžové", s: "Šťavnaté a společenské", v: "rose" },
-        { b: "Šumivé", s: "Perlivost a slavnostní nálada", v: "sparkling" },
+        { b: "Červené", s: "Struktura, tanin, večerní charakter", v: "red" },
+        { b: "Bílé", s: "Svěžest, lehkost, k moři i k jídlu", v: "white" },
+        { b: "Růžové", s: "Šťavnaté, společenské, letní stůl", v: "rose" },
+        { b: "Šumivé", s: "Franciacorta, Moscato — bubliny a radost", v: "sparkling" },
       ],
     },
     {
       key: "moment",
-      q: "Kdy a proč ho otevřete?",
-      hint: "Stejné víno jinak sedí k večeru, dárku i aperitivu.",
+      q: "V jaké chvíli ho vypijete?",
+      hint: "Stejná láhev jinak sedí k aperitivu, večeři i dárku pro blízkého.",
       opts: [
-        { b: "Aperitiv", s: "Před jídlem, lehká konverzace", v: "aperitiv" },
-        { b: "Večeře u stolu", s: "K jídlu a dlouhému rozhovoru", v: "dinner" },
-        { b: "Oslava", s: "Slavnostní večer, něco výjimečného", v: "celebration" },
-        { b: "Dárek / sbírka", s: "Láhev s příběhem a charakterem", v: "gift" },
+        { b: "Před jídlem", s: "Aperitiv, první sklenka u stolu", v: "aperitiv" },
+        { b: "U večeře", s: "K jídlu, dlouhý rozhovor, společnost", v: "dinner" },
+        { b: "Na oslavu", s: "Slavnostní večer, něco výjimečného", v: "celebration" },
+        { b: "Jako dárek", s: "Láhev s příběhem a respektem k vinaři", v: "gift" },
       ],
     },
     {
       key: "pairing",
-      q: "K čemu ho ladíte?",
-      hint: "Párování je polovina chuti — stejně důležité jako barva.",
+      q: "Co bude na talíři?",
+      hint: "Italské víno se rodí u jídla — párování je polovina doporučení.",
       opts: [
-        { b: "K masu", s: "Steak, zvěřina, gril", v: "maso" },
-        { b: "K rybě", s: "Ryby, mořské plody", v: "ryba" },
-        { b: "K sýru", s: "Sýry, uzeniny, tapas", v: "syr" },
-        { b: "Jen tak", s: "Sólo, bez jídla", v: "solo" },
-      ],
-    },
-    {
-      key: "fruit",
-      q: "Jaké ovoce v něm hledáte?",
-      hint: "Čerstvé třešně, zralé broskve nebo sušené fíky — to je zásadní rozdíl.",
-      opts: [
-        { b: "Čerstvé a svěží", s: "Citrus, jablko, jahoda", v: "fresh" },
-        { b: "Zralé a šťavnaté", s: "Broskev, třešeň, švestka", v: "ripe" },
-        { b: "Sušené a koncentrované", s: "Fík, rozinka, povidla", v: "dried" },
+        { b: "Maso a gril", s: "Steak, zvěřina, ragù, pečeně", v: "maso" },
+        { b: "Ryby a moře", s: "Ryby, plody moře, lehčí chody", v: "ryba" },
+        { b: "Sýry a pasty", s: "Parmigiano, uzeniny, těstoviny", v: "syr" },
+        { b: "Bez jídla", s: "Chci si ho vychutnat samotné", v: "solo" },
       ],
     },
     {
       key: "sweet",
-      q: "Jak sladké?",
-      hint: "Suchost není jen chuť — je to pocit v ústech po doušku.",
+      q: "Jak suché má být?",
+      hint: "Suchost není jen chuť — je to dojem po doušku. Většina našich vín je suchá.",
       opts: [
-        { b: "Suché", s: "Bez zbytkového cukru", v: 0 },
-        { b: "Polosuché", s: "Jemný náznak sladka", v: 1 },
-        { b: "Sladší", s: "Výrazně ovocné a hřejivé", v: 2 },
+        { b: "Úplně suché", s: "Bez zbytkového cukru, čistá chuť", v: 0 },
+        { b: "S náznakem sladka", s: "Polosuché, kulatější a hebké", v: 1 },
+        { b: "Sladší profil", s: "Ovocně hřejivé — Moscato, Dolce…", v: 2 },
       ],
     },
     {
       key: "body",
-      q: "Jaký charakter v ústech?",
-      hint: "Tělo a tanin — lehkost hedvábí, nebo struktura, která drží jídlo.",
+      q: "Jak plné má být v ústech?",
+      hint: "Tělo a tanin — od lehkého Chianti po mohutné Barolo a Primitivo.",
       opts: [
-        { b: "Jemné a hebké", s: "Kulaté, bez výrazného taninu", v: 0 },
-        { b: "Vyvážené", s: "Tak akorát — nic nepřebíjí", v: 1 },
-        { b: "Plné a strukturované", s: "Tanin, hloubka, síla", v: 2 },
+        { b: "Lehké a hebké", s: "Pití bez námahy, jemný tanin", v: 0 },
+        { b: "Středně plné", s: "Vyvážené, univerzální k jídlu", v: 1 },
+        { b: "Mohutné a strukturované", s: "Tanin, hloubka, dlouhý závěr", v: 2 },
       ],
     },
     {
-      key: "acidity",
-      q: "Jakou svěžest hledáte?",
-      hint: "Kyselina probouzí chuť — od jemné po ostře živou.",
+      key: "fruit",
+      q: "Jaké ovoce v něm chcete cítit?",
+      hint: "Čerstvé třešně z Chianti, zralé broskve z Puglie nebo sušené fíky z Amarone.",
       opts: [
-        { b: "Měkká a kulatá", s: "Hřejivé, bez ostření", v: 0 },
-        { b: "Vyvážená", s: "Svěží, ale ne řezavá", v: 1 },
-        { b: "Živá a mineralní", s: "Citrus, salinita, tah", v: 2 },
+        { b: "Čerstvé", s: "Citrus, jablko, jahoda, granátové jablko", v: "fresh" },
+        { b: "Zralé", s: "Třešeň, broskev, švestka, fík", v: "ripe" },
+        { b: "Sušené", s: "Rozinka, povidla, kakao, koncentrace", v: "dried" },
       ],
     },
     {
       key: "aroma",
-      q: "Co vás v aromatu láká nejvíc?",
-      hint: "Květiny, koření nebo dub — každé víno má svůj jazyk.",
+      q: "Co má dominovat ve vůni?",
+      hint: "Každá oblast mluví jiným jazykem — květiny, dub nebo kámen z půdy.",
       opts: [
-        { b: "Květiny a byliny", s: "Fialky, heřmánek, svěžest", v: "floral" },
-        { b: "Koření a dřevo", s: "Cedr, tabák, vanilka", v: "woody" },
-        { b: "Minerál a čistota", s: "Křída, mořská sůl, kámen", v: "mineral" },
+        { b: "Květiny a byliny", s: "Fialky, heřmánek, bílý květ", v: "floral" },
+        { b: "Dub a koření", s: "Cedr, vanilka, tabák po sudu", v: "woody" },
+        { b: "Minerál a kámen", s: "Mořská sůl, křída, sopečná půda", v: "mineral" },
       ],
     },
     {
-      key: "intensity",
-      q: "Spíš světlé, nebo hluboké?",
-      hint: "Intenzita barvy často odráží koncentraci chuti.",
+      key: "acidity",
+      q: "Jak živá má být kyselina?",
+      hint: "Kyselina probouzí chuť — u bílých ji cítíte nejvíc, u červených ji vyvažuje tanin.",
       opts: [
-        { b: "Světlé a lehké", s: "Pití bez námahy", v: 0 },
-        { b: "Uprostřed", s: "Vyvážená hloubka", v: 1 },
-        { b: "Tmavé a koncentrované", s: "Sytost, vrstvy, dlouhý závěr", v: 2 },
+        { b: "Měkká a kulatá", s: "Hřejivé, bez ostření", v: 0 },
+        { b: "Vyvážená", s: "Svěží, ale ne řezavá", v: 1 },
+        { b: "Výrazná", s: "Citrus, salinita, tah — Gavi, Etna…", v: 2 },
+      ],
+    },
+    {
+      key: "region",
+      q: "Který italský charakter vás láká?",
+      hint: "Sever, střed nebo jih — každý kraj dává vínu jinou osobnost.",
+      opts: [
+        { b: "Sever", s: "Piemonte, Lombardie — elegance a svěžest", v: 0 },
+        { b: "Střed", s: "Toscana, Veneto, Sicílie — klasika a rovnováha", v: 1 },
+        { b: "Jih", s: "Puglia — slunce, Primitivo, koncentrace", v: 2 },
       ],
     },
     {
       key: "adventure",
-      q: "Co od vína dnes chcete?",
-      hint: "Poslední otázka — od klasiky po odvážný objev.",
+      q: "Co od lahve očekáváte?",
+      hint: "Poslední otázka — od jisté klasiky po láhev, kterou si zapamatujete.",
       opts: [
-        { b: "Jistotu a klasiku", s: "Osvědčené oblasti a odrůdy", v: 0 },
-        { b: "Něco nového", s: "Zajímavá oblast, nový profil", v: 1 },
-        { b: "Odvahu a hloubku", s: "Výrazné, pamětihodné lahve", v: 2 },
+        { b: "Osvědčenou klasiku", s: "Chianti, Soave, známé jméno", v: 0 },
+        { b: "Zajímavý objev", s: "Etna, Cerasuolo, něco nového", v: 1 },
+        { b: "Výraznou láhev", s: "Barolo, Amarone, riserva — na památku", v: 2 },
       ],
     },
   ];
@@ -193,9 +193,16 @@
     add(
       {
         weight: 8,
-        s: wfAns.pairing && w.pairing.indexOf(wfAns.pairing) > -1 ? 8 : wfAns.pairing === "solo" ? 3 : 0,
+        s:
+          wfAns.pairing && w.pairing.indexOf(wfAns.pairing) > -1
+            ? 8
+            : wfAns.pairing === "solo" && p.mood && p.mood.indexOf("solo") > -1
+              ? 6
+              : wfAns.pairing === "maso" && w.pairing.indexOf("syr") > -1
+                ? 4
+                : 0,
       },
-      "ladí se k jídlu"
+      wfAns.pairing === "solo" ? "víno na samotné vychutnání" : "ladí se k jídlu"
     );
 
     add(
@@ -237,14 +244,25 @@
           : "minerální čistota"
     );
 
-    var intensity = numScore(wfAns.intensity, w.intensity, 10, ["světlá intenzita", "střední intenzita", "hluboká intenzita"]);
-    add({ weight: 10, s: intensity.s }, intensity.r);
+    var reg = numScore(wfAns.region, p.wm, 12, [
+      "severní elegance",
+      "střední rovnováha",
+      "jižní koncentrace",
+    ]);
+    add({ weight: 12, s: reg.s }, reg.r);
 
-    var adv = numScore(wfAns.adventure, p.adv, 10, ["klasický profil", "objevná láhev", "výrazná hloubka"]);
+    var adv = numScore(wfAns.adventure, p.adv, 10, [
+      "klasická italská volba",
+      "objevná láhev",
+      "výrazná hloubka",
+    ]);
     add({ weight: 10, s: adv.s }, adv.r);
 
     var tannin = numScore(wfAns.body, p.tn, 8, null);
-    add({ weight: 8, s: tannin.s }, wfAns.body >= 2 && p.tn >= 2 ? "tanin, který drží" : null);
+    add({ weight: 8, s: tannin.s }, wfAns.body >= 2 && p.tn >= 2 ? "tanin, který drží jídlo" : null);
+
+    var cx = numScore(wfAns.adventure, p.cx, 6, null);
+    add({ weight: 6, s: cx.s }, wfAns.adventure >= 2 && p.cx >= 2 ? "komplexní závěr" : null);
 
     var pct = max ? Math.round((sc / max) * 100) : 0;
     why = why.filter(function (x, i, a) {

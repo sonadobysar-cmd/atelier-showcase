@@ -165,7 +165,7 @@ img{display:block;max-width:100%}
 .finder .shead p{max-width:58ch;margin-left:auto;margin-right:auto}
 .finder-h2-line{display:inline-block;white-space:nowrap;letter-spacing:.02em}
 .finder-h2-line em{letter-spacing:.02em;display:inline;margin:0;padding:0}
-.wf-card{max-width:980px;min-height:520px;padding:clamp(34px,5vw,68px);border-color:rgba(217,192,138,.36);box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.wf-card{max-width:980px;min-height:520px;padding:clamp(34px,5vw,68px);border-color:rgba(217,192,138,.36);box-shadow:0 40px 90px rgba(0,0,0,.45);position:relative;overflow:hidden}
 .wf-card::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0,rgba(181,147,79,.1),transparent 62%)}
 .wf-intro{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:24px;font-family:var(--engrave);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-l)}
 .wf-intro i{display:block;width:48px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-l),transparent)}
@@ -418,7 +418,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 <!-- WINE FINDER (signature) -->
 <section class="sec finder" id="finder">
   <div class="wrap">
-    <div class="shead"><span class="eyebrow">Chuťový průvodce</span><h2 class="finder-h2"><span class="finder-h2-line">Najdi své <em>víno</em></span></h2><p>Deset otázek o chuti, náladě i okamžiku — porovnáme je s interním profilem každé lahve a doporučíme víno, které vám sedne nejpřesněji.</p></div>
+    <div class="shead"><span class="eyebrow">Chuťový průvodce</span><h2 class="finder-h2"><span class="finder-h2-line">Najdi své <em>víno</em></span></h2><p>Deset otázek, které by vám položila sommeliérka u stolu — barva, jídlo, suchost, tanin, ovocný charakter i italský region. Porovnáme je s profilem každé lahve a doporučíme tu pravou.</p></div>
     <div class="wf-card">
       <div class="wf-intro"><i></i><span>Profil chuti · jen pro vás</span><i></i></div>
       <div id="wfQuiz">

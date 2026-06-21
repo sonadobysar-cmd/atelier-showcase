@@ -474,12 +474,24 @@ function scheduleOpen(i){
   highlight(i);
   if(overlay.classList.contains('open')&&activeFloor===i)return;
   cancelOpenTimer();
-  openTimer=setTimeout(()=>openPopup(i),100);
+  openTimer=setTimeout(()=>openPopup(i),120);
 }
 function scheduleClose(){
+  if(overlay.classList.contains('open'))return;
   cancelOpenTimer();
   cancelCloseTimer();
-  closeTimer=setTimeout(()=>{closePopup();clearH();},140);
+  closeTimer=setTimeout(()=>{closePopup();clearH();},220);
+}
+function scheduleCloseFromOverlay(){
+  cancelOpenTimer();
+  cancelCloseTimer();
+  closeTimer=setTimeout(()=>{closePopup();clearH();},180);
+}
+function onFloorLeave(e){
+  if(overlay.classList.contains('open'))return;
+  const t=e.relatedTarget;
+  if(t&&(overlay.contains(t)||sectionCut?.contains(t)||stavbaSection?.contains(t)))return;
+  scheduleClose();
 }
 const touchUI=window.matchMedia('(hover:none) and (pointer:coarse)').matches||window.matchMedia('(max-width:768px)').matches;
 const recordMode=/[?&](record|preview)=1(?:&|$)/.test(location.search);
@@ -534,7 +546,7 @@ function bindFloor(el,i){
     el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();togglePopup(i);}});
   }else{
     el.addEventListener('mouseenter',()=>scheduleOpen(i));
-    el.addEventListener('mouseleave',scheduleClose);
+    el.addEventListener('mouseleave',onFloorLeave);
   }
 }
 gEls.forEach((g,i)=>bindFloor(g,i));
@@ -544,12 +556,26 @@ else if(touchUI){cutHint.textContent='\u2191 Klepni na patro \u2014 otev\u0159e 
 const sectionCut=document.querySelector('.section-cut');
 if(sectionCut&&!touchUI){
   sectionCut.addEventListener('mouseenter',cancelCloseTimer);
-  sectionCut.addEventListener('mouseleave',scheduleClose);
+  sectionCut.addEventListener('mouseleave',e=>{
+    if(overlay.classList.contains('open'))return;
+    const t=e.relatedTarget;
+    if(t&&overlay.contains(t))return;
+    scheduleClose();
+  });
 }
 const stavbaSection=document.getElementById('stavba');
 if(stavbaSection&&!touchUI){
   stavbaSection.addEventListener('mouseenter',cancelCloseTimer);
-  stavbaSection.addEventListener('mouseleave',scheduleClose);
+  stavbaSection.addEventListener('mouseleave',e=>{
+    if(overlay.classList.contains('open'))return;
+    const t=e.relatedTarget;
+    if(t&&overlay.contains(t))return;
+    scheduleClose();
+  });
+}
+if(!touchUI){
+  overlay.addEventListener('mouseenter',cancelCloseTimer);
+  overlay.addEventListener('mouseleave',scheduleCloseFromOverlay);
 }
 
 
@@ -642,6 +668,7 @@ function sceneSVG(scene){
 
 function openPopup(i){
   cancelOpenTimer();
+  cancelCloseTimer();
   activeFloor=i;
   highlight(i);
   const f=floors[i];

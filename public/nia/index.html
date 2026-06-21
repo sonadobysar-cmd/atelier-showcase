@@ -132,10 +132,10 @@ img{display:block;max-width:100%}
 .feat-spot-copy:hover{transform:translateY(-3px)}
 .feat-spot-thumb{position:relative;margin:0;overflow:hidden;border-radius:var(--r-lg);box-shadow:var(--shadow-lg);aspect-ratio:16/9;background:var(--off)}
 .feat-spot-thumb .shine{z-index:4}
-.mock-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;background:var(--off)}
-.pg-card-screen .mock-shot{position:absolute;inset:0}
+.mock-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:top center;display:block;background:#fff}
+.pg-card-screen .mock-shot{position:absolute;inset:0;object-fit:cover;background:var(--off)}
 .feat-spot-thumb picture,.feat-spot-thumb picture img{display:block;width:100%;height:100%}
-.feat-spot-thumb .mock-shot{width:100%;height:100%;object-fit:cover;object-position:58% 30%;transition:transform .7s var(--ease)}
+.feat-spot-thumb .mock-shot{width:100%;height:100%;object-fit:contain;object-position:top center;transition:transform .7s var(--ease);background:#fff}
 .feat-spot:hover .feat-spot-thumb .mock-shot{transform:scale(1.03)}
 .feat-spot-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--burgundy4);font-weight:400}
 .feat-spot-title{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.08;margin:14px 0 16px;color:var(--black)}

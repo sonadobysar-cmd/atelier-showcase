@@ -131,12 +131,11 @@ img{display:block;max-width:100%}
 .feat-spot-copy{display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .45s var(--ease)}
 .feat-spot-copy:hover{transform:translateY(-3px)}
 .feat-spot-thumb{position:relative;margin:0;overflow:hidden;border-radius:var(--r-lg);box-shadow:var(--shadow-lg);aspect-ratio:16/9;background:var(--off)}
-.feat-spot-thumb .shine{z-index:4}
+.feat-spot-thumb .feat-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .7s var(--ease)}
+.feat-spot-thumb .shine{z-index:4;border-radius:inherit}
+.feat-spot:hover .feat-spot-thumb .feat-img{transform:scale(1.03)}
 .mock-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:top center;display:block;background:#fff}
-.pg-card-screen .mock-shot{position:absolute;inset:0;object-fit:cover;background:var(--off)}
-.feat-spot-thumb picture,.feat-spot-thumb picture img{display:block;width:100%;height:100%}
-.feat-spot-thumb .mock-shot{width:100%;height:100%;object-fit:contain;object-position:top center;transition:transform .7s var(--ease);background:#fff}
-.feat-spot:hover .feat-spot-thumb .mock-shot{transform:scale(1.03)}
+.pg-card-screen .mock-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;background:var(--off)}
 .feat-spot-tag{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--burgundy4);font-weight:400}
 .feat-spot-title{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.08;margin:14px 0 16px;color:var(--black)}
 .feat-spot-desc{font-size:.92rem;line-height:1.85;color:var(--muted);max-width:420px;margin:0 0 22px;font-weight:300}
@@ -153,43 +152,30 @@ img{display:block;max-width:100%}
 .sec-head:not(.centered) h2 .rule{margin-left:0}
 .sec-head .idx{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:400}
 
-/* PROJECT GALLERY — filmstrip za statickým telefonem */
+/* PROJECT GALLERY — nekonečný pás náhledů */
 .proj-gallery{
-  --pg-w:clamp(220px,22vw,272px);
-  --pg-h:clamp(285px,31vw,355px);
-  --pg-r:clamp(38px,4.2vw,50px);
-  --pg-b:3px;
-  background:var(--black);color:var(--white);padding:clamp(88px,12vw,140px) 0 clamp(72px,10vw,112px);overflow:hidden}
-.proj-gallery-head{text-align:center;padding:0 6vw clamp(52px,7vw,80px);line-height:.82;position:relative;z-index:1}
+  --pg-w:clamp(168px,14vw,220px);
+  --pg-h:clamp(300px,34vw,400px);
+  --pg-gap:clamp(14px,2vw,20px);
+  background:var(--black);color:var(--white);padding:clamp(88px,12vw,140px) 0 0;overflow:hidden}
+.proj-gallery-head{text-align:center;padding:0 6vw clamp(40px,6vw,64px);line-height:.82;position:relative;z-index:1}
 .proj-gallery-script{font-family:var(--script);font-style:normal;font-size:clamp(3.6rem,10vw,7.5rem);font-weight:400;color:var(--white);display:block;margin-bottom:-.22em;transform:translateX(-12%);position:relative;z-index:1}
 .proj-gallery-title{font-family:var(--display);font-weight:500;font-size:clamp(2.8rem,9vw,6.5rem);letter-spacing:.02em;text-transform:uppercase;color:var(--white);margin:0;position:relative;z-index:1}
-.proj-gallery-stage{position:relative;padding:clamp(16px,3vw,32px) 0 0;overflow:visible;display:flex;justify-content:center}
-.proj-gallery-device{display:flex;flex-direction:column;align-items:center;width:var(--pg-w);position:relative;z-index:2}
-.proj-gallery-viewport{position:relative;width:var(--pg-w);height:var(--pg-h);flex-shrink:0}
-.proj-gallery-track-wrap{position:absolute;inset:0;width:100%;overflow:hidden;display:flex;align-items:center;z-index:1;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
-.proj-gallery-track{display:flex;align-items:center;gap:12px;width:max-content;height:100%;animation:pgScroll 42s linear infinite;will-change:transform}
-.proj-gallery-stage:hover .proj-gallery-track,.proj-gallery-track-wrap:hover .proj-gallery-track{animation-duration:34s}
+.proj-gallery-belt{overflow:hidden;width:100%;padding:clamp(8px,2vw,16px) 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.proj-gallery-track{display:flex;align-items:stretch;gap:var(--pg-gap);width:max-content;animation:pgScroll 50s linear infinite;will-change:transform}
+.proj-gallery-belt:hover .proj-gallery-track{animation-duration:38s}
 @keyframes pgScroll{to{transform:translateX(var(--pg-shift,-50%))}}
-.pg-card{flex:0 0 var(--pg-w);width:var(--pg-w);height:var(--pg-h);position:relative;overflow:hidden;border:none;padding:0;cursor:pointer;background:var(--burgundy2);border-radius:calc(var(--pg-r) - var(--pg-b));transition:transform .45s var(--ease),filter .4s,box-shadow .45s var(--ease)}
-.pg-card:hover{filter:brightness(1.12);transform:scale(1.03);box-shadow:0 24px 48px -20px rgba(158,77,106,.35)}
-.pg-card.on{filter:brightness(1.14);box-shadow:0 0 0 2px rgba(158,77,106,.5)}
-.pg-card-screen{position:absolute;inset:0;overflow:hidden;background:var(--off);border-radius:calc(var(--pg-r) - var(--pg-b))}
-.pg-card-screen .mock-shot{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
-.pg-card-screen .shine{z-index:4}
-.pg-card-screen .live,.pg-card-screen .pg-live{position:absolute;inset:0}
-.pg-card-screen .live iframe{pointer-events:none}
+.pg-card{flex:0 0 var(--pg-w);width:var(--pg-w);height:var(--pg-h);position:relative;overflow:hidden;border:2px solid rgba(255,255,255,.1);padding:0;cursor:pointer;background:var(--burgundy2);border-radius:clamp(22px,2.8vw,32px);box-shadow:0 20px 48px -16px rgba(0,0,0,.55);transition:transform .45s var(--ease),filter .4s,box-shadow .45s var(--ease),border-color .35s}
+.pg-card:hover{filter:brightness(1.1);transform:translateY(-6px) scale(1.02);box-shadow:0 28px 56px -16px rgba(158,77,106,.35);border-color:rgba(158,77,106,.45)}
+.pg-card.on{filter:brightness(1.12);border-color:rgba(158,77,106,.55);box-shadow:0 0 0 2px rgba(158,77,106,.4)}
+.pg-card-screen{position:absolute;inset:0;overflow:hidden;background:var(--off);border-radius:inherit}
+.pg-card-screen .shine{z-index:4;border-radius:inherit}
 .pg-card-soon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:.9rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-.pg-card-num{position:absolute;top:10px;left:10px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:400;z-index:3;background:rgba(8,6,6,.4);padding:5px 9px;border-radius:var(--r-pill)}
+.pg-card-num{position:absolute;top:10px;left:10px;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:400;z-index:3;background:rgba(8,6,6,.5);padding:5px 9px;border-radius:var(--r-pill)}
 .pg-card-name{display:none}
-.pg-phone{position:absolute;inset:0;z-index:3;width:100%;height:100%;pointer-events:none}
-.pg-phone-body{width:100%;height:100%;border:var(--pg-b) solid rgba(255,255,255,.94);border-radius:var(--pg-r) var(--pg-r) 0 0;border-bottom:none;background:transparent;box-shadow:0 40px 80px -32px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06);overflow:visible}
-.pg-phone-bezel{width:100%;height:100%;border:none;border-radius:0;background:transparent;overflow:visible}
-.pg-phone-window{height:100%;background:transparent;position:relative;border-radius:calc(var(--pg-r) - var(--pg-b)) calc(var(--pg-r) - var(--pg-b)) 0 0}
-.pg-phone-window::before{content:'';position:absolute;inset:0;z-index:2;box-shadow:inset 0 0 24px rgba(0,0,0,.22);pointer-events:none;border-radius:inherit}
-.pg-phone-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:28%;height:5px;background:rgba(8,6,6,.14);border-radius:var(--r-pill);z-index:3}
-.pg-phone-copy{flex:none;width:100%;padding:clamp(18px,2.6vw,26px) clamp(12px,1.6vw,16px) clamp(20px,2.8vw,28px);text-align:center;background:var(--white);border:var(--pg-b) solid rgba(255,255,255,.94);border-top:none;border-radius:0 0 var(--pg-r) var(--pg-r);box-shadow:0 40px 80px -32px rgba(0,0,0,.75)}
-.pg-copy-sm{font-family:var(--display);font-size:clamp(.48rem,1vw,.58rem);letter-spacing:.28em;text-transform:uppercase;font-weight:500;line-height:1.45;color:var(--black);display:block}
-.pg-copy-lg{font-family:var(--display);font-size:clamp(.88rem,2.1vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;font-weight:600;line-height:1.1;color:var(--burgundy3);display:block;margin:8px 0 6px}
+.proj-gallery-tagline{text-align:center;padding:clamp(28px,5vw,44px) 6vw clamp(12px,2vw,20px)}
+.proj-gallery-tagline .pg-copy-sm{font-family:var(--display);font-size:clamp(.48rem,1vw,.58rem);letter-spacing:.28em;text-transform:uppercase;font-weight:500;line-height:1.45;color:rgba(255,255,255,.72);display:block}
+.proj-gallery-tagline .pg-copy-lg{font-family:var(--display);font-size:clamp(.88rem,2.1vw,1.15rem);letter-spacing:.14em;text-transform:uppercase;font-weight:600;line-height:1.1;color:var(--burgundy-glow);display:block;margin:8px 0 6px}
 .proj-teaser-cta{text-align:center;margin-top:clamp(56px,9vw,88px);padding:clamp(12px,2vw,24px) 6vw clamp(56px,9vw,80px);background:var(--black)}
 .proj-teaser-cta p{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:32px;font-weight:400}
 .proj-teaser-cta .btn{margin-bottom:24px}
@@ -473,7 +459,7 @@ img{display:block;max-width:100%}
   .work-visual,.work-item.rev .work-visual{margin:0 auto}
   .frame{padding:0 0 36px 0}
   .frame .phone{right:4%;width:24%;max-width:96px}
-  .proj-gallery{--pg-w:clamp(200px,44vw,240px);--pg-h:clamp(255px,48vw,310px);--pg-r:clamp(32px,7vw,42px)}
+  .proj-gallery{--pg-w:clamp(148px,38vw,200px);--pg-h:clamp(260px,52vw,340px)}
   .proj-gallery-script{transform:translateX(-8%);font-size:clamp(2.8rem,12vw,5rem)}
   .proj-gallery-title{font-size:clamp(2.2rem,11vw,3.8rem)}
   .proj-gallery-head{padding-bottom:clamp(40px,8vw,56px)}
@@ -515,7 +501,7 @@ img{display:block;max-width:100%}
 }
 @media(max-width:768px){
   .feat-spot{grid-template-columns:1fr;gap:20px;padding-bottom:clamp(32px,7vw,48px)}
-  .feat-spot-thumb{order:1;aspect-ratio:16/10}
+  .feat-spot-thumb{order:1;aspect-ratio:16/9}
   .feat-spot-copy{order:2;position:relative;z-index:2;padding-top:4px}
   .feat-spot-thumb .live-poster b,.feat-spot-thumb .live-poster span:not(.play):not(.live-spin){display:none}
   .feat-spot-title{margin-top:8px}
@@ -627,10 +613,7 @@ img{display:block;max-width:100%}
 
 <div class="feat-spot reveal">
   <figure class="feat-spot-thumb">
-    <picture>
-      <source media="(max-width:1024px)" srcset="/nia/shots/realty-mobile.jpg">
-      <img class="mock-shot" src="/nia/shots/realty-desktop.jpg" alt="Prémiová realitka — desktop" loading="lazy" decoding="async">
-    </picture>
+    <img class="feat-img" src="/nia/shots/realty-desktop.jpg" alt="Prémiová realitka — náhled webu" loading="lazy" decoding="async">
     <div class="shine"></div>
   </figure>
   <a href="/nia/projekty#work-realty" class="feat-spot-copy" data-cursor>
@@ -646,27 +629,14 @@ img{display:block;max-width:100%}
     <span class="proj-gallery-script">Naše</span>
     <h2 class="proj-gallery-title">projekty</h2>
   </div>
-  <div class="proj-gallery-stage">
-    <div class="proj-gallery-device">
-      <div class="proj-gallery-viewport">
-        <div class="proj-gallery-track-wrap">
-          <div class="proj-gallery-track" id="projGalleryTrack"></div>
-        </div>
-        <div class="pg-phone" aria-hidden="true">
-          <div class="pg-phone-body">
-            <div class="pg-phone-bezel">
-              <div class="pg-phone-window"><span class="pg-phone-notch"></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="pg-phone-copy">
-        <span class="pg-copy-sm">Naše weby jsou</span>
-        <span class="pg-copy-lg">responzivní</span>
-        <span class="pg-copy-sm">a myslíme na vše</span>
-      </div>
-    </div>
+  <div class="proj-gallery-belt" aria-hidden="true">
+    <div class="proj-gallery-track" id="projGalleryTrack"></div>
   </div>
+  <p class="proj-gallery-tagline">
+    <span class="pg-copy-sm">Naše weby jsou</span>
+    <span class="pg-copy-lg">responzivní</span>
+    <span class="pg-copy-sm">a myslíme na vše</span>
+  </p>
   <div class="proj-teaser-cta reveal">
     <p>11 projektů · živé ukázky · detaily</p>
     <a href="/nia/projekty" class="btn" data-cursor>Všechny projekty</a>

@@ -220,11 +220,15 @@ img{display:block;max-width:100%}
 .frame .phone{position:absolute;right:0;bottom:2%;width:19%;min-width:72px;max-width:110px;z-index:7}
 .phone-body{background:var(--black);border-radius:32px;padding:6px;box-shadow:0 36px 64px -28px rgba(8,6,6,.55)}
 .phone-screen{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:9/19.3;background:#fff}
+.mock-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;display:block;background:var(--off)}
+.screen{position:relative}
+.resp-viewport .mock-shot,.ds-viewport .mock-shot,.pg-card-screen .mock-shot,.feat-spot-thumb .mock-shot{position:absolute;inset:0}
+.resp-device--tablet,.device-suite .ds-device--tablet{display:none!important}
 .shine{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.28) 50%,transparent 58%);transform:translateX(-35%);transition:transform .1s}
 .live{position:absolute;inset:0;overflow:hidden;background:var(--off)}
 .live iframe{position:absolute;top:0;left:0;border:0;pointer-events:none;transform-origin:0 0;max-width:none}
 
-/* RESPONSIVE THEATER — luxusní scéna desktop · tablet · mobil */
+/* RESPONSIVE THEATER — desktop · mobil */
 .resp-theater{position:relative;background:var(--black);color:var(--white);padding:clamp(108px,12vw,136px) 0 clamp(96px,12vw,140px);overflow:hidden}
 .resp-theater-bg{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 70% 55% at 50% 38%,rgba(122,61,84,.22) 0%,transparent 62%),
@@ -250,7 +254,7 @@ img{display:block;max-width:100%}
 .resp-device{position:absolute;transition:opacity .45s var(--ease),transform .55s var(--ease)}
 .resp-device--desktop{left:0;top:50%;transform:translateY(-50%);width:min(64%,580px);z-index:1}
 .resp-device--tablet{left:56%;top:6%;width:min(24%,190px);z-index:2}
-.resp-device--phone{left:70%;bottom:2%;width:min(14%,112px);z-index:3}
+.resp-device--phone{left:72%;bottom:4%;width:min(16%,120px);z-index:3}
 .resp-bezel{position:relative;background:linear-gradient(145deg,#2a2a2e 0%,#121214 100%);border-radius:14px;padding:7px;box-shadow:0 40px 80px -24px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.12)}
 .resp-device--phone .resp-bezel{border-radius:28px;padding:5px}
 .resp-device--tablet .resp-bezel{border-radius:18px}
@@ -457,7 +461,8 @@ img{display:block;max-width:100%}
   .work-back{display:inline-block;margin-bottom:28px;color:var(--muted)}
   .frame .phone{display:none}
   .frame{padding:0}
-  .work .live-poster span:not(.play):not(.live-spin){display:none}
+  .frame .screen .mock-shot{object-position:top center}
+  .frame .screen{aspect-ratio:9/19.2;max-width:min(280px,72vw);margin:0 auto;border-radius:28px;overflow:hidden}
 }
 .work-back{display:none}
 @media(max-width:980px){
@@ -598,11 +603,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/atelier-void">
-        <div class="live-poster"><span class="play">▶</span><b>Atelier Void</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/void-desktop.jpg" alt="Atelier Void — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/atelier-void"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/void-mobile.jpg" alt="Atelier Void — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
 </a>
@@ -628,11 +631,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/gloss">
-        <div class="live-poster"><span class="play">▶</span><b>Gloss</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/gloss-desktop.jpg" alt="Gloss — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/gloss"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/gloss-mobile.jpg" alt="Gloss — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
 </a>
@@ -657,11 +658,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://mochi-shop-tau.vercel.app">
-        <div class="live-poster"><span class="play">▶</span><b>Mochi Box</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/mochi-desktop.jpg" alt="Mochi Box — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://mochi-shop-tau.vercel.app"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/mochi-mobile.jpg" alt="Mochi Box — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -686,11 +685,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/lume">
-        <div class="live-poster"><span class="play">▶</span><b>LUMÉ Aesthetic Studio</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/lume-desktop.jpg" alt="LUMÉ Aesthetic Studio — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/lume"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/lume-mobile.jpg" alt="LUMÉ Aesthetic Studio — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -715,11 +712,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/laleia">
-        <div class="live-poster"><span class="play">▶</span><b>Lash Babe's</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/laleia-desktop.jpg" alt="Lash Babe's — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/laleia"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/laleia-mobile.jpg" alt="Lash Babe's — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -744,11 +739,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/matcha">
-        <div class="live-poster"><span class="play">▶</span><b>MATCHÁ</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/matcha-desktop.jpg" alt="MATCHÁ — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/matcha"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/matcha-mobile.jpg" alt="MATCHÁ — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -773,11 +766,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/klic-estate">
-        <div class="live-poster"><span class="play">▶</span><b>Prémiová realitka</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/realty-desktop.jpg" alt="Prémiová realitka — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/klic-estate"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/realty-mobile.jpg" alt="Prémiová realitka — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -802,11 +793,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/bdy-to-bdy">
-        <div class="live-poster"><span class="play">▶</span><b>BDY to BDY</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/bdy-desktop.jpg" alt="BDY to BDY — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/bdy-to-bdy"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/bdy-mobile.jpg" alt="BDY to BDY — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -831,11 +820,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/masterclass">
-        <div class="live-poster"><span class="play">▶</span><b>Konverzní trychtýř</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/funnel-desktop.jpg" alt="Konverzní trychtýř — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/masterclass"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/funnel-mobile.jpg" alt="Konverzní trychtýř — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -860,11 +847,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://altez.vercel.app">
-        <div class="live-poster"><span class="play">▶</span><b>ALTEZ</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/wellness-desktop.jpg" alt="ALTEZ — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://altez.vercel.app"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/wellness-mobile.jpg" alt="ALTEZ — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -889,11 +874,9 @@ img{display:block;max-width:100%}
   <div class="frame">
     <span class="spark">✦</span>
     <div class="screen"><div class="shine"></div>
-      <div class="live is-loading" data-vw="1340" data-src="https://atelier-showcase-cyan.vercel.app/vini-d-elite">
-        <div class="live-poster"><span class="play">▶</span><b>Vini d'Elite</b><span>Živý náhled</span></div>
-      </div>
+      <img class="mock-shot" src="/nia/shots/vini-desktop.jpg" alt="Vini d'Elite — desktop" loading="lazy" decoding="async">
     </div>
-    <div class="phone"><div class="phone-body"><div class="phone-screen"><div class="live is-loading" data-vw="430" data-src="https://atelier-showcase-cyan.vercel.app/vini-d-elite"><div class="live-poster"><span class="play">▶</span></div></div></div></div></div>
+    <div class="phone"><div class="phone-body"><div class="phone-screen"><img class="mock-shot" src="/nia/shots/vini-mobile.jpg" alt="Vini d'Elite — mobil" loading="lazy" decoding="async"></div></div></div>
     <span class="frame-tag">Živá ukázka ↗</span>
   </div>
       </a>
@@ -981,96 +964,28 @@ var PROJECTS=[
   {id:'vini',num:'11',name:"Vini d'Elite",cat:'Víno · E-shop',url:'https://atelier-showcase-cyan.vercel.app/vini-d-elite'}
 ];
 
-var PROJECT_THUMBS={
-  lume:'/lume/img/hero-model.jpg?v=11',
-  laleia:'/laleia/images/preview8.jpg',
-  realty:'/klic-estate/images/properties/01-vila-bazen-1.jpg',
-  bdy:'/bdy-to-bdy/img/hero.jpg',
-  wellness:'https://altez.vercel.app/img/hero.jpg'
+var PROJECT_SHOTS={
+  void:{d:'/nia/shots/void-desktop.jpg',m:'/nia/shots/void-mobile.jpg'},
+  gloss:{d:'/nia/shots/gloss-desktop.jpg',m:'/nia/shots/gloss-mobile.jpg'},
+  mochi:{d:'/nia/shots/mochi-desktop.jpg',m:'/nia/shots/mochi-mobile.jpg'},
+  lume:{d:'/nia/shots/lume-desktop.jpg',m:'/nia/shots/lume-mobile.jpg'},
+  laleia:{d:'/nia/shots/laleia-desktop.jpg',m:'/nia/shots/laleia-mobile.jpg'},
+  matcha:{d:'/nia/shots/matcha-desktop.jpg',m:'/nia/shots/matcha-mobile.jpg'},
+  realty:{d:'/nia/shots/realty-desktop.jpg',m:'/nia/shots/realty-mobile.jpg'},
+  bdy:{d:'/nia/shots/bdy-desktop.jpg',m:'/nia/shots/bdy-mobile.jpg'},
+  funnel:{d:'/nia/shots/funnel-desktop.jpg',m:'/nia/shots/funnel-mobile.jpg'},
+  wellness:{d:'/nia/shots/wellness-desktop.jpg',m:'/nia/shots/wellness-mobile.jpg'},
+  vini:{d:'/nia/shots/vini-desktop.jpg',m:'/nia/shots/vini-mobile.jpg'}
 };
 
-function applyStaticPreview(live,thumb){
-  if(!live||live.dataset.static)return;
-  live.dataset.static='1';
-  if(thumb){
-    var img=document.createElement('img');
-    img.className='live-thumb';
-    img.src=thumb;
-    img.alt='';
-    img.loading='eager';
-    img.decoding='async';
-    live.insertBefore(img,live.firstChild);
-  }
-  live.classList.remove('is-loading');
-  live.classList.add('is-loaded','live-static');
-}
-
-function initMobilePreviews(){
-  if(!isMobilePreview())return;
+function swapWorkShotsForViewport(){
+  var mobile=window.matchMedia('(max-width:1024px)').matches;
   document.querySelectorAll('.work-item[data-project]').forEach(function(item){
-    var live=item.querySelector('.screen .live[data-src]:not([data-soon])');
-    if(live)applyStaticPreview(live,PROJECT_THUMBS[item.dataset.project]||'');
+    var shots=PROJECT_SHOTS[item.dataset.project];
+    if(!shots)return;
+    var screenImg=item.querySelector('.screen .mock-shot');
+    if(screenImg)screenImg.src=mobile?shots.m:shots.d;
   });
-}
-
-function initLiveLinks(){
-  document.querySelectorAll('a.tilt.work-visual').forEach(function(a){
-    var url=a.getAttribute('href');
-    if(!url)return;
-    a.dataset.liveUrl=url;
-    a.removeAttribute('href');
-    a.removeAttribute('target');
-    a.setAttribute('role','link');
-    a.setAttribute('tabindex','0');
-    a.style.cursor='pointer';
-  });
-  document.querySelectorAll('.phone .live[data-src]').forEach(function(l){l.setAttribute('data-phone','1');});
-}
-
-var liveMounted=[];
-function liveMax(){return isMobilePreview()?0:2;}
-function isMobilePreview(){return isCoarse||window.matchMedia('(max-width:1024px)').matches;}
-
-function unmountIframe(live){
-  if(!live||!live.dataset.mounted)return;
-  var f=live.querySelector('iframe');
-  if(f)f.remove();
-  delete live.dataset.mounted;
-  live.classList.remove('is-loaded','has-iframe');
-  live.classList.add('is-loading');
-  var i=liveMounted.indexOf(live);
-  if(i>-1)liveMounted.splice(i,1);
-}
-
-function mountIframe(live){
-  if(isMobilePreview())return;
-  if(!live||live.dataset.mounted||live.dataset.static)return;
-  var src=live.getAttribute('data-src');if(!src)return;
-  if(live.hasAttribute('data-phone')&&isMobilePreview())return;
-  while(liveMounted.length>=liveMax()){
-    unmountIframe(liveMounted[0]);
-  }
-  var vw=parseFloat(live.getAttribute('data-vw'))||1280;
-  var f=document.createElement('iframe');
-  f.src=src;f.title='Živá ukázka';f.setAttribute('scrolling','no');f.setAttribute('loading','lazy');
-  f.setAttribute('tabindex','-1');
-  live.appendChild(f);live.dataset.mounted='1';
-  live.classList.remove('is-loading');live.classList.add('is-loaded','has-iframe');
-  liveMounted.push(live);
-  f.addEventListener('load',function(){fitOne(live);});
-  requestAnimationFrame(function(){fitOne(live);});
-}
-
-function mountWorkLives(container){
-  if(!container)return;
-  var root=container.matches('[data-live-url]')?container:container.querySelector('[data-live-url]');
-  if(!root)root=container;
-  var primary=root.querySelector('.ds-vp-d .live[data-src], .screen .live[data-src]:not([data-soon])');
-  if(primary)mountIframe(primary);
-  if(!isMobilePreview()){
-    var phone=root.querySelector('.ds-vp-p .live[data-src], .phone .live[data-src]:not([data-soon])');
-    if(phone)mountIframe(phone);
-  }
 }
 
 function bindLivePreviews(root){
@@ -1080,76 +995,14 @@ function bindLivePreviews(root){
     var poster=live.querySelector('.live-poster');
     if(poster)poster.addEventListener('click',function(e){e.preventDefault();window.location.href='/nia#konzultace';});
   });
-  (root||document).querySelectorAll('[data-live-url]').forEach(function(wrap){
-    if(wrap.dataset.liveTap)return;
-    wrap.dataset.liveTap='1';
-    function openDemo(e){
-      if(e.target.closest('a.work-view'))return;
-      var url=wrap.dataset.liveUrl;
-      if(!url)return;
-      e.preventDefault();
-      window.open(url,'_blank','noopener');
-    }
-    wrap.addEventListener('click',openDemo);
-    wrap.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();openDemo(e);}
-    });
-  });
 }
 
-function upgradeDeviceSuites(){
-  if(isCoarse)return;
-  document.querySelectorAll('.work-visual .frame:not([data-suite])').forEach(function(frame){
-    var screen=frame.querySelector('.screen');
-    var phone=frame.querySelector('.phone');
-    var dLive=screen&&screen.querySelector('.live');
-    if(!dLive)return;
-    var soon=dLive.hasAttribute('data-soon');
-    var pLive=phone&&phone.querySelector('.live');
-    var shine=screen&&screen.querySelector('.shine');
-    var tagEl=frame.querySelector('.frame-tag');
-    var tagText=tagEl?tagEl.textContent:'Živá ukázka ↗';
-    var src=dLive.getAttribute('data-src');
-    var suite=document.createElement('div');
-    suite.className='device-suite';
-    if(soon)suite.setAttribute('data-soon','');
-    suite.innerHTML='<div class="ds-ambient"></div><div class="ds-row">'+
-      '<div class="ds-device ds-device--desktop"><span class="ds-label">Desktop</span><div class="ds-bezel"><div class="ds-viewport ds-vp-d"></div></div></div>'+
-      (soon?'':
-      '<div class="ds-device ds-device--tablet"><span class="ds-label">Tablet</span><div class="ds-bezel"><div class="ds-viewport ds-vp-t"></div></div></div>'+
-      '<div class="ds-device ds-device--phone"><span class="ds-label">Mobil</span><div class="ds-bezel"><div class="ds-viewport ds-vp-p"></div></div></div>')+
-      '</div><span class="ds-tag">'+tagText+'</span>';
-    suite.querySelector('.ds-vp-d').appendChild(dLive);
-    if(shine)suite.querySelector('.ds-vp-d').appendChild(shine);
-    if(!soon){
-      if(pLive){suite.querySelector('.ds-vp-p').appendChild(pLive);}
-      else{
-        var pl=document.createElement('div');
-        pl.className='live is-loading';pl.setAttribute('data-src',src);pl.setAttribute('data-vw','430');
-        pl.innerHTML='<div class="live-poster"><span class="play">▶</span></div>';
-        suite.querySelector('.ds-vp-p').appendChild(pl);
-      }
-      var tl=document.createElement('div');
-      tl.className='live is-loading';tl.setAttribute('data-src',src);tl.setAttribute('data-vw','768');
-      tl.innerHTML='<div class="live-poster"><span class="play">▶</span></div>';
-      suite.querySelector('.ds-vp-t').appendChild(tl);
-    }
-    frame.innerHTML='';
-    frame.appendChild(suite);
-    frame.dataset.suite='1';
-  });
-}
-initLiveLinks();
-initMobilePreviews();
-upgradeDeviceSuites();
-bindLivePreviews();
-
-var respIdx=0,respLock=false;
 function buildRespDevices(p){
   var box=document.getElementById('respDevices');
   if(!box)return;
   box.innerHTML='';
-  if(!p.url){
+  var shots=PROJECT_SHOTS[p.id];
+  if(!p.url||!shots){
     var dev=document.createElement('div');
     dev.className='resp-device resp-device--desktop';
     dev.style.cssText='position:relative;width:min(88%,640px);margin:0 auto;left:auto;top:auto';
@@ -1161,19 +1014,20 @@ function buildRespDevices(p){
     var mdev=document.createElement('div');
     mdev.className='resp-device resp-device--phone';
     mdev.style.cssText='position:relative;width:min(92vw,340px);margin:0 auto;left:auto;right:auto;top:auto;bottom:auto';
-    mdev.innerHTML='<span class="resp-device-label">Mobil</span><div class="resp-bezel"><div class="resp-viewport"><div class="live is-loading" data-src="'+p.url+'" data-vw="430" data-resp="1"><div class="live-poster"><span class="play">▶</span><b>'+p.name+'</b><span>Živý náhled</span></div></div></div></div>';
+    mdev.innerHTML='<span class="resp-device-label">Mobil</span><div class="resp-bezel"><div class="resp-viewport"><img class="mock-shot" src="'+shots.m+'" alt=""></div></div>';
     box.appendChild(mdev);
-    setTimeout(function(){box.querySelectorAll('.live[data-src]').forEach(function(l){mountIframe(l);});bindLivePreviews(box);},60);
     return;
   }
-  [['desktop',1340,'Desktop'],['tablet',768,'Tablet'],['phone',430,'Mobil']].forEach(function(s){
-    var dev=document.createElement('div');
-    dev.className='resp-device resp-device--'+s[0];
-    dev.innerHTML='<span class="resp-device-label">'+s[2]+'</span><div class="resp-bezel"><div class="resp-viewport"><div class="live is-loading" data-src="'+p.url+'" data-vw="'+s[1]+'" data-resp="1"><div class="live-poster"><span class="play">▶</span></div></div></div></div>';
-    box.appendChild(dev);
-  });
-  setTimeout(function(){box.querySelectorAll('.live[data-src]').forEach(function(l){mountIframe(l);});bindLivePreviews(box);},60);
+  var ddev=document.createElement('div');
+  ddev.className='resp-device resp-device--desktop';
+  ddev.innerHTML='<span class="resp-device-label">Desktop</span><div class="resp-bezel"><div class="resp-viewport"><img class="mock-shot" src="'+shots.d+'" alt=""></div></div>';
+  box.appendChild(ddev);
+  var pdev=document.createElement('div');
+  pdev.className='resp-device resp-device--phone';
+  pdev.innerHTML='<span class="resp-device-label">Mobil</span><div class="resp-bezel"><div class="resp-viewport"><img class="mock-shot" src="'+shots.m+'" alt=""></div></div>';
+  box.appendChild(pdev);
 }
+var respIdx=0,respLock=false;
 function setRespProject(idx,scrollTo){
   if(idx<0)idx=PROJECTS.length-1;
   if(idx>=PROJECTS.length)idx=0;
@@ -1185,7 +1039,7 @@ function setRespProject(idx,scrollTo){
     setTimeout(function(){
       document.getElementById('respCat').textContent=p.cat;
       document.getElementById('respName').textContent=p.name;
-      document.getElementById('respNum').textContent=p.num+' / 10';
+      document.getElementById('respNum').textContent=p.num+' / 11';
       var op=document.getElementById('respOpen');
       if(p.url){op.href=p.url;op.style.display='';}
       else{op.style.display='none';}
@@ -1242,20 +1096,10 @@ function initRespTheater(){
   document.querySelectorAll('.work-item[data-project]').forEach(function(el){respIo.observe(el);});
 }
 
-function fitOne(l){
-  var f=l.querySelector('iframe');if(!f)return;
-  var vw=parseFloat(l.getAttribute('data-vw'))||1280,w=l.clientWidth,h=l.clientHeight;
-  if(w<2||h<2)return;
-  var scale=w/vw;
-  f.style.width=vw+'px';
-  f.style.height=Math.ceil(h/scale)+'px';
-  f.style.transform='scale('+scale+')';
-}
-function fitLive(){document.querySelectorAll('.live.has-iframe').forEach(fitOne);}
-window.addEventListener('resize',fitLive);
-window.addEventListener('load',function(){setTimeout(fitLive,120);setTimeout(fitLive,900);});
-
 initRespTheater();
+bindLivePreviews();
+swapWorkShotsForViewport();
+window.addEventListener('resize',swapWorkShotsForViewport);
 
 function handleProjHash(){
   var h=location.hash;
@@ -1269,28 +1113,6 @@ function handleProjHash(){
   setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});},280);
 }
 window.addEventListener('load',handleProjHash);
-
-var workLiveIo=null;
-if(!isMobilePreview()){
-workLiveIo=new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    var item=en.target;
-    if(en.isIntersecting&&en.intersectionRatio>=.4){
-      mountWorkLives(item);
-    }else if(!en.isIntersecting){
-      item.querySelectorAll('.live[data-mounted]').forEach(function(l){unmountIframe(l);});
-    }
-  });
-},{rootMargin:'40px',threshold:[0,.4,.6]});
-document.querySelectorAll('.work-item[data-project]').forEach(function(el){workLiveIo.observe(el);});
-}
-var respTheaterEl=document.getElementById('respTheater');
-if(respTheaterEl)new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(!en.isIntersecting)return;
-    document.querySelectorAll('.live[data-resp][data-src]').forEach(function(l){mountIframe(l);});
-  });
-},{threshold:.1}).observe(respTheaterEl);
 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});

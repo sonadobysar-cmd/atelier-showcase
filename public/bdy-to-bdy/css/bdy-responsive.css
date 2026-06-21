@@ -84,17 +84,7 @@ body {
     pointer-events: auto;
   }
   .hero > .spot {
-    width: 32px;
-    height: 32px;
-    z-index: 4;
-  }
-  .hero > .spot[data-pid="1"] {
-    left: 24% !important;
-    top: 76% !important;
-  }
-  .hero > .spot[data-pid="2"] {
-    left: 72% !important;
-    top: 36% !important;
+    display: none !important;
   }
   .hero-c h1 {
     font-size: clamp(2rem, 9.5vw, 3.2rem);
@@ -315,14 +305,6 @@ body {
   }
   .hd-in {
     gap: 8px;
-  }
-  .hero > .spot[data-pid="1"] {
-    left: 22% !important;
-    top: 78% !important;
-  }
-  .hero > .spot[data-pid="2"] {
-    left: 70% !important;
-    top: 34% !important;
   }
 }
 

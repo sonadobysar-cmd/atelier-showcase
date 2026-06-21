@@ -457,6 +457,7 @@ img{display:block;max-width:100%}
   .work-back{display:inline-block;margin-bottom:28px;color:var(--muted)}
   .frame .phone{display:none}
   .frame{padding:0}
+  .work .live-poster span:not(.play):not(.live-spin){display:none}
 }
 .work-back{display:none}
 @media(max-width:980px){
@@ -999,8 +1000,6 @@ function applyStaticPreview(live,thumb){
   }
   live.classList.remove('is-loading');
   live.classList.add('is-loaded','live-static');
-  var hint=live.querySelector('.live-poster span');
-  if(hint)hint.textContent='Klepni pro celý web';
 }
 
 function initMobilePreviews(){

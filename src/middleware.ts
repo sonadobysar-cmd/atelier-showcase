@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-/** Kořen domény → cesta v atelier-showcase (bez koncového /) */
+/** Primární doména portfolia (subdomény → ukázkové weby) */
+const PORTFOLIO_DOMAINS = ["niadobysar.com", "niadobysar.cz"] as const;
+
+/** Subdoména → cesta v atelier-showcase (bez koncového /) */
 const SUBDOMAIN_TO_PATH: Record<string, string> = {
   gloss: "/gloss",
   void: "/atelier-void",
@@ -18,6 +21,7 @@ const SUBDOMAIN_TO_PATH: Record<string, string> = {
   funnel: "/masterclass",
   masterclass: "/masterclass",
   webinar: "/masterclass",
+  zakaznici: "/zakaznici",
   vini: "/vini-d-elite",
   "vini-d-elite": "/vini-d-elite",
   vinidelite: "/vini-d-elite",
@@ -26,12 +30,14 @@ const SUBDOMAIN_TO_PATH: Record<string, string> = {
 };
 
 const ROOT_HOSTS = new Set([
-  "niadobysar.cz",
-  "www.niadobysar.cz",
+  ...PORTFOLIO_DOMAINS,
+  ...PORTFOLIO_DOMAINS.map((d) => `www.${d}`),
   "atelier-showcase-cyan.vercel.app",
 ]);
 
-const NIA_HOSTS = new Set(["nia.niadobysar.cz", "www.nia.niadobysar.cz"]);
+const NIA_HOSTS = new Set(
+  PORTFOLIO_DOMAINS.flatMap((d) => [`nia.${d}`, `www.nia.${d}`]),
+);
 
 function getHost(request: NextRequest): string {
   const xf = request.headers.get("x-forwarded-host");
@@ -51,6 +57,19 @@ function rewriteTo(url: URL, destPath: string): NextResponse {
   const target = new URL(url.toString());
   target.pathname = destPath;
   return NextResponse.rewrite(target);
+}
+
+/** Vrátí subdoménu pro gloss.niadobysar.com → "gloss", kořen → null */
+function getSubdomain(host: string): string | null {
+  for (const domain of PORTFOLIO_DOMAINS) {
+    if (host === domain || host === `www.${domain}`) return null;
+    const suffix = `.${domain}`;
+    if (!host.endsWith(suffix)) continue;
+    const sub = host.slice(0, -suffix.length);
+    if (!sub || sub.includes(".")) return null;
+    return sub;
+  }
+  return null;
 }
 
 export function middleware(request: NextRequest) {
@@ -78,9 +97,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const parts = host.split(".");
-  if (parts.length >= 3) {
-    const sub = parts[0];
+  const sub = getSubdomain(host);
+  if (sub) {
     const dest = SUBDOMAIN_TO_PATH[sub];
     if (dest) {
       if (pathname === "/" || pathname === "") {
@@ -89,7 +107,11 @@ export function middleware(request: NextRequest) {
       if (pathname.startsWith(dest)) {
         return NextResponse.next();
       }
-      const suffix = pathname.endsWith("/") ? "index.html" : pathname.includes(".") ? pathname.slice(dest.length) : `${pathname}/index.html`;
+      const suffix = pathname.endsWith("/")
+        ? "index.html"
+        : pathname.includes(".")
+          ? pathname.slice(dest.length)
+          : `${pathname}/index.html`;
       const full = pathname.startsWith("/") ? `${dest}${suffix}` : `${dest}/${suffix}`;
       return rewriteTo(request.nextUrl, full);
     }

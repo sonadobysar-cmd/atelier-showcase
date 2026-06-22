@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { listActiveBookings } from "@/lib/nia/konzultace-bookings";
+import { KONZ_DURATION_MIN } from "@/lib/nia/konzultace-schedule";
 
 export const runtime = "nodejs";
 
@@ -28,7 +29,7 @@ export async function GET(req: Request) {
       time: b.time,
       meetUrl: b.meetUrl,
       message: b.message,
-      createdAt: b.createdAt,
+      durationMin: KONZ_DURATION_MIN,
     })),
   });
 }

@@ -16,7 +16,7 @@ function cleanEnv(value: string | undefined): string {
   return s;
 }
 
-function normalizeFrom(raw: string): string {
+function normalizeFrom(raw: string | undefined): string {
   const s = cleanEnv(raw);
   if (!s) return "";
   if (s.includes("<") && s.includes(">")) return s;

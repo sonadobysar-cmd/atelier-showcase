@@ -4,6 +4,16 @@ import { KONZ_DURATION_MIN } from "@/lib/nia/konzultace-schedule";
 
 export const runtime = "nodejs";
 
+function bookingTitle(b: { name: string; message: string }): string {
+  const name = b.name.trim();
+  const msg = b.message.trim();
+  if (msg.length >= 3) {
+    const short = msg.length > 48 ? `${msg.slice(0, 45)}…` : msg;
+    return `${name} · ${short}`;
+  }
+  return `Online konzultace · ${name}`;
+}
+
 function checkAuth(req: Request): boolean {
   const secret = process.env.UPOMINKY_SYNC_SECRET?.trim();
   if (!secret) return false;
@@ -24,7 +34,7 @@ export async function GET(req: Request) {
     bookings: bookings.map((b) => ({
       ref: b.ref,
       clientName: b.name,
-      title: `Konzultace — ${b.name}`,
+      title: bookingTitle(b),
       dateIso: b.dateIso,
       time: b.time,
       meetUrl: b.meetUrl,

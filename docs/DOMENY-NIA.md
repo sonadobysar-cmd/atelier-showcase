@@ -15,9 +15,9 @@ Middleware v `src/middleware.ts` už mapuje subdomény na jednotlivé weby. Ty j
 | `gloss.niadobysar.com` | **atelier-showcase** | Gloss |
 | `void.niadobysar.com` | **atelier-showcase** | Atelier Void |
 | `lume.niadobysar.com` | **atelier-showcase** | LUMÉ |
-| `laleia.niadobysar.com` | **atelier-showcase** | Lash Babe's |
+| `lashbabes.niadobysar.com` | **atelier-showcase** | Lashbabes |
 | `matcha.niadobysar.com` | **atelier-showcase** | MATCHÁ |
-| `realty.niadobysar.com` | **atelier-showcase** | Prémiová realitka |
+| `realitka.niadobysar.com` | **atelier-showcase** | Prémiová realitka |
 | `bdy.niadobysar.com` | **atelier-showcase** | BDY to BDY |
 | `funnel.niadobysar.com` | **atelier-showcase** | Masterclass / funnel |
 | `vini.niadobysar.com` | **atelier-showcase** | Vini d'Elite |
@@ -52,10 +52,10 @@ Přidej všechny najednou (Vercel je přijme jako wildcard nebo po jedné):
 ```
 gloss.niadobysar.com
 void.niadobysar.com
+lashbabes.niadobysar.com
 lume.niadobysar.com
-laleia.niadobysar.com
 matcha.niadobysar.com
-realty.niadobysar.com
+realitka.niadobysar.com
 bdy.niadobysar.com
 funnel.niadobysar.com
 vini.niadobysar.com
@@ -69,10 +69,10 @@ nia.niadobysar.com
 |--------------|-----|---------|
 | `gloss` | CNAME | `cname.vercel-dns.com` |
 | `void` | CNAME | `cname.vercel-dns.com` |
+| `lashbabes` | CNAME | `cname.vercel-dns.com` |
 | `lume` | CNAME | `cname.vercel-dns.com` |
-| `laleia` | CNAME | `cname.vercel-dns.com` |
 | `matcha` | CNAME | `cname.vercel-dns.com` |
-| `realty` | CNAME | `cname.vercel-dns.com` |
+| `realitka` | CNAME | `cname.vercel-dns.com` |
 | `bdy` | CNAME | `cname.vercel-dns.com` |
 | `funnel` | CNAME | `cname.vercel-dns.com` |
 | `vini` | CNAME | `cname.vercel-dns.com` |

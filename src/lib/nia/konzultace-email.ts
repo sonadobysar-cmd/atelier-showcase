@@ -12,7 +12,7 @@ export type KonzBooking = {
   ref: string;
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   message: string;
   date: Date;
   time: string;
@@ -46,7 +46,7 @@ export function buildAdminNotificationHtml(b: KonzBooking): string {
 <p><strong>Termín:</strong> ${esc(when)}<br>
 <strong>Jméno:</strong> ${esc(b.name)}<br>
 <strong>E-mail:</strong> ${esc(b.email)}<br>
-${b.phone ? `<strong>Telefon:</strong> ${esc(b.phone)}<br>` : ""}
+<strong>Telefon:</strong> ${esc(b.phone)}<br>
 </p>
 <p><strong>Google Meet:</strong> <a href="${esc(b.meetUrl)}">${esc(b.meetUrl)}</a></p>
 <p style="white-space:pre-wrap">${esc(b.message)}</p>`;
@@ -54,5 +54,5 @@ ${b.phone ? `<strong>Telefon:</strong> ${esc(b.phone)}<br>` : ""}
 
 export function buildAdminNotificationText(b: KonzBooking): string {
   const when = formatWhen(b.date, b.time);
-  return `Nová online konzultace · ${b.ref}\n\nTermín: ${when}\nJméno: ${b.name}\nE-mail: ${b.email}${b.phone ? `\nTelefon: ${b.phone}` : ""}\nMeet: ${b.meetUrl}\n\n${b.message}`;
+  return `Nová online konzultace · ${b.ref}\n\nTermín: ${when}\nJméno: ${b.name}\nE-mail: ${b.email}\nTelefon: ${b.phone}\nMeet: ${b.meetUrl}\n\n${b.message}`;
 }

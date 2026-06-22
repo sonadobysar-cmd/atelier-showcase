@@ -3,7 +3,7 @@ export type KonzBooking = {
   ref: string;
   name: string;
   email: string;
-  phone?: string;
+  phone: string;
   message: string;
   dateIso: string;
   time: string;

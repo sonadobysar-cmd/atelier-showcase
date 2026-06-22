@@ -890,7 +890,7 @@ img{display:block;max-width:100%}
     <div class="konz-grid">
       <div class="konz-panel reveal">
         <span class="konz-online-badge">Online konzultace</span>
-        <p class="konz-hours"><b>Volno:</b> Po 14–21 · Út 11–18 · St 14–22 · Čt 14–22 · Pá 11–16 · So–Ne po domluvě e-mailem</p>
+        <p class="konz-hours">So–Ne po domluvě e-mailem</p>
         <div class="konz-days-label">Vyber den</div>
         <div class="konz-days" id="konzDays"></div>
         <div class="konz-days-label">Vyber čas</div>
@@ -900,11 +900,11 @@ img{display:block;max-width:100%}
       </div>
       <form class="konz-form reveal" id="konzForm">
         <div class="konz-summary" id="konzSummary">Načítám volné termíny…</div>
-        <div class="field-hp" aria-hidden="true"><label for="kWebsite">Web</label><input type="text" id="kWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+        <div class="field-hp" aria-hidden="true"><label for="kHp">Web</label><input type="text" id="kHp" name="website" tabindex="-1" autocomplete="off"></div>
         <div><label>Jméno</label><input type="text" id="kName" placeholder="Tvoje jméno" required autocomplete="name"></div>
         <div><label>E-mail</label><input type="email" id="kMail" placeholder="tvůj@email.cz" required autocomplete="email"></div>
-        <div><label>Telefon (volitelné)</label><input type="tel" id="kPhone" placeholder="+420 …" autocomplete="tel"></div>
-        <div><label>O čem chceš mluvit?</label><textarea id="kMsg" placeholder="Krátký popis projektu nebo otázky…" required></textarea></div>
+        <div><label>Telefon</label><input type="tel" id="kPhone" placeholder="+420 …" required autocomplete="tel" inputmode="tel"></div>
+        <div><label>Obor webu a poznámka</label><textarea id="kMsg" placeholder="Např. kadeřnictví, e-shop, restaurace… + stručně co od webu potřebuješ" required rows="4"></textarea></div>
         <button type="submit" class="btn" data-cursor>Rezervovat konzultaci ✦</button>
         <p class="konz-err" id="konzErr" hidden></p>
       </form>

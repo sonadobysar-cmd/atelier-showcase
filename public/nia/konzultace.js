@@ -150,6 +150,20 @@
       errEl.hidden = true;
       errEl.textContent = "";
     }
+    if (ph.replace(/\D/g, "").length < 9) {
+      if (errEl) {
+        errEl.hidden = false;
+        errEl.textContent = "Vyplň telefon (min. 9 číslic).";
+      }
+      return;
+    }
+    if (msg.length < 8) {
+      if (errEl) {
+        errEl.hidden = false;
+        errEl.textContent = "Vyplň obor webu a krátkou poznámku.";
+      }
+      return;
+    }
     if (btn) {
       btn.disabled = true;
       btn.textContent = "Odesílám…";
@@ -164,7 +178,7 @@
         message: msg,
         date: dateIso(selDay),
         time: selTime,
-        website: (document.getElementById("kWebsite") || {}).value || "",
+        website: (document.getElementById("kHp") || {}).value || "",
       }),
     })
       .then(function (r) {

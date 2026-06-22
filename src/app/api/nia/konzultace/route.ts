@@ -78,8 +78,15 @@ async function handlePost(req: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ ok: false, error: "Vyplň platný e-mail." }, { status: 400 });
   }
-  if (message.length < 4) {
-    return NextResponse.json({ ok: false, error: "Napiš krátký popis projektu nebo otázky." }, { status: 400 });
+  const phoneDigits = phone.replace(/\D/g, "");
+  if (phoneDigits.length < 9) {
+    return NextResponse.json({ ok: false, error: "Vyplň telefon (min. 9 číslic)." }, { status: 400 });
+  }
+  if (message.length < 8) {
+    return NextResponse.json(
+      { ok: false, error: "Vyplň obor webu a krátkou poznámku (např. kadeřnictví + co potřebuješ)." },
+      { status: 400 },
+    );
   }
   if (!isValidSlot(dateIso, time)) {
     return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 400 });
@@ -99,13 +106,13 @@ async function handlePost(req: Request) {
   const [y, mo, d] = dateIso.split("-").map(Number);
   const date = new Date(y, mo - 1, d, 12, 0, 0, 0);
   const ref = makeRef();
-  const booking = { ref, name, email, phone: phone || undefined, message, date, time, meetUrl };
+  const booking = { ref, name, email, phone, message, date, time, meetUrl };
 
   const saved = await createBooking({
     ref,
     name,
     email,
-    phone: phone || undefined,
+    phone,
     message,
     dateIso,
     time,

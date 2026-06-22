@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    return NextResponse.json({ ok: false, error: "Formulář není připojený. Napiš na niadobyshar@gmail.com." }, { status: 503 });
+    return NextResponse.json({ ok: false, error: "Formulář není připojený. Napiš na niadobysar@gmail.com." }, { status: 503 });
   }
 
   const res = await resendSend(apiKey, {

@@ -10,7 +10,7 @@ import {
   isValidSlot,
   scheduleForClient,
 } from "@/lib/nia/konzultace-schedule";
-import { resendSend, resolveNiaFrom, resolveNiaTo } from "@/lib/nia/resend";
+import { resendSend, resolveNiaFrom, resolveNiaTo, parseResendError } from "@/lib/nia/resend";
 
 export const runtime = "nodejs";
 
@@ -68,7 +68,7 @@ export async function POST(req: Request) {
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim();
   if (!meetUrl) {
     return NextResponse.json(
-      { ok: false, error: "Rezervace je dočasně nedostupná. Napiš na niadobyshar@gmail.com." },
+      { ok: false, error: "Rezervace je dočasně nedostupná. Napiš na niadobysar@gmail.com." },
       { status: 503 },
     );
   }
@@ -82,7 +82,7 @@ export async function POST(req: Request) {
   if (!apiKey) {
     console.error("[nia/konzultace] RESEND_API_KEY missing");
     return NextResponse.json(
-      { ok: false, error: "Odesílání e-mailů není nakonfigurováno. Napiš na niadobyshar@gmail.com." },
+      { ok: false, error: "Odesílání e-mailů není nakonfigurováno. Napiš na niadobysar@gmail.com." },
       { status: 503 },
     );
   }
@@ -100,8 +100,16 @@ export async function POST(req: Request) {
   });
 
   if (!clientRes.ok) {
-    console.error("[nia/konzultace] client email failed", clientRes.status, clientRes.body);
-    return NextResponse.json({ ok: false, error: "Nepodařilo se odeslat potvrzení. Zkus to znovu nebo napiš e-mail." }, { status: 502 });
+    const resendMsg = parseResendError(clientRes.body);
+    console.error("[nia/konzultace] client email failed", clientRes.status, clientRes.body, "from=", from);
+    const hint =
+      resendMsg.includes("domain") || resendMsg.includes("from")
+        ? " Odesílatel musí být z ověřené domény niadobysar.com (např. konzultace@niadobysar.com)."
+        : "";
+    return NextResponse.json(
+      { ok: false, error: `Nepodařilo se odeslat potvrzení.${hint} Zkus to znovu nebo napiš e-mail.` },
+      { status: 502 },
+    );
   }
 
   const adminRes = await resendSend(apiKey, {

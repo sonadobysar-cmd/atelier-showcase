@@ -41,7 +41,8 @@ export async function POST(req: Request) {
   try {
     return await handlePost(req);
   } catch (err) {
-    console.error("[nia/konzultace] POST failed", err);
+    const detail = err instanceof Error ? err.message : String(err);
+    console.error("[nia/konzultace] POST failed", detail, err);
     return NextResponse.json(
       { ok: false, error: "Rezervace se nepodařila uložit. Zkus to znovu nebo napiš na niadobysar@gmail.com." },
       { status: 500 },

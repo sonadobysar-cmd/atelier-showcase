@@ -45,6 +45,7 @@ async function writeAllUnsafe(bookings: import("@/lib/nia/konzultace-bookings-ty
     await put(BLOB_PATH, payload, {
       access: "private",
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: "application/json",
     });
     return;

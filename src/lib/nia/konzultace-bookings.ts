@@ -9,14 +9,18 @@ const BLOB_PATH = "nia-konzultace/bookings.json";
 const DATA_DIR = process.env.NIA_BOOKINGS_DATA_DIR || path.join(process.cwd(), "data", "nia-konzultace");
 const DATA_FILE = path.join(DATA_DIR, "bookings.json");
 
+function usesBlobStore(): boolean {
+  return Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+}
+
 async function readAllUnsafe(): Promise<import("@/lib/nia/konzultace-bookings-types").KonzBooking[]> {
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  if (usesBlobStore()) {
     try {
-      const { head } = await import("@vercel/blob");
-      const meta = await head(BLOB_PATH);
-      const res = await fetch(meta.url);
-      if (!res.ok) return [];
-      const parsed = (await res.json()) as unknown;
+      const { get } = await import("@vercel/blob");
+      const result = await get(BLOB_PATH, { access: "private" });
+      if (!result || result.statusCode !== 200 || !result.stream) return [];
+      const raw = await new Response(result.stream).text();
+      const parsed = JSON.parse(raw) as unknown;
       return Array.isArray(parsed) ? parsed : [];
     } catch {
       return [];
@@ -36,10 +40,10 @@ async function readAllUnsafe(): Promise<import("@/lib/nia/konzultace-bookings-ty
 async function writeAllUnsafe(bookings: import("@/lib/nia/konzultace-bookings-types").KonzBooking[]) {
   const payload = JSON.stringify(bookings, null, 2);
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
+  if (usesBlobStore()) {
     const { put } = await import("@vercel/blob");
     await put(BLOB_PATH, payload, {
-      access: "public",
+      access: "private",
       addRandomSuffix: false,
       contentType: "application/json",
     });
@@ -55,14 +59,12 @@ export async function listBookings() {
 }
 
 export async function listActiveBookings(from = new Date()) {
-  const today = new Date(from);
-  today.setHours(0, 0, 0, 0);
+  const { pragueTodayIso } = await import("@/lib/nia/konzultace-time");
+  const todayIso = pragueTodayIso(from);
   const bookings = await readAllUnsafe();
   return bookings.filter((b) => {
     if (b.cancelledAt) return false;
-    const [y, mo, d] = b.dateIso.split("-").map(Number);
-    const dt = new Date(y, mo - 1, d, 23, 59, 59, 999);
-    return dt >= today;
+    return b.dateIso >= todayIso;
   });
 }
 

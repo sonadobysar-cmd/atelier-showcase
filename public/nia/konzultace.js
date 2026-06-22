@@ -32,8 +32,6 @@
       var iso = dateIso(d);
       if (schedule && schedule.calendar && schedule.calendar[iso] && schedule.calendar[iso].length) {
         out.push(new Date(d));
-      } else if (schedule && schedule.weekly[String(d.getDay())] && schedule.weekly[String(d.getDay())].times.length) {
-        out.push(new Date(d));
       }
       d.setDate(d.getDate() + 1);
       guard++;
@@ -47,8 +45,7 @@
     if (schedule.calendar && schedule.calendar[iso]) {
       return schedule.calendar[iso];
     }
-    var wd = schedule.weekly[String(selDay.getDay())];
-    return wd && wd.times ? wd.times : [];
+    return [];
   }
 
   function renderTimes() {

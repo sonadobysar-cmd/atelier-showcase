@@ -16,6 +16,15 @@ export const KONZ_WEEKLY: Record<number, DayWindow | null> = {
 
 export const KONZ_BOOKABLE_DAYS = [1, 2, 3, 4, 5] as const;
 
+import {
+  KONZ_MIN_LEAD_MIN,
+  filterBookableTimes,
+  isSlotBookableInFuture,
+  pragueNowParts,
+} from "@/lib/nia/konzultace-time";
+
+export { KONZ_MIN_LEAD_MIN, filterBookableTimes, isSlotBookableInFuture, pragueTodayIso } from "@/lib/nia/konzultace-time";
+
 function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
@@ -39,8 +48,8 @@ export function timesForWeekday(dayOfWeek: number): string[] {
 }
 
 export function nextBookableDates(count: number, from = new Date()): Date[] {
-  const d = new Date(from);
-  d.setHours(12, 0, 0, 0);
+  const p = pragueNowParts(from);
+  const d = new Date(p.year, p.month - 1, p.day, 12, 0, 0, 0);
   const out: Date[] = [];
   let guard = 0;
   while (out.length < count && guard < 120) {
@@ -74,25 +83,31 @@ export function isValidSlot(dateIso: string, time: string, booked?: Record<strin
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateIso) || !/^\d{2}:\d{2}$/.test(time)) return false;
   const [y, mo, d] = dateIso.split("-").map(Number);
   const dt = new Date(y, mo - 1, d, 12, 0, 0, 0);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  if (dt < today) return false;
+  if (!KONZ_BOOKABLE_DAYS.includes(dt.getDay() as (typeof KONZ_BOOKABLE_DAYS)[number])) return false;
   if (!timesForWeekday(dt.getDay()).includes(time)) return false;
   if (booked?.[dateIso]?.includes(time)) return false;
+  if (!isSlotBookableInFuture(dateIso, time)) return false;
   return true;
 }
 
-export function scheduleForClient(booked: Record<string, string[]> = {}, horizonDays = 28) {
+export function scheduleForClient(booked: Record<string, string[]> = {}, horizonDays = 28, now = new Date()) {
   const calendar: Record<string, string[]> = {};
-  const dates = nextBookableDates(horizonDays);
+  const dates = nextBookableDates(horizonDays, now);
   for (const dt of dates) {
     const iso = formatDateIso(dt);
-    const available = timesForWeekday(dt.getDay()).filter((t) => !booked[iso]?.includes(t));
+    const available = filterBookableTimes(
+      iso,
+      timesForWeekday(dt.getDay()).filter((t) => !booked[iso]?.includes(t)),
+      undefined,
+      now,
+    );
     if (available.length > 0) calendar[iso] = available;
   }
 
   return {
     durationMin: KONZ_DURATION_MIN,
+    minLeadMin: KONZ_MIN_LEAD_MIN,
+    timezone: "Europe/Prague",
     bookableDays: KONZ_BOOKABLE_DAYS,
     days: horizonDays,
     calendar,

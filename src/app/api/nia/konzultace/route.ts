@@ -10,7 +10,7 @@ import {
   isValidSlot,
   scheduleForClient,
 } from "@/lib/nia/konzultace-schedule";
-import { resendSend, resolveNiaFrom, resolveNiaTo, parseResendError } from "@/lib/nia/resend";
+import { resendSend, resolveNiaFrom, resolveNiaTo } from "@/lib/nia/resend";
 import {
   bookedSlotsMap,
   createBooking,
@@ -38,6 +38,18 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  try {
+    return await handlePost(req);
+  } catch (err) {
+    console.error("[nia/konzultace] POST failed", err);
+    return NextResponse.json(
+      { ok: false, error: "Rezervace se nepodařila uložit. Zkus to znovu nebo napiš na niadobysar@gmail.com." },
+      { status: 500 },
+    );
+  }
+}
+
+async function handlePost(req: Request) {
   let body: unknown;
   try {
     body = await req.json();
@@ -105,49 +117,51 @@ export async function POST(req: Request) {
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    console.error("[nia/konzultace] RESEND_API_KEY missing");
-    return NextResponse.json(
-      { ok: false, error: "Odesílání e-mailů není nakonfigurováno. Napiš na niadobysar@gmail.com." },
-      { status: 503 },
-    );
+    console.error("[nia/konzultace] RESEND_API_KEY missing — booking saved", ref);
+    return NextResponse.json({
+      ok: true,
+      ref,
+      meetUrl,
+      date: formatDateIso(date),
+      time,
+      emailSent: false,
+    });
   }
 
   const from = resolveNiaFrom();
   const adminTo = resolveNiaTo();
 
-  const clientRes = await resendSend(apiKey, {
-    from,
-    to: [email],
-    reply_to: adminTo,
-    subject: `Potvrzení konzultace · ${ref} · Nia Dobyšar`,
-    html: buildClientConfirmationHtml(booking),
-    text: buildClientConfirmationText(booking),
-  });
+  let emailSent = false;
+  try {
+    const clientRes = await resendSend(apiKey, {
+      from,
+      to: [email],
+      reply_to: adminTo,
+      subject: `Potvrzení konzultace · ${ref} · Nia Dobyšar`,
+      html: buildClientConfirmationHtml(booking),
+      text: buildClientConfirmationText(booking),
+    });
 
-  if (!clientRes.ok) {
-    const resendMsg = parseResendError(clientRes.body);
-    console.error("[nia/konzultace] client email failed", clientRes.status, clientRes.body, "from=", from);
-    const hint =
-      resendMsg.includes("domain") || resendMsg.includes("from")
-        ? " Odesílatel musí být z ověřené domény niadobysar.com (např. konzultace@niadobysar.com)."
-        : "";
-    return NextResponse.json(
-      { ok: false, error: `Nepodařilo se odeslat potvrzení.${hint} Zkus to znovu nebo napiš e-mail.` },
-      { status: 502 },
-    );
-  }
+    if (!clientRes.ok) {
+      console.error("[nia/konzultace] client email failed", clientRes.status, clientRes.body, "from=", from);
+    } else {
+      emailSent = true;
+    }
 
-  const adminRes = await resendSend(apiKey, {
-    from,
-    to: [adminTo],
-    reply_to: email,
-    subject: `Rezervace konzultace · ${name} · ${ref}`,
-    html: buildAdminNotificationHtml(booking),
-    text: buildAdminNotificationText(booking),
-  });
+    const adminRes = await resendSend(apiKey, {
+      from,
+      to: [adminTo],
+      reply_to: email,
+      subject: `Rezervace konzultace · ${name} · ${ref}`,
+      html: buildAdminNotificationHtml(booking),
+      text: buildAdminNotificationText(booking),
+    });
 
-  if (!adminRes.ok) {
-    console.error("[nia/konzultace] admin email failed", adminRes.status, adminRes.body);
+    if (!adminRes.ok) {
+      console.error("[nia/konzultace] admin email failed", adminRes.status, adminRes.body);
+    }
+  } catch (err) {
+    console.error("[nia/konzultace] email error", err);
   }
 
   return NextResponse.json({
@@ -156,5 +170,6 @@ export async function POST(req: Request) {
     meetUrl,
     date: formatDateIso(date),
     time,
+    emailSent,
   });
 }

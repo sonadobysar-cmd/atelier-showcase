@@ -9,9 +9,8 @@ Middleware v `src/middleware.ts` už mapuje subdomény na jednotlivé weby. Ty j
 
 | URL | Projekt ve Vercelu | Poznámka |
 |-----|-------------------|----------|
-| `niadobysar.com` | **atelier-showcase** | Portfolio NIA (kořen) |
+| `niadobysar.com` | **atelier-showcase** | Portfolio NIA + galerie na `/projekty` |
 | `www.niadobysar.com` | **atelier-showcase** | Přesměrování na kořen |
-| `nia.niadobysar.com` | **atelier-showcase** | Portfolio (alternativa) |
 | `gloss.niadobysar.com` | **atelier-showcase** | Gloss |
 | `void.niadobysar.com` | **atelier-showcase** | Atelier Void |
 | `lume.niadobysar.com` | **atelier-showcase** | LUMÉ |
@@ -21,7 +20,6 @@ Middleware v `src/middleware.ts` už mapuje subdomény na jednotlivé weby. Ty j
 | `bdy.niadobysar.com` | **atelier-showcase** | BDY to BDY |
 | `funnel.niadobysar.com` | **atelier-showcase** | Masterclass / funnel |
 | `vini.niadobysar.com` | **atelier-showcase** | Vini d'Elite |
-| `portfolio.niadobysar.com` | **atelier-showcase** | Galerie projektů |
 | `altez.niadobysar.com` | **altez** | ALTEZ wellness (samostatný projekt) |
 | `mochi.niadobysar.com` | **mochi-shop** | Mochi Box (samostatný projekt) |
 
@@ -59,8 +57,6 @@ realitka.niadobysar.com
 bdy.niadobysar.com
 funnel.niadobysar.com
 vini.niadobysar.com
-portfolio.niadobysar.com
-nia.niadobysar.com
 ```
 
 ### B) U registrátora — CNAME záznamy
@@ -76,8 +72,6 @@ nia.niadobysar.com
 | `bdy` | CNAME | `cname.vercel-dns.com` |
 | `funnel` | CNAME | `cname.vercel-dns.com` |
 | `vini` | CNAME | `cname.vercel-dns.com` |
-| `portfolio` | CNAME | `cname.vercel-dns.com` |
-| `nia` | CNAME | `cname.vercel-dns.com` |
 
 > Hodnota CNAME může být jiná — vždy použij přesně to, co ukáže Vercel u dané domény.
 

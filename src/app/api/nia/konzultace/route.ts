@@ -11,6 +11,12 @@ import {
   scheduleForClient,
 } from "@/lib/nia/konzultace-schedule";
 import { resendSend, resolveNiaFrom, resolveNiaTo, parseResendError } from "@/lib/nia/resend";
+import {
+  bookedSlotsMap,
+  createBooking,
+  isSlotBooked,
+  listActiveBookings,
+} from "@/lib/nia/konzultace-bookings";
 
 export const runtime = "nodejs";
 
@@ -22,8 +28,10 @@ function makeRef(): string {
 
 export async function GET() {
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim() || "";
+  const active = await listActiveBookings();
+  const booked = bookedSlotsMap(active);
   return NextResponse.json({
-    ...scheduleForClient(),
+    ...scheduleForClient(booked),
     meetConfigured: meetUrl.length > 0,
     onlineOnly: true,
   });
@@ -64,6 +72,9 @@ export async function POST(req: Request) {
   if (!isValidSlot(dateIso, time)) {
     return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 400 });
   }
+  if (await isSlotBooked(dateIso, time)) {
+    return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 409 });
+  }
 
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim();
   if (!meetUrl) {
@@ -77,6 +88,20 @@ export async function POST(req: Request) {
   const date = new Date(y, mo - 1, d, 12, 0, 0, 0);
   const ref = makeRef();
   const booking = { ref, name, email, phone: phone || undefined, message, date, time, meetUrl };
+
+  const saved = await createBooking({
+    ref,
+    name,
+    email,
+    phone: phone || undefined,
+    message,
+    dateIso,
+    time,
+    meetUrl,
+  });
+  if (!saved.ok) {
+    return NextResponse.json({ ok: false, error: saved.error }, { status: 409 });
+  }
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {

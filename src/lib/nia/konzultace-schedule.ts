@@ -70,20 +70,32 @@ export function formatWhen(dt: Date, time: string): string {
   return `${DNY[dt.getDay()]} ${formatDateCs(dt)} · ${time}`;
 }
 
-export function isValidSlot(dateIso: string, time: string): boolean {
+export function isValidSlot(dateIso: string, time: string, booked?: Record<string, string[]>): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(dateIso) || !/^\d{2}:\d{2}$/.test(time)) return false;
   const [y, mo, d] = dateIso.split("-").map(Number);
   const dt = new Date(y, mo - 1, d, 12, 0, 0, 0);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   if (dt < today) return false;
-  return timesForWeekday(dt.getDay()).includes(time);
+  if (!timesForWeekday(dt.getDay()).includes(time)) return false;
+  if (booked?.[dateIso]?.includes(time)) return false;
+  return true;
 }
 
-export function scheduleForClient() {
+export function scheduleForClient(booked: Record<string, string[]> = {}, horizonDays = 28) {
+  const calendar: Record<string, string[]> = {};
+  const dates = nextBookableDates(horizonDays);
+  for (const dt of dates) {
+    const iso = formatDateIso(dt);
+    const available = timesForWeekday(dt.getDay()).filter((t) => !booked[iso]?.includes(t));
+    if (available.length > 0) calendar[iso] = available;
+  }
+
   return {
     durationMin: KONZ_DURATION_MIN,
     bookableDays: KONZ_BOOKABLE_DAYS,
+    days: horizonDays,
+    calendar,
     weekly: Object.fromEntries(
       Object.entries(KONZ_WEEKLY).map(([k, v]) => [
         k,

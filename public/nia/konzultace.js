@@ -29,8 +29,10 @@
     d.setHours(12, 0, 0, 0);
     var guard = 0;
     while (out.length < count && guard < 120) {
-      var wd = String(d.getDay());
-      if (schedule && schedule.weekly[wd] && schedule.weekly[wd].times.length) {
+      var iso = dateIso(d);
+      if (schedule && schedule.calendar && schedule.calendar[iso] && schedule.calendar[iso].length) {
+        out.push(new Date(d));
+      } else if (schedule && schedule.weekly[String(d.getDay())] && schedule.weekly[String(d.getDay())].times.length) {
         out.push(new Date(d));
       }
       d.setDate(d.getDate() + 1);
@@ -39,13 +41,23 @@
     return out;
   }
 
+  function timesForSelectedDay() {
+    if (!selDay || !schedule) return [];
+    var iso = dateIso(selDay);
+    if (schedule.calendar && schedule.calendar[iso]) {
+      return schedule.calendar[iso];
+    }
+    var wd = schedule.weekly[String(selDay.getDay())];
+    return wd && wd.times ? wd.times : [];
+  }
+
   function renderTimes() {
     konzTimes.innerHTML = "";
     selTime = null;
     if (!selDay || !schedule) return;
-    var times = schedule.weekly[String(selDay.getDay())];
-    if (!times || !times.times.length) return;
-    times.times.forEach(function (t, i) {
+    var times = timesForSelectedDay();
+    if (!times.length) return;
+    times.forEach(function (t, i) {
       var b = document.createElement("button");
       b.type = "button";
       b.className = "konz-time" + (i === 0 ? " on" : "");

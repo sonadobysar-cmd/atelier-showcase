@@ -125,7 +125,7 @@
       updateSummary();
     })
     .catch(function () {
-      konzSummary.textContent = "Kalendář se nepodařilo načíst. Obnov stránku nebo napiš na niadobyshar@gmail.com.";
+      konzSummary.textContent = "Kalendář se nepodařilo načíst. Obnov stránku nebo napiš na niadobysar@gmail.com.";
     });
 
   konzForm.addEventListener("submit", function (e) {
@@ -184,7 +184,7 @@
         }
         if (errEl) {
           errEl.hidden = false;
-          errEl.textContent = "Chyba sítě. Zkus to znovu nebo napiš na niadobyshar@gmail.com.";
+          errEl.textContent = "Chyba sítě. Zkus to znovu nebo napiš na niadobysar@gmail.com.";
         }
       });
   });

@@ -19,6 +19,7 @@ import {
 } from "@/lib/nia/konzultace-bookings";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 function makeRef(): string {
   const d = new Date();
@@ -30,11 +31,14 @@ export async function GET() {
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim() || "";
   const active = await listActiveBookings();
   const booked = bookedSlotsMap(active);
-  return NextResponse.json({
-    ...scheduleForClient(booked),
-    meetConfigured: meetUrl.length > 0,
-    onlineOnly: true,
-  });
+  return NextResponse.json(
+    {
+      ...scheduleForClient(booked),
+      meetConfigured: meetUrl.length > 0,
+      onlineOnly: true,
+    },
+    { headers: { "Cache-Control": "no-store, max-age=0" } },
+  );
 }
 
 export async function POST(req: Request) {

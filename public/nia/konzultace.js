@@ -23,20 +23,17 @@
     return dt.getFullYear() + "-" + pad(dt.getMonth() + 1) + "-" + pad(dt.getDate());
   }
 
-  function nextDates(count) {
-    var out = [];
-    var d = new Date();
-    d.setHours(12, 0, 0, 0);
-    var guard = 0;
-    while (out.length < count && guard < 120) {
-      var iso = dateIso(d);
-      if (schedule && schedule.calendar && schedule.calendar[iso] && schedule.calendar[iso].length) {
-        out.push(new Date(d));
-      }
-      d.setDate(d.getDate() + 1);
-      guard++;
-    }
-    return out;
+  function parseIsoLocal(iso) {
+    var p = iso.split("-");
+    return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), 12, 0, 0, 0);
+  }
+
+  function calendarDates(limit) {
+    if (!schedule || !schedule.calendar) return [];
+    return Object.keys(schedule.calendar)
+      .sort()
+      .slice(0, limit)
+      .map(parseIsoLocal);
   }
 
   function timesForSelectedDay() {
@@ -75,7 +72,7 @@
   function renderDays() {
     konzDays.innerHTML = "";
     selDay = null;
-    var dates = nextDates(10);
+    var dates = calendarDates(10);
     dates.forEach(function (dt, i) {
       var b = document.createElement("button");
       b.type = "button";
@@ -124,7 +121,7 @@
     konzConfirm.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
 
-  fetch("/api/nia/konzultace")
+  fetch("/api/nia/konzultace", { cache: "no-store" })
     .then(function (r) {
       return r.json();
     })

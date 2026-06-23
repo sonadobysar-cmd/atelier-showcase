@@ -161,7 +161,7 @@ td:first-child{font-weight:400;color:var(--ink);white-space:nowrap}
     <span class="eyebrow">Transparentně &amp; zodpovědně</span>
     <h1>Bezpečnost &amp; <span class="grad grad-data">data</span></h1>
     <p class="lead">Jak chráníme weby, které stavíme — od ukázkových dem po ostrý provoz u klientů. Bez strašení, ale s jasnými pravidly.</p>
-    <p class="page-updated">Poslední aktualizace: červen 2026</p>
+    <p class="page-updated">Poslední aktualizace: <span id="page-updated-date"></span></p>
   </div>
 </section>
 
@@ -353,6 +353,18 @@ document.querySelectorAll('.reveal').forEach(function(el){
     io.observe(el);
   } else { el.classList.add('in'); }
 });
+(function(){
+  var el=document.getElementById('page-updated-date');
+  if(!el)return;
+  var months=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+  var parts=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Prague',month:'2-digit',year:'numeric'}).formatToParts(new Date());
+  var month=1,year=2026;
+  parts.forEach(function(p){
+    if(p.type==='month')month=parseInt(p.value,10);
+    if(p.type==='year')year=parseInt(p.value,10);
+  });
+  el.textContent=months[month-1]+' '+year;
+})();
 </script>
 <script src="/nia/cookie-bar.js" defer></script>
 </body>

@@ -48,3 +48,4 @@ GLOSS-*.md
 
 # vercel
 .vercel
+.env*

@@ -14,21 +14,24 @@ Soubory v `slides/` — nahraj do IG jako carousel v pořadí 01 → 05.
 | `04-letni-akce.png` | Pro koho |
 | `05-letni-akce.png` | CTA — napiš WEB |
 
-## Reels / video (~13 s)
+## Reels / video (~14 s · 1080×1920)
 
-Otevři `reels.html` — automaticky se přizpůsobí obrazovce (9:16). Snímky se střídají samy.
+**Hotové soubory** (nahraj rovnou na IG):
 
-**Live:** [niadobysar.com/nia/marketing/letni-akce-2026/reels.html](https://niadobysar.com/nia/marketing/letni-akce-2026/reels.html)
+| Soubor | Formát |
+|--------|--------|
+| `video/letni-akce-reels.mp4` | **Instagram / TikTok** (doporučeno) |
+| `video/letni-akce-reels.webm` | Web / náhled |
 
-**Natočení:**
-1. Otevři odkaz v Chrome
-2. **F11** celá obrazovka (nebo Cmd+Ctrl+F)
-3. Spusť nahrávání obrazovky (QuickTime / iPhone)
-4. Nech běžet ~13 s — 4 snímky se přepnou samy
-5. Nahraj na IG Reels
+4 scény (~14 s): cena 5–15 tis. → co je v ceně → co je CI → CTA niadobysar.com
+
+**Náhled v prohlížeči:** [reels.html](https://niadobysar.com/nia/marketing/letni-akce-2026/reels.html)
+
+### Znovu vyexportovat video
 
 ```bash
-open public/nia/marketing/letni-akce-2026/reels.html
+cd public/nia/marketing/letni-akce-2026
+node export-reels.mjs
 ```
 
 ## Znovu vyexportovat PNG

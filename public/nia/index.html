@@ -484,23 +484,38 @@ body.has-promo-top .nav{top:var(--promo-top)}
   body.has-promo-top .nav-links{padding-top:calc(max(88px,env(safe-area-inset-top)) + var(--promo-top) - 46px)}
 }
 
-/* AKCE — sekce pod hero */
-.promo-launch{background:linear-gradient(165deg,var(--burgundy) 0%,var(--burgundy2) 55%,#3a1828 100%);color:var(--white);padding:clamp(72px,10vw,108px) 0;border-block:1px solid rgba(255,255,255,.06)}
-.promo-launch .eyebrow{color:rgba(255,255,255,.5)}
-.promo-launch-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,56px);align-items:start}
-.promo-launch-title{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin:14px 0 18px;color:var(--white)}
-.promo-launch-title .grad{color:var(--burgundy-glow);font-size:1.15em}
-.promo-launch-lead{font-size:.96rem;line-height:1.85;color:rgba(255,255,255,.72);max-width:460px;font-weight:300;margin:0 0 14px}
-.promo-launch-deadline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 28px;font-weight:400;line-height:1.7}
-.promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.08em}
-.promo-launch-simple{max-width:640px}
-.promo-launch .btn{margin-top:4px}
-.price-range{max-width:580px;margin:0 auto;text-align:center;padding:clamp(44px,6vw,60px) clamp(28px,4vw,44px);background:var(--white);border-radius:var(--r-xl);box-shadow:var(--shadow)}
-.price-range-amt{font-family:var(--display);font-size:clamp(2.6rem,7vw,3.8rem);letter-spacing:.02em;color:var(--burgundy3);line-height:1;font-weight:500}
-.price-range-amt span{font-size:.38em;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-top:10px;font-weight:400}
-.price-range-lead{font-size:clamp(.95rem,2.2vw,1.06rem);line-height:1.75;color:var(--ink);margin:26px 0 14px;font-weight:300}
-.price-range-ci{display:block;margin-top:12px;font-size:.9em;color:var(--muted);line-height:1.65}
-.price-range-note{font-size:.86rem;color:var(--muted);margin:0 0 28px;line-height:1.65;font-weight:300}
+/* AKCE — letní promo (reklamní hero) */
+.promo-launch{position:relative;overflow:hidden;background:var(--black);color:var(--white);padding:clamp(88px,12vw,128px) 0;border-block:1px solid rgba(255,255,255,.06)}
+.promo-launch-glow{position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(ellipse 90% 70% at 50% 110%,rgba(92,42,62,.62) 0%,transparent 58%),
+  radial-gradient(ellipse 45% 35% at 88% 8%,rgba(158,77,106,.22) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 30% at 8% 20%,rgba(122,61,84,.12) 0%,transparent 50%)}
+.promo-launch-stage{position:relative;z-index:1;max-width:920px;margin:0 auto;text-align:center}
+.promo-launch-badge{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-pill);background:rgba(255,255,255,.04);font-size:clamp(.58rem,2.4vw,.68rem);letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.72);backdrop-filter:blur(8px);margin-bottom:clamp(24px,4vw,36px)}
+.promo-launch-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--burgundy-glow);box-shadow:0 0 16px rgba(158,77,106,.65);flex:none;animation:promoPulse 2.4s ease-in-out infinite}
+@keyframes promoPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.65;transform:scale(.88)}}
+.promo-launch-kicker{font-size:clamp(.72rem,2.6vw,.88rem);letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:clamp(12px,2vw,18px);font-weight:400}
+.promo-launch-price{display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,2vw,16px);margin:0 0 4px;line-height:.88}
+.promo-launch-price-num{font-family:var(--display);font-weight:500;font-size:clamp(4.2rem,16vw,9.5rem);letter-spacing:-.03em;background:linear-gradient(165deg,var(--white) 18%,var(--burgundy-glow) 92%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 8px 32px rgba(158,77,106,.25))}
+.promo-launch-price-unit{font-family:var(--display);font-size:clamp(1.1rem,3.8vw,2rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.82);padding-bottom:clamp(10px,2.5vw,22px);font-weight:500;white-space:nowrap}
+.promo-launch-script{font-family:var(--script);font-size:clamp(2.4rem,8vw,4.6rem);color:var(--burgundy-glow);line-height:1;margin:clamp(4px,1vw,10px) 0 clamp(20px,3vw,28px);font-weight:400}
+.promo-launch-ci{font-size:clamp(.92rem,2.2vw,1.05rem);line-height:1.75;color:rgba(255,255,255,.68);max-width:560px;margin:0 auto clamp(18px,3vw,24px);font-weight:300}
+.promo-launch-ci em{font-style:normal;color:var(--burgundy-glow);font-weight:400}
+.promo-launch-deadline{font-size:clamp(.68rem,2vw,.78rem);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.48);margin:0 0 clamp(28px,4vw,36px);font-weight:400;line-height:1.7}
+.promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.14em}
+.promo-launch-cta{font-size:clamp(.62rem,2.2vw,.68rem);letter-spacing:.26em;padding:18px 36px;box-shadow:0 12px 40px -12px rgba(158,77,106,.55)}
+.promo-launch-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:clamp(32px,5vw,44px)}
+.promo-launch-tags span{font-size:clamp(.58rem,2vw,.66rem);letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.55)}
+
+/* Ceník — kompaktní banner (odkaz na akci) */
+.price-banner{position:relative;overflow:hidden;text-align:center;padding:clamp(36px,5vw,48px) clamp(24px,4vw,40px);margin-bottom:clamp(40px,6vw,56px);border-radius:var(--r-xl);background:linear-gradient(135deg,var(--burgundy3) 0%,var(--burgundy4) 100%);color:var(--white);box-shadow:var(--shadow-lg)}
+.price-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(255,255,255,.12) 0%,transparent 45%);pointer-events:none}
+.price-banner-inner{position:relative;z-index:1}
+.price-banner-num{font-family:var(--display);font-size:clamp(2rem,6vw,3.2rem);letter-spacing:.02em;font-weight:500;line-height:1;margin-bottom:10px}
+.price-banner-lead{font-size:clamp(.88rem,2vw,.98rem);line-height:1.65;color:rgba(255,255,255,.82);max-width:520px;margin:0 auto;font-weight:300}
+.price-banner-lead span{display:block;margin-top:8px;font-size:.88em;color:rgba(255,255,255,.58)}
+.price-banner a{display:inline-block;margin-top:20px;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--white);border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:2px;transition:opacity .25s}
+.price-banner a:hover{opacity:.85}
 
 /* RESPONSIVE */
 @media(max-width:980px){
@@ -599,7 +614,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   .reveal{filter:none;transform:translateY(20px)}
   .hero-name-marquee-track{animation:none;transform:translateX(-15%)}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}.hero-name-marquee-track{animation:none;transform:translateX(-25%)}.hero-backdrop{opacity:1!important;transform:none!important}.shine{animation:none;opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}.hero-name-marquee-track{animation:none;transform:translateX(-25%)}.hero-backdrop{opacity:1!important;transform:none!important}.shine{animation:none;opacity:0}.promo-launch-badge .dot{animation:none}}
 </style>
 </head>
 <body class="has-promo-top">
@@ -617,7 +632,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
     <a href="/nia#studio">Studio</a>
-    <a href="/nia#sluzby">Ceník</a>
+    <a href="/nia#akce">Ceník</a>
     <a href="/nia#web-na-splatky">Web na splátky</a>
     <a href="/nia#konzultace">Konzultace</a>
     <a href="/nia#kontakt">Kontakt</a>
@@ -661,13 +676,25 @@ body.has-promo-top .nav{top:var(--promo-top)}
 </section>
 
 <section id="akce" class="promo-launch reveal">
+  <div class="promo-launch-glow" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="promo-launch-simple">
-      <span class="eyebrow">Letní akce 2026</span>
-      <h2 class="promo-launch-title">5–15 tis. za web včetně <span class="grad">corporate identity</span></h2>
-      <p class="promo-launch-lead">Corporate identity <span class="price-range-ci" style="display:inline;margin:0;color:rgba(255,255,255,.58)">(vizuální identita značky — logo, barvy, typografie a celkový styl, který ladí s webem)</span>. Cena podle rozsahu a náročnosti projektu.</p>
-      <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
-      <a href="#konzultace" class="btn" data-cursor>Využít letní akci ✦</a>
+    <div class="promo-launch-stage">
+      <div class="promo-launch-badge"><span class="dot" aria-hidden="true"></span> Letní akce · max. 5 projektů</div>
+      <p class="promo-launch-kicker">Web včetně corporate identity</p>
+      <div class="promo-launch-price" aria-label="5 až 15 tisíc korun">
+        <span class="promo-launch-price-num">5–15</span>
+        <span class="promo-launch-price-unit">tis. Kč</span>
+      </div>
+      <p class="promo-launch-script">letní akce 2026</p>
+      <p class="promo-launch-ci"><em>Corporate identity</em> — vizuální identita značky: logo, barvy, typografie a celkový styl, který ladí s webem do posledního detailu.</p>
+      <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · cena podle rozsahu projektu</p>
+      <a href="#konzultace" class="btn promo-launch-cta" data-cursor>Využít letní akci ✦</a>
+      <div class="promo-launch-tags" aria-hidden="true">
+        <span>Web na míru</span>
+        <span>Branding</span>
+        <span>Responzivní</span>
+        <span>Bez šablon</span>
+      </div>
     </div>
   </div>
 </section>
@@ -768,18 +795,12 @@ body.has-promo-top .nav{top:var(--promo-top)}
 
 <section id="sluzby" class="sluzby">
   <div class="wrap">
-    <div class="sec-head centered reveal">
-      <div>
-        <span class="eyebrow">Služby &amp; ceník</span>
-        <h2>Cenové <span class="grad">rozpětí</span><span class="rule"></span></h2>
+    <div class="price-banner reveal">
+      <div class="price-banner-inner">
+        <div class="price-banner-num">5–15 tis. Kč</div>
+        <p class="price-banner-lead">Web včetně corporate identity<span>(logo, barvy, typografie a vizuální styl značky — doladíme na konzultaci)</span></p>
+        <a href="#konzultace" data-cursor>Rezervovat konzultaci →</a>
       </div>
-      <span class="idx">orientační ceny</span>
-    </div>
-    <div class="price-range reveal">
-      <div class="price-range-amt">5–15 <span>tis. Kč</span></div>
-      <p class="price-range-lead">Web včetně corporate identity <span class="price-range-ci">(vizuální identita značky — logo, barvy, typografie a celkový styl, který ladí s webem)</span></p>
-      <p class="price-range-note">Cena podle rozsahu a náročnosti projektu. Finální částku doladíme na konzultaci.</p>
-      <a href="#konzultace" class="btn" data-cursor>Rezervovat konzultaci ✦</a>
     </div>
 
     <div class="obsah-kluc reveal">
@@ -914,7 +935,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
       <div class="foot-top">
         <div class="foot-brand">Nia Dobyšar</div>
         <div class="foot-links">
-          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
+          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#akce">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>

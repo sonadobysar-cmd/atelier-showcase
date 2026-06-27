@@ -527,9 +527,21 @@ img{display:block;max-width:100%}
   .reveal{filter:none;transform:translateY(20px)}
   .hero-name-marquee-track{animation:none;transform:translateX(-15%)}
 }
+:root{--promo-top:0px}
+body.has-promo-top{--promo-top:42px;padding-top:var(--promo-top)}
+.promo-topbar{position:fixed;top:0;left:0;right:0;z-index:250;height:var(--promo-top);display:flex;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;padding:0 max(6vw,12px);background:linear-gradient(90deg,var(--burgundy3) 0%,var(--burgundy4) 48%,var(--burgundy-glow) 100%);color:var(--white);text-align:center;font-size:clamp(.58rem,2.8vw,.72rem);letter-spacing:.16em;text-transform:uppercase;font-weight:400;line-height:1.45;box-shadow:0 4px 24px -8px rgba(26,10,16,.35)}
+.promo-topbar strong{font-weight:500;color:var(--white);letter-spacing:.12em}
+.promo-topbar a{color:var(--white);border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:1px;white-space:nowrap}
+body.has-promo-top .nav{top:var(--promo-top)}
+@media(max-width:980px){body.has-promo-top{--promo-top:52px}}
 </style>
 </head>
-<body>
+<body class="has-promo-top">
+
+<div class="promo-topbar" role="region" aria-label="Aktuální akce">
+  <span><strong>Akce:</strong> web včetně corporate identity · sleva 5–15 000 Kč · do 1. 9. 2026 nebo do kapacity</span>
+  <a href="/nia#konzultace">Rezervovat →</a>
+</div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-dot" id="cursorDot"></div>
@@ -538,7 +550,6 @@ img{display:block;max-width:100%}
   <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
-    <a href="/nia#akce">Akce</a>
     <a href="/nia#studio">Studio</a>
     <a href="/nia#sluzby">Ceník</a>
     <a href="/nia#web-na-splatky">Web na splátky</a>

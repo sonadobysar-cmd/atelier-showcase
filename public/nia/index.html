@@ -484,6 +484,25 @@ body.has-promo-top .nav{top:var(--promo-top)}
   body.has-promo-top .nav-links{padding-top:calc(max(88px,env(safe-area-inset-top)) + var(--promo-top) - 46px)}
 }
 
+/* AKCE — sekce pod hero */
+.promo-launch{background:linear-gradient(165deg,var(--burgundy) 0%,var(--burgundy2) 55%,#3a1828 100%);color:var(--white);padding:clamp(72px,10vw,108px) 0;border-block:1px solid rgba(255,255,255,.06)}
+.promo-launch .eyebrow{color:rgba(255,255,255,.5)}
+.promo-launch-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,56px);align-items:start}
+.promo-launch-title{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin:14px 0 18px;color:var(--white)}
+.promo-launch-title .grad{color:var(--burgundy-glow);font-size:1.15em}
+.promo-launch-lead{font-size:.96rem;line-height:1.85;color:rgba(255,255,255,.72);max-width:460px;font-weight:300;margin:0 0 14px}
+.promo-launch-deadline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 28px;font-weight:400;line-height:1.7}
+.promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.08em}
+.promo-launch-tiers{display:grid;gap:12px}
+.promo-tier{display:grid;grid-template-columns:1fr auto auto;gap:12px 16px;align-items:center;padding:16px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:background .35s var(--ease),transform .35s var(--ease)}
+.promo-tier:hover{background:rgba(255,255,255,.08);transform:translateX(4px)}
+.promo-tier-name{font-family:var(--display);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25}
+.promo-tier-note{font-size:.72rem;color:rgba(255,255,255,.48);grid-column:1/-1;margin-top:-4px;font-weight:300}
+.promo-tier-was{font-size:.78rem;color:rgba(255,255,255,.42);text-decoration:line-through;text-align:right;white-space:nowrap}
+.promo-tier-off{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--burgundy-glow);text-align:center;white-space:nowrap;font-weight:500}
+.promo-tier-now{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;text-align:right;white-space:nowrap;color:var(--white)}
+.promo-launch .btn{margin-top:4px}
+
 /* RESPONSIVE */
 @media(max-width:980px){
   .hero-name-layer{padding:64px 0 18vh}
@@ -504,6 +523,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   .studio-shots{grid-template-columns:1fr;gap:16px;margin-top:48px}
   .studio-photo{order:-1;max-width:400px;margin:0 auto}
   .feat-spot{grid-template-columns:1fr;gap:28px}
+  .promo-launch-grid{grid-template-columns:1fr;gap:28px}
   #sluzby .wrap{padding-left:clamp(12px,3vw,6vw);padding-right:clamp(12px,3vw,6vw)}
   .price-grid{gap:clamp(8px,1.8vw,14px)}
   .price{padding:clamp(18px,3.5vw,36px) clamp(10px,2vw,24px);border-radius:clamp(16px,3vw,32px)}
@@ -638,6 +658,43 @@ body.has-promo-top .nav{top:var(--promo-top)}
   </div>
   <div class="hero-foot">
     <div class="scrollcue"><span class="bar"></span>Scroll</div>
+  </div>
+</section>
+
+<section id="akce" class="promo-launch reveal">
+  <div class="wrap">
+    <div class="promo-launch-grid">
+      <div>
+        <span class="eyebrow">Letní start 2026</span>
+        <h2 class="promo-launch-title">Web + <span class="grad">identita</span> se slevou</h2>
+        <p class="promo-launch-lead">Kompletní web včetně corporate identity — barvy, typografie a vizuální směr, který ladí s webem do posledního detailu. Sleva podle náročnosti projektu.</p>
+        <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
+        <a href="#konzultace" class="btn" data-cursor>Rezervovat s akcí ✦</a>
+      </div>
+      <div class="promo-launch-tiers">
+        <div class="promo-tier">
+          <div class="promo-tier-name">Jednostránka</div>
+          <div class="promo-tier-was">9 900 Kč</div>
+          <div class="promo-tier-off">−5 000 Kč</div>
+          <div class="promo-tier-now">od 4 900 Kč</div>
+          <div class="promo-tier-note">Základ identity: barvy + typografie k webu</div>
+        </div>
+        <div class="promo-tier">
+          <div class="promo-tier-name">Web na míru</div>
+          <div class="promo-tier-was">24 900 Kč</div>
+          <div class="promo-tier-off">−10 000 Kč</div>
+          <div class="promo-tier-now">od 14 900 Kč</div>
+          <div class="promo-tier-note">Vícestránkový web + vizuální identita na míru</div>
+        </div>
+        <div class="promo-tier">
+          <div class="promo-tier-name">Web + branding</div>
+          <div class="promo-tier-was">39 900 Kč</div>
+          <div class="promo-tier-off">−15 000 Kč</div>
+          <div class="promo-tier-now">od 24 900 Kč</div>
+          <div class="promo-tier-note">Logo, kompletní CI, web a sociální šablony</div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

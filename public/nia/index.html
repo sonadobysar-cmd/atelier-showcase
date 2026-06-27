@@ -7,7 +7,7 @@
 <link rel="icon" href="/nia/favicon-32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/nia/apple-touch-icon.png?v=2">
 <title>Nia Dobyšar — Webdesign studio · web na splátky</title>
-<meta name="description" content="Moderní weby na míru pro malé firmy — i web na splátky od 2 000 Kč měsíčně. Design, tvorba, hosting a správa.">
+<meta name="description" content="Letní akce do 1. 9. 2026: sleva 5–15 000 Kč na web včetně corporate identity. Moderní weby na míru — i web na splátky od 2 000 Kč měsíčně.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -471,6 +471,29 @@ img{display:block;max-width:100%}
 @keyframes staggerUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .parallax-soft{will-change:transform;transition:transform .1s linear}
 
+/* AKCE — letní start 2026 */
+.promo-launch{background:linear-gradient(165deg,var(--burgundy) 0%,var(--burgundy2) 55%,#3a1828 100%);color:var(--white);padding:clamp(72px,10vw,108px) 0;border-block:1px solid rgba(255,255,255,.06)}
+.promo-launch .eyebrow{color:rgba(255,255,255,.5)}
+.promo-launch-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,5vw,56px);align-items:start}
+.promo-launch-title{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.05;margin:14px 0 18px;color:var(--white)}
+.promo-launch-title .grad{color:var(--burgundy-glow);font-size:1.15em}
+.promo-launch-lead{font-size:.96rem;line-height:1.85;color:rgba(255,255,255,.72);max-width:460px;font-weight:300;margin:0 0 14px}
+.promo-launch-deadline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 28px;font-weight:400;line-height:1.7}
+.promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.08em}
+.promo-launch-tiers{display:grid;gap:12px}
+.promo-tier{display:grid;grid-template-columns:1fr auto auto;gap:12px 16px;align-items:center;padding:16px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:background .35s var(--ease),transform .35s var(--ease)}
+.promo-tier:hover{background:rgba(255,255,255,.08);transform:translateX(4px)}
+.promo-tier-name{font-family:var(--display);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25}
+.promo-tier-note{font-size:.72rem;color:rgba(255,255,255,.48);grid-column:1/-1;margin-top:-4px;font-weight:300}
+.promo-tier-was{font-size:.78rem;color:rgba(255,255,255,.42);text-decoration:line-through;text-align:right;white-space:nowrap}
+.promo-tier-off{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--burgundy-glow);text-align:center;white-space:nowrap;font-weight:500}
+.promo-tier-now{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;text-align:right;white-space:nowrap;color:var(--white)}
+.promo-launch .btn{margin-top:4px}
+.price.on-sale{outline:2px solid rgba(158,77,106,.35);position:relative}
+.price.on-sale .pk{background:rgba(158,77,106,.12);color:var(--burgundy3);padding:4px 10px;border-radius:var(--r-pill);display:inline-block}
+.price .amt-was{font-family:var(--display);font-size:1rem;color:var(--muted2);text-decoration:line-through;margin:0 0 2px;letter-spacing:.02em}
+.price .from-sale{font-size:.74rem;color:var(--burgundy4);letter-spacing:.08em}
+
 /* RESPONSIVE */
 @media(max-width:980px){
   .hero-name-layer{padding:64px 0 18vh}
@@ -491,6 +514,7 @@ img{display:block;max-width:100%}
   .studio-shots{grid-template-columns:1fr;gap:16px;margin-top:48px}
   .studio-photo{order:-1;max-width:400px;margin:0 auto}
   .feat-spot{grid-template-columns:1fr;gap:28px}
+  .promo-launch-grid{grid-template-columns:1fr;gap:28px}
   #sluzby .wrap{padding-left:clamp(12px,3vw,6vw);padding-right:clamp(12px,3vw,6vw)}
   .price-grid{gap:clamp(8px,1.8vw,14px)}
   .price{padding:clamp(18px,3.5vw,36px) clamp(10px,2vw,24px);border-radius:clamp(16px,3vw,32px)}
@@ -579,6 +603,7 @@ img{display:block;max-width:100%}
   <a class="brand" href="#top">Nia Dobyšar<span class="dot"></span></a>
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
+    <a href="/nia#akce">Akce</a>
     <a href="/nia#studio">Studio</a>
     <a href="/nia#sluzby">Ceník</a>
     <a href="/nia#web-na-splatky">Web na splátky</a>
@@ -610,7 +635,7 @@ img{display:block;max-width:100%}
       </div>
     </div>
     <div class="hero-copy">
-      <p class="hero-eyebrow">Webdesign studio · Brno &amp; Praha</p>
+      <p class="hero-eyebrow">Webdesign studio · Brno &amp; Praha · <strong style="font-weight:500;color:var(--burgundy-glow)">Akce do 1. 9.</strong></p>
       <p class="hero-slogan">Moderní weby, co <span class="grad">září</span>.</p>
       <div class="hero-cta">
         <a href="/nia/projekty" class="btn" data-cursor>Vybrané práce</a>
@@ -629,6 +654,43 @@ img{display:block;max-width:100%}
     <span>Webdesign</span><span class="x">·</span><span>Weby na míru</span><span class="x">·</span><span>Branding</span><span class="x">·</span><span>UX &amp; UI</span><span class="x">·</span><span>Konzultace</span><span class="x">·</span>
   </div>
 </div>
+
+<section id="akce" class="promo-launch reveal">
+  <div class="wrap">
+    <div class="promo-launch-grid">
+      <div>
+        <span class="eyebrow">Letní start 2026</span>
+        <h2 class="promo-launch-title">Web + <span class="grad">identita</span> se slevou</h2>
+        <p class="promo-launch-lead">Kompletní web včetně corporate identity — barvy, typografie a vizuální směr, který ladí s webem do posledního detailu. Sleva podle náročnosti projektu.</p>
+        <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
+        <a href="#konzultace" class="btn" data-cursor>Rezervovat s akcí ✦</a>
+      </div>
+      <div class="promo-launch-tiers">
+        <div class="promo-tier">
+          <div class="promo-tier-name">Jednostránka</div>
+          <div class="promo-tier-was">9 900 Kč</div>
+          <div class="promo-tier-off">−5 000 Kč</div>
+          <div class="promo-tier-now">od 4 900 Kč</div>
+          <div class="promo-tier-note">Základ identity: barvy + typografie k webu</div>
+        </div>
+        <div class="promo-tier">
+          <div class="promo-tier-name">Web na míru</div>
+          <div class="promo-tier-was">24 900 Kč</div>
+          <div class="promo-tier-off">−10 000 Kč</div>
+          <div class="promo-tier-now">od 14 900 Kč</div>
+          <div class="promo-tier-note">Vícestránkový web + vizuální identita na míru</div>
+        </div>
+        <div class="promo-tier">
+          <div class="promo-tier-name">Web + branding</div>
+          <div class="promo-tier-was">39 900 Kč</div>
+          <div class="promo-tier-off">−15 000 Kč</div>
+          <div class="promo-tier-now">od 24 900 Kč</div>
+          <div class="promo-tier-note">Logo, kompletní CI, web a sociální šablony</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="editorial-intro reveal">
   <p>Navrhuju weby, které vypadají jako velká značka — čisté, moderní a do posledního detailu.</p>
@@ -724,40 +786,43 @@ img{display:block;max-width:100%}
         <span class="eyebrow">Služby &amp; ceník</span>
         <h2>Vyber si <span class="grad">balíček</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">ceny orientační</span>
+      <span class="idx">ceny orientační · akce do 1. 9.</span>
     </div>
     <div class="price-carousel">
     <div class="price-grid">
-      <div class="price reveal">
-        <span class="pk">Landing</span>
+      <div class="price on-sale reveal">
+        <span class="pk">Akce −5 000 Kč</span>
         <div class="pkn">Jednostránka</div>
-        <div class="amt"><span class="od">od</span>9 900<span class="cur"> Kč</span></div>
-        <div class="from">jednorázově</div>
+        <div class="amt-was">9 900 Kč</div>
+        <div class="amt"><span class="od">od</span>4 900<span class="cur"> Kč</span></div>
+        <div class="from from-sale">vč. základů identity · jednorázově</div>
         <p class="pdesc">Jedna silná stránka, co prodává. Ideální pro službu, akci nebo osobní značku.</p>
         <ul><li>Design na míru</li><li>Responzivní</li><li>Kontaktní formulář</li><li>Nasazení online</li></ul>
         <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
       </div>
-      <div class="price feat reveal">
-        <span class="pk">Nejoblíbenější</span>
+      <div class="price feat on-sale reveal">
+        <span class="pk">Akce −10 000 Kč</span>
         <div class="pkn">Web na míru</div>
-        <div class="amt"><span class="od">od</span>24 900<span class="cur"> Kč</span></div>
-        <div class="from">dle rozsahu</div>
+        <div class="amt-was">24 900 Kč</div>
+        <div class="amt"><span class="od">od</span>14 900<span class="cur"> Kč</span></div>
+        <div class="from from-sale">vč. corporate identity · dle rozsahu</div>
         <p class="pdesc">Vícestránkový web s vlastní identitou a interaktivními prvky. Tvoje výkladní skříň.</p>
         <ul><li>Kompletní design</li><li>Interaktivní prvky</li><li>Až 6 sekcí / stránek</li><li>Animace &amp; mikrointerakce</li><li>SEO základ</li></ul>
         <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
       </div>
-      <div class="price prem reveal">
-        <span class="pk">Premium</span>
+      <div class="price prem on-sale reveal">
+        <span class="pk">Akce −15 000 Kč</span>
         <div class="pkn">Web + branding</div>
-        <div class="amt"><span class="od">od</span>39 900<span class="cur"> Kč</span></div>
-        <div class="from">komplet</div>
+        <div class="amt-was">39 900 Kč</div>
+        <div class="amt"><span class="od">od</span>24 900<span class="cur"> Kč</span></div>
+        <div class="from from-sale">kompletní CI + web · prioritní termín</div>
         <p class="pdesc">Kompletní vizuální identita a web, co spolu ladí do posledního detailu.</p>
         <ul><li>Logo &amp; identita</li><li>Web na míru</li><li>Barvy, typografie, styl</li><li>Sociální šablony</li><li>Prioritní termín</li></ul>
         <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
       </div>
     </div>
     </div>
-    <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
+    <p class="price-note">Akční ceny platí při rezervaci konzultace do 1. 9. 2026 (nebo do vyčerpání kapacity). Finální cenu doladíme podle rozsahu — sleva se promítne do nabídky.</p>
 
     <div class="sluzby-sub">
       <div class="sec-head centered reveal">
@@ -895,7 +960,7 @@ img{display:block;max-width:100%}
         <div class="konz-days" id="konzDays"></div>
         <div class="konz-days-label">Vyber čas</div>
         <div class="konz-times" id="konzTimes"></div>
-        <p class="konz-hint" id="konzHint">Úvodní konzultace trvá cca 30 minut — čistě informativní. Po rezervaci ti hned přijde e-mail s potvrzením a odkazem na Google Meet.</p>
+        <p class="konz-hint" id="konzHint">Úvodní konzultace trvá cca 30 minut — čistě informativní. Po rezervaci ti hned přijde e-mail s potvrzením a odkazem na Google Meet. <strong>Letní akce:</strong> sleva 5–15 000 Kč na web vč. identity při rezervaci do 1. 9. 2026.</p>
         <p class="konz-osobne-note">Konzultace probíhá <strong>online</strong>. Osobní setkání domlouváme až po úvodní schůzce — pokud máš zájem o osobní schůzku, napiš na <a href="mailto:niadobysar@gmail.com">niadobysar@gmail.com</a> a udělám maximum, abychom se potkali.</p>
       </div>
       <form class="konz-form reveal" id="konzForm">
@@ -948,7 +1013,7 @@ img{display:block;max-width:100%}
       <div class="foot-top">
         <div class="foot-brand">Nia Dobyšar</div>
         <div class="foot-links">
-          <a href="/nia/projekty">Práce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
+          <a href="/nia/projekty">Práce</a><a href="#akce">Akce</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
           <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
         </div>
       </div>

@@ -494,12 +494,10 @@ body.has-promo-top .nav{top:var(--promo-top)}
 .promo-launch-deadline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 28px;font-weight:400;line-height:1.7}
 .promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.08em}
 .promo-launch-tiers{display:grid;gap:12px}
-.promo-tier{display:grid;grid-template-columns:1fr auto auto;gap:12px 16px;align-items:center;padding:16px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:background .35s var(--ease),transform .35s var(--ease)}
+.promo-tier{display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:center;padding:16px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:background .35s var(--ease),transform .35s var(--ease)}
 .promo-tier:hover{background:rgba(255,255,255,.08);transform:translateX(4px)}
 .promo-tier-name{font-family:var(--display);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25}
 .promo-tier-note{font-size:.72rem;color:rgba(255,255,255,.48);grid-column:1/-1;margin-top:-4px;font-weight:300}
-.promo-tier-was{font-size:.78rem;color:rgba(255,255,255,.42);text-decoration:line-through;text-align:right;white-space:nowrap}
-.promo-tier-off{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--burgundy-glow);text-align:center;white-space:nowrap;font-weight:500}
 .promo-tier-now{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;text-align:right;white-space:nowrap;color:var(--white)}
 .promo-launch .btn{margin-top:4px}
 
@@ -606,7 +604,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
 <body class="has-promo-top">
 
 <div class="promo-topbar" role="region" aria-label="Aktuální akce">
-  <span><strong>Akce:</strong> web včetně corporate identity · sleva 5–15 000 Kč · do 1. 9. 2026 nebo do kapacity</span>
+  <span><strong>Portfolio akce:</strong> web včetně corporate identity · 5–15 000 Kč podle rozsahu · do 1. 9. 2026 nebo do kapacity</span>
   <a href="#konzultace" data-cursor>Rezervovat →</a>
 </div>
 
@@ -665,33 +663,27 @@ body.has-promo-top .nav{top:var(--promo-top)}
   <div class="wrap">
     <div class="promo-launch-grid">
       <div>
-        <span class="eyebrow">Letní start 2026</span>
-        <h2 class="promo-launch-title">Web + <span class="grad">identita</span> se slevou</h2>
-        <p class="promo-launch-lead">Kompletní web včetně corporate identity — barvy, typografie a vizuální směr, který ladí s webem do posledního detailu. Sleva podle náročnosti projektu.</p>
+        <span class="eyebrow">Portfolio akce 2026</span>
+        <h2 class="promo-launch-title">Web + <span class="grad">identita</span> za 5–15 tis.</h2>
+        <p class="promo-launch-lead">Teď nabírám klienty do portfolia. Moderní web včetně corporate identity — barvy, typografie a vizuální směr, který ladí s webem do posledního detailu. Cena podle náročnosti projektu.</p>
         <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
-        <a href="#konzultace" class="btn" data-cursor>Rezervovat s akcí ✦</a>
+        <a href="#konzultace" class="btn" data-cursor>Chci do portfolia ✦</a>
       </div>
       <div class="promo-launch-tiers">
         <div class="promo-tier">
-          <div class="promo-tier-name">Jednostránka</div>
-          <div class="promo-tier-was">9 900 Kč</div>
-          <div class="promo-tier-off">−5 000 Kč</div>
-          <div class="promo-tier-now">od 4 900 Kč</div>
-          <div class="promo-tier-note">Základ identity: barvy + typografie k webu</div>
+          <div class="promo-tier-name">Jednodušší</div>
+          <div class="promo-tier-now">od 5 000 Kč</div>
+          <div class="promo-tier-note">Jednostránka nebo mini web + základy identity (barvy, typografie)</div>
         </div>
         <div class="promo-tier">
-          <div class="promo-tier-name">Web na míru</div>
-          <div class="promo-tier-was">24 900 Kč</div>
-          <div class="promo-tier-off">−10 000 Kč</div>
-          <div class="promo-tier-now">od 14 900 Kč</div>
-          <div class="promo-tier-note">Vícestránkový web + vizuální identita na míru</div>
+          <div class="promo-tier-name">Střední</div>
+          <div class="promo-tier-now">od 10 000 Kč</div>
+          <div class="promo-tier-note">Web na míru + corporate identity podle značky</div>
         </div>
         <div class="promo-tier">
-          <div class="promo-tier-name">Web + branding</div>
-          <div class="promo-tier-was">39 900 Kč</div>
-          <div class="promo-tier-off">−15 000 Kč</div>
-          <div class="promo-tier-now">od 24 900 Kč</div>
-          <div class="promo-tier-note">Logo, kompletní CI, web a sociální šablony</div>
+          <div class="promo-tier-name">Rozsáhlejší</div>
+          <div class="promo-tier-now">od 15 000 Kč</div>
+          <div class="promo-tier-note">Vícestránkový web + kompletní CI (logo, šablony, vizuální směr)</div>
         </div>
       </div>
     </div>

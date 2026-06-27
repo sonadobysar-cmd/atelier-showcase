@@ -14,15 +14,22 @@ Soubory v `slides/` — nahraj do IG jako carousel v pořadí 01 → 05.
 | `04-letni-akce.png` | Pro koho |
 | `05-letni-akce.png` | CTA — napiš WEB |
 
-## Reels / video
+## Reels / video (~13 s)
 
-Otevři `reels.html` na celou obrazovku (1080×1920) a natoč obrazovku ~12 s — snímky se střídají automaticky.
+Otevři `reels.html` — automaticky se přizpůsobí obrazovce (9:16). Snímky se střídají samy.
+
+**Live:** [niadobysar.com/nia/marketing/letni-akce-2026/reels.html](https://niadobysar.com/nia/marketing/letni-akce-2026/reels.html)
+
+**Natočení:**
+1. Otevři odkaz v Chrome
+2. **F11** celá obrazovka (nebo Cmd+Ctrl+F)
+3. Spusť nahrávání obrazovky (QuickTime / iPhone)
+4. Nech běžet ~13 s — 4 snímky se přepnou samy
+5. Nahraj na IG Reels
 
 ```bash
 open public/nia/marketing/letni-akce-2026/reels.html
 ```
-
-Tip: v Chrome F12 → Device toolbar → Custom 1080×1920, pak fullscreen.
 
 ## Znovu vyexportovat PNG
 
@@ -36,17 +43,15 @@ node export-slides.mjs
 ```
 Letní akce ✦
 
-Web včetně corporate identity — od 5 000 do 15 000 Kč podle rozsahu.
+Web včetně corporate identity — 5–15 tis. Kč podle rozsahu.
 
-Ne template. Barvy, typografie a vizuální směr, který ladí s webem do posledního detailu.
+Corporate identity = vizuální identita značky: logo, barvy, typografie a styl, který ladí s webem.
 
-→ Jednodušší od 5 000 Kč
-→ Střední od 10 000 Kč
-→ Rozsáhlejší od 15 000 Kč
+Ne šablona. Web na míru, který vypadá jako velká značka.
 
 Platí do 1. 9. 2026 · max. 5 projektů
 
-Napiš WEB do zpráv nebo rezervuj konzultaci — odkaz v bio.
+Rezervuj konzultaci — odkaz v bio · niadobysar.com
 
 Tvůj web, tvoje záře. ✦
 

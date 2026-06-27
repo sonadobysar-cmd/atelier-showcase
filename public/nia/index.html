@@ -489,23 +489,50 @@ body.has-promo-top .nav{top:var(--promo-top)}
 .promo-launch-glow{position:absolute;inset:0;pointer-events:none;background:
   radial-gradient(ellipse 90% 70% at 50% 110%,rgba(92,42,62,.62) 0%,transparent 58%),
   radial-gradient(ellipse 45% 35% at 88% 8%,rgba(158,77,106,.22) 0%,transparent 55%),
-  radial-gradient(ellipse 40% 30% at 8% 20%,rgba(122,61,84,.12) 0%,transparent 50%)}
+  radial-gradient(ellipse 40% 30% at 8% 20%,rgba(122,61,84,.12) 0%,transparent 50%);
+  animation:promoBgPulse 9s ease-in-out infinite alternate}
+@keyframes promoBgPulse{0%{opacity:.72;transform:scale(1) translateY(0)}100%{opacity:1;transform:scale(1.06) translateY(-1%)}}
 .promo-launch-stage{position:relative;z-index:1;max-width:920px;margin:0 auto;text-align:center}
+.promo-launch-stage > *{opacity:0;transform:translateY(32px)}
+.promo-launch.in .promo-launch-stage > *{animation:promoStaggerIn .8s var(--ease) forwards}
+.promo-launch.in .promo-launch-badge{animation-delay:.06s}
+.promo-launch.in .promo-launch-kicker{animation-delay:.14s}
+.promo-launch.in .promo-launch-price{animation-delay:.22s}
+.promo-launch.in .promo-launch-script{animation-delay:.32s}
+.promo-launch.in .promo-launch-ci{animation-delay:.42s}
+.promo-launch.in .promo-launch-deadline{animation-delay:.52s}
+.promo-launch.in .promo-launch-cta{animation-delay:.62s}
+.promo-launch.in .promo-launch-tags{animation-delay:.72s}
+@keyframes promoStaggerIn{to{opacity:1;transform:none}}
 .promo-launch-badge{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-pill);background:rgba(255,255,255,.04);font-size:clamp(.58rem,2.4vw,.68rem);letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.72);backdrop-filter:blur(8px);margin-bottom:clamp(24px,4vw,36px)}
 .promo-launch-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--burgundy-glow);box-shadow:0 0 16px rgba(158,77,106,.65);flex:none;animation:promoPulse 2.4s ease-in-out infinite}
 @keyframes promoPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.65;transform:scale(.88)}}
 .promo-launch-kicker{font-size:clamp(.72rem,2.6vw,.88rem);letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:clamp(12px,2vw,18px);font-weight:400}
-.promo-launch-price{display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,2vw,16px);margin:0 0 4px;line-height:.88}
-.promo-launch-price-num{font-family:var(--display);font-weight:500;font-size:clamp(4.2rem,16vw,9.5rem);letter-spacing:-.03em;background:linear-gradient(165deg,var(--white) 18%,var(--burgundy-glow) 92%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 8px 32px rgba(158,77,106,.25))}
+.promo-launch-price{display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,2vw,16px);margin:0 0 4px;line-height:.88;position:relative}
+.promo-launch-price-num{font-family:var(--display);font-weight:500;font-size:clamp(4.2rem,16vw,9.5rem);letter-spacing:-.03em;background:linear-gradient(165deg,var(--white) 18%,var(--burgundy-glow) 92%);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 8px 32px rgba(158,77,106,.25))}
+.promo-launch.in .promo-launch-price-num{animation:promoStaggerIn .8s var(--ease) .22s forwards,promoPriceShimmer 5s ease-in-out 1s infinite}
+@keyframes promoPriceShimmer{0%,100%{background-position:0% 50%;filter:drop-shadow(0 8px 28px rgba(158,77,106,.2))}50%{background-position:100% 50%;filter:drop-shadow(0 12px 48px rgba(158,77,106,.45))}}
 .promo-launch-price-unit{font-family:var(--display);font-size:clamp(1.1rem,3.8vw,2rem);letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.82);padding-bottom:clamp(10px,2.5vw,22px);font-weight:500;white-space:nowrap}
 .promo-launch-script{font-family:var(--script);font-size:clamp(2.4rem,8vw,4.6rem);color:var(--burgundy-glow);line-height:1;margin:clamp(4px,1vw,10px) 0 clamp(20px,3vw,28px);font-weight:400}
+.promo-launch.in .promo-launch-script{animation:promoStaggerIn .8s var(--ease) .32s forwards,promoScriptFloat 4.5s ease-in-out 1.2s infinite}
+@keyframes promoScriptFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .promo-launch-ci{font-size:clamp(.92rem,2.2vw,1.05rem);line-height:1.75;color:rgba(255,255,255,.68);max-width:560px;margin:0 auto clamp(18px,3vw,24px);font-weight:300}
 .promo-launch-ci em{font-style:normal;color:var(--burgundy-glow);font-weight:400}
 .promo-launch-deadline{font-size:clamp(.68rem,2vw,.78rem);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.48);margin:0 0 clamp(28px,4vw,36px);font-weight:400;line-height:1.7}
 .promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.14em}
 .promo-launch-cta{font-size:clamp(.62rem,2.2vw,.68rem);letter-spacing:.26em;padding:18px 36px;box-shadow:0 12px 40px -12px rgba(158,77,106,.55)}
+.promo-launch.in .promo-launch-cta{animation:promoStaggerIn .8s var(--ease) .62s forwards,promoCtaPulse 3s ease-in-out 1.4s infinite}
+@keyframes promoCtaPulse{0%,100%{transform:translateY(0) scale(1);box-shadow:0 12px 40px -12px rgba(158,77,106,.55)}50%{transform:translateY(-3px) scale(1.02);box-shadow:0 20px 56px -8px rgba(158,77,106,.65)}}
 .promo-launch-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;margin-top:clamp(32px,5vw,44px)}
-.promo-launch-tags span{font-size:clamp(.58rem,2vw,.66rem);letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.55)}
+.promo-launch-tags span{font-size:clamp(.58rem,2vw,.66rem);letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:rgba(255,255,255,.55);opacity:0;transform:translateY(12px)}
+.promo-launch.in .promo-launch-tags span{animation:promoTagIn .65s var(--ease) forwards}
+.promo-launch.in .promo-launch-tags span:nth-child(1){animation-delay:.82s}
+.promo-launch.in .promo-launch-tags span:nth-child(2){animation-delay:.92s}
+.promo-launch.in .promo-launch-tags span:nth-child(3){animation-delay:1.02s}
+.promo-launch.in .promo-launch-tags span:nth-child(4){animation-delay:1.12s}
+@keyframes promoTagIn{to{opacity:1;transform:none}}
+.promo-launch-spark{position:absolute;width:min(420px,70vw);height:min(420px,70vw);border-radius:50%;background:radial-gradient(circle,rgba(158,77,106,.14) 0%,transparent 68%);top:50%;left:50%;transform:translate(-50%,-58%);pointer-events:none;animation:promoSpark 6s ease-in-out infinite alternate;z-index:0}
+@keyframes promoSpark{0%{opacity:.35;transform:translate(-50%,-58%) scale(.92)}100%{opacity:.85;transform:translate(-50%,-58%) scale(1.08)}}
 
 /* Ceník — kompaktní banner (odkaz na akci) */
 .price-banner{position:relative;overflow:hidden;text-align:center;padding:clamp(36px,5vw,48px) clamp(24px,4vw,40px);margin-bottom:clamp(40px,6vw,56px);border-radius:var(--r-xl);background:linear-gradient(135deg,var(--burgundy3) 0%,var(--burgundy4) 100%);color:var(--white);box-shadow:var(--shadow-lg)}
@@ -614,7 +641,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   .reveal{filter:none;transform:translateY(20px)}
   .hero-name-marquee-track{animation:none;transform:translateX(-15%)}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}.hero-name-marquee-track{animation:none;transform:translateX(-25%)}.hero-backdrop{opacity:1!important;transform:none!important}.shine{animation:none;opacity:0}.promo-launch-badge .dot{animation:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none;filter:none}.hero-name-marquee-track{animation:none;transform:translateX(-25%)}.hero-backdrop{opacity:1!important;transform:none!important}.shine{animation:none;opacity:0}.promo-launch-badge .dot{animation:none}.promo-launch-stage > *{opacity:1;transform:none}.promo-launch-tags span{opacity:1;transform:none}}
 </style>
 </head>
 <body class="has-promo-top">
@@ -677,6 +704,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
 
 <section id="akce" class="promo-launch reveal">
   <div class="promo-launch-glow" aria-hidden="true"></div>
+  <div class="promo-launch-spark" aria-hidden="true"></div>
   <div class="wrap">
     <div class="promo-launch-stage">
       <div class="promo-launch-badge"><span class="dot" aria-hidden="true"></span> Letní akce · max. 5 projektů</div>

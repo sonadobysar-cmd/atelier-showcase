@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Letní akce — IG Reels · Nia Dobyšar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080606; --white:#fff; --cream:#f7f4f2;
+  --burgundy:#1a0a10; --burgundy2:#2d121c; --burgundy3:#5c2a3e; --glow:#9e4d6a;
+  --display:'Bodoni Moda',Georgia,serif;
+  --script:'Pinyon Script',cursive;
+  --body:'Outfit',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+.stage{width:1080px;height:1920px;position:relative;overflow:hidden;margin:0 auto;background:var(--black);color:var(--white);font-family:var(--body)}
+.stage::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 90% 60% at 50% 100%,rgba(92,42,62,.5) 0%,transparent 58%),
+  radial-gradient(ellipse 50% 40% at 85% 8%,rgba(158,77,106,.2) 0%,transparent 55%);animation:bgPulse 8s ease-in-out infinite alternate}
+@keyframes bgPulse{from{opacity:.85}to{opacity:1}}
+.frame{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 64px;opacity:0;transform:translateY(24px) scale(.98);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.frame.on{opacity:1;transform:none}
+.eyebrow{font-size:24px;letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:32px}
+.price{font-family:var(--display);font-size:200px;line-height:.85;font-weight:500;background:linear-gradient(165deg,var(--white) 15%,var(--glow) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:priceGlow 3s ease-in-out infinite alternate}
+@keyframes priceGlow{from{filter:drop-shadow(0 0 0 transparent)}to{filter:drop-shadow(0 0 40px rgba(158,77,106,.35))}}
+.sub{font-size:36px;letter-spacing:.1em;text-transform:uppercase;line-height:1.35;margin-top:24px;font-weight:300}
+.script{font-family:var(--script);font-size:88px;color:var(--glow);-webkit-text-fill-color:var(--glow);letter-spacing:0;text-transform:none;display:block;margin-top:16px;line-height:1}
+.list{text-align:left;margin-top:48px;display:grid;gap:20px;font-size:32px;font-weight:300;line-height:1.4;color:rgba(255,255,255,.88)}
+.list li{list-style:none;display:flex;gap:16px;align-items:flex-start}
+.list li::before{content:'✦';color:var(--glow);font-size:24px;margin-top:4px}
+.tiers{display:grid;gap:18px;width:100%;max-width:880px;margin-top:20px}
+.tier{padding:24px 28px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:28px}
+.tier strong{font-family:var(--display);font-size:30px;letter-spacing:.06em;text-transform:uppercase}
+.tier span{font-family:var(--display);font-size:38px;white-space:nowrap}
+.cta-box{margin-top:40px;padding:24px 48px;border-radius:999px;background:var(--burgundy3);font-size:26px;letter-spacing:.24em;text-transform:uppercase;box-shadow:0 20px 60px -20px rgba(92,42,62,.8);animation:ctaPulse 2s ease-in-out infinite}
+@keyframes ctaPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.03)}}
+.deadline{font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:28px;line-height:1.7}
+.deadline strong{color:var(--glow)}
+.brand{position:absolute;bottom:72px;left:0;right:0;text-align:center;font-family:var(--display);font-size:22px;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.marquee{position:absolute;top:0;left:0;right:0;background:var(--burgundy2);padding:18px 0;overflow:hidden;white-space:nowrap;border-bottom:1px solid rgba(255,255,255,.06)}
+.marquee-track{display:inline-flex;gap:32px;animation:marquee 18s linear infinite;font-size:18px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.75)}
+.marquee-track span.x{color:var(--glow);opacity:.8}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Letní akce</span><span class="x">·</span><span>Web + CI</span><span class="x">·</span><span>5–15 tis.</span><span class="x">·</span><span>Nia Dobyšar</span><span class="x">·</span>
+      <span>Letní akce</span><span class="x">·</span><span>Web + CI</span><span class="x">·</span><span>5–15 tis.</span><span class="x">·</span><span>Nia Dobyšar</span><span class="x">·</span>
+    </div>
+  </div>
+
+  <div class="frame on" data-i="0">
+    <p class="eyebrow">Letní akce 2026</p>
+    <p class="price">5–15</p>
+    <p class="sub">tis. za web včetně<br>corporate identity</p>
+    <span class="script">září</span>
+  </div>
+
+  <div class="frame" data-i="1">
+    <p class="eyebrow">V ceně</p>
+    <ul class="list">
+      <li>Web na míru</li>
+      <li>Barvy &amp; typografie</li>
+      <li>Corporate identity</li>
+      <li>Mobil i desktop</li>
+    </ul>
+  </div>
+
+  <div class="frame" data-i="2">
+    <p class="eyebrow">Podle rozsahu</p>
+    <div class="tiers">
+      <div class="tier"><strong>Jednodušší</strong><span>od 5 000 Kč</span></div>
+      <div class="tier"><strong>Střední</strong><span>od 10 000 Kč</span></div>
+      <div class="tier"><strong>Rozsáhlejší</strong><span>od 15 000 Kč</span></div>
+    </div>
+  </div>
+
+  <div class="frame" data-i="3">
+    <p class="eyebrow">Do 1. 9. 2026</p>
+    <p class="sub" style="margin-top:0">Chceš web, který<br><span class="script" style="font-size:96px">září?</span></p>
+    <div class="cta-box">Napiš WEB do zpráv ✦</div>
+    <p class="deadline">max. <strong>5 projektů</strong><br>niadobysar.com</p>
+  </div>
+
+  <p class="brand">Nia Dobyšar · Moderní weby, co září.</p>
+</div>
+<script>
+const frames=[...document.querySelectorAll('.frame')];
+let i=0;
+const DUR=[2800,2600,3200,3400];
+function show(n){
+  frames.forEach((f,j)=>f.classList.toggle('on',j===n));
+  setTimeout(()=>{i=(n+1)%frames.length;show(i);},DUR[n]||3000);
+}
+setTimeout(()=>show(1),DUR[0]);
+</script>
+</body>
+</html>

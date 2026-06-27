@@ -493,13 +493,14 @@ body.has-promo-top .nav{top:var(--promo-top)}
 .promo-launch-lead{font-size:.96rem;line-height:1.85;color:rgba(255,255,255,.72);max-width:460px;font-weight:300;margin:0 0 14px}
 .promo-launch-deadline{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);margin:0 0 28px;font-weight:400;line-height:1.7}
 .promo-launch-deadline strong{color:var(--burgundy-glow);font-weight:500;letter-spacing:.08em}
-.promo-launch-tiers{display:grid;gap:12px}
-.promo-tier{display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:center;padding:16px 18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:background .35s var(--ease),transform .35s var(--ease)}
-.promo-tier:hover{background:rgba(255,255,255,.08);transform:translateX(4px)}
-.promo-tier-name{font-family:var(--display);font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;font-weight:500;line-height:1.25}
-.promo-tier-note{font-size:.72rem;color:rgba(255,255,255,.48);grid-column:1/-1;margin-top:-4px;font-weight:300}
-.promo-tier-now{font-family:var(--display);font-size:1.35rem;letter-spacing:.02em;text-align:right;white-space:nowrap;color:var(--white)}
+.promo-launch-simple{max-width:640px}
 .promo-launch .btn{margin-top:4px}
+.price-range{max-width:580px;margin:0 auto;text-align:center;padding:clamp(44px,6vw,60px) clamp(28px,4vw,44px);background:var(--white);border-radius:var(--r-xl);box-shadow:var(--shadow)}
+.price-range-amt{font-family:var(--display);font-size:clamp(2.6rem,7vw,3.8rem);letter-spacing:.02em;color:var(--burgundy3);line-height:1;font-weight:500}
+.price-range-amt span{font-size:.38em;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;display:block;margin-top:10px;font-weight:400}
+.price-range-lead{font-size:clamp(.95rem,2.2vw,1.06rem);line-height:1.75;color:var(--ink);margin:26px 0 14px;font-weight:300}
+.price-range-ci{display:block;margin-top:12px;font-size:.9em;color:var(--muted);line-height:1.65}
+.price-range-note{font-size:.86rem;color:var(--muted);margin:0 0 28px;line-height:1.65;font-weight:300}
 
 /* RESPONSIVE */
 @media(max-width:980px){
@@ -604,7 +605,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
 <body class="has-promo-top">
 
 <div class="promo-topbar" role="region" aria-label="Aktuální akce">
-  <span><strong>Letní akce:</strong> web včetně corporate identity · 5–15 000 Kč podle rozsahu · do 1. 9. 2026</span>
+  <span><strong>Letní akce:</strong> web včetně corporate identity (logo, barvy, typografie) · 5–15 tis. Kč · do 1. 9. 2026</span>
   <a href="#konzultace" data-cursor>Rezervovat →</a>
 </div>
 
@@ -661,31 +662,12 @@ body.has-promo-top .nav{top:var(--promo-top)}
 
 <section id="akce" class="promo-launch reveal">
   <div class="wrap">
-    <div class="promo-launch-grid">
-      <div>
-        <span class="eyebrow">Letní akce 2026</span>
-        <h2 class="promo-launch-title">Web + <span class="grad">identita</span> za 5–15 tis.</h2>
-        <p class="promo-launch-lead">Letní akce na moderní web včetně corporate identity — barvy, typografie a vizuální směr, který ladí s webem do posledního detailu. Cena podle náročnosti projektu.</p>
-        <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
-        <a href="#konzultace" class="btn" data-cursor>Využít letní akci ✦</a>
-      </div>
-      <div class="promo-launch-tiers">
-        <div class="promo-tier">
-          <div class="promo-tier-name">Jednodušší</div>
-          <div class="promo-tier-now">od 5 000 Kč</div>
-          <div class="promo-tier-note">Jednostránka nebo mini web + základy identity (barvy, typografie)</div>
-        </div>
-        <div class="promo-tier">
-          <div class="promo-tier-name">Střední</div>
-          <div class="promo-tier-now">od 10 000 Kč</div>
-          <div class="promo-tier-note">Web na míru + corporate identity podle značky</div>
-        </div>
-        <div class="promo-tier">
-          <div class="promo-tier-name">Rozsáhlejší</div>
-          <div class="promo-tier-now">od 15 000 Kč</div>
-          <div class="promo-tier-note">Vícestránkový web + kompletní CI (logo, šablony, vizuální směr)</div>
-        </div>
-      </div>
+    <div class="promo-launch-simple">
+      <span class="eyebrow">Letní akce 2026</span>
+      <h2 class="promo-launch-title">5–15 tis. za web včetně <span class="grad">corporate identity</span></h2>
+      <p class="promo-launch-lead">Corporate identity <span class="price-range-ci" style="display:inline;margin:0;color:rgba(255,255,255,.58)">(vizuální identita značky — logo, barvy, typografie a celkový styl, který ladí s webem)</span>. Cena podle rozsahu a náročnosti projektu.</p>
+      <p class="promo-launch-deadline">Platí do <strong>1. 9. 2026</strong> · nebo do vyčerpání kapacity · max. <strong>5 projektů</strong></p>
+      <a href="#konzultace" class="btn" data-cursor>Využít letní akci ✦</a>
     </div>
   </div>
 </section>
@@ -789,98 +771,15 @@ body.has-promo-top .nav{top:var(--promo-top)}
     <div class="sec-head centered reveal">
       <div>
         <span class="eyebrow">Služby &amp; ceník</span>
-        <h2>Vyber si <span class="grad">balíček</span><span class="rule"></span></h2>
+        <h2>Cenové <span class="grad">rozpětí</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">ceny orientační</span>
+      <span class="idx">orientační ceny</span>
     </div>
-    <div class="price-carousel">
-    <div class="price-grid">
-      <div class="price reveal">
-        <span class="pk">Landing</span>
-        <div class="pkn">Jednostránka</div>
-        <div class="amt"><span class="od">od</span>9 900<span class="cur"> Kč</span></div>
-        <div class="from">jednorázově</div>
-        <p class="pdesc">Jedna silná stránka, co prodává. Ideální pro službu, akci nebo osobní značku.</p>
-        <ul><li>Design na míru</li><li>Responzivní</li><li>Kontaktní formulář</li><li>Nasazení online</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-      <div class="price feat reveal">
-        <span class="pk">Nejoblíbenější</span>
-        <div class="pkn">Web na míru</div>
-        <div class="amt"><span class="od">od</span>24 900<span class="cur"> Kč</span></div>
-        <div class="from">dle rozsahu</div>
-        <p class="pdesc">Vícestránkový web s vlastní identitou a interaktivními prvky. Tvoje výkladní skříň.</p>
-        <ul><li>Kompletní design</li><li>Interaktivní prvky</li><li>Až 6 sekcí / stránek</li><li>Animace &amp; mikrointerakce</li><li>SEO základ</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-      <div class="price prem reveal">
-        <span class="pk">Premium</span>
-        <div class="pkn">Web + branding</div>
-        <div class="amt"><span class="od">od</span>39 900<span class="cur"> Kč</span></div>
-        <div class="from">komplet</div>
-        <p class="pdesc">Kompletní vizuální identita a web, co spolu ladí do posledního detailu.</p>
-        <ul><li>Logo &amp; identita</li><li>Web na míru</li><li>Barvy, typografie, styl</li><li>Sociální šablony</li><li>Prioritní termín</li></ul>
-        <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-      </div>
-    </div>
-    </div>
-    <p class="price-note">Každý projekt je jiný — finální cenu doladíme na konzultaci podle tvých představ.</p>
-
-    <div class="sluzby-sub">
-      <div class="sec-head centered reveal">
-        <div>
-          <span class="eyebrow">Paušál</span>
-          <h2>Správa <span class="grad">webu</span><span class="rule"></span></h2>
-        </div>
-        <span class="idx">měsíční péče</span>
-      </div>
-      <div class="price-carousel">
-      <div class="price-grid">
-        <div class="price reveal">
-          <span class="pk">Paušál</span>
-          <div class="pkn">Základ</div>
-          <div class="amt"><span class="od">od</span>500<span class="cur"> Kč</span></div>
-          <div class="from">/ měsíc</div>
-          <p class="pdesc">Web běží, vy se staráte o byznys — techniku necháte na mně.</p>
-          <ul>
-            <li>Hosting a doména pod dohledem</li>
-            <li>Pravidelné zálohy</li>
-            <li>Aktualizace a monitoring</li>
-            <li>Oprava drobných chyb</li>
-          </ul>
-          <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-        </div>
-        <div class="price feat reveal">
-          <span class="pk">Doporučeno</span>
-          <div class="pkn">Standard</div>
-          <div class="amt"><span class="od">od</span>1 000<span class="cur"> Kč</span></div>
-          <div class="from">/ měsíc</div>
-          <p class="pdesc">Vše ze Základu plus pravidelné úpravy obsahu — bez řešení techniky.</p>
-          <ul>
-            <li>Vše ze Základu</li>
-            <li>Drobné úpravy obsahu (do 1 hodiny měsíčně)</li>
-            <li>Změny textů, cen, fotek</li>
-            <li>Přednostní reakce</li>
-          </ul>
-          <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-        </div>
-        <div class="price prem reveal">
-          <span class="pk">Paušál</span>
-          <div class="pkn">Plus</div>
-          <div class="amt"><span class="od">od</span>2 000<span class="cur"> Kč</span></div>
-          <div class="from">/ měsíc</div>
-          <p class="pdesc">Pro weby, co se mají postupně zlepšovat a vydělávat víc.</p>
-          <ul>
-            <li>Vše ze Standardu</li>
-            <li>Více úprav (2–3 hodiny měsíčně)</li>
-            <li>Měsíční report návštěvnosti</li>
-            <li>Postupné SEO a vylepšení</li>
-          </ul>
-          <a href="#konzultace" class="pbtn" data-cursor>Mám zájem</a>
-        </div>
-      </div>
-      </div>
-      <p class="price-note">Větší úpravy nad rámec paušálu: 700 Kč / hodina.</p>
+    <div class="price-range reveal">
+      <div class="price-range-amt">5–15 <span>tis. Kč</span></div>
+      <p class="price-range-lead">Web včetně corporate identity<span class="price-range-ci">(vizuální identita značky — logo, barvy, typografie a celkový styl, který ladí s webem)</span></p>
+      <p class="price-range-note">Cena podle rozsahu a náročnosti projektu. Finální částku doladíme na konzultaci.</p>
+      <a href="#konzultace" class="btn" data-cursor>Rezervovat konzultaci ✦</a>
     </div>
 
     <div class="obsah-kluc reveal">

@@ -524,6 +524,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
 .promo-launch.in .promo-launch-deadline{animation-delay:.52s}
 .promo-launch.in .promo-launch-cta{animation-delay:.62s}
 .promo-launch.in .promo-launch-tags{animation-delay:.72s}
+.promo-launch.in .promo-launch-tiers{animation-delay:.82s}
 @keyframes promoStaggerIn{to{opacity:1;transform:none}}
 .promo-launch-badge{display:inline-flex;align-items:center;gap:12px;padding:12px 22px;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-pill);background:rgba(255,255,255,.04);font-size:clamp(.58rem,2.4vw,.68rem);letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.72);backdrop-filter:blur(8px);margin-bottom:clamp(24px,4vw,36px)}
 .promo-launch-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--burgundy-glow);box-shadow:0 0 16px rgba(158,77,106,.65);flex:none;animation:promoPulse 2.4s ease-in-out infinite}
@@ -687,7 +688,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
     <a href="/nia#studio">Studio</a>
-    <a href="/nia#sluzby">Ceník</a>
+    <a href="#sluzby">Ceník</a>
     <a href="/nia#web-na-splatky">Web na splátky</a>
     <a href="/nia#konzultace">Konzultace</a>
     <a href="/nia#kontakt">Kontakt</a>
@@ -697,7 +698,7 @@ body.has-promo-top .nav{top:var(--promo-top)}
   <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
 <button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
-<script src="/nia/nia-nav.js?v=7"></script>
+<script src="/nia/nia-nav.js?v=8"></script>
 
 <section id="top" class="hero hero-editorial">
   <div class="hero-stage">
@@ -1275,8 +1276,30 @@ if(!isCoarse){
   },{passive:true});
 }
 
-var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+function niaRevealWithin(root){
+  if(!root)return;
+  if(root.classList.contains('reveal'))root.classList.add('in');
+  root.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+}
+window.niaRevealSection=niaRevealWithin;
+
+function niaKickReveals(){
+  document.querySelectorAll('.reveal').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.92&&r.bottom>24)el.classList.add('in');
+  });
+}
+function niaRevealHash(){
+  var id=location.hash&&location.hash.length>1?location.hash.slice(1):'';
+  if(id)niaRevealWithin(document.getElementById(id));
+}
+requestAnimationFrame(niaKickReveals);
+window.addEventListener('load',function(){niaKickReveals();niaRevealHash();setTimeout(niaKickReveals,120);setTimeout(niaRevealHash,200);});
+window.addEventListener('hashchange',niaRevealHash);
+window.addEventListener('resize',niaKickReveals);
 </script>
 <script src="/nia/konzultace.js" defer></script>
 <script src="/nia/cookie-bar.js" defer></script>

@@ -38,9 +38,6 @@
     var navH = nav ? nav.offsetHeight : 72;
     var top = el.getBoundingClientRect().top + window.pageYOffset - navH - 12;
     window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
-    if (typeof window.niaRevealSection === "function") {
-      window.niaRevealSection(id);
-    }
   }
 
   function setMenuOpen(on) {

@@ -476,12 +476,17 @@ img{display:block;max-width:100%}
 body.has-promo-top{--promo-top:42px;padding-top:var(--promo-top)}
 .promo-topbar{position:fixed;top:0;left:0;right:0;z-index:250;height:var(--promo-top);display:flex;align-items:center;justify-content:center;gap:10px 16px;flex-wrap:wrap;padding:0 max(6vw,12px);background:linear-gradient(90deg,var(--burgundy3) 0%,var(--burgundy4) 48%,var(--burgundy-glow) 100%);color:var(--white);text-align:center;font-size:clamp(.58rem,2.8vw,.72rem);letter-spacing:.16em;text-transform:uppercase;font-weight:400;line-height:1.45;box-shadow:0 4px 24px -8px rgba(26,10,16,.35)}
 .promo-topbar strong{font-weight:500;color:var(--white);letter-spacing:.12em}
-.promo-topbar a{color:var(--white);border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:1px;white-space:nowrap;transition:opacity .25s}
+.promo-topbar a{color:var(--white);border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:1px;white-space:nowrap;transition:opacity .25s;flex-shrink:0}
 .promo-topbar a:hover{opacity:.88}
+.promo-topbar-short{display:none}
 body.has-promo-top .nav{top:var(--promo-top)}
 @media(max-width:980px){
-  body.has-promo-top{--promo-top:52px}
+  body.has-promo-top{--promo-top:40px}
   body.has-promo-top .nav-links{padding-top:calc(max(88px,env(safe-area-inset-top)) + var(--promo-top) - 46px)}
+  .promo-topbar{flex-wrap:nowrap;gap:8px;padding:0 10px;font-size:clamp(.5rem,2.15vw,.58rem);letter-spacing:.08em;overflow:hidden}
+  .promo-topbar-full{display:none}
+  .promo-topbar-short{display:inline;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .promo-topbar a{font-size:.5rem;letter-spacing:.1em}
 }
 
 /* AKCE — letní promo (reklamní hero) */
@@ -647,7 +652,8 @@ body.has-promo-top .nav{top:var(--promo-top)}
 <body class="has-promo-top">
 
 <div class="promo-topbar" role="region" aria-label="Aktuální akce">
-  <span><strong>Letní akce:</strong> web včetně corporate identity (logo, barvy, typografie) · 5–15 tis. Kč · do 1. 9. 2026</span>
+  <span class="promo-topbar-full"><strong>Letní akce:</strong> web včetně corporate identity (logo, barvy, typografie) · 5–15 tis. Kč · do 1. 9. 2026</span>
+  <span class="promo-topbar-short"><strong>Letní akce</strong> · web + CI · 5–15 tis. · do 1. 9.</span>
   <a href="#konzultace" data-cursor>Rezervovat →</a>
 </div>
 

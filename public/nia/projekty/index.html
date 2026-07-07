@@ -1120,7 +1120,7 @@ function initRespTheater(){
       for(var i=0;i<PROJECTS.length;i++){if(PROJECTS[i].id===id){idx=i;break;}}
       if(idx>=0&&idx!==respIdx)setRespProject(idx,false);
     });
-  },{threshold:[.42,.55],rootMargin:'-12% 0 -38% 0'});
+  },{threshold:[.42,.55],rootMargin:'-12% 0px -38% 0px'});
   document.querySelectorAll('.work-item[data-project]').forEach(function(el){respIo.observe(el);});
 }
 

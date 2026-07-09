@@ -10,6 +10,8 @@
     { "source": "/nia", "destination": "/nia/index.html" },
     { "source": "/nia/projekty", "destination": "/nia/projekty/index.html" },
     { "source": "/nia/bezpecnost", "destination": "/nia/bezpecnost/index.html" },
+    { "source": "/nia/dekujeme-poptavka", "destination": "/nia/dekujeme-poptavka/index.html" },
+    { "source": "/nia/dekujeme-konzultace", "destination": "/nia/dekujeme-konzultace/index.html" },
     { "source": "/klic-estate", "destination": "/klic-estate/index.html" },
     { "source": "/realitka", "destination": "/klic-estate/index.html" },
     { "source": "/lume", "destination": "/lume/index.html" },

@@ -195,7 +195,7 @@
           }
           return;
         }
-        showConfirm(res.data);
+        window.location.href = "/nia/dekujeme-konzultace";
       })
       .catch(function () {
         if (btn) {
@@ -236,8 +236,8 @@
         .then(function (res) {
           if (btn) btn.disabled = false;
           if (res.ok && res.data.ok) {
-            if (okEl) okEl.style.display = "block";
-            kForm.reset();
+            window.location.href = "/nia/dekujeme-poptavka";
+            return;
           } else if (errEl) {
             errEl.hidden = false;
             errEl.textContent = (res.data && res.data.error) || "Odeslání selhalo.";

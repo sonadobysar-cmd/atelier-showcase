@@ -1,6 +1,21 @@
 (function () {
   var KEY = "nia_cookie_consent";
-  if (localStorage.getItem(KEY)) return;
+
+  function grantAdsConsent() {
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        analytics_storage: "granted",
+      });
+    }
+  }
+
+  if (localStorage.getItem(KEY)) {
+    grantAdsConsent();
+    return;
+  }
 
   var css =
     ".nia-cookie{position:fixed;left:0;right:0;bottom:0;z-index:320;padding:12px 12px calc(12px + env(safe-area-inset-bottom,0));pointer-events:none;opacity:0;transform:translateY(110%);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}" +
@@ -35,19 +50,20 @@
     '<div class="nia-cookie__panel">' +
     '<span class="nia-cookie__mark" aria-hidden="true">✦</span>' +
     '<div class="nia-cookie__body">' +
-    '<p class="nia-cookie__eyebrow">Cookies</p>' +
-    '<p class="nia-cookie__text">Používáme jen nezbytné cookies, aby web běžel hladce. Žádné sledování bez tvého souhlasu. ' +
+    '<p class="nia-cookie__eyebrow">Cookies &amp; soukromí</p>' +
+    '<p class="nia-cookie__text">Používáme nezbytné cookies pro chod webu. Po tvém souhlasu také měření návštěvnosti a reklamní tagy (Google Ads) — v EU jen s tvým předchozím souhlasem. ' +
     '<a href="/nia/bezpecnost#cookies">Více v zásadách ochrany</a>.</p>' +
     "</div>" +
     '<div class="nia-cookie__actions">' +
     '<button type="button" class="nia-cookie__btn nia-cookie__btn--ghost" id="niaCookieMore">Zásady</button>' +
-    '<button type="button" class="nia-cookie__btn nia-cookie__btn--primary" id="niaCookieAccept">Rozumím ✦</button>' +
+    '<button type="button" class="nia-cookie__btn nia-cookie__btn--primary" id="niaCookieAccept">Souhlasím ✦</button>' +
     "</div></div>";
 
   document.body.appendChild(root);
 
   function accept() {
     localStorage.setItem(KEY, "1");
+    grantAdsConsent();
     root.classList.remove("is-visible");
     setTimeout(function () {
       root.remove();

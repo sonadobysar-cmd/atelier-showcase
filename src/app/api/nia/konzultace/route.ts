@@ -13,10 +13,15 @@ import {
 import { resendSend, resolveNiaFrom, resolveNiaTo } from "@/lib/nia/resend";
 import {
   bookedSlotsMap,
+  confirmBooking,
   createBooking,
   isSlotBooked,
   listActiveBookings,
 } from "@/lib/nia/konzultace-bookings";
+import { corsHeaders } from "@/lib/nia/security/allowed-origins";
+import { guardFormRequest, handleOptions } from "@/lib/nia/security/form-guard";
+import { logSubmission } from "@/lib/nia/security/submission-log";
+import { validateKonzultace } from "@/lib/nia/security/validate";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,17 +32,39 @@ function makeRef(): string {
   return `NIA-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(Math.floor(Math.random() * 10000), 4)}`;
 }
 
-export async function GET() {
+export async function OPTIONS(req: Request) {
+  return handleOptions(req);
+}
+
+export async function GET(req: Request) {
+  const guard = await guardFormRequest({
+    endpoint: "konzultace-get",
+    req,
+    requireTurnstile: false,
+  });
+  if (!guard.allowed) return guard.response;
+
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim() || "";
   const active = await listActiveBookings();
   const booked = bookedSlotsMap(active);
+
+  await logSubmission({
+    endpoint: "konzultace-get",
+    ip: guard.meta.ip,
+    userAgent: guard.meta.userAgent,
+    origin: guard.meta.origin,
+    referer: guard.meta.referer,
+    filter: "ok",
+    processed: true,
+  });
+
   return NextResponse.json(
     {
       ...scheduleForClient(booked),
       meetConfigured: meetUrl.length > 0,
       onlineOnly: true,
     },
-    { headers: { "Cache-Control": "no-store, max-age=0" } },
+    { headers: { ...corsHeaders(req.headers.get("origin")), "Cache-Control": "no-store, max-age=0" } },
   );
 }
 
@@ -49,7 +76,7 @@ export async function POST(req: Request) {
     console.error("[nia/konzultace] POST failed", detail, err);
     return NextResponse.json(
       { ok: false, error: "Rezervace se nepodařila uložit. Zkus to znovu nebo napiš na niadobysar@gmail.com." },
-      { status: 500 },
+      { status: 500, headers: corsHeaders(req.headers.get("origin")) },
     );
   }
 }
@@ -59,52 +86,65 @@ async function handlePost(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "Neplatný požadavek." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Neplatný požadavek." }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
 
   if (typeof body !== "object" || body === null) {
-    return NextResponse.json({ ok: false, error: "Chybí údaje." }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Chybí údaje." }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
 
   const b = body as Record<string, unknown>;
-  const hp = typeof b.website === "string" ? b.website.trim() : "";
-  if (hp.length > 0) return NextResponse.json({ ok: true });
+  const emailPreview = typeof b.email === "string" ? b.email.trim().toLowerCase() : "";
 
-  const name = typeof b.name === "string" ? b.name.trim() : "";
-  const email = typeof b.email === "string" ? b.email.trim().toLowerCase() : "";
-  const phone = typeof b.phone === "string" ? b.phone.trim() : "";
-  const message = typeof b.message === "string" ? b.message.trim() : "";
-  const dateIso = typeof b.date === "string" ? b.date.trim() : "";
-  const time = typeof b.time === "string" ? b.time.trim() : "";
+  const guard = await guardFormRequest({
+    endpoint: "konzultace-post",
+    req,
+    body: b,
+    emailForLimit: emailPreview,
+  });
+  if (!guard.allowed) return guard.response;
 
-  if (name.length < 2) {
-    return NextResponse.json({ ok: false, error: "Vyplň jméno." }, { status: 400 });
+  const validated = validateKonzultace(b);
+  if (!validated.ok) {
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "validation",
+      processed: false,
+      note: validated.error,
+      payload: b,
+    });
+    return NextResponse.json({ ok: false, error: validated.error }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ ok: false, error: "Vyplň platný e-mail." }, { status: 400 });
-  }
-  const phoneDigits = phone.replace(/\D/g, "");
-  if (phoneDigits.length < 9) {
-    return NextResponse.json({ ok: false, error: "Vyplň telefon (min. 9 číslic)." }, { status: 400 });
-  }
-  if (message.length < 8) {
-    return NextResponse.json(
-      { ok: false, error: "Vyplň obor webu a krátkou poznámku (např. kadeřnictví + co potřebuješ)." },
-      { status: 400 },
-    );
-  }
+
+  const { name, email, phone, message, dateIso, time } = validated.data;
+
   if (!isValidSlot(dateIso, time)) {
-    return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 400 });
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "validation",
+      processed: false,
+      note: "invalid_slot",
+      payload: b,
+    });
+    return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
   if (await isSlotBooked(dateIso, time)) {
-    return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 409 });
+    return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 409, headers: corsHeaders(req.headers.get("origin")) });
   }
 
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim();
   if (!meetUrl) {
     return NextResponse.json(
       { ok: false, error: "Rezervace je dočasně nedostupná. Napiš na niadobysar@gmail.com." },
-      { status: 503 },
+      { status: 503, headers: corsHeaders(req.headers.get("origin")) },
     );
   }
 
@@ -124,12 +164,24 @@ async function handlePost(req: Request) {
     meetUrl,
   });
   if (!saved.ok) {
-    return NextResponse.json({ ok: false, error: saved.error }, { status: 409 });
+    return NextResponse.json({ ok: false, error: saved.error }, { status: 409, headers: corsHeaders(req.headers.get("origin")) });
   }
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    console.error("[nia/konzultace] RESEND_API_KEY missing — booking saved", ref);
+    console.error("[nia/konzultace] RESEND_API_KEY missing — booking pending", ref);
+    await confirmBooking(ref);
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "ok",
+      processed: true,
+      note: "no_resend_confirmed",
+      payload: { ref, name, email, dateIso, time },
+    });
     return NextResponse.json({
       ok: true,
       ref,
@@ -137,7 +189,7 @@ async function handlePost(req: Request) {
       date: formatDateIso(date),
       time,
       emailSent: false,
-    });
+    }, { headers: corsHeaders(req.headers.get("origin")) });
   }
 
   const from = resolveNiaFrom();
@@ -176,6 +228,22 @@ async function handlePost(req: Request) {
     console.error("[nia/konzultace] email error", err);
   }
 
+  if (emailSent) {
+    await confirmBooking(ref);
+  }
+
+  await logSubmission({
+    endpoint: "konzultace-post",
+    ip: guard.meta.ip,
+    userAgent: guard.meta.userAgent,
+    origin: guard.meta.origin,
+    referer: guard.meta.referer,
+    filter: "ok",
+    processed: emailSent,
+    note: emailSent ? "confirmed" : "pending_expires_15m",
+    payload: { ref, name, email, dateIso, time },
+  });
+
   return NextResponse.json({
     ok: true,
     ref,
@@ -183,5 +251,5 @@ async function handlePost(req: Request) {
     date: formatDateIso(date),
     time,
     emailSent,
-  });
+  }, { headers: corsHeaders(req.headers.get("origin")) });
 }

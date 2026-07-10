@@ -9,7 +9,12 @@ export type KonzBooking = {
   time: string;
   meetUrl: string;
   createdAt: string;
+  status: "pending" | "confirmed";
+  expiresAt?: string;
+  confirmedAt?: string;
   cancelledAt?: string;
 };
 
-export type KonzBookingInput = Omit<KonzBooking, "id" | "createdAt" | "cancelledAt">;
+export type KonzBookingInput = Omit<KonzBooking, "id" | "createdAt" | "status" | "expiresAt" | "confirmedAt" | "cancelledAt">;
+
+export const PENDING_TTL_MS = 15 * 60 * 1000;

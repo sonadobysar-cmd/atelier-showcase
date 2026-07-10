@@ -12,6 +12,7 @@
     { "source": "/nia/bezpecnost", "destination": "/nia/bezpecnost/index.html" },
     { "source": "/nia/dekujeme-poptavka", "destination": "/nia/dekujeme-poptavka/index.html" },
     { "source": "/nia/dekujeme-konzultace", "destination": "/nia/dekujeme-konzultace/index.html" },
+    { "source": "/nia/admin/logy", "destination": "/nia/admin/logy.html" },
     { "source": "/klic-estate", "destination": "/klic-estate/index.html" },
     { "source": "/realitka", "destination": "/klic-estate/index.html" },
     { "source": "/lume", "destination": "/lume/index.html" },

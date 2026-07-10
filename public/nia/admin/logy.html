@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Logy formulářů — Nia Dobyšar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f7f4f2;--ink:#080606;--burgundy3:#5c2a3e;--burgundy-glow:#9e4d6a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--cream);color:var(--ink);padding:24px;font-weight:300}
+.wrap{max-width:1200px;margin:0 auto}
+h1{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:1.6rem;margin-bottom:8px}
+p.meta{font-size:.85rem;color:#6e5c64;margin-bottom:20px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+input,button{font-family:inherit}
+input[type=password],input[type=text]{flex:1;min-width:220px;padding:12px 14px;border:1px solid rgba(26,10,16,.15);border-radius:12px;background:#fff}
+button{padding:12px 18px;border:none;border-radius:999px;background:var(--burgundy3);color:#fff;letter-spacing:.12em;text-transform:uppercase;font-size:.62rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--burgundy3);border:1px solid rgba(92,42,62,.25)}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 12px 40px -24px rgba(8,6,6,.18)}
+th,td{padding:10px 12px;text-align:left;font-size:.78rem;vertical-align:top;border-bottom:1px solid rgba(26,10,16,.06)}
+th{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#7a3d54;background:rgba(247,244,242,.7)}
+.tag{display:inline-block;padding:4px 8px;border-radius:999px;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase}
+.tag.ok{background:rgba(92,42,62,.12);color:#5c2a3e}
+.tag.bad{background:rgba(158,77,106,.14);color:#9e4d6a}
+pre{white-space:pre-wrap;word-break:break-word;font-size:.7rem;color:#5a4a52}
+.empty{padding:40px;text-align:center;color:#6e5c64}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Logy formulářů</h1>
+  <p class="meta">Interní přehled pokusů o odeslání (včetně zablokovaných). Uchovávej token v tajnosti.</p>
+  <div class="toolbar">
+    <input type="password" id="token" placeholder="NIA_SECURITY_LOG_TOKEN" autocomplete="current-password">
+    <button type="button" id="loadBtn">Načíst</button>
+    <button type="button" class="ghost" id="exportBtn">Stáhnout JSON</button>
+  </div>
+  <div id="out"><div class="empty">Zadej token a načti logy.</div></div>
+</div>
+<script>
+(function(){
+  var KEY='nia_log_token';
+  var tokenEl=document.getElementById('token');
+  var out=document.getElementById('out');
+  try{var saved=localStorage.getItem(KEY);if(saved)tokenEl.value=saved;}catch(e){}
+
+  function authHeaders(){
+    var t=tokenEl.value.trim();
+    return {Authorization:'Bearer '+t};
+  }
+
+  function render(logs){
+    if(!logs.length){out.innerHTML='<div class="empty">Žádné záznamy.</div>';return;}
+    var rows=logs.map(function(l){
+      var cls=l.filter==='ok'?'ok':'bad';
+      var payload=l.payload?'<pre>'+JSON.stringify(l.payload,null,0)+'</pre>':'';
+      return '<tr><td>'+l.ts+'</td><td>'+l.endpoint+'</td><td><span class="tag '+cls+'">'+l.filter+'</span></td><td>'+(l.processed?'ano':'ne')+'</td><td>'+l.ip+'</td><td>'+(l.note||'')+'</td><td>'+payload+'</td></tr>';
+    }).join('');
+    out.innerHTML='<table><thead><tr><th>Čas</th><th>Endpoint</th><th>Filtr</th><th>Zprac.</th><th>IP</th><th>Pozn.</th><th>Data</th></tr></thead><tbody>'+rows+'</tbody></table>';
+  }
+
+  document.getElementById('loadBtn').addEventListener('click',function(){
+    var t=tokenEl.value.trim(); if(!t)return;
+    try{localStorage.setItem(KEY,t);}catch(e){}
+    fetch('/api/nia/security/logs?limit=500',{headers:authHeaders()})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(!d.ok){out.innerHTML='<div class="empty">Neautorizováno nebo chyba.</div>';return;} render(d.logs||[]); })
+      .catch(function(){out.innerHTML='<div class="empty">Chyba sítě.</div>';});
+  });
+
+  document.getElementById('exportBtn').addEventListener('click',function(){
+    var t=tokenEl.value.trim(); if(!t)return;
+    window.location.href='/api/nia/security/logs?format=download&token='+encodeURIComponent(t);
+  });
+})();
+</script>
+</body>
+</html>

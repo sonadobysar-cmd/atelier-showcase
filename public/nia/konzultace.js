@@ -8,7 +8,6 @@
   var konzSummary = document.getElementById("konzSummary");
   var konzForm = document.getElementById("konzForm");
   var konzOk = document.getElementById("konzOk");
-  var konzConfirm = document.getElementById("konzConfirm");
   if (!konzDays || !konzTimes || !konzForm) return;
 
   function pad(n) {
@@ -102,31 +101,40 @@
       "<b>Online konzultace · 30 min</b><br>" + DNY[selDay.getDay()] + " " + fmtDate(selDay) + " · " + selTime;
   }
 
-  function showConfirm(data) {
-    if (konzForm) konzForm.hidden = true;
-    if (konzOk) konzOk.style.display = "none";
-    if (!konzConfirm) return;
-    konzConfirm.hidden = false;
-    var whenEl = document.getElementById("konzConfirmWhen");
-    var refEl = document.getElementById("konzConfirmRef");
-    var meetEl = document.getElementById("konzConfirmMeet");
-    if (whenEl && selDay && selTime) {
-      whenEl.textContent = DNY[selDay.getDay()] + " " + fmtDate(selDay) + " · " + selTime;
+  function showErr(errEl, msg) {
+    if (!errEl) return;
+    errEl.hidden = false;
+    errEl.textContent = msg;
+  }
+
+  function handleApiError(res, errEl) {
+    if (res.status === 429) {
+      showErr(errEl, (window.NiaFormSecurity && window.NiaFormSecurity.rateLimitMessage) || "Zkuste to prosím později.");
+      return;
     }
-    if (refEl) refEl.textContent = data.ref || "";
-    if (meetEl) {
-      meetEl.href = data.meetUrl || "#";
-      meetEl.textContent = "Připojit se přes Google Meet ↗";
+    if (res.status === 403) {
+      showErr(errEl, "Ověření selhalo. Obnov stránku a zkus znovu.");
+      return;
     }
-    konzConfirm.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    var msg = (res.data && res.data.error) || "Požadavek se nepodařil.";
+    showErr(errEl, msg);
   }
 
   fetch("/api/nia/konzultace", { cache: "no-store" })
     .then(function (r) {
-      return r.json();
+      return r.json().then(function (data) {
+        return { ok: r.ok, status: r.status, data: data };
+      });
     })
-    .then(function (data) {
-      schedule = data;
+    .then(function (res) {
+      if (!res.ok) {
+        konzSummary.textContent =
+          res.status === 429
+            ? "Kalendář je dočasně nedostupný. Zkus za chvíli nebo napiš na niadobysar@gmail.com."
+            : "Kalendář se nepodařilo načíst. Obnov stránku nebo napiš na niadobysar@gmail.com.";
+        return;
+      }
+      schedule = res.data;
       renderDays();
       updateSummary();
     })
@@ -148,39 +156,42 @@
       errEl.textContent = "";
     }
     if (ph.replace(/\D/g, "").length < 9) {
-      if (errEl) {
-        errEl.hidden = false;
-        errEl.textContent = "Vyplň telefon (min. 9 číslic).";
-      }
+      showErr(errEl, "Vyplň telefon (min. 9 číslic).");
       return;
     }
     if (msg.length < 8) {
-      if (errEl) {
-        errEl.hidden = false;
-        errEl.textContent = "Vyplň obor webu a krátkou poznámku.";
-      }
+      showErr(errEl, "Vyplň obor webu a krátkou poznámku.");
       return;
     }
     if (btn) {
       btn.disabled = true;
       btn.textContent = "Odesílám…";
     }
-    fetch("/api/nia/konzultace", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: n,
-        email: m,
-        phone: ph,
-        message: msg,
-        date: dateIso(selDay),
-        time: selTime,
-        website: (document.getElementById("kHp") || {}).value || "",
-      }),
-    })
-      .then(function (r) {
-        return r.json().then(function (data) {
-          return { ok: r.ok, data: data };
+
+    var extras = window.NiaFormSecurity
+      ? window.NiaFormSecurity.getPayloadExtras("konzultace")
+      : Promise.reject(new Error("security"));
+
+    extras
+      .then(function (sec) {
+        return fetch("/api/nia/konzultace", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: n,
+            email: m,
+            phone: ph,
+            message: msg,
+            date: dateIso(selDay),
+            time: selTime,
+            website: (document.getElementById("kWebsite") || {}).value || "",
+            formToken: sec.formToken,
+            turnstileToken: sec.turnstileToken,
+          }),
+        }).then(function (r) {
+          return r.json().then(function (data) {
+            return { ok: r.ok, status: r.status, data: data };
+          });
         });
       })
       .then(function (res) {
@@ -189,10 +200,7 @@
           btn.textContent = "Rezervovat konzultaci ✦";
         }
         if (!res.ok || !res.data.ok) {
-          if (errEl) {
-            errEl.hidden = false;
-            errEl.textContent = (res.data && res.data.error) || "Rezervace se nepodařila.";
-          }
+          handleApiError(res, errEl);
           return;
         }
         window.location.href = "/nia/dekujeme-konzultace";
@@ -202,10 +210,7 @@
           btn.disabled = false;
           btn.textContent = "Rezervovat konzultaci ✦";
         }
-        if (errEl) {
-          errEl.hidden = false;
-          errEl.textContent = "Chyba sítě. Zkus to znovu nebo napiš na niadobysar@gmail.com.";
-        }
+        showErr(errEl, "Chyba sítě nebo ověření. Obnov stránku a zkus znovu.");
       });
   });
 
@@ -213,24 +218,32 @@
   if (kForm) {
     kForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      var okEl = document.getElementById("kOk");
       var errEl = document.getElementById("kErr");
       var btn = kForm.querySelector('button[type="submit"]');
       if (errEl) errEl.hidden = true;
       if (btn) btn.disabled = true;
-      fetch("/api/nia/kontakt", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: document.getElementById("fName").value.trim(),
-          email: document.getElementById("fMail").value.trim(),
-          message: document.getElementById("fMsg").value.trim(),
-          website: (document.getElementById("fWebsite") || {}).value || "",
-        }),
-      })
-        .then(function (r) {
-          return r.json().then(function (d) {
-            return { ok: r.ok, data: d };
+
+      var extras = window.NiaFormSecurity
+        ? window.NiaFormSecurity.getPayloadExtras("kontakt")
+        : Promise.reject(new Error("security"));
+
+      extras
+        .then(function (sec) {
+          return fetch("/api/nia/kontakt", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: document.getElementById("fName").value.trim(),
+              email: document.getElementById("fMail").value.trim(),
+              message: document.getElementById("fMsg").value.trim(),
+              website: (document.getElementById("fWebsite") || {}).value || "",
+              formToken: sec.formToken,
+              turnstileToken: sec.turnstileToken,
+            }),
+          }).then(function (r) {
+            return r.json().then(function (d) {
+              return { ok: r.ok, status: r.status, data: d };
+            });
           });
         })
         .then(function (res) {
@@ -238,17 +251,12 @@
           if (res.ok && res.data.ok) {
             window.location.href = "/nia/dekujeme-poptavka";
             return;
-          } else if (errEl) {
-            errEl.hidden = false;
-            errEl.textContent = (res.data && res.data.error) || "Odeslání selhalo.";
           }
+          handleApiError(res, errEl);
         })
         .catch(function () {
           if (btn) btn.disabled = false;
-          if (errEl) {
-            errEl.hidden = false;
-            errEl.textContent = "Chyba sítě.";
-          }
+          showErr(errEl, "Chyba sítě nebo ověření. Obnov stránku a zkus znovu.");
         });
     });
   }

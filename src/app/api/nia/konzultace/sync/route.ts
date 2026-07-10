@@ -28,7 +28,7 @@ export async function GET(req: Request) {
     return NextResponse.json({ ok: false, error: "Neautorizováno." }, { status: 401 });
   }
 
-  const bookings = await listActiveBookings();
+  const bookings = (await listActiveBookings()).filter((b) => b.status === "confirmed");
   return NextResponse.json({
     ok: true,
     bookings: bookings.map((b) => ({

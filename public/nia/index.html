@@ -899,7 +899,7 @@ img{display:block;max-width:100%}
         <p class="konz-hint" id="konzHint">Úvodní konzultace trvá cca 30 minut — čistě informativní. Po rezervaci ti hned přijde e-mail s potvrzením a odkazem na Google Meet.</p>
         <p class="konz-osobne-note">Konzultace probíhá <strong>online</strong>. Osobní setkání domlouváme až po úvodní schůzce — pokud máš zájem o osobní schůzku, napiš na <a href="mailto:niadobysar@gmail.com">niadobysar@gmail.com</a> a udělám maximum, abychom se potkali.</p>
       </div>
-      <form class="konz-form reveal" id="konzForm">
+      <form class="konz-form reveal" id="konzForm" data-nia-form="konzultace">
         <div class="konz-summary" id="konzSummary">Načítám volné termíny…</div>
         <div class="field-hp" aria-hidden="true"><label for="kWebsite">Web</label><input type="text" id="kWebsite" name="website" tabindex="-1" autocomplete="off"></div>
         <div><label>Jméno</label><input type="text" id="kName" placeholder="Tvoje jméno" required autocomplete="name"></div>
@@ -927,7 +927,7 @@ img{display:block;max-width:100%}
       <h2>Pojďme udělat něco, na co se <span class="grad">nezapomíná</span>.<span class="rule"></span></h2>
     </div>
     <div class="k-grid">
-      <form class="k-form reveal" id="kForm">
+      <form class="k-form reveal" id="kForm" data-nia-form="kontakt">
         <div class="field-hp" aria-hidden="true"><label for="fWebsite">Web</label><input type="text" id="fWebsite" name="website" tabindex="-1" autocomplete="off"></div>
         <div><label>Jméno</label><input type="text" id="fName" placeholder="Tvoje jméno" required autocomplete="name"></div>
         <div><label>E-mail</label><input type="email" id="fMail" placeholder="tvůj@email.cz" required autocomplete="email"></div>
@@ -1116,6 +1116,7 @@ if(!isCoarse){
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
+<script src="/nia/form-security.js" defer></script>
 <script src="/nia/konzultace.js" defer></script>
 <script src="/nia/cookie-bar.js" defer></script>
 </body>

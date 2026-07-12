@@ -20,6 +20,7 @@ export async function GET(req: Request) {
   });
   if (!guard.allowed) return guard.response;
 
+  const rawSiteKey = process.env.TURNSTILE_SITE_KEY?.trim() ?? "";
   const siteKey = turnstileSiteKey();
   const formToken = mintFormToken();
   if (!siteKey || !formToken) {
@@ -31,7 +32,11 @@ export async function GET(req: Request) {
       referer: guard.meta.referer,
       filter: "config",
       processed: false,
-      note: "missing_turnstile_or_token_secret",
+      note: rawSiteKey && !siteKey
+        ? "invalid_turnstile_site_key_placeholder"
+        : !formToken
+          ? "missing_form_token_secret"
+          : "missing_turnstile_site_key",
     });
     return NextResponse.json(
       { ok: false, error: "Formulář není nakonfigurován." },

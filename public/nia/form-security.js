@@ -23,13 +23,23 @@
     warn(code, detail || "");
     var err = new Error(
       code === "config"
-        ? "Formulář se nepodařilo připravit. Obnov stránku — pokud problém přetrvává, napiš na niadobysar@gmail.com."
+        ? detail === "invalid turnstile site key"
+          ? "Formulář není správně nastavený na serveru (Turnstile). Napiš na niadobysar@gmail.com."
+          : "Formulář se nepodařilo připravit. Obnov stránku — pokud problém přetrvává, napiš na niadobysar@gmail.com."
         : code === "turnstile"
           ? "Ověření proti robotům selhalo. Obnov stránku a zkus to znovu."
           : "Odeslání se nepodařilo. Obnov stránku a zkus to znovu.",
     );
     err.code = code;
     return err;
+  }
+
+  function isValidSiteKey(key) {
+    if (!key || typeof key !== "string") return false;
+    if (key === "TURNSTILE_SITE_KEY" || key === "TURNSTILE_SECRET_KEY") return false;
+    if (/TURNSTILE_|SECRET_KEY|SITE_KEY/i.test(key)) return false;
+    if (key.length < 20) return false;
+    return key.indexOf("0x") === 0;
   }
 
   function loadScript() {
@@ -101,6 +111,9 @@
             throw userError("config", data && data.error);
           }
           config = data;
+          if (!isValidSiteKey(data.turnstileSiteKey)) {
+            throw userError("config", "invalid turnstile site key");
+          }
           log("config loaded, site key present:", Boolean(data.turnstileSiteKey));
           return data;
         });

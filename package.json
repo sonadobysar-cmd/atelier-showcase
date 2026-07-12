@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "printf '\\n  ATELIER SHOWCASE — otevři v prohlížeči:\\n  http://127.0.0.1:3010/gloss\\n  http://127.0.0.1:3010/lume\\n  http://127.0.0.1:3010/contour-clinic\\n  (rozcestník: http://127.0.0.1:3010)\\n\\n  Tip: při chybě 500 spusť npm run serve\\n\\n' && next dev -H 127.0.0.1 -p 3010",

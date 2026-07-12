@@ -4,6 +4,33 @@
   var widgets = {};
   var pending = {};
   var scriptLoading = false;
+  var initDone = false;
+  var initPromise = null;
+
+  function log() {
+    if (typeof console !== "undefined" && console.log) {
+      console.log.apply(console, ["[NiaFormSecurity]"].concat([].slice.call(arguments)));
+    }
+  }
+
+  function warn() {
+    if (typeof console !== "undefined" && console.warn) {
+      console.warn.apply(console, ["[NiaFormSecurity]"].concat([].slice.call(arguments)));
+    }
+  }
+
+  function userError(code, detail) {
+    warn(code, detail || "");
+    var err = new Error(
+      code === "config"
+        ? "Formulář se nepodařilo připravit. Obnov stránku — pokud problém přetrvává, napiš na niadobysar@gmail.com."
+        : code === "turnstile"
+          ? "Ověření proti robotům selhalo. Obnov stránku a zkus to znovu."
+          : "Odeslání se nepodařilo. Obnov stránku a zkus to znovu.",
+    );
+    err.code = code;
+    return err;
+  }
 
   function loadScript() {
     return new Promise(function (resolve, reject) {
@@ -20,8 +47,8 @@
         }, 40);
         setTimeout(function () {
           clearInterval(t);
-          reject(new Error("turnstile timeout"));
-        }, 12000);
+          if (!window.turnstile) reject(new Error("turnstile script timeout"));
+        }, 15000);
         return;
       }
       scriptLoading = true;
@@ -30,64 +57,90 @@
       s.async = true;
       s.defer = true;
       s.onload = function () {
+        log("turnstile script loaded");
         resolve();
       };
       s.onerror = function () {
-        reject(new Error("turnstile load failed"));
+        reject(new Error("turnstile script load failed"));
       };
       document.head.appendChild(s);
     });
   }
 
   function fetchConfig() {
-    return fetch("/api/nia/form-config", { cache: "no-store" })
+    return fetch("/api/nia/form-config", { cache: "no-store", credentials: "same-origin" })
       .then(function (r) {
-        return r.json();
-      })
-      .then(function (data) {
-        if (!data.ok) throw new Error("config");
-        config = data;
-        return data;
+        return r.json().then(function (data) {
+          if (!r.ok || !data.ok) {
+            throw userError("config", data && data.error);
+          }
+          config = data;
+          log("config loaded, site key present:", Boolean(data.turnstileSiteKey));
+          return data;
+        });
       });
+  }
+
+  function whenTurnstileReady() {
+    return new Promise(function (resolve) {
+      if (!window.turnstile) {
+        resolve();
+        return;
+      }
+      if (typeof window.turnstile.ready === "function") {
+        window.turnstile.ready(resolve);
+      } else {
+        resolve();
+      }
+    });
   }
 
   function ensureWidget(key, container) {
     if (!config || !window.turnstile) return null;
     if (widgets[key]) return widgets[key];
-    var id = window.turnstile.render(container, {
-      sitekey: config.turnstileSiteKey,
-      size: "invisible",
-      callback: function (token) {
-        var p = pending[key];
-        if (p) {
-          pending[key] = null;
-          p.resolve(token);
-        }
-      },
-      "error-callback": function () {
-        var p = pending[key];
-        if (p) {
-          pending[key] = null;
-          p.reject(new Error("turnstile error"));
-        }
-      },
-      "expired-callback": function () {
-        var p = pending[key];
-        if (p) {
-          pending[key] = null;
-          p.reject(new Error("turnstile expired"));
-        }
-      },
-    });
-    widgets[key] = id;
-    return id;
+    try {
+      var id = window.turnstile.render(container, {
+        sitekey: config.turnstileSiteKey,
+        size: "invisible",
+        callback: function (token) {
+          log("turnstile token for", key);
+          var p = pending[key];
+          if (p) {
+            pending[key] = null;
+            p.resolve(token);
+          }
+        },
+        "error-callback": function () {
+          warn("turnstile error-callback", key);
+          var p = pending[key];
+          if (p) {
+            pending[key] = null;
+            p.reject(userError("turnstile", "error-callback"));
+          }
+        },
+        "expired-callback": function () {
+          warn("turnstile expired", key);
+          var p = pending[key];
+          if (p) {
+            pending[key] = null;
+            p.reject(userError("turnstile", "expired"));
+          }
+        },
+      });
+      widgets[key] = id;
+      log("widget rendered", key, id);
+      return id;
+    } catch (e) {
+      warn("turnstile render failed", key, e);
+      return null;
+    }
   }
 
   function getTurnstileToken(key) {
     return new Promise(function (resolve, reject) {
       var id = widgets[key];
       if (!id || !window.turnstile) {
-        reject(new Error("widget missing"));
+        reject(userError("turnstile", "widget missing"));
         return;
       }
       pending[key] = { resolve: resolve, reject: reject };
@@ -95,14 +148,14 @@
         window.turnstile.execute(id);
       } catch (e) {
         pending[key] = null;
-        reject(e);
+        reject(userError("turnstile", e && e.message));
       }
       setTimeout(function () {
         if (pending[key]) {
           pending[key] = null;
-          reject(new Error("turnstile timeout"));
+          reject(userError("turnstile", "execute timeout"));
         }
-      }, 15000);
+      }, 20000);
     });
   }
 
@@ -113,12 +166,21 @@
   }
 
   function init() {
-    var hosts = document.querySelectorAll("[data-nia-form]");
-    if (!hosts.length) return Promise.resolve();
+    if (initPromise) return initPromise;
 
-    return fetchConfig()
+    var hosts = document.querySelectorAll("[data-nia-form]");
+    if (!hosts.length) {
+      initDone = true;
+      initPromise = Promise.resolve();
+      return initPromise;
+    }
+
+    initPromise = fetchConfig()
       .then(function () {
         return loadScript();
+      })
+      .then(function () {
+        return whenTurnstileReady();
       })
       .then(function () {
         hosts.forEach(function (host) {
@@ -128,33 +190,64 @@
             box = document.createElement("div");
             box.className = "nia-turnstile-host";
             box.setAttribute("aria-hidden", "true");
-            box.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;";
+            box.style.cssText =
+              "position:fixed;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;";
             host.appendChild(box);
           }
           ensureWidget(key, box);
         });
+        initDone = true;
+        log("init complete, widgets:", Object.keys(widgets).join(", "));
       })
-      .catch(function () {
-        /* tiché — submit pak spadne na serveru */
+      .catch(function (err) {
+        initDone = false;
+        initPromise = null;
+        warn("init failed", err);
+        throw err;
       });
+
+    return initPromise;
   }
 
   window.NiaFormSecurity = {
     init: init,
+    ready: function () {
+      return init();
+    },
     getPayloadExtras: function (formKey) {
-      return refreshFormToken()
-        .then(function (formToken) {
-          return getTurnstileToken(formKey).then(function (turnstileToken) {
-            return { formToken: formToken, turnstileToken: turnstileToken };
+      return init()
+        .then(function () {
+          if (!widgets[formKey]) {
+            var host = document.querySelector('[data-nia-form="' + formKey + '"]');
+            if (host) {
+              var box = host.querySelector(".nia-turnstile-host");
+              if (box && config && window.turnstile) {
+                ensureWidget(formKey, box);
+              }
+            }
+          }
+          if (!widgets[formKey]) {
+            throw userError("turnstile", "widget not ready");
+          }
+          return refreshFormToken().then(function (formToken) {
+            return getTurnstileToken(formKey).then(function (turnstileToken) {
+              return { formToken: formToken, turnstileToken: turnstileToken };
+            });
           });
+        })
+        .catch(function (err) {
+          if (err && err.code) throw err;
+          throw userError("config", err && err.message);
         });
     },
     rateLimitMessage: "Zkuste to prosím později nebo mi napište na niadobysar@gmail.com.",
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
+    document.addEventListener("DOMContentLoaded", function () {
+      init().catch(function () {});
+    });
   } else {
-    init();
+    init().catch(function () {});
   }
 })();

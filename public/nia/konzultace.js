@@ -120,7 +120,7 @@
     showErr(errEl, msg);
   }
 
-  fetch("/api/nia/konzultace", { cache: "no-store" })
+  fetch("/api/nia/konzultace", { cache: "no-store", credentials: "same-origin" })
     .then(function (r) {
       return r.json().then(function (data) {
         return { ok: r.ok, status: r.status, data: data };
@@ -168,11 +168,17 @@
       btn.textContent = "Odesílám…";
     }
 
-    var extras = window.NiaFormSecurity
-      ? window.NiaFormSecurity.getPayloadExtras("konzultace")
-      : Promise.reject(new Error("security"));
+    if (!window.NiaFormSecurity) {
+      showErr(errEl, "Formulář se nepodařilo připravit. Obnov stránku.");
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Rezervovat konzultaci ✦";
+      }
+      console.error("[nia/konzultace] NiaFormSecurity missing");
+      return;
+    }
 
-    extras
+    window.NiaFormSecurity.getPayloadExtras("konzultace")
       .then(function (sec) {
         return fetch("/api/nia/konzultace", {
           method: "POST",
@@ -205,12 +211,16 @@
         }
         window.location.href = "/nia/dekujeme-konzultace";
       })
-      .catch(function () {
+      .catch(function (err) {
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Rezervovat konzultaci ✦";
         }
-        showErr(errEl, "Chyba sítě nebo ověření. Obnov stránku a zkus znovu.");
+        console.error("[nia/konzultace] submit failed", err);
+        showErr(
+          errEl,
+          (err && err.message) || "Odeslání se nepodařilo. Obnov stránku a zkus to znovu.",
+        );
       });
   });
 
@@ -223,11 +233,14 @@
       if (errEl) errEl.hidden = true;
       if (btn) btn.disabled = true;
 
-      var extras = window.NiaFormSecurity
-        ? window.NiaFormSecurity.getPayloadExtras("kontakt")
-        : Promise.reject(new Error("security"));
+      if (!window.NiaFormSecurity) {
+        if (btn) btn.disabled = false;
+        showErr(errEl, "Formulář se nepodařilo připravit. Obnov stránku.");
+        console.error("[nia/kontakt] NiaFormSecurity missing");
+        return;
+      }
 
-      extras
+      window.NiaFormSecurity.getPayloadExtras("kontakt")
         .then(function (sec) {
           return fetch("/api/nia/kontakt", {
             method: "POST",
@@ -254,9 +267,13 @@
           }
           handleApiError(res, errEl);
         })
-        .catch(function () {
+        .catch(function (err) {
           if (btn) btn.disabled = false;
-          showErr(errEl, "Chyba sítě nebo ověření. Obnov stránku a zkus znovu.");
+          console.error("[nia/kontakt] submit failed", err);
+          showErr(
+            errEl,
+            (err && err.message) || "Odeslání se nepodařilo. Obnov stránku a zkus to znovu.",
+          );
         });
     });
   }

@@ -38,6 +38,32 @@
         resolve();
         return;
       }
+
+      var existing = document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]');
+      if (existing) {
+        if (window.turnstile) {
+          resolve();
+          return;
+        }
+        existing.addEventListener("load", function () {
+          resolve();
+        });
+        existing.addEventListener("error", function () {
+          reject(new Error("turnstile script load failed"));
+        });
+        var waited = setInterval(function () {
+          if (window.turnstile) {
+            clearInterval(waited);
+            resolve();
+          }
+        }, 40);
+        setTimeout(function () {
+          clearInterval(waited);
+          if (!window.turnstile) reject(new Error("turnstile script timeout"));
+        }, 15000);
+        return;
+      }
+
       if (scriptLoading) {
         var t = setInterval(function () {
           if (window.turnstile) {
@@ -51,11 +77,11 @@
         }, 15000);
         return;
       }
+
       scriptLoading = true;
       var s = document.createElement("script");
       s.src = TURNSTILE_SRC;
-      s.async = true;
-      s.defer = true;
+      s.async = false;
       s.onload = function () {
         log("turnstile script loaded");
         resolve();

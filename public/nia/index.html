@@ -1116,6 +1116,7 @@ if(!isCoarse){
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 <script src="/nia/form-security.js" defer></script>
 <script src="/nia/konzultace.js" defer></script>
 <script src="/nia/cookie-bar.js" defer></script>

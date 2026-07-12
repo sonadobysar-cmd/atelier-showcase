@@ -137,11 +137,33 @@ async function handlePost(req: Request) {
     return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
   if (await isSlotBooked(dateIso, time)) {
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "validation",
+      processed: false,
+      note: "slot_booked",
+      payload: b,
+    });
     return NextResponse.json({ ok: false, error: "Tento termín už není k dispozici. Vyber jiný." }, { status: 409, headers: corsHeaders(req.headers.get("origin")) });
   }
 
   const meetUrl = process.env.NIA_GOOGLE_MEET_URL?.trim();
   if (!meetUrl) {
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "config",
+      processed: false,
+      note: "meet_url_missing",
+      payload: b,
+    });
     return NextResponse.json(
       { ok: false, error: "Rezervace je dočasně nedostupná. Napiš na niadobysar@gmail.com." },
       { status: 503, headers: corsHeaders(req.headers.get("origin")) },
@@ -164,6 +186,17 @@ async function handlePost(req: Request) {
     meetUrl,
   });
   if (!saved.ok) {
+    await logSubmission({
+      endpoint: "konzultace-post",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "validation",
+      processed: false,
+      note: saved.error || "create_failed",
+      payload: b,
+    });
     return NextResponse.json({ ok: false, error: saved.error }, { status: 409, headers: corsHeaders(req.headers.get("origin")) });
   }
 

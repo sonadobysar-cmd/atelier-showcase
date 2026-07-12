@@ -183,6 +183,7 @@
         return fetch("/api/nia/konzultace", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
           body: JSON.stringify({
             name: n,
             email: m,
@@ -231,6 +232,13 @@
       var errEl = document.getElementById("kErr");
       var btn = kForm.querySelector('button[type="submit"]');
       if (errEl) errEl.hidden = true;
+      var n = document.getElementById("fName").value.trim();
+      var m = document.getElementById("fMail").value.trim();
+      var msg = document.getElementById("fMsg").value.trim();
+      if (msg.length < 4) {
+        showErr(errEl, "Napiš zprávu.");
+        return;
+      }
       if (btn) btn.disabled = true;
 
       if (!window.NiaFormSecurity) {
@@ -245,6 +253,7 @@
           return fetch("/api/nia/kontakt", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "same-origin",
             body: JSON.stringify({
               name: document.getElementById("fName").value.trim(),
               email: document.getElementById("fMail").value.trim(),

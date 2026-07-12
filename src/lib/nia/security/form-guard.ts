@@ -3,6 +3,7 @@ import { validateBrowserOrigin, corsHeaders } from "@/lib/nia/security/allowed-o
 import { verifyFormToken } from "@/lib/nia/security/form-token";
 import { requestMeta } from "@/lib/nia/security/request-meta";
 import {
+  rateLimitFormConfig,
   rateLimitKontakt,
   rateLimitKonzultaceCreate,
   rateLimitKonzultaceRead,
@@ -12,7 +13,7 @@ import { logSubmission } from "@/lib/nia/security/submission-log";
 import { verifyTurnstile } from "@/lib/nia/security/turnstile";
 import { fakeOkResponse, RATE_LIMIT_MESSAGE } from "@/lib/nia/security/validate";
 
-export type GuardEndpoint = "kontakt" | "konzultace-get" | "konzultace-post";
+export type GuardEndpoint = "kontakt" | "konzultace-get" | "konzultace-post" | "form-config";
 
 type GuardOptions = {
   endpoint: GuardEndpoint;
@@ -45,7 +46,11 @@ export async function guardFormRequest(opts: GuardOptions): Promise<
     payload: body,
   };
 
-  if (opts.requireTurnstile !== false && !upstashConfigured() && process.env.NODE_ENV === "production") {
+  if (
+    (endpoint === "form-config" || opts.requireTurnstile !== false) &&
+    !upstashConfigured() &&
+    process.env.NODE_ENV === "production"
+  ) {
     await logSubmission({ ...logBase, filter: "config", processed: false, note: "Upstash missing" });
     return {
       allowed: false,
@@ -64,7 +69,7 @@ export async function guardFormRequest(opts: GuardOptions): Promise<
     return { allowed: false, response: json(fakeOkResponse(), 200, opts.req) };
   }
 
-  if (endpoint !== "konzultace-get") {
+  if (endpoint !== "konzultace-get" && endpoint !== "form-config") {
     const formToken = body.formToken ?? body.form_token;
     if (!verifyFormToken(formToken)) {
       await logSubmission({ ...logBase, filter: "time_trap", processed: false });
@@ -87,6 +92,18 @@ export async function guardFormRequest(opts: GuardOptions): Promise<
     const rl = await rateLimitKonzultaceRead(meta.ip);
     if (!rl.ok) {
       await logSubmission({ ...logBase, filter: "rate_limit", processed: false, note: "konzultace-read" });
+      return {
+        allowed: false,
+        response: json({ ok: false, error: RATE_LIMIT_MESSAGE }, 429, opts.req),
+      };
+    }
+    return { allowed: true, meta };
+  }
+
+  if (endpoint === "form-config") {
+    const rl = await rateLimitFormConfig(meta.ip);
+    if (!rl.ok) {
+      await logSubmission({ ...logBase, filter: "rate_limit", processed: false, note: "form-config" });
       return {
         allowed: false,
         response: json({ ok: false, error: RATE_LIMIT_MESSAGE }, 429, opts.req),

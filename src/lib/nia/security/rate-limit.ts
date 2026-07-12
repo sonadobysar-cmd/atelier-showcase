@@ -56,6 +56,10 @@ export async function rateLimitKonzultaceCreate(ip: string, email: string): Prom
   return check(hourEmail, email.toLowerCase());
 }
 
+export async function rateLimitFormConfig(ip: string): Promise<RateLimitResult> {
+  return check(limiter("form-config", 25, "1 h"), ip);
+}
+
 export function upstashConfigured(): boolean {
   return Boolean(getRedis());
 }

@@ -50,6 +50,17 @@ export async function POST(req: Request) {
   const { name, email, message } = validated.data;
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
+    await logSubmission({
+      endpoint: "kontakt",
+      ip: guard.meta.ip,
+      userAgent: guard.meta.userAgent,
+      origin: guard.meta.origin,
+      referer: guard.meta.referer,
+      filter: "config",
+      processed: false,
+      note: "resend_missing",
+      payload: b,
+    });
     return NextResponse.json(
       { ok: false, error: "Formulář není připojený. Napiš na niadobysar@gmail.com." },
       { status: 503, headers: corsHeaders(req.headers.get("origin")) },

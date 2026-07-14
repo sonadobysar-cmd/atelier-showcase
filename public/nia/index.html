@@ -411,6 +411,7 @@ img{display:block;max-width:100%}
 .konz-hours{font-size:.76rem;line-height:1.7;color:var(--muted);margin:0 0 22px;font-weight:300}
 .konz-hours b{color:var(--ink2);font-weight:400}
 .konz-err{font-size:.82rem;color:#a33;margin-top:8px;line-height:1.5}
+.nia-turnstile-mount{margin:14px 0 6px;min-height:65px}
 .konz-confirm{background:var(--off);border-radius:var(--r-xl);padding:36px 32px;box-shadow:var(--shadow);text-align:center}
 .konz-confirm h3{font-family:var(--display);font-weight:500;font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:.04em;text-transform:uppercase;margin:0 0 12px;color:var(--black)}
 .konz-confirm p{color:var(--muted);line-height:1.7;margin:0 0 20px;font-weight:300;font-size:.92rem}
@@ -1116,9 +1117,8 @@ if(!isCoarse){
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-<script src="/nia/form-security.js?v=20260714a" defer></script>
-<script src="/nia/konzultace.js?v=20260714a" defer></script>
+<script src="/nia/form-security.js?v=20260714b" defer></script>
+<script src="/nia/konzultace.js?v=20260714b" defer></script>
 <script src="/nia/cookie-bar.js" defer></script>
 </body>
 </html>

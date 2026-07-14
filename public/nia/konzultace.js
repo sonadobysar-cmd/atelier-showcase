@@ -210,6 +210,9 @@
           btn.textContent = "Rezervovat konzultaci ✦";
         }
         if (!res.ok || !res.data.ok) {
+          if (window.NiaFormSecurity && window.NiaFormSecurity.resetTurnstile) {
+            window.NiaFormSecurity.resetTurnstile("konzultace");
+          }
           handleApiError(res, errEl);
           return;
         }
@@ -220,6 +223,9 @@
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Rezervovat konzultaci ✦";
+        }
+        if (window.NiaFormSecurity && window.NiaFormSecurity.resetTurnstile) {
+          window.NiaFormSecurity.resetTurnstile("konzultace");
         }
         console.error("[nia/konzultace] submit failed", err);
         showErr(
@@ -278,10 +284,16 @@
             window.location.href = "/nia/dekujeme-poptavka";
             return;
           }
+          if (window.NiaFormSecurity && window.NiaFormSecurity.resetTurnstile) {
+            window.NiaFormSecurity.resetTurnstile("kontakt");
+          }
           handleApiError(res, errEl);
         })
         .catch(function (err) {
           if (btn) btn.disabled = false;
+          if (window.NiaFormSecurity && window.NiaFormSecurity.resetTurnstile) {
+            window.NiaFormSecurity.resetTurnstile("kontakt");
+          }
           console.error("[nia/kontakt] submit failed", err);
           showErr(
             errEl,

@@ -1,10 +1,10 @@
 (function () {
   var TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
   var config = null;
-  var widgets = {};
-  var pending = {};
+  var widgetId = null;
+  var sharedContainer = null;
+  var pending = null;
   var scriptLoading = false;
-  var initDone = false;
   var initPromise = null;
 
   function log() {
@@ -51,16 +51,6 @@
 
       var existing = document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]');
       if (existing) {
-        if (window.turnstile) {
-          resolve();
-          return;
-        }
-        existing.addEventListener("load", function () {
-          resolve();
-        });
-        existing.addEventListener("error", function () {
-          reject(new Error("turnstile script load failed"));
-        });
         var waited = setInterval(function () {
           if (window.turnstile) {
             clearInterval(waited);
@@ -114,7 +104,7 @@
           if (!isValidSiteKey(data.turnstileSiteKey)) {
             throw userError("config", "invalid turnstile site key");
           }
-          log("config loaded, site key present:", Boolean(data.turnstileSiteKey));
+          log("config loaded");
           return data;
         });
       });
@@ -134,82 +124,134 @@
     });
   }
 
-  function ensureWidget(key, container) {
+  function ensureSharedContainer() {
+    if (sharedContainer) return sharedContainer;
+    sharedContainer = document.createElement("div");
+    sharedContainer.className = "nia-turnstile-host";
+    sharedContainer.setAttribute("aria-hidden", "true");
+    sharedContainer.style.cssText =
+      "position:fixed;left:-10000px;top:0;width:304px;height:78px;opacity:0;pointer-events:none;overflow:hidden;";
+    document.body.appendChild(sharedContainer);
+    return sharedContainer;
+  }
+
+  function destroyWidget() {
+    if (widgetId && window.turnstile && typeof window.turnstile.remove === "function") {
+      try {
+        window.turnstile.remove(widgetId);
+      } catch (e) {
+        warn("turnstile remove failed", e);
+      }
+    }
+    widgetId = null;
+    pending = null;
+    if (sharedContainer) {
+      sharedContainer.innerHTML = "";
+    }
+  }
+
+  function renderWidget(retryLeft) {
     if (!config || !window.turnstile) return null;
-    if (widgets[key]) return widgets[key];
+    if (widgetId) return widgetId;
+
+    var container = ensureSharedContainer();
+    container.innerHTML = "";
+
     try {
-      var id = window.turnstile.render(container, {
+      widgetId = window.turnstile.render(container, {
         sitekey: config.turnstileSiteKey,
         size: "invisible",
         callback: function (token) {
-          log("turnstile token for", key);
-          var p = pending[key];
-          if (p) {
-            pending[key] = null;
+          log("turnstile token received");
+          if (pending) {
+            var p = pending;
+            pending = null;
             p.resolve(token);
           }
         },
         "error-callback": function () {
-          warn("turnstile error-callback", key);
-          var p = pending[key];
-          if (p) {
-            pending[key] = null;
-            p.reject(userError("turnstile", "error-callback"));
+          warn("turnstile error-callback");
+          if (!pending) return;
+          var p = pending;
+          pending = null;
+          if (p.retryLeft > 0) {
+            destroyWidget();
+            getTurnstileToken(p.retryLeft - 1).then(p.resolve).catch(p.reject);
+            return;
           }
+          p.reject(userError("turnstile", "error-callback"));
         },
         "expired-callback": function () {
-          warn("turnstile expired", key);
-          var p = pending[key];
-          if (p) {
-            pending[key] = null;
-            p.reject(userError("turnstile", "expired"));
+          warn("turnstile expired");
+          destroyWidget();
+          if (!pending) return;
+          var p = pending;
+          pending = null;
+          if (p.retryLeft > 0) {
+            getTurnstileToken(p.retryLeft - 1).then(p.resolve).catch(p.reject);
+            return;
           }
+          p.reject(userError("turnstile", "expired"));
         },
       });
-      widgets[key] = id;
-      log("widget rendered", key, id);
-      return id;
+      log("widget rendered", widgetId);
+      return widgetId;
     } catch (e) {
-      warn("turnstile render failed", key, e);
+      warn("turnstile render failed", e);
+      widgetId = null;
       return null;
     }
   }
 
-  function getTurnstileToken(key) {
+  function getTurnstileToken(retryLeft) {
     return new Promise(function (resolve, reject) {
-      var id = widgets[key];
-      if (!id || !window.turnstile) {
-        reject(userError("turnstile", "widget missing"));
+      if (!window.turnstile) {
+        reject(userError("turnstile", "turnstile missing"));
         return;
       }
-      pending[key] = { resolve: resolve, reject: reject };
+
+      var id = renderWidget(retryLeft);
+      if (!id) {
+        reject(userError("turnstile", "widget not ready"));
+        return;
+      }
+
+      pending = { resolve: resolve, reject: reject, retryLeft: retryLeft };
+
       try {
+        if (typeof window.turnstile.reset === "function") {
+          window.turnstile.reset(id);
+        }
         window.turnstile.execute(id);
       } catch (e) {
-        pending[key] = null;
-        reject(userError("turnstile", e && e.message));
-      }
-      setTimeout(function () {
-        if (pending[key]) {
-          pending[key] = null;
-          reject(userError("turnstile", "execute timeout"));
+        pending = null;
+        if (retryLeft > 0) {
+          destroyWidget();
+          getTurnstileToken(retryLeft - 1).then(resolve).catch(reject);
+          return;
         }
-      }, 20000);
-    });
-  }
+        reject(userError("turnstile", e && e.message));
+        return;
+      }
 
-  function refreshFormToken() {
-    return fetchConfig().then(function (c) {
-      return c.formToken;
+      setTimeout(function () {
+        if (!pending) return;
+        var p = pending;
+        pending = null;
+        if (p.retryLeft > 0) {
+          destroyWidget();
+          getTurnstileToken(p.retryLeft - 1).then(p.resolve).catch(p.reject);
+          return;
+        }
+        p.reject(userError("turnstile", "execute timeout"));
+      }, 20000);
     });
   }
 
   function init() {
     if (initPromise) return initPromise;
 
-    var hosts = document.querySelectorAll("[data-nia-form]");
-    if (!hosts.length) {
-      initDone = true;
+    if (!document.querySelector("[data-nia-form]")) {
       initPromise = Promise.resolve();
       return initPromise;
     }
@@ -222,24 +264,9 @@
         return whenTurnstileReady();
       })
       .then(function () {
-        hosts.forEach(function (host) {
-          var key = host.getAttribute("data-nia-form") || "default";
-          var box = host.querySelector(".nia-turnstile-host");
-          if (!box) {
-            box = document.createElement("div");
-            box.className = "nia-turnstile-host";
-            box.setAttribute("aria-hidden", "true");
-            box.style.cssText =
-              "position:fixed;right:0;bottom:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden;";
-            host.appendChild(box);
-          }
-          ensureWidget(key, box);
-        });
-        initDone = true;
-        log("init complete, widgets:", Object.keys(widgets).join(", "));
+        log("init complete (lazy widget)");
       })
       .catch(function (err) {
-        initDone = false;
         initPromise = null;
         warn("init failed", err);
         throw err;
@@ -253,24 +280,12 @@
     ready: function () {
       return init();
     },
-    getPayloadExtras: function (formKey) {
+    getPayloadExtras: function () {
       return init()
         .then(function () {
-          if (!widgets[formKey]) {
-            var host = document.querySelector('[data-nia-form="' + formKey + '"]');
-            if (host) {
-              var box = host.querySelector(".nia-turnstile-host");
-              if (box && config && window.turnstile) {
-                ensureWidget(formKey, box);
-              }
-            }
-          }
-          if (!widgets[formKey]) {
-            throw userError("turnstile", "widget not ready");
-          }
-          return refreshFormToken().then(function (formToken) {
-            return getTurnstileToken(formKey).then(function (turnstileToken) {
-              return { formToken: formToken, turnstileToken: turnstileToken };
+          return fetchConfig().then(function (c) {
+            return getTurnstileToken(1).then(function (turnstileToken) {
+              return { formToken: c.formToken, turnstileToken: turnstileToken };
             });
           });
         })

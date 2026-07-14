@@ -1,6 +1,6 @@
 (function () {
   var TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-  var SCRIPT_VERSION = "20260714b";
+  var SCRIPT_VERSION = "20260714c";
   var config = null;
   var widgets = {};
   var scriptLoading = false;
@@ -33,7 +33,8 @@
               ? "Potvrď ověření proti robotům (zaškrtnutí nad tlačítkem) a zkus odeslat znovu."
               : detail === "expired"
                 ? "Ověření proti robotům vypršelo. Obnov stránku a zkus to znovu."
-                : "Ověření proti robotům selhalo. Obnov stránku a zkus to znovu.",
+                : "Ověření proti robotům selhalo. Obnov stránku a zkus to znovu."
+          : "Odeslání se nepodařilo. Obnov stránku a zkus to znovu.",
     );
     err.code = code;
     err.detail = detail || "";

@@ -167,6 +167,8 @@
       btn.disabled = true;
       btn.textContent = "Odesílám…";
     }
+    if (konzForm.dataset.submitting === "1") return;
+    konzForm.dataset.submitting = "1";
 
     if (!window.NiaFormSecurity) {
       showErr(errEl, "Formulář se nepodařilo připravit. Obnov stránku.");
@@ -202,6 +204,7 @@
         });
       })
       .then(function (res) {
+        konzForm.dataset.submitting = "0";
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Rezervovat konzultaci ✦";
@@ -213,6 +216,7 @@
         window.location.href = "/nia/dekujeme-konzultace";
       })
       .catch(function (err) {
+        konzForm.dataset.submitting = "0";
         if (btn) {
           btn.disabled = false;
           btn.textContent = "Rezervovat konzultaci ✦";

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Správa obsahu — Nia Dobyšar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Outfit:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f7f4f2;--ink:#080606;--burgundy3:#5c2a3e;--burgundy4:#7a3d54;--muted:#6e5c64;--line:rgba(26,10,16,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--cream);color:var(--ink);padding:20px;font-weight:300;font-size:.92rem}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-family:'Bodoni Moda',Georgia,serif;font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:1.5rem}
+.meta{color:var(--muted);font-size:.84rem;margin:6px 0 18px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+input,select,textarea,button{font-family:inherit;font-size:.88rem}
+input[type=password],input[type=text],input[type=url],select,textarea{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;width:100%}
+input[type=password]{min-width:220px;flex:1}
+button{padding:10px 16px;border:none;border-radius:999px;background:var(--burgundy3);color:#fff;letter-spacing:.1em;text-transform:uppercase;font-size:.58rem;cursor:pointer}
+button.ghost{background:transparent;color:var(--burgundy3);border:1px solid rgba(92,42,62,.25)}
+button.danger{background:#8b3048}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.tab{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}
+.tab.on{background:var(--burgundy3);color:#fff;border-color:var(--burgundy3)}
+.panel{display:none;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 10px 30px -20px rgba(8,6,6,.15)}
+.panel.on{display:block}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--burgundy4);margin:10px 0 4px}
+.form-row{margin-bottom:8px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.78rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--burgundy4)}
+.thumb{width:52px;height:52px;object-fit:cover;border-radius:8px}
+.msg{padding:10px 12px;border-radius:10px;margin:10px 0;font-size:.84rem}
+.msg.ok{background:rgba(92,42,62,.1);color:var(--burgundy3)}
+.msg.err{background:rgba(158,77,106,.12);color:#9e4d6a}
+.empty{padding:24px;color:var(--muted);text-align:center}
+@media(max-width:720px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Správa obsahu</h1>
+  <p class="meta">Obchod (šablony, stock fotky), obory a UGC videa. Token ulož v prohlížeči — nikomu ho neposílej.</p>
+  <div class="toolbar">
+    <input type="password" id="token" placeholder="NIA_CMS_ADMIN_TOKEN" autocomplete="current-password">
+    <button type="button" id="loadBtn">Načíst</button>
+  </div>
+  <div id="status"></div>
+
+  <div id="app" hidden>
+    <div class="tabs" id="tabs">
+      <button type="button" class="tab on" data-tab="templates">Šablony IG</button>
+      <button type="button" class="tab" data-tab="stock">Stock fotky</button>
+      <button type="button" class="tab" data-tab="industries">Obory</button>
+      <button type="button" class="tab" data-tab="ugc">UGC videa</button>
+    </div>
+
+    <div class="panel on" data-panel="templates">
+      <h2 style="font-family:'Bodoni Moda',serif;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Přidat šablonu</h2>
+      <form id="formTemplate">
+        <div class="grid2">
+          <div class="form-row"><label>Název</label><input type="text" name="name" required></div>
+          <div class="form-row"><label>Obor</label><select name="industryId" id="tplIndustry"></select></div>
+          <div class="form-row"><label>Cena (text)</label><input type="text" name="priceLabel" placeholder="od 299 Kč"></div>
+          <div class="form-row"><label>Mockup fotka</label><input type="file" name="file" accept="image/*" required></div>
+        </div>
+        <div class="form-row"><label>Popis (volitelné)</label><textarea name="description" rows="2"></textarea></div>
+        <button type="submit" style="margin-top:10px">Uložit šablonu</button>
+      </form>
+      <div id="listTemplates"></div>
+    </div>
+
+    <div class="panel" data-panel="stock">
+      <h2 style="font-family:'Bodoni Moda',serif;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Přidat stock sadu</h2>
+      <form id="formStock">
+        <div class="grid2">
+          <div class="form-row"><label>Název</label><input type="text" name="name" required></div>
+          <div class="form-row"><label>Obor</label><select name="industryId" id="stockIndustry"></select></div>
+          <div class="form-row"><label>Cena (text)</label><input type="text" name="priceLabel" placeholder="od 490 Kč"></div>
+          <div class="form-row"><label>Náhledová fotka</label><input type="file" name="file" accept="image/*" required></div>
+        </div>
+        <div class="form-row"><label>Popis</label><textarea name="description" rows="2"></textarea></div>
+        <button type="submit" style="margin-top:10px">Uložit stock sadu</button>
+      </form>
+      <div id="listStock"></div>
+    </div>
+
+    <div class="panel" data-panel="industries">
+      <form id="formIndustry" class="toolbar" style="margin-top:0">
+        <input type="text" name="label" placeholder="Název oboru (např. Kadeřnictví)" style="flex:1">
+        <button type="submit">Přidat obor</button>
+      </form>
+      <div id="listIndustries"></div>
+    </div>
+
+    <div class="panel" data-panel="ugc">
+      <h2 style="font-family:'Bodoni Moda',serif;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">Přidat UGC video</h2>
+      <form id="formUgc">
+        <div class="grid2">
+          <div class="form-row"><label>Název / popisek</label><input type="text" name="title" required></div>
+          <div class="form-row"><label>Obor (volitelné)</label><select name="industryId" id="ugcIndustry"><option value="">—</option></select></div>
+          <div class="form-row"><label>Video soubor</label><input type="file" name="video" accept="video/*" required></div>
+          <div class="form-row"><label>Poster (volitelné)</label><input type="file" name="poster" accept="image/*"></div>
+        </div>
+        <p class="meta" style="margin-top:8px">Nebo vlož URL, pokud je video už na webu:</p>
+        <div class="form-row"><label>URL videa</label><input type="url" name="videoUrl" placeholder="/nia/ugc-promo/clips/..."></div>
+        <button type="submit" style="margin-top:10px">Uložit video</button>
+      </form>
+      <div id="listUgc"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='nia_cms_token';
+  var tokenEl=document.getElementById('token');
+  var statusEl=document.getElementById('status');
+  var app=document.getElementById('app');
+  var catalog=null;
+  try{var s=localStorage.getItem(KEY);if(s)tokenEl.value=s;}catch(e){}
+
+  function token(){return tokenEl.value.trim();}
+  function headers(json){var h={Authorization:'Bearer '+token()};if(json)h['Content-Type']='application/json';return h;}
+  function msg(text,ok){statusEl.innerHTML='<div class="msg '+(ok?'ok':'err')+'">'+text+'</div>';}
+
+  function industryOptions(sel){
+    if(!catalog)return;
+    sel.innerHTML=catalog.industries.map(function(i){return '<option value="'+i.id+'">'+i.label+'</option>';}).join('');
+    var ugc=document.getElementById('ugcIndustry');
+    if(ugc)ugc.innerHTML='<option value="">—</option>'+catalog.industries.map(function(i){return '<option value="'+i.id+'">'+i.label+'</option>';}).join('');
+  }
+
+  function uploadFile(file,kind){
+    var fd=new FormData();
+    fd.append('file',file);
+    fd.append('kind',kind);
+    return fetch('/api/nia/cms/admin',{method:'POST',headers:{Authorization:'Bearer '+token()},body:fd}).then(function(r){return r.json();});
+  }
+
+  function api(action,payload){
+    return fetch('/api/nia/cms/admin',{method:'POST',headers:headers(true),body:JSON.stringify({action:action,payload:payload||{}})}).then(function(r){return r.json();});
+  }
+
+  function renderLists(){
+    if(!catalog)return;
+    industryOptions(document.getElementById('tplIndustry'));
+    industryOptions(document.getElementById('stockIndustry'));
+
+    function industryLabel(id){var f=catalog.industries.find(function(i){return i.id===id;});return f?f.label:id;}
+
+    function productTable(type,targetId){
+      var list=catalog.products.filter(function(p){return p.type===type;});
+      if(!list.length){document.getElementById(targetId).innerHTML='<div class="empty">Zatím prázdné.</div>';return;}
+      var rows=list.map(function(p){
+        return '<tr><td><img class="thumb" src="'+p.imageUrl+'" alt=""></td><td>'+p.name+'</td><td>'+industryLabel(p.industryId)+'</td><td>'+(p.priceLabel||'')+'</td><td><button type="button" class="ghost danger" data-del-product="'+p.id+'">Smazat</button></td></tr>';
+      }).join('');
+      document.getElementById(targetId).innerHTML='<table><thead><tr><th>Foto</th><th>Název</th><th>Obor</th><th>Cena</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+    }
+    productTable('template','listTemplates');
+    productTable('stock','listStock');
+
+    var indRows=catalog.industries.map(function(i){
+      return '<tr><td>'+i.label+'</td><td><code>'+i.id+'</code></td><td><button type="button" class="ghost danger" data-del-industry="'+i.id+'">Smazat</button></td></tr>';
+    }).join('');
+    document.getElementById('listIndustries').innerHTML='<table><thead><tr><th>Obor</th><th>ID</th><th></th></tr></thead><tbody>'+indRows+'</tbody></table>';
+
+    var ugc=catalog.ugcVideos||[];
+    if(!ugc.length){document.getElementById('listUgc').innerHTML='<div class="empty">Zatím žádná videa.</div>';return;}
+    var ugcRows=ugc.map(function(v){
+      return '<tr><td>'+v.title+'</td><td style="max-width:200px;word-break:break-all">'+v.videoUrl+'</td><td><button type="button" class="ghost danger" data-del-ugc="'+v.id+'">Smazat</button></td></tr>';
+    }).join('');
+    document.getElementById('listUgc').innerHTML='<table><thead><tr><th>Název</th><th>URL</th><th></th></tr></thead><tbody>'+ugcRows+'</tbody></table>';
+
+    document.querySelectorAll('[data-del-product]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(!confirm('Smazat produkt?'))return;
+        api('delete_product',{id:btn.getAttribute('data-del-product')}).then(handleReload);
+      });
+    });
+    document.querySelectorAll('[data-del-industry]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(!confirm('Smazat obor? Produkty zůstanou s původním ID.'))return;
+        api('delete_industry',{id:btn.getAttribute('data-del-industry')}).then(handleReload);
+      });
+    });
+    document.querySelectorAll('[data-del-ugc]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        if(!confirm('Smazat video?'))return;
+        api('delete_ugc_video',{id:btn.getAttribute('data-del-ugc')}).then(handleReload);
+      });
+    });
+  }
+
+  function handleReload(d){
+    if(!d.ok){msg(d.error||'Chyba.',false);return;}
+    catalog=d.catalog;renderLists();msg('Uloženo.',true);
+  }
+
+  function load(){
+    var t=token();if(!t)return msg('Zadej token.',false);
+    try{localStorage.setItem(KEY,t);}catch(e){}
+    fetch('/api/nia/cms/admin',{headers:headers()}).then(function(r){return r.json();}).then(function(d){
+      if(!d.ok)return msg('Neautorizováno nebo chyba.',false);
+      catalog=d.catalog;app.hidden=false;renderLists();msg('Katalog načten.',true);
+    }).catch(function(){msg('Chyba sítě.',false);});
+  }
+
+  document.getElementById('loadBtn').addEventListener('click',load);
+
+  document.getElementById('tabs').addEventListener('click',function(e){
+    var tab=e.target.closest('[data-tab]');if(!tab)return;
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t===tab);});
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('on',p.getAttribute('data-panel')===tab.getAttribute('data-tab'));});
+  });
+
+  document.getElementById('formIndustry').addEventListener('submit',function(e){
+    e.preventDefault();
+    var label=e.target.label.value.trim();if(!label)return;
+    api('add_industry',{label:label}).then(handleReload);
+    e.target.reset();
+  });
+
+  function handleProductForm(e,type){
+    e.preventDefault();
+    var f=e.target;
+    var file=f.file.files[0];
+    if(!file)return msg('Vyber fotku.',false);
+    uploadFile(file,'image').then(function(up){
+      if(!up.ok)throw new Error(up.error||'upload');
+      return api('add_product',{type:type,name:f.name.value.trim(),industryId:f.industryId.value,imageUrl:up.url,priceLabel:f.priceLabel.value.trim(),description:f.description.value.trim()});
+    }).then(handleReload).catch(function(err){msg(err.message||'Chyba nahrání.',false);});
+    f.reset();
+  }
+
+  document.getElementById('formTemplate').addEventListener('submit',function(e){handleProductForm(e,'template');});
+  document.getElementById('formStock').addEventListener('submit',function(e){handleProductForm(e,'stock');});
+
+  document.getElementById('formUgc').addEventListener('submit',function(e){
+    e.preventDefault();
+    var f=e.target;
+    var title=f.title.value.trim();
+    var videoUrl=f.videoUrl.value.trim();
+    var videoFile=f.video.files[0];
+    var posterFile=f.poster.files[0];
+    if(!title)return msg('Zadej název.',false);
+
+    function save(url,poster){
+      return api('add_ugc_video',{title:title,videoUrl:url,posterUrl:poster||undefined,industryId:f.industryId.value||undefined});
+    }
+
+    if(videoFile){
+      uploadFile(videoFile,'video').then(function(up){
+        if(!up.ok)throw new Error(up.error||'upload');
+        if(posterFile){
+          return uploadFile(posterFile,'image').then(function(pu){
+            if(!pu.ok)throw new Error(pu.error||'poster');
+            return save(up.url,pu.url);
+          });
+        }
+        return save(up.url);
+      }).then(handleReload).catch(function(err){msg(err.message||'Chyba.',false);});
+    } else if(videoUrl){
+      (posterFile?uploadFile(posterFile,'image').then(function(pu){if(!pu.ok)throw new Error(pu.error);return save(videoUrl,pu.url);}):save(videoUrl))
+        .then(handleReload).catch(function(err){msg(err.message||'Chyba.',false);});
+    } else msg('Nahraj video nebo vlož URL.',false);
+    f.reset();
+  });
+})();
+</script>
+</body>
+</html>

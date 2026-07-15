@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/nia/favicon.svg?v=2" type="image/svg+xml">
+<title>Obchod — šablony &amp; stock fotky — Nia Dobyšar</title>
+<meta name="description" content="Šablony na Instagram a stock fotky podle oboru — pro salony, kosmetiku, fitness a další. Nia Dobyšar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="/nia/google-ads.js"></script>
+<style>
+:root{--black:#080606;--white:#fff;--cream:#f7f4f2;--off:#f0ebe8;--burgundy2:#2d121c;--burgundy3:#5c2a3e;--burgundy4:#7a3d54;--burgundy-glow:#9e4d6a;--ink:#080606;--muted:#6e5c64;--line:rgba(26,10,16,.1);--r-md:24px;--r-sm:14px;--r-pill:999px;--shadow:0 16px 48px -28px rgba(8,6,6,.2);--display:'Bodoni Moda',Georgia,serif;--script:'Pinyon Script',cursive;--b:'Outfit',system-ui,sans-serif;--section:clamp(48px,7vw,80px)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--b);background:var(--cream);color:var(--ink);font-weight:300;line-height:1.7}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 6vw}
+.grad{font-family:var(--script);font-size:1.32em;color:var(--burgundy-glow);text-transform:none}
+.eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;color:var(--burgundy4)}
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 6vw;background:rgba(8,6,6,.94);color:var(--white)}
+.brand{font-family:var(--display);font-size:1.15rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow)}
+.nav-links{display:flex;gap:18px;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase}
+.nav-links a{opacity:.78}.nav-links a:hover,.nav-links a.on{opacity:1}
+.nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 20px;opacity:1}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;color:var(--white)}
+.burger span{width:28px;height:2px;background:currentColor}
+.nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none}
+.page-head{background:var(--black);color:var(--white);padding:clamp(112px,12vw,132px) 0 clamp(32px,5vw,48px)}
+.page-head h1{font-family:var(--display);font-size:clamp(2rem,5vw,3rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.06;margin-top:8px}
+.page-head p{max-width:50ch;color:rgba(255,255,255,.62);margin-top:12px;font-size:.96rem}
+.page-back{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.6;display:inline-block;margin-bottom:16px}
+.sec{padding:var(--section) 0}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.tab,.pill{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--white);cursor:pointer}
+.tab.on,.pill.on{background:var(--burgundy3);border-color:var(--burgundy3);color:var(--white)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow)}
+.card-img{aspect-ratio:4/5;background:var(--off)}
+.card-img img{width:100%;height:100%;object-fit:cover}
+.card-body{padding:16px 16px 18px}
+.card-body .tag{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy4)}
+.card-body h3{font-family:var(--display);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin:6px 0 8px;font-weight:500}
+.card-body p{font-size:.84rem;color:var(--muted);margin-bottom:8px}
+.card-body .price{display:block;font-size:.78rem;color:var(--burgundy3);margin-bottom:12px;font-weight:400}
+.card-btn{display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);background:var(--burgundy3);color:var(--white)}
+.empty{text-align:center;color:var(--muted);padding:32px 0;font-size:.92rem}
+.note{margin-top:24px;padding:16px 18px;border-radius:var(--r-md);background:rgba(92,42,62,.06);border:1px solid rgba(92,42,62,.1);font-size:.86rem;color:var(--muted);max-width:58ch}
+.footer{background:var(--burgundy2);color:rgba(255,255,255,.7);padding:48px 0 28px;margin-top:var(--section)}
+.foot-links{display:flex;gap:18px;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap;margin-top:12px}
+@media(max-width:980px){
+  .burger{display:flex}.nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100dvh;background:var(--black);flex-direction:column;padding:88px 40px 40px;gap:22px;transform:translateX(100%);transition:.55s;visibility:hidden}
+  .nav-links.open{transform:none;visibility:visible}body.nav-open{overflow:hidden}body.nav-open .nav-scrim{display:block}
+}
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
+  <nav class="nav-links" id="navLinks">
+    <a href="/nia/projekty">Práce</a>
+    <a href="/nia/ugc-promo">UGC/Promo</a>
+    <a href="/nia/obchod" class="on">Obchod</a>
+    <a href="/nia#kontakt">Kontakt</a>
+    <a href="/nia#konzultace" class="nav-cta">Rezervovat</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+<button type="button" class="nav-scrim" id="navScrim" hidden></button>
+<script src="/nia/nia-nav.js?v=7"></script>
+
+<section class="page-head">
+  <div class="wrap">
+    <a href="/nia" class="page-back">← Zpět na hlavní</a>
+    <span class="eyebrow">Digitální produkty</span>
+    <h1>Šablony &amp; <span class="grad">Stock</span> fotky</h1>
+    <p>Hotové šablony na Instagram a stock fotky podle oboru — ideální, když rozjíždíš salon nebo značku a ještě nemáš vlastní vizuály.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="tabs" id="shopTabs">
+      <button type="button" class="tab on" data-type="template">Šablony na IG</button>
+      <button type="button" class="tab" data-type="stock">Stock fotky</button>
+    </div>
+    <div class="filters" id="shopFilters"></div>
+    <div class="grid" id="shopGrid"></div>
+    <p class="empty" id="shopEmpty" hidden>V tomto oboru zatím nic není — brzy doplním.</p>
+    <p class="note">Ceny a licence domluvíme individuálně. Po kliknutí na „Mám zájem“ tě přesměruju na kontaktní formulář.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div style="font-family:var(--display);color:#fff;letter-spacing:.06em">Nia Dobyšar</div>
+    <div class="foot-links">
+      <a href="/nia/ugc-promo">UGC/Promo</a>
+      <a href="/nia/obchod">Obchod</a>
+      <a href="/nia#kontakt">Kontakt</a>
+    </div>
+  </div>
+</footer>
+<script src="/nia/obchod/obchod.js?v=1"></script>
+<script src="/nia/cookie-bar.js" defer></script>
+</body>
+</html>

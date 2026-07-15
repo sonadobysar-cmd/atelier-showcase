@@ -7,7 +7,7 @@
 <link rel="icon" href="/nia/favicon-32.png?v=2" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/nia/apple-touch-icon.png?v=2">
 <title>UGC &amp; Promo — Nia Dobyšar</title>
-<meta name="description" content="UGC videa, promo obsah, grafické carousely a social media marketing — portfolio Soňy Dobyšar. Produktová videa, beauty, fashion, faceless reels a brand design.">
+<meta name="description" content="UGC videa, promo obsah, mentoring a personalizované šablony pro sociální sítě — Nia Dobyšar.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -16,30 +16,28 @@
 :root{
   --black:#080606; --white:#fff; --cream:#f7f4f2; --off:#f0ebe8;
   --burgundy2:#2d121c; --burgundy3:#5c2a3e; --burgundy4:#7a3d54; --burgundy-glow:#9e4d6a;
-  --promo:#ff4d9a; --promo-soft:rgba(255,77,154,.12);
   --ink:#080606; --muted:#6e5c64; --muted2:#9a888e;
   --line:rgba(26,10,16,.1); --line-w:rgba(26,10,16,.18);
-  --r-lg:40px; --r-md:24px; --r-sm:16px; --r-pill:999px;
-  --shadow:0 20px 60px -32px rgba(8,6,6,.18);
+  --r-lg:40px; --r-md:24px; --r-sm:14px; --r-pill:999px;
+  --shadow:0 16px 48px -28px rgba(8,6,6,.2);
   --display:'Bodoni Moda',Georgia,serif;
   --script:'Pinyon Script',cursive;
   --b:'Outfit',system-ui,sans-serif;
-  --section:clamp(72px,10vw,112px);
+  --section:clamp(56px,8vw,88px);
   --ease:cubic-bezier(.16,1,.3,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:100px}
-body{font-family:var(--b);background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:1.02rem;font-weight:300;line-height:1.75}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--b);background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:1rem;font-weight:300;line-height:1.7}
 a{color:inherit;text-decoration:none}
 img,video{display:block;max-width:100%}
 ::selection{background:var(--burgundy3);color:var(--white)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 6vw;width:100%}
-.wrap-narrow{max-width:900px;margin:0 auto;padding:0 6vw;width:100%}
+.wrap{max-width:1040px;margin:0 auto;padding:0 6vw;width:100%}
+
+/* script accent — vždy První velké, zbytek malé (psát přímo v HTML) */
+.grad{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.32em;line-height:.92;color:var(--burgundy-glow);vertical-align:-.07em;text-transform:none;letter-spacing:0}
+
 .eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;font-weight:400;color:var(--burgundy4)}
-.eyebrow-pink{color:var(--promo)}
-.grad{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.35em;line-height:.9;color:var(--burgundy-glow);vertical-align:-.08em}
-.grad-pink{color:var(--promo)}
-.sig{font-family:var(--script);font-size:1.3em;color:var(--burgundy-glow)}
 
 .cursor,.cursor-dot{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999}
 .cursor{width:34px;height:34px;border:1px solid rgba(42,18,28,.22);transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
@@ -51,7 +49,7 @@ img,video{display:block;max-width:100%}
   padding:18px 6vw;background:rgba(8,6,6,.94);color:var(--white);box-shadow:0 1px 0 rgba(255,255,255,.06)}
 .brand{font-family:var(--display);font-size:1.15rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
 .brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow);flex:none}
-.nav-links{display:flex;align-items:center;gap:20px;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;font-weight:400}
+.nav-links{display:flex;align-items:center;gap:18px;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase;font-weight:400}
 .nav-links a{opacity:.78;transition:opacity .3s}
 .nav-links a:hover,.nav-links a.on{opacity:1}
 .nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 20px;letter-spacing:.24em;background:rgba(255,255,255,.06);opacity:1}
@@ -62,93 +60,61 @@ img,video{display:block;max-width:100%}
 .burger.open span:nth-child(2){transform:rotate(-45deg)}
 .nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none;padding:0;margin:0;cursor:pointer}
 
-/* HERO */
-.hero{position:relative;background:var(--black);color:var(--white);padding:clamp(110px,12vw,140px) 0 clamp(48px,8vw,72px);overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:
-  radial-gradient(ellipse 70% 55% at 20% 80%,rgba(255,77,154,.18) 0%,transparent 60%),
-  radial-gradient(ellipse 50% 40% at 85% 15%,rgba(158,77,106,.15) 0%,transparent 55%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,56px);align-items:center;position:relative;z-index:2}
-.hero-copy h1{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,6vw,4.2rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.02;margin:10px 0 16px}
-.hero-copy .lead{max-width:48ch;color:rgba(255,255,255,.68);font-size:1.02rem;line-height:1.7}
-.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.hero-tags span{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;padding:9px 14px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);color:rgba(255,255,255,.78)}
-.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
-.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;padding:14px 28px;border-radius:var(--r-pill);transition:background .3s,transform .3s;border:none;cursor:pointer}
-.btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
-.btn-pink{background:var(--promo)}
-.btn-pink:hover{background:#ff6aad}
-.btn-line{font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;opacity:.82;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:6px;transition:color .3s,border-color .3s,opacity .3s,transform .3s}
-.btn-line:hover{color:var(--white);border-color:var(--promo);opacity:1;transform:translateY(-1px)}
-.hero-media{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 32px 80px -24px rgba(0,0,0,.55);background:#111}
-.hero-media video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#111}
-.hero-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
-.hero-media.playing .poster{opacity:0;pointer-events:none}
-.play-fab{position:absolute;inset:0;display:grid;place-items:center;background:rgba(8,6,6,.25);border:none;cursor:pointer;transition:background .3s}
-.play-fab span{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 12px 40px -8px rgba(0,0,0,.4);transition:transform .3s}
-.play-fab:hover span{transform:scale(1.06)}
-.play-fab svg{width:22px;height:22px;margin-left:4px;fill:var(--black)}
-.hero-media.playing .play-fab{display:none}
+.page-head{background:var(--black);color:var(--white);padding:clamp(112px,12vw,136px) 0 clamp(36px,6vw,52px)}
+.page-head .inner{display:grid;grid-template-columns:1fr min(280px,34vw);gap:clamp(24px,4vw,40px);align-items:end}
+.page-head h1{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.06}
+.page-head .lead{margin-top:14px;max-width:44ch;font-size:.98rem;color:rgba(255,255,255,.62);line-height:1.65}
+.page-head .eyebrow{color:rgba(255,255,255,.45)}
+.page-back{display:inline-block;font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.6;margin-bottom:18px;transition:opacity .3s}
+.page-back:hover{opacity:1}
+.portrait{border-radius:var(--r-md);overflow:hidden;box-shadow:0 20px 50px -20px rgba(0,0,0,.55);aspect-ratio:3/4;object-fit:cover;width:100%}
 
-/* SECTIONS */
 .sec{padding:var(--section) 0;border-bottom:1px solid var(--line)}
 .sec.alt{background:var(--white)}
-.sec.dark{background:var(--black);color:var(--white);border-bottom-color:rgba(255,255,255,.06)}
-.sec-head{margin-bottom:clamp(28px,4vw,40px)}
-.sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.08}
-.sec-head p{margin-top:12px;max-width:62ch;color:var(--muted);font-size:.98rem}
-.sec.dark .sec-head p{color:rgba(255,255,255,.62)}
-.sec-head .kicker{display:block;margin-bottom:8px}
+.sec h2{font-family:var(--display);font-weight:500;font-size:clamp(1.45rem,3vw,1.9rem);letter-spacing:.04em;text-transform:uppercase;line-height:1.12;margin-bottom:10px}
+.sec .sub{color:var(--muted);font-size:.92rem;max-width:56ch;margin-bottom:24px}
 
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px);align-items:center}
-.about-grid img{border-radius:var(--r-lg);box-shadow:var(--shadow)}
-.about-grid p{color:var(--muted);font-size:.98rem}
-.about-grid p+p{margin-top:14px}
-.about-grid strong{color:var(--ink);font-weight:500}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.svc{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);padding:22px 20px;box-shadow:var(--shadow)}
+.sec.alt .svc{background:var(--cream)}
+.svc-num{font-size:.58rem;letter-spacing:.32em;color:var(--burgundy4);margin-bottom:8px}
+.svc h3{font-family:var(--display);font-size:1.05rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px;font-weight:500}
+.svc p{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0}
 
-.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
-.stat{background:var(--white);border-radius:var(--r-md);padding:20px 18px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.stat b{display:block;font-family:var(--display);font-size:clamp(1.4rem,3vw,1.9rem);letter-spacing:.02em;color:var(--promo);margin-bottom:4px}
-.stat span{font-size:.78rem;color:var(--muted);line-height:1.45;display:block}
-.metrics-shot{margin-top:28px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.block{margin-top:clamp(28px,4vw,40px)}
+.block:first-child{margin-top:0}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.block-head h3{font-family:var(--display);font-size:1rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+.block-head span{font-size:.78rem;color:var(--muted2);letter-spacing:.06em}
 
-.svc-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.svc{background:var(--off);border-radius:var(--r-md);padding:22px 20px;border:1px solid var(--line)}
-.svc b{display:block;font-family:var(--display);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
-.svc p{font-size:.86rem;color:var(--muted);margin:0;line-height:1.55}
+.reel-row{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+.reel-row::-webkit-scrollbar{height:4px}
+.reel-row::-webkit-scrollbar-thumb{background:var(--line-w);border-radius:4px}
+.reel{flex:0 0 clamp(140px,28vw,200px);scroll-snap-align:start;border-radius:var(--r-sm);overflow:hidden;background:var(--black);box-shadow:var(--shadow);position:relative}
+.reel video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block}
+.reel figcaption{position:absolute;left:0;right:0;bottom:0;padding:28px 10px 10px;background:linear-gradient(transparent,rgba(8,6,6,.75));font-size:.65rem;letter-spacing:.06em;color:rgba(255,255,255,.88)}
 
-.reel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.reel-card{position:relative;border-radius:var(--r-md);overflow:hidden;background:var(--black);box-shadow:var(--shadow)}
-.reel-card img{width:100%;aspect-ratio:9/16;object-fit:cover}
-.reel-card figcaption{position:absolute;left:0;right:0;bottom:0;padding:14px 12px 12px;background:linear-gradient(transparent,rgba(8,6,6,.82));font-size:.72rem;letter-spacing:.08em;color:rgba(255,255,255,.92)}
+.carousel-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:720px}
+.carousel-row img{border-radius:var(--r-sm);aspect-ratio:1;object-fit:cover;width:100%;box-shadow:var(--shadow)}
 
-.gallery-wide{margin-top:24px;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
-.gallery-wide img{width:100%}
-.gallery-note{margin-top:14px;font-size:.86rem;color:var(--muted2)}
+.note{margin-top:20px;padding:16px 18px;border-radius:var(--r-md);background:rgba(92,42,62,.06);border:1px solid rgba(92,42,62,.1);font-size:.86rem;color:var(--muted);max-width:62ch}
+.note b{color:var(--burgundy3);font-weight:500}
 
-.edu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
-.edu{background:var(--off);border-radius:var(--r-md);padding:22px 20px;border:1px solid var(--line)}
-.edu b{display:block;font-family:var(--display);font-size:.95rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;color:var(--ink)}
-.edu p{font-size:.86rem;color:var(--muted);margin:0}
+.cta-box{margin-top:28px;padding:28px 24px;border-radius:var(--r-lg);background:var(--black);color:var(--white);text-align:center;max-width:560px}
+.cta-box p{color:rgba(255,255,255,.62);font-size:.92rem;margin-top:8px}
+.cta-box .btn{display:inline-flex;margin-top:18px;background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;padding:14px 28px;border-radius:var(--r-pill);transition:background .3s,transform .3s}
+.cta-box .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
+.cta-box h3{font-family:var(--display);font-size:1.25rem;letter-spacing:.04em;text-transform:uppercase}
 
-.tools{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.tools span{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;padding:8px 14px;border-radius:var(--r-pill);background:var(--promo-soft);color:var(--burgundy3);border:1px solid rgba(255,77,154,.2)}
-
-.cta-panel{margin-top:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,40px);align-items:center;padding:clamp(28px,4vw,40px);border-radius:var(--r-lg);background:var(--black);color:var(--white)}
-.cta-panel img{border-radius:var(--r-md);box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
-.cta-panel h3{font-family:var(--display);font-size:clamp(1.5rem,3vw,2rem);letter-spacing:.04em;text-transform:uppercase}
-.cta-panel p{color:rgba(255,255,255,.65);margin-top:10px;font-size:.95rem}
-.cta-panel .btn{margin-top:20px}
-
-.footer{background:var(--burgundy2);color:rgba(255,255,255,.75);padding:64px 0 36px}
-.foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;padding-bottom:36px}
-.foot-brand{font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.4rem);line-height:1.1;color:var(--white);display:block;white-space:nowrap;letter-spacing:.06em}
-.foot-brand::after{content:'';display:block;width:min(90px,20vw);height:2px;margin-top:14px;background:var(--burgundy-glow);opacity:.7;border-radius:var(--r-pill)}
-.foot-links{display:flex;gap:22px;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap}
+.footer{background:var(--burgundy2);color:rgba(255,255,255,.75);padding:52px 0 32px}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding-bottom:28px}
+.foot-brand{font-family:var(--display);font-size:clamp(1.3rem,4vw,2rem);color:var(--white);letter-spacing:.06em}
+.foot-links{display:flex;gap:18px;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap}
 .foot-links a{color:rgba(255,255,255,.65)}
 .foot-links a:hover{color:var(--white)}
-.foot-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,.08);font-size:.68rem;color:rgba(255,255,255,.4);letter-spacing:.06em}
+.foot-bot{padding-top:22px;border-top:1px solid rgba(255,255,255,.08);font-size:.66rem;color:rgba(255,255,255,.4);letter-spacing:.06em}
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
 @media(max-width:980px){
@@ -158,15 +124,19 @@ img,video{display:block;max-width:100%}
   .nav-links a.nav-cta{background:transparent;border-color:rgba(255,255,255,.35);opacity:1;width:100%;text-align:center;padding:14px 22px}
   body.nav-open{overflow:hidden}
   body.nav-open .nav-scrim{display:block}
-  .hero-grid,.about-grid,.cta-panel{grid-template-columns:1fr}
-  .stat-grid,.svc-row{grid-template-columns:repeat(2,1fr)}
-  .reel-grid{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:560px){
-  .stat-grid,.svc-row,.edu-grid{grid-template-columns:1fr}
-  .reel-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:720px){
+  .page-head .inner{grid-template-columns:1fr}
+  .page-head .portrait-wrap{max-width:220px;margin:0 auto}
+  .svc-grid{grid-template-columns:1fr}
+  .carousel-row{grid-template-columns:repeat(3,1fr);max-width:none}
+  .carousel-row img:nth-child(n+4){display:none}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+  video{animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -191,200 +161,131 @@ img,video{display:block;max-width:100%}
 <button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
 <script src="/nia/nia-nav.js?v=7"></script>
 
-<section class="hero reveal">
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow eyebrow-pink">Content creator · branding · design</span>
-      <h1>UGC &amp; <span class="grad grad-pink">Promo</span></h1>
-      <p class="lead">Videa, reels, produktové záběry a grafické carousely pro značky, které chtějí růst na sociálních sítích — od beauty a fashion až po vzdělávání a služby.</p>
-      <div class="hero-tags">
-        <span>UGC videa</span>
-        <span>Reels &amp; TikTok</span>
-        <span>Carousely</span>
-        <span>Brand identity</span>
-        <span>Web design</span>
-      </div>
-      <div class="hero-actions">
-        <a href="#kontakt-ugc" class="btn btn-pink" data-cursor>Domluvit spolupráci</a>
-        <a href="#portfolio-video" class="btn-line" data-cursor>Prohlédnout portfolio ↓</a>
-      </div>
-    </div>
-    <div class="hero-media" id="heroMedia">
-      <img class="poster" src="/nia/ugc-promo/img/hero-cover.jpg" alt="Portfolio prezentace — cover" width="1280" height="720" loading="eager">
-      <video id="heroVideo" preload="metadata" playsinline controls poster="/nia/ugc-promo/img/hero-cover.jpg">
-        <source src="/nia/ugc-promo/portfolio.mp4" type="video/mp4">
-      </video>
-      <button type="button" class="play-fab" id="heroPlay" aria-label="Přehrát portfolio video">
-        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-      </button>
-    </div>
-  </div>
-</section>
-
-<section class="sec alt reveal" id="o-mne">
-  <div class="wrap about-grid">
+<section class="page-head reveal">
+  <div class="wrap inner">
     <div>
-      <div class="sec-head">
-        <span class="eyebrow kicker">O mně</span>
-        <h2>Soňa Dobyšar · <span class="grad">Marketing</span> &amp; branding</h2>
+      <a href="/nia" class="page-back" data-cursor>← Zpět na hlavní</a>
+      <span class="eyebrow">Obsah &amp; sociální sítě</span>
+      <h1>UGC · Promo · <span class="grad">Mentoring</span></h1>
+      <p class="lead">Tvořím videa a grafiku pro značky, které chtějí růst na Instagramu a TikToku — a učím, jak na to jít samy. Plus prodávám personalizované šablony pro reels a feed.</p>
+    </div>
+    <div class="portrait-wrap">
+      <img class="portrait" src="/nia/ugc-promo/img/portrait.jpg" alt="Nia Dobyšar" width="540" height="720" loading="eager">
+    </div>
+  </div>
+</section>
+
+<section class="sec alt reveal" id="sluzby">
+  <div class="wrap">
+    <span class="eyebrow">Co nabízím</span>
+    <h2>Čtyři oblasti <span class="grad">spolupráce</span></h2>
+    <p class="sub">Od hotového obsahu pro značku přes promo kampaně až po mentoring a šablony na míru.</p>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="svc-num">01</div>
+        <h3>UGC</h3>
+        <p>Autentická videa pro tvou značku — produkt, recenze, tutorial, lifestyle. Formát 9:16 i 1:1, připravené k publikaci nebo do reklamy.</p>
+      </article>
+      <article class="svc">
+        <div class="svc-num">02</div>
+        <h3>Promo</h3>
+        <p>Promo reels, carousely a vizuály pro kampaně, akce a spuštění služeb. Sladěné s identitou značky a cílem — prodej, reach nebo důvěra.</p>
+      </article>
+      <article class="svc">
+        <div class="svc-num">03</div>
+        <h3>Mentoring</h3>
+        <p>1:1 konzultace — strategie obsahu, střih v CapCut / iMovie, práce s Metou, feed estetika. Pro tvůrce i malé firmy, které chtějí růst vlastními silami.</p>
+      </article>
+      <article class="svc">
+        <div class="svc-num">04</div>
+        <h3>Šablony</h3>
+        <p>Personalizované šablony pro reels, stories a carousely — tvoje barvy, fonty a styl. Ideální, když chceš konzistentní feed bez každodenní grafiky od nuly.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec reveal" id="portfolio">
+  <div class="wrap">
+    <span class="eyebrow">Ukázky</span>
+    <h2>Portfolio <span class="grad">videí</span></h2>
+    <p class="sub">Výřezy z reálných projektů — lifestyle, produkt, faceless estetika a beauty. Klipni pro posun, na mobilu swipe.</p>
+
+    <div class="block">
+      <div class="block-head"><h3>Lifestyle &amp; template reels</h3><span>CapCut · iMovie</span></div>
+      <div class="reel-row">
+        <figure class="reel"><video src="/nia/ugc-promo/clips/reel-coffee.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Coffee &amp; self-care reel"></video><figcaption>Coffee · self-care</figcaption></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/reel-photographer.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Ze života fotografky"></video><figcaption>Ze života fotografky</figcaption></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/reel-flowers.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Péče o květiny"></video><figcaption>Péče o květiny</figcaption></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/reel-pancakes.mp4" muted loop playsinline autoplay preload="metadata" aria-label="Aesthetic food"></video><figcaption>Aesthetic food</figcaption></figure>
       </div>
-      <p>Zdravím, dovolte mi v krátkosti se představit. Jsem zapálený tvůrce brandu, identity, obsahu, designu a eventů. Neustále se v oboru vzdělávám — vše výše uvedené je mojí vášní. Ke každému projektu přistupuji s maximální zodpovědností a do kreativity dávám celé své já.</p>
-      <p><strong>Garantuji, že vaše sítě porostou a klienti o vás budou vědět.</strong> A to je oč tu běží.</p>
-      <div class="tools">
-        <span>CapCut</span>
-        <span>iMovie</span>
-        <span>Meta Ads</span>
-        <span>Canva / Figma</span>
-        <span>WordPress</span>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Produkt &amp; fashion</h3><span>UGC · reklama</span></div>
+      <div class="reel-row">
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-01.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-02.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-03.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-04.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-05.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/product-06.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
       </div>
     </div>
-    <img src="/nia/ugc-promo/img/about-portrait.jpg" alt="Soňa Dobyšar — portrét" width="960" height="540" loading="lazy">
-  </div>
-</section>
 
-<section class="sec reveal" id="sluzby">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Co tvořím</span>
-      <h2>Obsah, který <span class="grad">prodává</span></h2>
-      <p>Od produktových záběrů přes lifestyle a beauty až po promo grafiku pro feed i reklamy.</p>
-    </div>
-    <div class="svc-row">
-      <div class="svc"><b>UGC videa</b><p>Autentická videa pro značky — produkt, recenze, unboxing, tutorial. Formát 9:16 i 16:9.</p></div>
-      <div class="svc"><b>Faceless reels</b><p>Univerzální estetické záběry bez tváře — ideální pro beauty, lifestyle, food a fashion.</p></div>
-      <div class="svc"><b>Grafické carousely</b><p>Promo posty, školení, kurzy, služby — čitelné, výrazné, připravené k publikaci.</p></div>
-      <div class="svc"><b>Brand &amp; web</b><p>Identita, vizuál feedu, copy a weby — aby vše ladilo od prvního příspěvku po landing page.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec dark reveal" id="vysledky">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow eyebrow-pink kicker">Výsledky</span>
-      <h2>Čísla, která <span class="grad grad-pink">mluví</span></h2>
-      <p>Reálné metriky z kampaní a organického obsahu — dosah mimo vlastní sledující, růst profilu a engagement.</p>
-    </div>
-    <div class="stat-grid">
-      <div class="stat"><b>61 946</b><span>zobrazení v jedné kampani · 16 % z reklam</span></div>
-      <div class="stat"><b>+4 106 %</b><span>růst oslovených účtů u vybraného obsahu</span></div>
-      <div class="stat"><b>31 tis.</b><span>zobrazení reelů a příspěvků · +93 % za měsíc</span></div>
-      <div class="stat"><b>94 %</b><span>zobrazení od nesledujících — virální potenciál</span></div>
-    </div>
-    <div class="metrics-shot">
-      <img src="/nia/ugc-promo/img/metrics.jpg" alt="Přehled metrik Instagramu — zobrazení, interakce, noví sledující" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec alt reveal" id="portfolio-video">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Videa</span>
-      <h2>Template &amp; <span class="grad">lifestyle</span> reels</h2>
-      <p>Zde je portfolio videí od produktů, přes fashion, beauty až po osobní projekty. Pracuji primárně v CapCut a iMovie.</p>
-    </div>
-    <div class="reel-grid">
-      <figure class="reel-card"><img src="/nia/ugc-promo/img/thumb-coffee-rest.jpg" alt="UGC video — coffee &amp; self-care" width="326" height="577" loading="lazy"><figcaption>You need a rest · cozy lifestyle</figcaption></figure>
-      <figure class="reel-card"><img src="/nia/ugc-promo/img/thumb-photographer-life.jpg" alt="UGC video — ze života fotografky" width="326" height="577" loading="lazy"><figcaption>Ze života fotografky</figcaption></figure>
-      <figure class="reel-card"><img src="/nia/ugc-promo/img/thumb-flower-care.jpg" alt="UGC video — péče o květiny" width="326" height="577" loading="lazy"><figcaption>Jak pečovat o řezané květiny</figcaption></figure>
-      <figure class="reel-card"><img src="/nia/ugc-promo/img/thumb-pink-pancakes.jpg" alt="UGC video — aesthetic food" width="326" height="577" loading="lazy"><figcaption>Aesthetic food · pink pancakes</figcaption></figure>
-    </div>
-    <div class="gallery-wide" style="margin-top:18px">
-      <img src="/nia/ugc-promo/img/videos-intro.jpg" alt="Portfolio videí — produkt, fashion, beauty" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec reveal">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Produkty</span>
-      <h2>Product <span class="grad">videos</span></h2>
-      <p>Kosmetika, wellness, fashion a nápoje — záběry, které sedí do feedu i do placené reklamy.</p>
-    </div>
-    <div class="gallery-wide">
-      <img src="/nia/ugc-promo/img/product-videos.jpg" alt="Produktová UGC videa — beauty, matcha, fashion" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec alt reveal">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Faceless</span>
-      <h2>Faceless &amp; <span class="grad">universal</span></h2>
-      <p>Estetické záběry bez tváře — univerzální pro značky, které chtějí luxusní mood bez konkrétního influencera.</p>
-    </div>
-    <div class="gallery-wide">
-      <img src="/nia/ugc-promo/img/faceless-videos.jpg" alt="Faceless UGC videa — lifestyle, fashion, flowers" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec reveal">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Beauty</span>
-      <h2>Beauty &amp; <span class="grad">wellness</span></h2>
-      <p>Řasy, obočí, péče o pleť, vlasy — procesní i výsledkové záběry pro salony a kosmetické značky.</p>
-    </div>
-    <div class="gallery-wide">
-      <img src="/nia/ugc-promo/img/beauty-videos.jpg" alt="Beauty UGC videa — lashes, brows, skincare" width="1920" height="1080" loading="lazy">
-    </div>
-    <p class="gallery-note">Ukázky z reálných projektů pro beauty segment — včetně before/after, procedur a self-care mood videí.</p>
-  </div>
-</section>
-
-<section class="sec alt reveal" id="carousely">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Grafika</span>
-      <h2>Graphic design <span class="grad">carousels</span></h2>
-      <p>Promo carousely pro kurzy, služby, e-commerce i B2B — od beauty masterclassů po pojištění a digital marketing.</p>
-    </div>
-    <div class="gallery-wide">
-      <img src="/nia/ugc-promo/img/carousel-design.jpg" alt="Grafické carousely — kurzy, marketing, služby" width="1920" height="1080" loading="lazy">
-    </div>
-    <div class="gallery-wide" style="margin-top:18px">
-      <img src="/nia/ugc-promo/img/carousel-collage.jpg" alt="Collage grafických carouselů — školení, kosmetika, pojištění" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec reveal" id="vzdelavani">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow kicker">Zázemí</span>
-      <h2>Vzdělání &amp; <span class="grad">know-how</span></h2>
-    </div>
-    <div class="edu-grid">
-      <div class="edu"><b>MBA Marketing (2023–2024)</b><p>Dálkové studium EduEffective — psychologie marketingu, reklama, tvorba, grafika a další.</p></div>
-      <div class="edu"><b>Kurz FB reklamy — Petr Handlíř (2024)</b><p>SEO, PPC, práce s Metou, Pixelem a souvisejícími nástroji.</p></div>
-      <div class="edu"><b>Kurz Videoguru (2022)</b><p>Střih, vizuál a získávání publika na TikToku i Instagramu.</p></div>
-      <div class="edu"><b>Tvorba webu ve WordPressu (2023)</b><p>Weby, textařina, pluginy, webgrafika včetně corporate identity.</p></div>
-    </div>
-    <div class="gallery-wide" style="margin-top:24px">
-      <img src="/nia/ugc-promo/img/education.jpg" alt="Přehled vzdělání — MBA, videokurzy, reklamy, web" width="1920" height="1080" loading="lazy">
-    </div>
-  </div>
-</section>
-
-<section class="sec alt reveal" id="kontakt-ugc">
-  <div class="wrap-narrow">
-    <div class="cta-panel">
-      <div>
-        <span class="eyebrow eyebrow-pink">Spolupráce</span>
-        <h3>Let's work <span class="grad grad-pink">together</span></h3>
-        <p>Potřebuješ UGC obsah, promo videa nebo grafiku pro kampaně? Napiš — domluvíme rozsah, styl a termín.</p>
-        <a href="/nia#kontakt" class="btn btn-pink" data-cursor>Odeslat poptávku</a>
-        <p style="margin-top:18px;font-size:.86rem;color:rgba(255,255,255,.5)">
-          <a href="mailto:niadobysar@gmail.com" style="border-bottom:1px solid rgba(255,255,255,.2)">niadobysar@gmail.com</a>
-          · <a href="tel:+420773800785" style="border-bottom:1px solid rgba(255,255,255,.2)">+420 773 800 785</a>
-          · <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener" style="border-bottom:1px solid rgba(255,255,255,.2)">@niadobysar</a>
-        </p>
+    <div class="block">
+      <div class="block-head"><h3>Faceless &amp; universal</h3><span>bez tváře</span></div>
+      <div class="reel-row">
+        <figure class="reel"><video src="/nia/ugc-promo/clips/faceless-01.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/faceless-02.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/faceless-03.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/faceless-04.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
       </div>
-      <img src="/nia/ugc-promo/img/contact.jpg" alt="Soňa Dobyšar — kontakt" width="960" height="540" loading="lazy">
+    </div>
+
+    <div class="block">
+      <div class="block-head"><h3>Beauty &amp; wellness</h3><span>salony · kosmetika</span></div>
+      <div class="reel-row">
+        <figure class="reel"><video src="/nia/ugc-promo/clips/beauty-01.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/beauty-02.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/beauty-03.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+        <figure class="reel"><video src="/nia/ugc-promo/clips/beauty-04.mp4" muted loop playsinline autoplay preload="metadata"></video></figure>
+      </div>
+    </div>
+
+    <p class="note"><b>Tip:</b> Ukázky jsou vyexportované z portfolia — pokud pošleš originální soubory ve vyšší kvalitě, nahradím je bez změny layoutu.</p>
+  </div>
+</section>
+
+<section class="sec alt reveal" id="grafika">
+  <div class="wrap">
+    <span class="eyebrow">Promo grafika</span>
+    <h2>Carousely &amp; <span class="grad">posty</span></h2>
+    <p class="sub">Ukázky grafických carouselů pro kurzy, služby a kampaně — stejný styl umím přenést do šablon na míru.</p>
+    <div class="carousel-row">
+      <img src="/nia/ugc-promo/img/carousel-beauty.jpg" alt="Carousel — beauty kurz" width="540" height="540" loading="lazy">
+      <img src="/nia/ugc-promo/img/carousel-marketing.jpg" alt="Carousel — digital marketing" width="540" height="540" loading="lazy">
+      <img src="/nia/ugc-promo/img/carousel-hair.jpg" alt="Carousel — kadeřnictví" width="540" height="540" loading="lazy">
+      <img src="/nia/ugc-promo/img/carousel-invest.jpg" alt="Carousel — investice do budoucnosti" width="540" height="540" loading="lazy">
+      <img src="/nia/ugc-promo/img/carousel-pet.jpg" alt="Carousel — pojištění mazlíčků" width="540" height="540" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section class="sec reveal" id="kontakt">
+  <div class="wrap">
+    <span class="eyebrow">Spolupráce</span>
+    <h2>Pojďme to <span class="grad">Domluvit</span></h2>
+    <p class="sub">UGC, promo balíček, mentoring nebo šablony — napiš, co potřebuješ, a domluvíme rozsah i termín.</p>
+    <div class="cta-box">
+      <h3>Napiš mi</h3>
+      <p>Nejrychleji přes kontaktní formulář na webu nebo e-mailem.</p>
+      <a href="/nia#kontakt" class="btn" data-cursor>Odeslat poptávku</a>
+      <p style="margin-top:16px;font-size:.82rem;color:rgba(255,255,255,.45)">
+        <a href="mailto:niadobysar@gmail.com">niadobysar@gmail.com</a> ·
+        <a href="tel:+420773800785">+420 773 800 785</a> ·
+        <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">@niadobysar</a>
+      </p>
     </div>
   </div>
 </section>
@@ -396,17 +297,11 @@ img,video{display:block;max-width:100%}
       <div class="foot-links">
         <a href="/nia/projekty">Práce</a>
         <a href="/nia/ugc-promo">UGC/Promo</a>
-        <a href="/nia#studio">Studio</a>
-        <a href="/nia#sluzby">Ceník</a>
-        <a href="/nia#konzultace">Konzultace</a>
         <a href="/nia#kontakt">Kontakt</a>
-        <a href="/nia/bezpecnost">Bezpečnost</a>
         <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
-    <div class="foot-bot">
-      <span>© Nia Dobyšar — Webdesign studio · UGC &amp; Promo</span>
-    </div>
+    <div class="foot-bot">© Nia Dobyšar — UGC · Promo · Mentoring · Šablony</div>
   </div>
 </footer>
 
@@ -423,26 +318,17 @@ img,video{display:block;max-width:100%}
     });
   }
 })();
-(function(){
-  var media=document.getElementById('heroMedia');
-  var video=document.getElementById('heroVideo');
-  var play=document.getElementById('heroPlay');
-  if(!media||!video||!play)return;
-  function start(){
-    media.classList.add('playing');
-    video.play().catch(function(){});
-  }
-  play.addEventListener('click',start);
-  video.addEventListener('play',function(){media.classList.add('playing');});
-  video.addEventListener('pause',function(){
-    if(video.currentTime<0.05||video.ended)media.classList.remove('playing');
-  });
-})();
 document.querySelectorAll('.reveal').forEach(function(el){
   if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
     io.observe(el);
   } else { el.classList.add('in'); }
+});
+document.querySelectorAll('.reel video').forEach(function(v){
+  v.addEventListener('click',function(){
+    if(v.paused){v.play();return;}
+    v.muted=!v.muted;
+  });
 });
 </script>
 <script src="/nia/cookie-bar.js" defer></script>

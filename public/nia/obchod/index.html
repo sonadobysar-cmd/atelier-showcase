@@ -5,108 +5,244 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="/nia/favicon.svg?v=2" type="image/svg+xml">
 <title>Obchod — šablony &amp; stock fotky — Nia Dobyšar</title>
-<meta name="description" content="Šablony na Instagram a stock fotky podle oboru — pro salony, kosmetiku, fitness a další. Nia Dobyšar.">
+<meta name="description" content="Luxusní šablony na Instagram a stock fotky podle oboru — pro salony, kosmetiku, fitness a další. Okamžité stažení po platbě.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
 <script src="/nia/google-ads.js"></script>
 <style>
-:root{--black:#080606;--white:#fff;--cream:#f7f4f2;--off:#f0ebe8;--burgundy2:#2d121c;--burgundy3:#5c2a3e;--burgundy4:#7a3d54;--burgundy-glow:#9e4d6a;--ink:#080606;--muted:#6e5c64;--line:rgba(26,10,16,.1);--r-md:24px;--r-sm:14px;--r-pill:999px;--shadow:0 16px 48px -28px rgba(8,6,6,.2);--display:'Bodoni Moda',Georgia,serif;--script:'Pinyon Script',cursive;--b:'Outfit',system-ui,sans-serif;--section:clamp(48px,7vw,80px)}
+:root{
+  --black:#080606;--black2:#121010;--white:#fff;--cream:#f7f4f2;--off:#f0ebe8;--paper:#e8e2de;
+  --burgundy2:#2d121c;--burgundy3:#5c2a3e;--burgundy4:#7a3d54;--burgundy-glow:#9e4d6a;
+  --ink:#080606;--muted:#6e5c64;--line:rgba(26,10,16,.1);--line-w:rgba(26,10,16,.16);
+  --r-md:24px;--r-lg:32px;--r-pill:999px;
+  --shadow:0 24px 64px -32px rgba(8,6,6,.22);
+  --shadow-lg:0 40px 80px -40px rgba(8,6,6,.28);
+  --display:'Bodoni Moda',Georgia,serif;--script:'Pinyon Script',cursive;--b:'Outfit',system-ui,sans-serif;
+  --section:clamp(72px,10vw,108px);--ease:cubic-bezier(.16,1,.3,1);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--b);background:var(--cream);color:var(--ink);font-weight:300;line-height:1.7}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
+body{font-family:var(--b);background:var(--cream);color:var(--ink);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-.wrap{max-width:1040px;margin:0 auto;padding:0 6vw}
-.grad{font-family:var(--script);font-size:1.32em;color:var(--burgundy-glow);text-transform:none}
-.eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;color:var(--burgundy4)}
-.nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 6vw;background:rgba(8,6,6,.94);color:var(--white)}
+::selection{background:var(--burgundy3);color:var(--white)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 6vw}
+.grad{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.35em;line-height:.9;text-transform:none;letter-spacing:0;color:var(--burgundy-glow);vertical-align:-.06em}
+.eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;color:var(--burgundy4);font-weight:400}
+
+/* NAV — stejná logika jako homepage */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  padding:30px 6vw;transition:background .5s var(--ease),color .5s,padding .4s var(--ease),box-shadow .4s;
+  color:var(--white);background:rgba(8,6,6,.88);backdrop-filter:blur(16px) saturate(1.1);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav.scrolled{padding:18px 6vw}
 .brand{font-family:var(--display);font-size:1.15rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
-.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow)}
-.nav-links{display:flex;gap:18px;font-size:.56rem;letter-spacing:.26em;text-transform:uppercase}
-.nav-links a{opacity:.78}.nav-links a:hover,.nav-links a.on{opacity:1}
-.nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 20px;opacity:1}
-.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;color:var(--white)}
-.burger span{width:28px;height:2px;background:currentColor}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow);flex:none}
+.nav-links{display:flex;align-items:center;gap:24px;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;font-weight:400}
+.nav-links a{position:relative;padding:4px 0;opacity:.78;transition:opacity .35s}
+.nav-links a:hover,.nav-links a.on{opacity:1}
+.nav-links a.on::after{content:'';position:absolute;left:0;bottom:-4px;width:100%;height:1px;background:var(--burgundy-glow)}
+.nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:11px 22px;letter-spacing:.24em;background:rgba(255,255,255,.06);opacity:1;transition:background .35s,border-color .35s,transform .35s var(--ease)}
+.nav-links a.nav-cta:hover{background:var(--burgundy3);border-color:var(--burgundy3);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;color:var(--white);-webkit-tap-highlight-color:transparent}
+.burger span{width:28px;height:2px;background:currentColor;transition:.35s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){transform:rotate(-45deg)}
 .nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none}
-.page-head{background:var(--black);color:var(--white);padding:clamp(112px,12vw,132px) 0 clamp(32px,5vw,48px)}
-.page-head h1{font-family:var(--display);font-size:clamp(2rem,5vw,3rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.06;margin-top:8px}
-.page-head p{max-width:50ch;color:rgba(255,255,255,.62);margin-top:12px;font-size:.96rem}
-.page-back{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.6;display:inline-block;margin-bottom:16px}
-.sec{padding:var(--section) 0}
-.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.tab,.pill{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 18px;border-radius:var(--r-pill);border:1px solid var(--line);background:var(--white);cursor:pointer}
-.tab.on,.pill.on{background:var(--burgundy3);border-color:var(--burgundy3);color:var(--white)}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--shadow)}
-.card-img{aspect-ratio:4/5;background:var(--off)}
-.card-img img{width:100%;height:100%;object-fit:cover}
-.card-body{padding:16px 16px 18px}
-.card-body .tag{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--burgundy4)}
-.card-body h3{font-family:var(--display);font-size:1rem;letter-spacing:.04em;text-transform:uppercase;margin:6px 0 8px;font-weight:500}
-.card-body p{font-size:.84rem;color:var(--muted);margin-bottom:8px}
-.card-body .price{display:block;font-size:.78rem;color:var(--burgundy3);margin-bottom:12px;font-weight:400}
-.card-btn{display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);background:var(--burgundy3);color:var(--white);border:none;cursor:pointer;font-family:inherit}
-.card-btn.ghost{background:transparent;color:var(--burgundy3);border:1px solid rgba(92,42,62,.25);text-align:center}
-.card-btn:disabled{opacity:.6;cursor:wait}
-.empty{text-align:center;color:var(--muted);padding:32px 0;font-size:.92rem}
-.note{margin-top:24px;padding:16px 18px;border-radius:var(--r-md);background:rgba(92,42,62,.06);border:1px solid rgba(92,42,62,.1);font-size:.86rem;color:var(--muted);max-width:58ch}
-.footer{background:var(--burgundy2);color:rgba(255,255,255,.7);padding:48px 0 28px;margin-top:var(--section)}
-.foot-links{display:flex;gap:18px;font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;flex-wrap:wrap;margin-top:12px}
+
+/* HERO */
+.shop-hero{position:relative;min-height:min(72vh,640px);background:var(--black);color:var(--white);display:flex;align-items:flex-end;overflow:hidden;padding:clamp(120px,14vw,148px) 0 clamp(48px,6vw,64px)}
+.shop-hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 55% at 20% 80%,rgba(92,42,62,.45) 0%,transparent 58%),
+  radial-gradient(ellipse 50% 40% at 85% 15%,rgba(122,61,84,.18) 0%,transparent 55%);
+  pointer-events:none}
+.shop-hero::after{content:'';position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(8,6,6,.7));pointer-events:none}
+.shop-hero-inner{position:relative;z-index:2;width:100%}
+.page-back{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;opacity:.55;display:inline-block;margin-bottom:20px;transition:opacity .35s}
+.page-back:hover{opacity:.9}
+.shop-hero h1{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,6.5vw,4.2rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.02;margin-top:10px}
+.shop-hero h1 .grad{color:var(--burgundy-glow);-webkit-text-fill-color:var(--burgundy-glow)}
+.shop-hero-lead{max-width:52ch;color:rgba(255,255,255,.62);margin-top:18px;font-size:clamp(.94rem,1.8vw,1.05rem);line-height:1.8}
+.shop-hero-meta{display:flex;flex-wrap:wrap;gap:28px;margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1)}
+.shop-hero-meta span{font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.shop-hero-meta b{display:block;margin-top:4px;font-family:var(--display);font-size:1.1rem;font-weight:500;letter-spacing:.06em;color:var(--white)}
+
+/* MARQUEE */
+.shop-marquee{background:var(--burgundy2);color:var(--white);padding:20px 0;overflow:hidden;white-space:nowrap;border-block:1px solid rgba(255,255,255,.06)}
+.shop-marquee-track{display:inline-block;animation:shopScroll 38s linear infinite;font-family:var(--display);font-weight:500;font-size:clamp(.92rem,1.8vw,1.15rem);letter-spacing:.2em;text-transform:uppercase}
+.shop-marquee-track span{margin:0 32px}
+.shop-marquee-track .x{font-size:.5rem;vertical-align:middle;color:var(--burgundy-glow);opacity:.85}
+@keyframes shopScroll{to{transform:translateX(-50%)}}
+
+/* KATALOG */
+.shop-main{padding:var(--section) 0}
+.shop-intro{max-width:640px;margin-bottom:clamp(40px,6vw,56px)}
+.shop-intro h2{font-family:var(--display);font-weight:500;font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:.03em;text-transform:uppercase;line-height:1.08;margin-top:12px}
+.shop-intro p{color:var(--muted);margin-top:14px;font-size:.96rem}
+
+.shop-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.shop-tabs{display:flex;gap:8px;flex-wrap:wrap}
+.shop-tab{font-family:var(--b);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;padding:12px 22px;border-radius:var(--r-pill);border:1px solid var(--line-w);background:var(--white);cursor:pointer;color:var(--ink);transition:background .35s,border-color .35s,color .35s,transform .35s var(--ease)}
+.shop-tab:hover{border-color:var(--burgundy4);transform:translateY(-1px)}
+.shop-tab.on{background:var(--burgundy3);border-color:var(--burgundy3);color:var(--white);box-shadow:0 12px 28px -14px rgba(92,42,62,.55)}
+.shop-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.shop-pill{font-family:var(--b);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;padding:10px 16px;border-radius:var(--r-pill);border:1px solid var(--line);background:transparent;cursor:pointer;color:var(--muted);transition:all .35s var(--ease)}
+.shop-pill:hover{color:var(--burgundy3);border-color:rgba(92,42,62,.25)}
+.shop-pill.on{background:rgba(92,42,62,.08);border-color:rgba(92,42,62,.22);color:var(--burgundy3)}
+
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:clamp(20px,3vw,28px)}
+.shop-card{position:relative;background:var(--white);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);transition:transform .55s var(--ease),box-shadow .55s var(--ease)}
+.shop-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.shop-card-visual{position:relative;aspect-ratio:4/5;background:var(--off);overflow:hidden}
+.shop-card-visual img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.shop-card:hover .shop-card-visual img{transform:scale(1.04)}
+.shop-card-shine{position:absolute;inset:0;background:linear-gradient(125deg,rgba(255,255,255,.28) 0%,transparent 42%,transparent 100%);opacity:0;transition:opacity .5s;pointer-events:none;z-index:2}
+.shop-card:hover .shop-card-shine{opacity:1}
+.shop-card-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,6,6,.35) 100%);pointer-events:none;z-index:1}
+.shop-card-tag{position:absolute;top:14px;left:14px;z-index:3;font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;padding:7px 12px;border-radius:var(--r-pill);background:rgba(8,6,6,.72);color:rgba(255,255,255,.92);backdrop-filter:blur(8px)}
+.shop-card-body{padding:22px 22px 24px}
+.shop-card-body h3{font-family:var(--display);font-weight:500;font-size:1.15rem;letter-spacing:.04em;text-transform:uppercase;line-height:1.15;margin-bottom:8px}
+.shop-card-body p{font-size:.86rem;color:var(--muted);line-height:1.65;margin-bottom:16px;min-height:2.8em}
+.shop-card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:16px;border-top:1px solid var(--line)}
+.shop-price{font-family:var(--display);font-size:1.05rem;letter-spacing:.04em;color:var(--burgundy3)}
+.shop-btn{font-family:var(--b);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;padding:12px 20px;border-radius:var(--r-pill);background:var(--burgundy3);color:var(--white);border:none;cursor:pointer;transition:background .35s,transform .35s var(--ease),box-shadow .35s}
+.shop-btn:hover{background:var(--burgundy4);transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(92,42,62,.6)}
+.shop-btn:disabled{opacity:.55;cursor:wait;transform:none}
+.shop-btn--ghost{background:transparent;color:var(--burgundy3);border:1px solid rgba(92,42,62,.28);display:inline-block;text-align:center}
+.shop-btn--ghost:hover{background:rgba(92,42,62,.06);box-shadow:none}
+
+.shop-empty{text-align:center;padding:clamp(48px,8vw,80px) 24px;color:var(--muted)}
+.shop-empty p{font-family:var(--display);font-size:1.4rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.shop-note{margin-top:clamp(48px,7vw,72px);padding:clamp(24px,4vw,32px);border-radius:var(--r-lg);background:var(--black);color:rgba(255,255,255,.72);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.shop-note p{font-size:.92rem;max-width:48ch;line-height:1.75}
+.shop-note b{color:var(--white);font-weight:400}
+.shop-note .shop-btn{white-space:nowrap}
+
+/* FOOTER */
+.footer{background:var(--burgundy2);color:rgba(255,255,255,.72);padding:clamp(48px,7vw,64px) 0 28px;margin-top:var(--section)}
+.foot-top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:24px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08)}
+.foot-brand{font-family:var(--display);font-size:1.2rem;letter-spacing:.12em;text-transform:uppercase;color:var(--white)}
+.foot-links{display:flex;flex-wrap:wrap;gap:14px 22px;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase}
+.foot-links a{opacity:.72;transition:opacity .35s}
+.foot-links a:hover{opacity:1}
+.foot-bot{margin-top:20px;font-size:.78rem;opacity:.45}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
 @media(max-width:980px){
-  .burger{display:flex}.nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100dvh;background:var(--black);flex-direction:column;padding:88px 40px 40px;gap:22px;transform:translateX(100%);transition:.55s;visibility:hidden}
-  .nav-links.open{transform:none;visibility:visible}body.nav-open{overflow:hidden}body.nav-open .nav-scrim{display:block}
+  .burger{display:flex}
+  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100dvh;background:var(--black);flex-direction:column;align-items:flex-start;padding:88px 40px 40px;gap:22px;transform:translateX(100%);transition:.55s var(--ease);visibility:hidden}
+  .nav-links.open{transform:none;visibility:visible}
+  body.nav-open{overflow:hidden}
+  body.nav-open .nav-scrim{display:block}
+  .shop-toolbar{flex-direction:column;align-items:stretch}
+  .shop-filters{justify-content:flex-start}
+  .shop-note{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nav{padding:18px 6vw}
+  .nav-links{gap:18px;font-size:.54rem}
 }
 </style>
 </head>
 <body>
-<header class="nav" id="nav">
+
+<header class="nav scrolled" id="nav">
   <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
   <nav class="nav-links" id="navLinks">
     <a href="/nia/projekty">Práce</a>
     <a href="/nia/ugc-promo">UGC/Promo</a>
     <a href="/nia/obchod" class="on">Obchod</a>
+    <a href="/nia#studio">Studio</a>
+    <a href="/nia#sluzby">Ceník</a>
+    <a href="/nia#web-na-splatky">Web na splátky</a>
+    <a href="/nia#konzultace">Konzultace</a>
     <a href="/nia#kontakt">Kontakt</a>
     <a href="/nia#konzultace" class="nav-cta">Rezervovat</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
-<button type="button" class="nav-scrim" id="navScrim" hidden></button>
+<button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
 <script src="/nia/nia-nav.js?v=7"></script>
 
-<section class="page-head">
-  <div class="wrap">
+<section class="shop-hero">
+  <div class="wrap shop-hero-inner reveal">
     <a href="/nia" class="page-back">← Zpět na hlavní</a>
-    <span class="eyebrow">Digitální produkty</span>
-    <h1>Šablony &amp; <span class="grad">Stock</span> fotky</h1>
-    <p>Hotové šablony na Instagram a stock fotky podle oboru — ideální, když rozjíždíš salon nebo značku a ještě nemáš vlastní vizuály.</p>
+    <span class="eyebrow" style="color:rgba(255,255,255,.45)">Digitální studio</span>
+    <h1>Šablony &amp; <span class="grad">Stock</span></h1>
+    <p class="shop-hero-lead">Editorial šablony pro Instagram a stock fotky podle oboru — pro salony, kosmetiku, fitness i značky, které právě startují.</p>
+    <div class="shop-hero-meta">
+      <div><span>Kategorie</span><b>IG šablony · Fotky</b></div>
+      <div><span>Formát</span><b>Okamžité stažení</b></div>
+      <div><span>Styl</span><b>Editorial · Luxe</b></div>
+    </div>
   </div>
 </section>
 
-<section class="sec">
+<div class="shop-marquee" aria-hidden="true">
+  <div class="shop-marquee-track" id="shopMarquee"></div>
+</div>
+
+<section class="shop-main">
   <div class="wrap">
-    <div class="tabs" id="shopTabs">
-      <button type="button" class="tab on" data-type="template">Šablony na IG</button>
-      <button type="button" class="tab" data-type="stock">Stock fotky</button>
+    <div class="shop-intro reveal">
+      <span class="eyebrow">Kurátorovaný výběr</span>
+      <h2>Hotový obsah, <span class="grad">tvůj branding</span></h2>
+      <p>Vyber si šablonu nebo stock sadu podle oboru. Po zaplacení ti přijde odkaz ke stažení — bez čekání na e-mail od grafika.</p>
     </div>
-    <div class="filters" id="shopFilters"></div>
-    <div class="grid" id="shopGrid"></div>
-    <p class="empty" id="shopEmpty" hidden>V tomto oboru zatím nic není — brzy doplním.</p>
-    <p class="note">Ceny a licence domluvíme individuálně. Po kliknutí na „Mám zájem“ tě přesměruju na kontaktní formulář.</p>
+
+    <div class="shop-toolbar reveal">
+      <div class="shop-tabs" id="shopTabs">
+        <button type="button" class="shop-tab on" data-type="template">Šablony na IG</button>
+        <button type="button" class="shop-tab" data-type="stock">Stock fotky</button>
+      </div>
+      <div class="shop-filters" id="shopFilters"></div>
+    </div>
+
+    <div class="shop-grid" id="shopGrid"></div>
+    <div class="shop-empty" id="shopEmpty" hidden>
+      <p>Brzy doplním</p>
+      <span>V tomto oboru zatím nic není — sleduj Instagram nebo napiš, až bude novinka.</span>
+    </div>
+
+    <div class="shop-note reveal">
+      <p><b>Na míru?</b> Potřebuješ personalizované barvy, fonty nebo celý balíček pro kampaň — domluvíme se individuálně.</p>
+      <a href="/nia#kontakt" class="shop-btn">Napsat Nii</a>
+    </div>
   </div>
 </section>
 
 <footer class="footer">
   <div class="wrap">
-    <div style="font-family:var(--display);color:#fff;letter-spacing:.06em">Nia Dobyšar</div>
-    <div class="foot-links">
-      <a href="/nia/ugc-promo">UGC/Promo</a>
-      <a href="/nia/obchod">Obchod</a>
-      <a href="/nia#kontakt">Kontakt</a>
+    <div class="foot-top">
+      <div class="foot-brand">Nia Dobyšar</div>
+      <div class="foot-links">
+        <a href="/nia/projekty">Práce</a>
+        <a href="/nia/ugc-promo">UGC/Promo</a>
+        <a href="/nia/obchod">Obchod</a>
+        <a href="/nia#kontakt">Kontakt</a>
+        <a href="/nia/bezpecnost">Bezpečnost</a>
+        <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
+      </div>
     </div>
+    <div class="foot-bot">© Nia Dobyšar — Webdesign studio</div>
   </div>
 </footer>
-<script src="/nia/obchod/obchod.js?v=1"></script>
+
+<script>
+(function(){
+  var items=['Šablony IG','Stock fotky','Kosmetika','Kadeřnictví','Wellness','Fitness','Okamžité stažení','Editorial styl'];
+  var mq=document.getElementById('shopMarquee');
+  if(mq){
+    var half=items.map(function(w){return '<span>'+w+' <span class="x">✦</span></span>';}).join('');
+    mq.innerHTML=half+half;
+  }
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+<script src="/nia/obchod/obchod.js?v=2"></script>
 <script src="/nia/cookie-bar.js" defer></script>
 </body>
 </html>

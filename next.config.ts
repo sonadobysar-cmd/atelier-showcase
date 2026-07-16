@@ -22,6 +22,7 @@ const nextConfig: NextConfig = {
       { source: "/nia/obchod", destination: "/nia/obchod/index.html" },
       { source: "/nia/dekujeme-poptavka", destination: "/nia/dekujeme-poptavka/index.html" },
       { source: "/nia/dekujeme-konzultace", destination: "/nia/dekujeme-konzultace/index.html" },
+      { source: "/nia/dekujeme-obchod", destination: "/nia/dekujeme-obchod/index.html" },
       { source: "/nia/admin/logy", destination: "/nia/admin/logy.html" },
       { source: "/nia/admin/obsah", destination: "/nia/admin/obsah.html" },
       { source: "/klic-estate", destination: "/klic-estate/index.html" },

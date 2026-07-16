@@ -1,5 +1,5 @@
 (function () {
-  var state = { industries: [], products: [], type: "template", industry: "" };
+  var state = { industries: [], products: [], type: "template", industry: "", buying: null };
 
   var tabs = document.getElementById("shopTabs");
   var filters = document.getElementById("shopFilters");
@@ -12,6 +12,45 @@
       if (state.industries[i].id === id) return state.industries[i].label;
     }
     return id;
+  }
+
+  function priceText(p) {
+    if (typeof p.priceCzk === "number" && p.priceCzk > 0) {
+      return p.priceCzk.toLocaleString("cs-CZ") + " Kč";
+    }
+    return p.priceLabel || "";
+  }
+
+  function buyProduct(productId, btn) {
+    if (state.buying) return;
+    state.buying = productId;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Přesměrování…";
+    }
+    fetch("/api/nia/shop/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId: productId }),
+    })
+      .then(function (r) {
+        return r.json();
+      })
+      .then(function (d) {
+        if (d.ok && d.url) {
+          window.location.href = d.url;
+          return;
+        }
+        throw new Error(d.error || "Platbu se nepodařilo spustit.");
+      })
+      .catch(function (err) {
+        alert(err.message || "Chyba. Zkus to znovu nebo napiš přes kontakt.");
+        state.buying = null;
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = "Koupit";
+        }
+      });
   }
 
   function renderFilters() {
@@ -53,6 +92,10 @@
     if (empty) empty.hidden = true;
     grid.innerHTML = list
       .map(function (p) {
+        var price = priceText(p);
+        var cta = p.purchasable
+          ? '<button type="button" class="card-btn" data-buy="' + p.id + '">Koupit</button>'
+          : '<a href="/nia#kontakt" class="card-btn ghost">Mám zájem</a>';
         return (
           '<article class="card">' +
           '<div class="card-img"><img src="' +
@@ -68,12 +111,18 @@
           p.name +
           "</h3>" +
           (p.description ? "<p>" + p.description + "</p>" : "") +
-          (p.priceLabel ? '<b class="price">' + p.priceLabel + "</b>" : "") +
-          '<a href="/nia#kontakt" class="card-btn">Mám zájem</a>' +
+          (price ? '<b class="price">' + price + "</b>" : "") +
+          cta +
           "</div></article>"
         );
       })
       .join("");
+
+    grid.querySelectorAll("[data-buy]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        buyProduct(btn.getAttribute("data-buy"), btn);
+      });
+    });
   }
 
   function load() {

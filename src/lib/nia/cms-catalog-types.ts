@@ -12,10 +12,19 @@ export type CmsProduct = {
   industryId: string;
   imageUrl: string;
   description?: string;
+  /** Zobrazení v katalogu (např. „od 299 Kč“). */
   priceLabel?: string;
+  /** Prodejní cena v Kč — musí být > 0 pro tlačítko Koupit. */
+  priceCzk?: number;
+  /** Interní klíč souboru ke stažení (private blob / data složka). */
+  downloadUrl?: string;
   active: boolean;
   order: number;
   createdAt: string;
+};
+
+export type CmsProductPublic = Omit<CmsProduct, "downloadUrl"> & {
+  purchasable: boolean;
 };
 
 export type CmsUgcVideo = {

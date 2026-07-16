@@ -7,8 +7,9 @@ import {
   slugifyIndustry,
   uploadCmsFile,
 } from "@/lib/nia/cms-catalog";
-import type { CmsIndustry, CmsProduct, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
 import { corsHeaders } from "@/lib/nia/security/allowed-origins";
+import { uploadShopDownloadFile } from "@/lib/nia/shop-files";
+import type { CmsIndustry, CmsProduct, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -30,12 +31,25 @@ export async function POST(req: Request) {
 
   if (contentType.includes("multipart/form-data")) {
     const form = await req.formData();
-    const uploadKind = (form.get("kind") as string) === "video" ? "video" : "image";
+    const uploadKind = String(form.get("kind") || "image");
+    if (uploadKind === "download") {
+      const file = form.get("file");
+      if (!(file instanceof File)) {
+        return NextResponse.json({ ok: false, error: "Chybí soubor." }, { status: 400 });
+      }
+      const uploaded = await uploadShopDownloadFile(file);
+      if (!uploaded.ok) {
+        return NextResponse.json({ ok: false, error: uploaded.error }, { status: 400 });
+      }
+      return NextResponse.json({ ok: true, url: uploaded.key });
+    }
+
+    const kind = uploadKind === "video" ? "video" : "image";
     const file = form.get("file");
     if (!(file instanceof File)) {
       return NextResponse.json({ ok: false, error: "Chybí soubor." }, { status: 400 });
     }
-    const uploaded = await uploadCmsFile(file, uploadKind);
+    const uploaded = await uploadCmsFile(file, kind);
     if (!uploaded.ok) {
       return NextResponse.json({ ok: false, error: uploaded.error }, { status: 400 });
     }
@@ -75,6 +89,8 @@ export async function POST(req: Request) {
     if (!name || !industryId || !imageUrl || (type !== "template" && type !== "stock")) {
       return NextResponse.json({ ok: false, error: "Vyplň typ, název, obor a mockup." }, { status: 400 });
     }
+    const priceCzk = Number(payload.priceCzk);
+    const downloadUrl = String(payload.downloadUrl || "").trim() || undefined;
     const product: CmsProduct = {
       id: randomUUID(),
       type,
@@ -83,6 +99,8 @@ export async function POST(req: Request) {
       imageUrl,
       description: String(payload.description || "").trim() || undefined,
       priceLabel: String(payload.priceLabel || "").trim() || undefined,
+      priceCzk: Number.isFinite(priceCzk) && priceCzk > 0 ? Math.round(priceCzk) : undefined,
+      downloadUrl,
       active: payload.active !== false,
       order: catalog.products.length + 1,
       createdAt: now,
@@ -97,6 +115,7 @@ export async function POST(req: Request) {
     const idx = catalog.products.findIndex((p) => p.id === id);
     if (idx < 0) return NextResponse.json({ ok: false, error: "Produkt nenalezen." }, { status: 404 });
     const cur = catalog.products[idx];
+    const rawPrice = payload.priceCzk !== undefined ? Number(payload.priceCzk) : cur.priceCzk;
     catalog.products[idx] = {
       ...cur,
       name: String(payload.name ?? cur.name).trim(),
@@ -104,6 +123,16 @@ export async function POST(req: Request) {
       imageUrl: String(payload.imageUrl ?? cur.imageUrl).trim(),
       description: payload.description !== undefined ? String(payload.description).trim() || undefined : cur.description,
       priceLabel: payload.priceLabel !== undefined ? String(payload.priceLabel).trim() || undefined : cur.priceLabel,
+      priceCzk:
+        payload.priceCzk !== undefined
+          ? typeof rawPrice === "number" && Number.isFinite(rawPrice) && rawPrice > 0
+            ? Math.round(rawPrice)
+            : undefined
+          : cur.priceCzk,
+      downloadUrl:
+        payload.downloadUrl !== undefined
+          ? String(payload.downloadUrl).trim() || undefined
+          : cur.downloadUrl,
       active: payload.active !== undefined ? Boolean(payload.active) : cur.active,
       order: Number(payload.order ?? cur.order),
     };

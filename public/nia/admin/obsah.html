@@ -65,8 +65,10 @@ th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bu
         <div class="grid2">
           <div class="form-row"><label>Název</label><input type="text" name="name" required></div>
           <div class="form-row"><label>Obor</label><select name="industryId" id="tplIndustry"></select></div>
-          <div class="form-row"><label>Cena (text)</label><input type="text" name="priceLabel" placeholder="od 299 Kč"></div>
+          <div class="form-row"><label>Cena (Kč)</label><input type="number" name="priceCzk" min="1" step="1" placeholder="299"></div>
+          <div class="form-row"><label>Cena (text, volitelné)</label><input type="text" name="priceLabel" placeholder="od 299 Kč"></div>
           <div class="form-row"><label>Mockup fotka</label><input type="file" name="file" accept="image/*" required></div>
+          <div class="form-row"><label>Soubor ke stažení (ZIP)</label><input type="file" name="download" accept=".zip,application/zip"></div>
         </div>
         <div class="form-row"><label>Popis (volitelné)</label><textarea name="description" rows="2"></textarea></div>
         <button type="submit" style="margin-top:10px">Uložit šablonu</button>
@@ -80,8 +82,10 @@ th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bu
         <div class="grid2">
           <div class="form-row"><label>Název</label><input type="text" name="name" required></div>
           <div class="form-row"><label>Obor</label><select name="industryId" id="stockIndustry"></select></div>
-          <div class="form-row"><label>Cena (text)</label><input type="text" name="priceLabel" placeholder="od 490 Kč"></div>
+          <div class="form-row"><label>Cena (Kč)</label><input type="number" name="priceCzk" min="1" step="1" placeholder="490"></div>
+          <div class="form-row"><label>Cena (text, volitelné)</label><input type="text" name="priceLabel" placeholder="od 490 Kč"></div>
           <div class="form-row"><label>Náhledová fotka</label><input type="file" name="file" accept="image/*" required></div>
+          <div class="form-row"><label>Soubor ke stažení (ZIP)</label><input type="file" name="download" accept=".zip,application/zip"></div>
         </div>
         <div class="form-row"><label>Popis</label><textarea name="description" rows="2"></textarea></div>
         <button type="submit" style="margin-top:10px">Uložit stock sadu</button>
@@ -141,6 +145,10 @@ th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bu
     return fetch('/api/nia/cms/admin',{method:'POST',headers:{Authorization:'Bearer '+token()},body:fd}).then(function(r){return r.json();});
   }
 
+  function uploadDownload(file){
+    return uploadFile(file,'download');
+  }
+
   function api(action,payload){
     return fetch('/api/nia/cms/admin',{method:'POST',headers:headers(true),body:JSON.stringify({action:action,payload:payload||{}})}).then(function(r){return r.json();});
   }
@@ -156,9 +164,11 @@ th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bu
       var list=catalog.products.filter(function(p){return p.type===type;});
       if(!list.length){document.getElementById(targetId).innerHTML='<div class="empty">Zatím prázdné.</div>';return;}
       var rows=list.map(function(p){
-        return '<tr><td><img class="thumb" src="'+p.imageUrl+'" alt=""></td><td>'+p.name+'</td><td>'+industryLabel(p.industryId)+'</td><td>'+(p.priceLabel||'')+'</td><td><button type="button" class="ghost danger" data-del-product="'+p.id+'">Smazat</button></td></tr>';
+        var price=p.priceCzk?p.priceCzk+' Kč':(p.priceLabel||'—');
+        var dl=p.downloadUrl?'✓ soubor':'—';
+        return '<tr><td><img class="thumb" src="'+p.imageUrl+'" alt=""></td><td>'+p.name+'</td><td>'+industryLabel(p.industryId)+'</td><td>'+price+'</td><td>'+dl+'</td><td><button type="button" class="ghost danger" data-del-product="'+p.id+'">Smazat</button></td></tr>';
       }).join('');
-      document.getElementById(targetId).innerHTML='<table><thead><tr><th>Foto</th><th>Název</th><th>Obor</th><th>Cena</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+      document.getElementById(targetId).innerHTML='<table><thead><tr><th>Foto</th><th>Název</th><th>Obor</th><th>Cena</th><th>Download</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
     }
     productTable('template','listTemplates');
     productTable('stock','listStock');
@@ -228,10 +238,32 @@ th{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bu
     e.preventDefault();
     var f=e.target;
     var file=f.file.files[0];
+    var downloadFile=f.download&&f.download.files[0];
     if(!file)return msg('Vyber fotku.',false);
     uploadFile(file,'image').then(function(up){
       if(!up.ok)throw new Error(up.error||'upload');
-      return api('add_product',{type:type,name:f.name.value.trim(),industryId:f.industryId.value,imageUrl:up.url,priceLabel:f.priceLabel.value.trim(),description:f.description.value.trim()});
+      var chain=Promise.resolve(up.url);
+      if(downloadFile){
+        chain=uploadDownload(downloadFile).then(function(du){
+          if(!du.ok)throw new Error(du.error||'download upload');
+          return {imageUrl:up.url,downloadUrl:du.url};
+        });
+      } else {
+        chain=chain.then(function(url){return {imageUrl:url,downloadUrl:undefined};});
+      }
+      return chain.then(function(data){
+        var priceCzk=Number(f.priceCzk.value);
+        return api('add_product',{
+          type:type,
+          name:f.name.value.trim(),
+          industryId:f.industryId.value,
+          imageUrl:data.imageUrl,
+          downloadUrl:data.downloadUrl,
+          priceCzk:priceCzk>0?priceCzk:undefined,
+          priceLabel:f.priceLabel.value.trim(),
+          description:f.description.value.trim()
+        });
+      });
     }).then(handleReload).catch(function(err){msg(err.message||'Chyba nahrání.',false);});
     f.reset();
   }

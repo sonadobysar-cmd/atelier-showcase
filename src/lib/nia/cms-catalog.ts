@@ -1,9 +1,10 @@
 import { randomUUID } from "crypto";
 import { mkdir, readFile, writeFile } from "fs/promises";
 import path from "path";
-import type { CmsCatalog, CmsIndustry, CmsProduct, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
+import type { CmsCatalog, CmsIndustry, CmsProduct, CmsProductPublic, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
+import { productPurchasable } from "@/lib/nia/shop-product";
 
-export type { CmsCatalog, CmsIndustry, CmsProduct, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
+export type { CmsCatalog, CmsIndustry, CmsProduct, CmsProductPublic, CmsUgcVideo, ProductType } from "@/lib/nia/cms-catalog-types";
 
 const BLOB_PATH = "nia-cms/catalog.json";
 const DATA_DIR = process.env.NIA_CMS_DATA_DIR || path.join(process.cwd(), "data", "nia-cms");
@@ -33,6 +34,7 @@ export function defaultCatalog(): CmsCatalog {
       industryId: "kosmetika",
       imageUrl: "/nia/ugc-promo/img/carousel-beauty.jpg",
       priceLabel: "od 299 Kč",
+      priceCzk: 299,
       active: true,
       order: 1,
       createdAt: new Date().toISOString(),
@@ -44,6 +46,7 @@ export function defaultCatalog(): CmsCatalog {
       industryId: "kadernictvi",
       imageUrl: "/nia/ugc-promo/img/carousel-hair.jpg",
       priceLabel: "od 299 Kč",
+      priceCzk: 299,
       active: true,
       order: 2,
       createdAt: new Date().toISOString(),
@@ -55,6 +58,7 @@ export function defaultCatalog(): CmsCatalog {
       industryId: "marketing",
       imageUrl: "/nia/ugc-promo/img/carousel-marketing.jpg",
       priceLabel: "od 299 Kč",
+      priceCzk: 299,
       active: true,
       order: 3,
       createdAt: new Date().toISOString(),
@@ -67,6 +71,7 @@ export function defaultCatalog(): CmsCatalog {
       imageUrl: "/nia/ugc-promo/img/carousel-invest.jpg",
       description: "10 fotek pro start salonu bez vlastního portfolia.",
       priceLabel: "od 490 Kč",
+      priceCzk: 490,
       active: true,
       order: 1,
       createdAt: new Date().toISOString(),
@@ -79,6 +84,7 @@ export function defaultCatalog(): CmsCatalog {
       imageUrl: "/nia/ugc-promo/img/carousel-pet.jpg",
       description: "Stock fotky pro lokální služby a e-shopy.",
       priceLabel: "od 390 Kč",
+      priceCzk: 390,
       active: true,
       order: 2,
       createdAt: new Date().toISOString(),
@@ -95,13 +101,21 @@ export function defaultCatalog(): CmsCatalog {
   return { industries, products, ugcVideos };
 }
 
+function normalizeProduct(p: CmsProduct): CmsProduct {
+  return {
+    ...p,
+    priceCzk: typeof p.priceCzk === "number" && p.priceCzk > 0 ? p.priceCzk : undefined,
+    downloadUrl: p.downloadUrl?.trim() || undefined,
+  };
+}
+
 function normalizeCatalog(raw: unknown): CmsCatalog {
   const base = defaultCatalog();
   if (!raw || typeof raw !== "object") return base;
   const o = raw as Partial<CmsCatalog>;
   return {
     industries: Array.isArray(o.industries) && o.industries.length ? o.industries : base.industries,
-    products: Array.isArray(o.products) ? o.products : base.products,
+    products: Array.isArray(o.products) ? o.products.map((p) => normalizeProduct(p as CmsProduct)) : base.products,
     ugcVideos: Array.isArray(o.ugcVideos) ? o.ugcVideos : base.ugcVideos,
   };
 }
@@ -190,10 +204,16 @@ export async function uploadCmsFile(
   return { ok: true, url: `/nia/obchod/uploads/${name}` };
 }
 
-export function publicCatalog(catalog: CmsCatalog): CmsCatalog {
+export function publicCatalog(catalog: CmsCatalog): { industries: CmsIndustry[]; products: CmsProductPublic[]; ugcVideos: CmsUgcVideo[] } {
   return {
     industries: catalog.industries,
-    products: catalog.products.filter((p) => p.active).sort((a, b) => a.order - b.order),
+    products: catalog.products
+      .filter((p) => p.active)
+      .sort((a, b) => a.order - b.order)
+      .map((p) => {
+        const { downloadUrl: _d, ...rest } = p;
+        return { ...rest, purchasable: productPurchasable(p) };
+      }),
     ugcVideos: catalog.ugcVideos.filter((v) => v.active).sort((a, b) => a.order - b.order),
   };
 }

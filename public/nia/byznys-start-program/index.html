@@ -102,6 +102,17 @@ img{display:block;max-width:100%}
 .ph-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted2);text-align:center;padding:16px}
 .ph-label span{display:block;font-family:var(--display);font-size:.9rem;letter-spacing:.12em;color:var(--burgundy4);margin-bottom:8px}
 
+.cenik{background:var(--off);padding:var(--section) 0}
+.cenik-list{max-width:720px;margin:0 auto}
+.cenik-row{display:grid;grid-template-columns:1fr auto;gap:12px 28px;align-items:baseline;padding:28px 0;border-top:1px solid var(--line);transition:transform .45s var(--ease)}
+.cenik-row:last-of-type{border-bottom:1px solid var(--line)}
+.cenik-row:hover{transform:translateX(6px)}
+.cenik-hrs{font-family:var(--display);font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--black)}
+.cenik-amt{font-family:var(--display);font-weight:500;font-size:clamp(1.35rem,3vw,1.85rem);letter-spacing:.02em;color:var(--black);text-align:right;white-space:nowrap}
+.cenik-save{grid-column:1 / -1;font-size:.82rem;color:var(--burgundy4);letter-spacing:.04em;font-weight:300;margin-top:-4px}
+.cenik-perk{max-width:720px;margin:40px auto 0;padding-top:32px;border-top:1px solid var(--line);text-align:center;font-size:.94rem;line-height:1.75;color:var(--muted);font-weight:300}
+.cenik-perk strong{color:var(--burgundy3);font-weight:500}
+
 .cta-band{background:var(--burgundy);color:var(--white);padding:clamp(72px,12vw,120px) 0;text-align:center}
 .cta-band .eyebrow{color:rgba(255,255,255,.5)}
 .cta-band h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.08;margin:16px 0 20px;color:var(--white)}
@@ -242,6 +253,40 @@ img{display:block;max-width:100%}
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="cenik" class="cenik">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">Mentoring</span>
+        <h2>Ceník Byznys Start <span class="grad">Program</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">hodiny</span>
+    </div>
+    <div class="cenik-list reveal">
+      <div class="cenik-row">
+        <span class="cenik-hrs">1 hodina</span>
+        <span class="cenik-amt">2 000 Kč</span>
+      </div>
+      <div class="cenik-row">
+        <span class="cenik-hrs">5 hodin</span>
+        <span class="cenik-amt">9 000 Kč</span>
+        <span class="cenik-save">ušetříte 1 000 Kč</span>
+      </div>
+      <div class="cenik-row">
+        <span class="cenik-hrs">10 hodin</span>
+        <span class="cenik-amt">18 000 Kč</span>
+        <span class="cenik-save">ušetříte 2 000 Kč</span>
+      </div>
+      <div class="cenik-row">
+        <span class="cenik-hrs">20 hodin</span>
+        <span class="cenik-amt">35 000 Kč</span>
+        <span class="cenik-save">ušetříte 5 000 Kč</span>
+      </div>
+    </div>
+    <p class="cenik-perk reveal">Klienti programu: <strong>sleva 20&nbsp;%</strong> na branding a tvorbu webu</p>
   </div>
 </section>
 

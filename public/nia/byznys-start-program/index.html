@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/nia/favicon.svg?v=2" type="image/svg+xml">
+<link rel="icon" href="/nia/favicon-32.png?v=2" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/nia/apple-touch-icon.png?v=2">
+<title>Byznys Start Program — Nia Dobyšar</title>
+<meta name="description" content="Byznys Start Program — od vize po hotové podnikání s vlastní tváří. Projdeme s vámi celou cestu: kdo jste, co budete dělat, strategie, vizuál, papíry i start.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=Outfit:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<script src="/nia/google-ads.js"></script>
+<style>
+:root{
+  --black:#080606; --black2:#121010; --white:#fff; --cream:#f7f4f2; --off:#f0ebe8; --paper:#e8e2de;
+  --burgundy:#1a0a10; --burgundy2:#2d121c; --burgundy3:#5c2a3e; --burgundy4:#7a3d54; --burgundy-glow:#9e4d6a;
+  --ink:#080606; --muted:#6e5c64; --muted2:#9a888e;
+  --line:rgba(26,10,16,.1); --line-w:rgba(26,10,16,.18);
+  --r:32px; --r-sm:20px; --r-md:24px; --r-lg:40px; --r-xl:56px; --r-pill:999px;
+  --shadow:0 20px 60px -32px rgba(8,6,6,.18);
+  --shadow-lg:0 40px 80px -40px rgba(8,6,6,.28);
+  --display:'Bodoni Moda',Georgia,'Times New Roman',serif;
+  --script:'Pinyon Script',cursive;
+  --b:'Outfit',system-ui,sans-serif;
+  --section:clamp(104px,14vw,156px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:1.02rem;font-weight:300;line-height:1.75}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--burgundy3);color:var(--white)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 6vw;width:100%}
+.eyebrow{font-size:.62rem;letter-spacing:.48em;text-transform:uppercase;font-weight:400;color:var(--burgundy4)}
+.grad{font-family:var(--script);font-style:normal;font-weight:400;font-size:1.35em;line-height:.9;text-transform:none;letter-spacing:0;color:var(--burgundy4);vertical-align:-.08em;padding:0 .04em}
+.btn{display:inline-flex;align-items:center;gap:12px;border-radius:var(--r-pill);border:none;cursor:pointer;transition:transform .35s var(--ease),box-shadow .35s,background .35s;font-family:var(--b);background:var(--burgundy3);color:var(--white);font-weight:400;letter-spacing:.24em;font-size:.64rem;text-transform:uppercase;padding:16px 32px;box-shadow:0 12px 32px -12px rgba(92,42,62,.55)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(92,42,62,.65);background:var(--burgundy4)}
+.btn-line{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;font-weight:400;opacity:.82;color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:6px;transition:color .35s,border-color .35s,opacity .35s,transform .35s var(--ease)}
+.btn-line:hover{color:var(--white);border-color:var(--burgundy-glow);opacity:1;transform:translateY(-1px)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-bottom:64px}
+.sec-head.centered{flex-direction:column;align-items:center;text-align:center;margin-bottom:72px}
+.sec-head.centered .idx{margin-top:6px}
+.sec-head h2{font-family:var(--display);font-weight:500;font-size:clamp(2.2rem,5.5vw,4rem);line-height:1.02;letter-spacing:.02em;margin-top:16px;text-transform:uppercase;color:var(--black)}
+.sec-head h2 .grad{font-size:1.2em;color:var(--burgundy4)}
+.sec-head h2 .rule{display:block;width:min(96px,16vw);height:2px;background:linear-gradient(90deg,var(--burgundy3),var(--burgundy-glow));margin:24px auto 0;border-radius:var(--r-pill);opacity:.85}
+.sec-head .idx{font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:400}
+
+.cursor,.cursor-dot{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999}
+.cursor{width:34px;height:34px;border:1px solid rgba(42,18,28,.22);transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}
+.cursor-dot{width:4px;height:4px;background:var(--burgundy3);transform:translate(-50%,-50%)}
+.cursor.grow{width:68px;height:68px;background:rgba(90,42,58,.06);border-color:transparent}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+.nav{position:fixed;top:0;left:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;
+  padding:30px 6vw;transition:background .5s var(--ease),color .5s,padding .4s var(--ease),box-shadow .4s;
+  color:var(--white);background:rgba(8,6,6,.55);backdrop-filter:blur(16px) saturate(1.1)}
+.nav.scrolled{background:rgba(8,6,6,.94);color:var(--white);padding:18px 6vw;box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav.scrolled a.nav-cta{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.06)}
+.nav.scrolled a.nav-cta:hover{background:var(--burgundy3);border-color:var(--burgundy3)}
+.brand{font-family:var(--display);font-size:1.15rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:12px}
+.brand .dot{width:5px;height:5px;border-radius:50%;background:var(--burgundy-glow);flex:none;opacity:.9}
+.nav-links{display:flex;align-items:center;gap:22px;font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;font-weight:400}
+.nav-links a{position:relative;padding:4px 0;opacity:.78}
+.nav-links a:not(.nav-cta):hover,.nav-links a.on{opacity:1}
+.nav-links a:not(.nav-cta)::after{content:'';position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--burgundy-glow);transition:width .4s var(--ease)}
+.nav-links a:not(.nav-cta):hover::after,.nav-links a.on::after{width:100%}
+.nav-links a.nav-cta{border:1px solid rgba(255,255,255,.28);border-radius:var(--r-pill);padding:12px 24px;letter-spacing:.26em;background:rgba(255,255,255,.06);opacity:1;transition:background .35s var(--ease),border-color .35s,color .35s,transform .35s var(--ease)}
+.nav-links a.nav-cta:hover{background:var(--burgundy3);border-color:var(--burgundy3);transform:translateY(-1px)}
+.burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;z-index:210;color:var(--white);-webkit-tap-highlight-color:transparent}
+.burger span{width:28px;height:2px;background:currentColor;transition:.35s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){transform:rotate(-45deg)}
+.nav-scrim{display:none;position:fixed;inset:0;z-index:204;background:rgba(8,6,6,.55);border:none;padding:0;margin:0;cursor:pointer}
+
+.hero{position:relative;min-height:88vh;background:var(--black);color:var(--white);display:flex;align-items:flex-end;padding:140px 0 clamp(64px,10vw,110px);overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 80% 60% at 50% 100%,rgba(92,42,62,.4) 0%,transparent 62%),
+  radial-gradient(ellipse 50% 40% at 80% 20%,rgba(122,61,84,.14) 0%,transparent 55%);
+  pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:820px}
+.hero .eyebrow{color:rgba(255,255,255,.5)}
+.hero h1{font-family:var(--display);font-weight:500;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.05;letter-spacing:.02em;text-transform:uppercase;margin:18px 0 28px;color:var(--white)}
+.hero-lead{font-size:clamp(.95rem,2.2vw,1.08rem);line-height:1.85;color:rgba(255,255,255,.72);font-weight:300;max-width:640px;margin-bottom:36px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+
+.cesta{background:var(--cream);padding:var(--section) 0}
+.cesta-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:clamp(36px,6vw,72px);align-items:start}
+.process{display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:26px 0;border-top:1px solid var(--line);transition:transform .45s var(--ease)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step:hover{transform:translateX(6px)}
+.step .n{color:var(--burgundy3);font-weight:400;font-family:var(--display);font-size:1.15rem;letter-spacing:.04em;padding-top:2px}
+.step h4{font-family:var(--display);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--black);font-size:clamp(1.05rem,2.2vw,1.25rem);margin-bottom:8px}
+.step p{font-weight:300;color:var(--muted);font-size:.94rem;line-height:1.8;max-width:520px}
+
+.ph-shots{display:grid;grid-template-columns:1fr 1fr;gap:16px;position:sticky;top:110px}
+.ph{margin:0;border-radius:var(--r-lg);overflow:hidden;background:var(--off);box-shadow:var(--shadow);aspect-ratio:4/5;position:relative;display:flex;align-items:center;justify-content:center}
+.ph:nth-child(2){aspect-ratio:5/4;margin-top:28px}
+.ph-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted2);text-align:center;padding:16px}
+.ph-label span{display:block;font-family:var(--display);font-size:.9rem;letter-spacing:.12em;color:var(--burgundy4);margin-bottom:8px}
+
+.cta-band{background:var(--burgundy);color:var(--white);padding:clamp(72px,12vw,120px) 0;text-align:center}
+.cta-band .eyebrow{color:rgba(255,255,255,.5)}
+.cta-band h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.08;margin:16px 0 20px;color:var(--white)}
+.cta-band h2 .grad{color:var(--burgundy-glow)}
+.cta-band p{max-width:540px;margin:0 auto 36px;font-size:.98rem;line-height:1.85;color:rgba(255,255,255,.68);font-weight:300}
+.cta-band .btn{background:var(--burgundy-glow);box-shadow:0 12px 32px -12px rgba(0,0,0,.4)}
+.cta-band .btn:hover{background:var(--burgundy4)}
+
+.footer{background:var(--burgundy2);color:rgba(255,255,255,.75);padding:80px 0 40px;margin-top:0;border-top:1px solid rgba(255,255,255,.06)}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap;margin-bottom:48px}
+.foot-brand{font-family:var(--display);font-size:clamp(1.4rem,4.5vw,2.2rem);line-height:1.1;letter-spacing:.06em;color:var(--white)}
+.foot-links{display:flex;gap:28px;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;flex-wrap:wrap}
+.foot-links a{color:rgba(255,255,255,.65)}
+.foot-links a:hover{color:var(--white)}
+.foot-bot{font-size:.72rem;opacity:.45;letter-spacing:.06em}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:980px){
+  .nav-links{gap:16px;font-size:.52rem;letter-spacing:.18em}
+  .cesta-grid{grid-template-columns:1fr}
+  .ph-shots{position:static;grid-template-columns:1fr 1fr;margin-bottom:8px}
+  .ph:nth-child(2){margin-top:0}
+}
+@media(max-width:860px){
+  .burger{display:flex}
+  .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;height:100vh;height:100dvh;background:var(--black);flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:max(88px,env(safe-area-inset-top)) 40px 40px;gap:22px;transform:translateX(100%);transition:transform .55s var(--ease),visibility .55s;font-size:.95rem;z-index:205;box-shadow:-12px 0 48px -16px rgba(0,0,0,.4);color:var(--white);overflow-y:auto;-webkit-overflow-scrolling:touch;letter-spacing:.18em;visibility:hidden;pointer-events:none}
+  .nav-links.open{transform:translateX(0);visibility:visible;pointer-events:auto}
+  .nav-links a.nav-cta{background:transparent;border-color:rgba(255,255,255,.35);opacity:1;width:100%;text-align:center;padding:14px 22px}
+  body.nav-open{overflow:hidden}
+  body.nav-open .nav-scrim{display:block}
+}
+@media(max-width:640px){
+  .ph-shots{grid-template-columns:1fr;max-width:360px;margin:0 auto 40px}
+  .hero{min-height:auto;padding-top:120px}
+  .foot-links{gap:16px 20px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="/nia">Nia Dobyšar<span class="dot"></span></a>
+  <nav class="nav-links" id="navLinks">
+    <a href="/nia/projekty">Portfolio</a>
+    <a href="/nia#studio">Studio</a>
+    <a href="/nia/byznys-start-program" class="on">Byznys Start Program</a>
+    <a href="/nia#sluzby">Ceník</a>
+    <a href="/nia/obchod">Obchod</a>
+    <a href="/nia#kontakt">Kontakt</a>
+    <a href="/nia#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
+  </nav>
+  <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+<button type="button" class="nav-scrim" id="navScrim" aria-label="Zavřít menu" tabindex="-1" hidden></button>
+<script src="/nia/nia-nav.js?v=7"></script>
+
+<section class="hero">
+  <div class="wrap hero-inner reveal">
+    <span class="eyebrow">Byznys Start Program</span>
+    <h1>Nevíte, co chcete dělat?</h1>
+    <p class="hero-lead">Máte nápad, na který si roky netroufáte? Nebo vaše podnikání už dlouho jen stojí na místě a nevíte proč? Nejsme kouč, co vám řekne obecné fráze a popřeje hodně štěstí. Vezmeme vás za ruku a projdeme s vámi celou cestu – od toho, kdo jste, přes to, co budete dělat, až po hotové podnikání s vlastní tváří.</p>
+    <div class="hero-cta">
+      <a href="/nia#konzultace" class="btn" data-cursor>Domluvit konzultaci</a>
+      <a href="#cesta" class="btn-line" data-cursor>Jak to probíhá</a>
+    </div>
+  </div>
+</section>
+
+<section id="cesta" class="cesta">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">Proces</span>
+        <h2>Cesta, kterou <span class="grad">projdete</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">6 kroků</span>
+    </div>
+
+    <div class="cesta-grid">
+      <div class="ph-shots reveal" aria-hidden="true">
+        <figure class="ph">
+          <div class="ph-label"><span>Foto 01</span>Placeholder — společná práce / konzultace</div>
+        </figure>
+        <figure class="ph">
+          <div class="ph-label"><span>Foto 02</span>Placeholder — brand / vizuál / web</div>
+        </figure>
+      </div>
+
+      <div class="process reveal">
+        <div class="step reveal-child">
+          <span class="n">01</span>
+          <div>
+            <h4>Poznáme se doopravdy</h4>
+            <p>Sedneme si a probereme, kdo jste, co vás baví, v čem jste dobří, co vám nejde a proč vlastně chcete změnu. Bez soudů a bez škatulek – ať konečně víte, na čem stavět.</p>
+          </div>
+        </div>
+        <div class="step reveal-child">
+          <span class="n">02</span>
+          <div>
+            <h4>Najdeme vaše podnikání</h4>
+            <p>Netušíte kudy? Projdeme spolu možnosti, dokud nenarazíme na to, co vám sedí. Máte nápad, ale bojíte se do něj jít? Prověříme ho a doladíme, ať víte, že stojí na pevných nohou.</p>
+          </div>
+        </div>
+        <div class="step reveal-child">
+          <span class="n">03</span>
+          <div>
+            <h4>Postavíme strategii, co dává smysl</h4>
+            <p>Kdo jsou vaši lidé, co jim nabídnete, jak se odlišíte, kolik si máte říct za svou práci. Žádné rady z internetu – plán šitý přímo na vás.</p>
+          </div>
+        </div>
+        <div class="step reveal-child">
+          <span class="n">04</span>
+          <div>
+            <h4>Dáme tomu tvář</h4>
+            <p>Jméno, vizuální styl, případně web, který vypadá tak dobře, jak dobří jste vy.</p>
+          </div>
+        </div>
+        <div class="step reveal-child">
+          <span class="n">05</span>
+          <div>
+            <h4>Vyřešíme papíry a peníze</h4>
+            <p>Založení, legislativa, základní finance – to, co vás možná děsí nebo odrazuje, projdeme spolu, krok za krokem.</p>
+          </div>
+        </div>
+        <div class="step reveal-child">
+          <span class="n">06</span>
+          <div>
+            <h4>Vykročíte</h4>
+            <p>Nekončíme u plánu na papíře. Jdeme s vámi až do chvíle, kdy své podnikání skutečně spustíte.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap reveal">
+    <span class="eyebrow">Další krok</span>
+    <h2>Pojďme to <span class="grad">probrat</span></h2>
+    <p>Rezervujte si konzultaci — bez závazku si řekneme, jestli Byznys Start Program sedí právě vám.</p>
+    <a href="/nia#konzultace" class="btn" data-cursor>Domluvit konzultaci</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">Nia Dobyšar</div>
+      <div class="foot-links">
+        <a href="/nia/projekty">Portfolio</a>
+        <a href="/nia#studio">Studio</a>
+        <a href="/nia/byznys-start-program">Byznys Start Program</a>
+        <a href="/nia#sluzby">Ceník</a>
+        <a href="/nia/obchod">Obchod</a>
+        <a href="/nia#kontakt">Kontakt</a>
+        <a href="/nia/bezpecnost">Bezpečnost</a>
+      </div>
+    </div>
+    <div class="foot-bot">© Nia Dobyšar — Webdesign studio</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('cursor'), d=document.getElementById('cursorDot');
+  if(c && d && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    var x=0,y=0,cx=0,cy=0;
+    document.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;});
+    (function loop(){cx+=(x-cx)*.18;cy+=(y-cy)*.18;c.style.left=cx+'px';c.style.top=cy+'px';d.style.left=x+'px';d.style.top=y+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('[data-cursor],a,button').forEach(function(el){
+      el.addEventListener('mouseenter',function(){c.classList.add('grow');});
+      el.addEventListener('mouseleave',function(){c.classList.remove('grow');});
+    });
+  }
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+})();
+</script>
+<script src="/nia/cookie-bar.js" defer></script>
+</body>
+</html>

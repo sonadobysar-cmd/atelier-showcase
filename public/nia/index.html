@@ -309,6 +309,11 @@ img{display:block;max-width:100%}
 .sec-head.centered .sec-lead{text-align:center}
 
 /* WEB NA SPLÁTKY */
+.bsp-teaser{background:var(--white);padding:var(--section) 0;border-top:1px solid var(--line)}
+.bsp-teaser-lead{max-width:640px;margin:0 auto clamp(32px,5vw,44px);text-align:center;font-size:clamp(.92rem,2.4vw,1.02rem);line-height:1.85;color:var(--muted);font-weight:300}
+.bsp-teaser-cta{text-align:center}
+.bsp-teaser-cta .btn{background:var(--burgundy3);color:var(--white);font-size:.64rem;letter-spacing:.24em;padding:16px 32px}
+.bsp-teaser-cta .btn:hover{background:var(--burgundy4);transform:translateY(-2px)}
 .splatky{background:var(--white);padding:var(--section) 0;border-top:1px solid var(--line)}
 .splatky-intro{max-width:640px;margin:0 auto clamp(40px,6vw,56px);text-align:center;font-size:clamp(.9rem,2.4vw,.98rem);line-height:1.85;color:var(--muted);font-weight:300}
 .splatky-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(28px,5vw,48px);align-items:start;max-width:1040px;margin:0 auto}
@@ -580,15 +585,13 @@ img{display:block;max-width:100%}
 <header class="nav" id="nav">
   <a class="brand" href="#top">Nia Dobyšar<span class="dot"></span></a>
   <nav class="nav-links" id="navLinks">
-    <a href="/nia/projekty">Práce</a>
-    <a href="/nia/ugc-promo">UGC/Promo</a>
+    <a href="/nia/projekty">Portfolio</a>
+    <a href="#studio">Studio</a>
+    <a href="/nia/byznys-start-program">Byznys Start Program</a>
+    <a href="#sluzby">Ceník</a>
     <a href="/nia/obchod">Obchod</a>
-    <a href="/nia#studio">Studio</a>
-    <a href="/nia#sluzby">Ceník</a>
-    <a href="/nia#web-na-splatky">Web na splátky</a>
-    <a href="/nia#konzultace">Konzultace</a>
-    <a href="/nia#kontakt">Kontakt</a>
-    <a href="/nia#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
+    <a href="#kontakt">Kontakt</a>
+    <a href="#konzultace" class="nav-cta" data-cursor>Rezervovat</a>
   </nav>
   <button class="burger" id="burger" aria-label="Otevřít menu" aria-expanded="false"><span></span><span></span></button>
 </header>
@@ -677,6 +680,22 @@ img{display:block;max-width:100%}
     <a href="/nia/projekty" class="btn" data-cursor>Všechny projekty</a>
     <br>
     <a href="/nia/projekty" class="btn-line" data-cursor>Prohlédnout portfolio →</a>
+  </div>
+</section>
+
+<section id="byznys-start" class="bsp-teaser">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">Byznys Start Program</span>
+        <h2>Od vize po <span class="grad">podnikání</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">nová služba</span>
+    </div>
+    <p class="bsp-teaser-lead reveal">Nevíte, co chcete dělat, nebo se vaše podnikání zaseklo na místě? V Byznys Start Programu vás vezmeme za ruku a projdeme s vámi celou cestu — od vize po hotové podnikání s vlastní tváří.</p>
+    <div class="bsp-teaser-cta reveal">
+      <a href="/nia/byznys-start-program" class="btn" data-cursor>Zjistit více</a>
+    </div>
   </div>
 </section>
 
@@ -951,8 +970,7 @@ img{display:block;max-width:100%}
       <div class="foot-top">
         <div class="foot-brand">Nia Dobyšar</div>
         <div class="foot-links">
-          <a href="/nia/projekty">Práce</a><a href="/nia/ugc-promo">UGC/Promo</a><a href="/nia/obchod">Obchod</a><a href="#studio">Studio</a><a href="#sluzby">Ceník</a><a href="#web-na-splatky">Web na splátky</a><a href="#konzultace">Konzultace</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
-          <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Instagram</a>
+          <a href="/nia/projekty">Portfolio</a><a href="#studio">Studio</a><a href="/nia/byznys-start-program">Byznys Start Program</a><a href="#sluzby">Ceník</a><a href="/nia/obchod">Obchod</a><a href="#kontakt">Kontakt</a><a href="/nia/bezpecnost">Bezpečnost</a>
         </div>
       </div>
       <div class="foot-bot">

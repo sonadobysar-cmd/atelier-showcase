@@ -113,6 +113,28 @@ img{display:block;max-width:100%}
 .cenik-perk{max-width:720px;margin:40px auto 0;padding-top:32px;border-top:1px solid var(--line);text-align:center;font-size:.94rem;line-height:1.75;color:var(--muted);font-weight:300}
 .cenik-perk strong{color:var(--burgundy3);font-weight:500}
 
+.ukazka{background:var(--cream);padding:var(--section) 0}
+.ukazka-body{max-width:720px;margin:0 auto}
+.ukazka-body>p{font-size:.98rem;line-height:1.85;color:var(--muted);font-weight:300;margin-bottom:28px}
+.ukazka-body>p:last-of-type{margin-bottom:0}
+.ukazka-steps{display:flex;flex-direction:column;margin:8px 0 28px}
+.ukazka-steps .step p{max-width:none}
+.ukazka-note{margin-top:32px;font-size:.72rem;line-height:1.65;color:var(--muted2);font-weight:300;letter-spacing:.02em}
+
+.pro-koho{background:var(--cream);padding:var(--section) 0}
+.pro-koho-body{max-width:720px;margin:0 auto;font-size:.98rem;line-height:1.85;color:var(--muted);font-weight:300}
+
+.faq{background:var(--off);padding:var(--section) 0}
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-top:1px solid var(--line)}
+.faq-item:last-child{border-bottom:1px solid var(--line)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0;font-family:var(--display);font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--black);font-size:clamp(1.05rem,2.2vw,1.25rem);line-height:1.3;transition:color .35s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'+';font-family:var(--display);font-size:1.35rem;color:var(--burgundy3);flex:none;line-height:1;transition:transform .35s var(--ease)}
+.faq-item[open] summary::after{content:'–'}
+.faq-item summary:hover{color:var(--burgundy3)}
+.faq-item .faq-a{padding:0 0 26px;font-size:.94rem;line-height:1.8;color:var(--muted);font-weight:300;max-width:640px}
+
 .cta-band{background:var(--burgundy);color:var(--white);padding:clamp(72px,12vw,120px) 0;text-align:center}
 .cta-band .eyebrow{color:rgba(255,255,255,.5)}
 .cta-band h2{font-family:var(--display);font-weight:500;font-size:clamp(2rem,5vw,3.4rem);letter-spacing:.02em;text-transform:uppercase;line-height:1.08;margin:16px 0 20px;color:var(--white)}
@@ -256,11 +278,72 @@ img{display:block;max-width:100%}
   </div>
 </section>
 
+<section id="ukazka" class="ukazka">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">Příběh</span>
+        <h2>Ukázka <span class="grad">spolupráce</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">příklad</span>
+    </div>
+    <div class="ukazka-body reveal">
+      <p>Petra byla na mateřské dovolené a nevěděla, co bude dělat, až se vrátí do práce – jistá byla jen v tom, že do staré kanceláře se vracet nechce. Peněz nebylo nazbyt a v hlavě měla spíš zmatek než plán.</p>
+      <div class="ukazka-steps process">
+        <div class="step">
+          <span class="n">01</span>
+          <div>
+            <h4>Poznání</h4>
+            <p>Sedly jsme si a probraly, co ji baví, v čem je dobrá, co ji na staré práci vysávalo a co jí naopak dávalo energii.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n">02</span>
+          <div>
+            <h4>Nalezení směru</h4>
+            <p>Ukázalo se, že ji táhne beauty segment. Prošly jsme možnosti, až jsme narazily na koncept, který jí opravdu sedl.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n">03</span>
+          <div>
+            <h4>Strategie</h4>
+            <p>Postavily jsme strategii i finanční plán tak, aby rozjezd zvládla i s omezeným rozpočtem.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n">04</span>
+          <div>
+            <h4>Vizuál</h4>
+            <p>Vytvořily jsme jí jméno a vizuální identitu studia.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n">05</span>
+          <div>
+            <h4>Legislativa a finance</h4>
+            <p>Prošly jsme spolu založení živnosti a základní finanční nastavení.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="n">06</span>
+          <div>
+            <h4>Vykročení</h4>
+            <p>Dnes má Petra vlastní útulné studio na okraji Prahy a spokojeně z něj žije.</p>
+          </div>
+        </div>
+      </div>
+      <p>Takhle nějak může vypadat cesta – ta vaše bude jiná, protože šitá přímo na míru vám.</p>
+      <p class="ukazka-note">Modelový/ilustrativní příklad procesu, nikoli konkrétní odkazatelná klientka.</p>
+    </div>
+  </div>
+</section>
+
 <section id="cenik" class="cenik">
   <div class="wrap">
     <div class="sec-head centered reveal">
       <div>
-        <span class="eyebrow">Mentoring</span>
+        <span class="eyebrow">Byznys Start Program</span>
         <h2>Ceník Byznys Start <span class="grad">Program</span><span class="rule"></span></h2>
       </div>
       <span class="idx">hodiny</span>
@@ -287,6 +370,57 @@ img{display:block;max-width:100%}
       </div>
     </div>
     <p class="cenik-perk reveal">Klienti programu: <strong>sleva 20&nbsp;%</strong> na branding a tvorbu webu</p>
+  </div>
+</section>
+
+<section id="pro-koho" class="pro-koho">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">Upřímně</span>
+        <h2>Pro koho program <span class="grad">není</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">hranice</span>
+    </div>
+    <p class="pro-koho-body reveal">Program není pro vás, pokud hledáte rychlý recept na zbohatnutí bez vlastního zapojení, už máte hotový plán a potřebujete jen technickou realizaci (v tom vám rádi pomůžeme přímo s webem), nejste ochotni být k sobě upřímní a projít si i nepříjemné otázky, nebo právě procházíte náročným životním obdobím, kde je potřeba spíš odborná psychologická podpora než byznys strategie.</p>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="sec-head centered reveal">
+      <div>
+        <span class="eyebrow">FAQ</span>
+        <h2>Časté <span class="grad">otázky</span><span class="rule"></span></h2>
+      </div>
+      <span class="idx">odpovědi</span>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary>Jak spolupráce probíhá?</summary>
+        <p class="faq-a">Online i osobně, podle toho, co vám vyhovuje – pracujeme s klienty po celé ČR i na Slovensku.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Kolik to stojí?</summary>
+        <p class="faq-a">Platíte za odpracovaný čas – 2 000 Kč/hod, s výhodnějšími balíčky hodin (viz <a href="#cenik">ceník výše</a>). Klienti programu mají navíc slevu 20&nbsp;% na branding a tvorbu webu.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Nemám žádný nápad na podnikání, vadí to?</summary>
+        <p class="faq-a">Ne, naopak – přesně na tohle je program určený.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Nemám na to peníze.</summary>
+        <p class="faq-a">Pokud právě teď nemáte prostředky investovat do sebe a svého podnikání, možná skutečně není ten pravý čas začínat – a to je v pořádku, ozvěte se, až budete připraveni. Program je pro ty, kdo jsou rozhodnuti do sebe investovat, protože přesně tahle investice jim otevře cestu dál.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Nevím, jestli na to mám.</summary>
+        <p class="faq-a">Přesně to teď spolu zjistíme. Se mnou po boku máte oporu, která vám nedovolí to vzdát v půlce cesty.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Už jsem to zkoušel/a a nevyšlo mi to.</summary>
+        <p class="faq-a">Věřím vám. Sama jsem párkrát spadla na hubu a jednou úplně zkrachovala, než jsem přišla na to, co dělat jinak. Přesně díky tomu vás dokážu provést tak, abyste se vyhnuli chybám, kvůli kterým jsem si to musela odžít já.</p>
+      </details>
+    </div>
   </div>
 </section>
 
@@ -335,5 +469,61 @@ img{display:block;max-width:100%}
 })();
 </script>
 <script src="/nia/cookie-bar.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Jak spolupráce probíhá?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Online i osobně, podle toho, co vám vyhovuje – pracujeme s klienty po celé ČR i na Slovensku."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kolik to stojí?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Platíte za odpracovaný čas – 2 000 Kč/hod, s výhodnějšími balíčky hodin (viz ceník výše). Klienti programu mají navíc slevu 20 % na branding a tvorbu webu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nemám žádný nápad na podnikání, vadí to?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ne, naopak – přesně na tohle je program určený."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nemám na to peníze.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pokud právě teď nemáte prostředky investovat do sebe a svého podnikání, možná skutečně není ten pravý čas začínat – a to je v pořádku, ozvěte se, až budete připraveni. Program je pro ty, kdo jsou rozhodnuti do sebe investovat, protože přesně tahle investice jim otevře cestu dál."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Nevím, jestli na to mám.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Přesně to teď spolu zjistíme. Se mnou po boku máte oporu, která vám nedovolí to vzdát v půlce cesty."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Už jsem to zkoušel/a a nevyšlo mi to.",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Věřím vám. Sama jsem párkrát spadla na hubu a jednou úplně zkrachovala, než jsem přišla na to, co dělat jinak. Přesně díky tomu vás dokážu provést tak, abyste se vyhnuli chybám, kvůli kterým jsem si to musela odžít já."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

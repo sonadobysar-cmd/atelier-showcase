@@ -263,6 +263,7 @@ img{display:block;max-width:100%}
 .studio .sec-head .idx{color:rgba(255,255,255,.45)}
 .studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .studio-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 18%;border-radius:var(--r-xl);box-shadow:var(--shadow-lg)}
+.studio-photo img:nth-child(2){object-position:center 30%}
 .studio-lead{font-family:var(--display);font-weight:500;font-size:clamp(1.15rem,2.2vw,1.65rem);line-height:1.35;letter-spacing:.03em;text-transform:uppercase;color:var(--white)}
 .studio-lead::after{width:56px;background:var(--burgundy-glow);opacity:.75}
 .studio-text{margin-top:28px;font-size:.94rem;line-height:1.9;color:rgba(255,255,255,.68);max-width:520px;font-weight:300}
@@ -399,7 +400,7 @@ img{display:block;max-width:100%}
 .kontakt h2 .rule{display:block;width:min(96px,16vw);height:2px;margin-top:24px;border-radius:var(--r-pill)}
 .konz-form{display:flex;flex-direction:column;gap:20px}
 .studio-copy{display:flex;flex-direction:column}
-.studio-photo{position:relative}
+.studio-photo{position:relative;display:flex;flex-direction:column;gap:20px}
 .studio-shots{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:72px}
 .studio-shots figure{margin:0;overflow:hidden}
 .studio-shots img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform .7s var(--ease)}
@@ -714,6 +715,7 @@ img{display:block;max-width:100%}
     <div class="studio-grid">
       <div class="studio-photo reveal">
         <img src="/nia/photos/nia-studio.jpg" alt="Nia Dobyšar v ateliéru" width="520" height="650" loading="lazy">
+        <img src="/nia/photos/nia-cv6-shot.jpg" alt="Nia Dobyšar — portrét" width="520" height="650" loading="lazy">
       </div>
       <div class="studio-copy">
       <div class="reveal">

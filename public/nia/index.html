@@ -263,9 +263,11 @@ img{display:block;max-width:100%}
 .studio .sec-head .idx{color:rgba(255,255,255,.45)}
 .studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 .studio-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 18%;border-radius:var(--r-xl);box-shadow:var(--shadow-lg)}
-.studio-lead{font-family:var(--display);font-weight:500;font-size:clamp(1.35rem,2.6vw,2rem);line-height:1.3;letter-spacing:.03em;text-transform:uppercase;color:var(--white)}
+.studio-lead{font-family:var(--display);font-weight:500;font-size:clamp(1.15rem,2.2vw,1.65rem);line-height:1.35;letter-spacing:.03em;text-transform:uppercase;color:var(--white)}
 .studio-lead::after{width:56px;background:var(--burgundy-glow);opacity:.75}
-.studio-text{margin-top:28px;font-size:.94rem;line-height:1.9;color:rgba(255,255,255,.68);max-width:480px;font-weight:300}
+.studio-text{margin-top:28px;font-size:.94rem;line-height:1.9;color:rgba(255,255,255,.68);max-width:520px;font-weight:300}
+.studio-text + .studio-text{margin-top:18px}
+.studio-process-title{font-family:var(--display);font-weight:500;font-size:clamp(1.1rem,2.4vw,1.4rem);letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin:12px 0 4px;padding-bottom:8px}
 .studio-original{margin-top:22px;font-size:.94rem;line-height:1.85;color:rgba(255,255,255,.78);max-width:520px;font-weight:300}
 .studio-keys{display:flex;flex-wrap:wrap;gap:8px 0;margin-top:18px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--burgundy-glow);font-weight:400}
 .studio-keys span{display:inline-flex;align-items:center}
@@ -705,9 +707,9 @@ img{display:block;max-width:100%}
     <div class="sec-head centered reveal">
       <div>
         <span class="eyebrow">Studio</span>
-        <h2>Za každým webem <span class="grad">já</span><span class="rule"></span></h2>
+        <h2>Za vším <span class="grad">já</span><span class="rule"></span></h2>
       </div>
-      <span class="idx">o mně &amp; proces</span>
+      <span class="idx">o mně</span>
     </div>
     <div class="studio-grid">
       <div class="studio-photo reveal">
@@ -715,16 +717,18 @@ img{display:block;max-width:100%}
       </div>
       <div class="studio-copy">
       <div class="reveal">
-        <p class="studio-lead">Navrhuju a stavím weby, které vypadají, jako by je dělala velká značka — i když za nimi stojí jeden člověk.</p>
-        <p class="studio-text">Každý projekt je čistý, moderní a do detailu promyšlený. Vlastní typografie, vlastní identita, žádné šablony. Od prázdné stránky po hotový web, který prodává dřív, než se dočte.</p>
-        <p class="studio-original">Nedělám weby ze šablon. Každý vzniká od nuly — s vlastním nápadem, kreativitou a rukopisem, aby vypadal jako vy, ne jako kdokoli jiný.</p>
-        <p class="studio-keys" aria-label="Klíčové hodnoty"><span>Originalita</span><span>Kreativita</span><span>Vlastní rukopis</span></p>
+        <p class="studio-lead">Stavím weby, které vypadají, jako by je dělala velká značka, a provázím lidi k podnikání, které jim skutečně sedí — i když za tím vším stojí jeden člověk.</p>
+        <p class="studio-text">Nejsem teoretička. Založila a prodala jsem několik salonů, vedla dva e-shopy i rekvalifikační centrum a pracovala jako úspěšná obchodní manažerka — a taky jsem párkrát spadla na hubu a jednou úplně zkrachovala. Vím proto přesně, jak vypadá cesta nahoru i to, co bolí, když se nedaří. A přesně proto vás dokážu vzít za ruku a ušetřit vám zbytečné okliky.</p>
+        <p class="studio-text">Jedna část mě staví weby do posledního pixelu, druhá pomáhá lidem najít a rozjet podnikání, po kterém touží. Obojí spojuje totéž: žádné šablony, žádné obecné rady, jen řešení šitá přímo na míru vám — podložená skutečnou zkušeností, ne přednáškou z knihy.</p>
+        <p class="studio-original">Weby navrhuju a stavím od nuly — s vlastní typografií, identitou a rukopisem, aby vypadaly jako vy, ne jako kdokoli jiný. V Byznys Start Programu zase beru za ruku lidi, co neví, jakým směrem se vydat, nebo se bojí do toho jít — a dovedu je až k reálně fungujícímu podnikání.</p>
+        <p class="studio-keys" aria-label="Klíčové hodnoty"><span>Originalita</span><span>Kreativita</span><span>Osobní zkušenost z praxe</span></p>
         <blockquote class="studio-quote">
-          <p>„Web má být krásný ještě předtím, než někdo přečte první větu.“</p>
+          <p>„Web i podnikání mají být krásné a fungovat, ještě než o nich někdo stihne zapochybovat.“</p>
           <cite>— Nia</cite>
         </blockquote>
       </div>
       <div class="process reveal">
+        <h3 class="studio-process-title">Jak vzniká váš web</h3>
         <div class="step reveal-child"><span class="n">01</span><div><h4>Brief</h4><p>Poznáme značku, cíle a tón. Bez toho se nekreslí.</p></div></div>
         <div class="step reveal-child"><span class="n">02</span><div><h4>Koncept</h4><p>Směr, paleta, typografie a struktura. Základ, na kterém vše stojí.</p></div></div>
         <div class="step reveal-child"><span class="n">03</span><div><h4>Design</h4><p>Vizuál na míru, doladěný do posledního pixelu.</p></div></div>

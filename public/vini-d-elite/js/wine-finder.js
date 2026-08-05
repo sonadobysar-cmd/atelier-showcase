@@ -381,12 +381,10 @@
       '<p class="wfr-desc">' +
       w.desc +
       "</p>" +
-      '<div class="wfr-foot"><span class="wfr-price">' +
-      w.price.toLocaleString("cs-CZ") +
-      " Kč</span>" +
-      '<button class="btn btn-gold" style="padding:13px 24px" onclick="addToCart(' +
-      w.id +
-      ');openCart()">Přidat do košíku</button></div>' +
+      '<div class="wfr-foot"><span class="wfr-price">Cena na dotaz</span>' +
+      '<a class="btn btn-gold" style="padding:13px 24px" href="' +
+      window.viniContactHref(w) +
+      '">Mám zájem</a></div>' +
       "</div>" +
       "</div>" +
       '<div class="wfr-alts-label">Další blízké shody</div>' +
@@ -451,12 +449,10 @@
       '<p class="wfr-desc">' +
       w.desc +
       "</p>" +
-      '<div class="wfr-foot"><span class="wfr-price">' +
-      w.price.toLocaleString("cs-CZ") +
-      " Kč</span>" +
-      '<button class="btn btn-gold" style="padding:13px 24px" onclick="addToCart(' +
-      w.id +
-      ');openCart()">Přidat do košíku</button></div>' +
+      '<div class="wfr-foot"><span class="wfr-price">Cena na dotaz</span>' +
+      '<a class="btn btn-gold" style="padding:13px 24px" href="' +
+      window.viniContactHref(w) +
+      '">Mám zájem</a></div>' +
       "</div>" +
       "</div>";
   }

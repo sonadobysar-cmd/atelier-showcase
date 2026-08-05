@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atelier Showcase — odkazy pro Cursor</title>
+  <style>
+    :root {
+      --bg: #fff6fb;
+      --ink: #1a1a1a;
+      --accent: #e5197e;
+      --muted: #5a5a5a;
+      --card: #fff;
+      --border: rgba(229, 25, 126, 0.2);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      padding: 2rem 1.25rem 3rem;
+    }
+    main { max-width: 720px; margin: 0 auto; }
+    h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 0.35rem; }
+    .lead { color: var(--muted); margin: 0 0 2rem; }
+    h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin: 2rem 0 0.75rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 0.65rem;
+    }
+    .card strong { display: block; margin-bottom: 0.25rem; }
+    a {
+      color: var(--accent);
+      word-break: break-all;
+      font-size: 0.95rem;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88rem;
+    }
+    pre {
+      background: #1a1a1a;
+      color: #f8f0f4;
+      padding: 1rem 1.1rem;
+      border-radius: 12px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    ol { padding-left: 1.2rem; }
+    li { margin: 0.5rem 0; }
+    .note {
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.85rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Odkazy pro Cursor</h1>
+    <p class="lead">Zkopíruj URL do chatu v Cursoru — agent si veřejný web umí načíst. U lokálního serveru přilož screenshot nebo popis.</p>
+
+    <h2>Veřejný web (Vercel)</h2>
+    <div class="card">
+      <strong>GLOSS — hlavní demo</strong>
+      <a href="https://atelier-showcase-cyan.vercel.app/gloss">https://atelier-showcase-cyan.vercel.app/gloss</a>
+    </div>
+    <div class="card">
+      <strong>Rozcestník všech webů</strong>
+      <a href="https://atelier-showcase-cyan.vercel.app/">https://atelier-showcase-cyan.vercel.app/</a>
+    </div>
+    <div class="card">
+      <strong>Contour Clinic</strong>
+      <a href="https://atelier-showcase-cyan.vercel.app/contour-clinic">https://atelier-showcase-cyan.vercel.app/contour-clinic</a>
+    </div>
+
+    <h2>Lokálně (jen u tebe v počítači)</h2>
+    <div class="card">
+      <strong>Spuštění</strong>
+      <code>cd atelier-showcase && npm run dev</code>
+    </div>
+    <div class="card">
+      <strong>GLOSS lokálně</strong>
+      <a href="http://127.0.0.1:3010/gloss">http://127.0.0.1:3010/gloss</a>
+    </div>
+    <p class="note">Cursor v cloudu nevidí <code>127.0.0.1</code>. Pro lokální vzhled pošli screenshot, nebo nejdřív pushni na Vercel a pošli veřejný odkaz.</p>
+
+    <h2>GitHub</h2>
+    <div class="card">
+      <strong>Repozitář</strong>
+      <a href="https://github.com/sonadobysar-cmd/atelier-showcase">https://github.com/sonadobysar-cmd/atelier-showcase</a>
+    </div>
+
+    <h2>Jak to napsat v Cursor chatu</h2>
+    <pre>Podívej se na https://atelier-showcase-cyan.vercel.app/gloss
+— v sekci Zrcadlo rituálu je špatně …</pre>
+
+    <p>Nebo přilož soubor v chatu:</p>
+    <pre>@CURSOR-LINKS.html
+@src/components/gloss/GlossSignatureRitual.tsx</pre>
+
+    <h2>Co funguje nejlíp</h2>
+    <ol>
+      <li><strong>Veřejná URL</strong> — agent si stránku načte sám.</li>
+      <li><strong>Screenshot</strong> — pro layout, barvy, ořezy (přetáhni do chatu).</li>
+      <li><strong>@ soubor</strong> — pro konkrétní kód v projektu.</li>
+      <li><strong>Krátký popis</strong> — co je špatně a co má být jinak.</li>
+    </ol>
+  </main>
+</body>
+</html>

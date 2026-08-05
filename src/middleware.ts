@@ -24,9 +24,6 @@ const SUBDOMAIN_TO_PATH: Record<string, string> = {
   masterclass: "/masterclass",
   webinar: "/masterclass",
   zakaznici: "/zakaznici",
-  vini: "/vini-d-elite",
-  "vini-d-elite": "/vini-d-elite",
-  vinidelite: "/vini-d-elite",
   portfolio: "/nia/projekty",
   projekty: "/nia/projekty",
 };

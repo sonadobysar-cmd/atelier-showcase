@@ -31,9 +31,13 @@ const nextConfig: NextConfig = {
       { source: "/lume", destination: "/lume/index.html" },
       { source: "/klinika", destination: "/lume/index.html" },
       { source: "/bdy", destination: "/bdy-to-bdy/index.html" },
-      { source: "/vini-d-elite", destination: "/vini-d-elite/index.html" },
-      { source: "/vini-d-elite/la-cantina", destination: "/vini-d-elite/la-cantina.html" },
-      { source: "/vinidelite", destination: "/vini-d-elite/index.html" },
+    ];
+  },
+  async redirects() {
+    return [
+      { source: "/vini-d-elite", destination: "https://vini.niadobysar.com", permanent: true },
+      { source: "/vini-d-elite/:path*", destination: "https://vini.niadobysar.com/:path*", permanent: true },
+      { source: "/vinidelite", destination: "https://vini.niadobysar.com", permanent: true },
     ];
   },
 };

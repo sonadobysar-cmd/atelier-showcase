@@ -19,7 +19,7 @@ Middleware v `src/middleware.ts` už mapuje subdomény na jednotlivé weby. Ty j
 | `realitka.niadobysar.com` | **atelier-showcase** | Prémiová realitka |
 | `bdy.niadobysar.com` | **atelier-showcase** | BDY to BDY |
 | `funnel.niadobysar.com` | **atelier-showcase** | Masterclass / funnel |
-| `vini.niadobysar.com` | **atelier-showcase** | Vini d'Elite |
+| `vini.niadobysar.com` | **vini-d-elite** | Vini d'Elite (samostatný projekt) |
 | `altez.niadobysar.com` | **altez** | ALTEZ wellness (samostatný projekt) |
 | `mochi.niadobysar.com` | **mochi-shop** | Mochi Box (samostatný projekt) |
 
@@ -56,8 +56,9 @@ matcha.niadobysar.com
 realitka.niadobysar.com
 bdy.niadobysar.com
 funnel.niadobysar.com
-vini.niadobysar.com
 ```
+
+(Vini d'Elite má vlastní projekt — viz Krok 3.)
 
 ### B) U registrátora — CNAME záznamy
 
@@ -71,7 +72,6 @@ vini.niadobysar.com
 | `realitka` | CNAME | `cname.vercel-dns.com` |
 | `bdy` | CNAME | `cname.vercel-dns.com` |
 | `funnel` | CNAME | `cname.vercel-dns.com` |
-| `vini` | CNAME | `cname.vercel-dns.com` |
 
 > Hodnota CNAME může být jiná — vždy použij přesně to, co ukáže Vercel u dané domény.
 
@@ -79,9 +79,14 @@ vini.niadobysar.com
 
 ---
 
-## Krok 3 — Samostatné projekty (ALTEZ, Mochi)
+## Krok 3 — Samostatné projekty (ALTEZ, Mochi, Vini d'Elite)
 
 Tyto weby běží na jiných Vercel projektech — subdoména se připojí **k tomu projektu**, ne k atelier-showcase.
+
+### Vini d'Elite
+
+1. Vercel → projekt **vini-d-elite** → Domains → přidej `vini.niadobysar.com`
+2. DNS: CNAME `vini` → `cname.vercel-dns.com`
 
 ### ALTEZ
 
@@ -141,5 +146,6 @@ Do ověření domény v Resend můžeš testovat s `onboarding@resend.dev`.
 - [ ] CNAME pro každou subdoménu u registrátora
 - [ ] `altez.niadobysar.com` → projekt altez
 - [ ] `mochi.niadobysar.com` → projekt mochi-shop
+- [ ] `vini.niadobysar.com` → projekt vini-d-elite
 - [ ] Resend + env proměnné + redeploy
 - [ ] Test rezervace a pár subdomén

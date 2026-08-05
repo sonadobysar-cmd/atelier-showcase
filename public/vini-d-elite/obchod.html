@@ -186,10 +186,13 @@ img{display:block;max-width:100%}
 .wcard-b{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1}
 .wcard-b .reg{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:7px}
 .wcard-b h3{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--dark-ink);line-height:1.1}
-.wcard-b .grape{font-size:.84rem;color:#8a7553;margin:3px 0 14px}
+.wcard-b .grape{font-size:.84rem;color:#8a7553;margin:3px 0 7px}
+.wcard-b .subtitle{font-family:var(--serif);font-size:.92rem;font-style:italic;color:var(--wine);margin:0 0 12px}
 .wcard-b .desc{font-size:.86rem;color:#5a4632;margin-bottom:18px;flex:1}
+.wcard-b .pairing{font-size:.76rem;color:#765f45;margin:-7px 0 17px;padding-top:10px;border-top:1px solid rgba(42,12,20,.09)}
+.wcard-b .pairing b{font-family:var(--engrave);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d)}
 .wcard-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(42,12,20,.14);padding-top:16px;gap:12px}
-.wcard-price{font-family:var(--serif);font-size:1.55rem;color:var(--dark-ink)}
+.wcard-price{font-family:var(--engrave);font-size:.62rem;line-height:1.35;letter-spacing:.13em;text-transform:uppercase;color:#765f45;white-space:nowrap}
 .wcard-foot button,.wcard-foot a{background:var(--wine);color:var(--parch);border:none;font-family:var(--sans);font-size:.64rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:12px 18px;cursor:pointer;transition:background .25s;line-height:1;text-align:center}
 .wcard-foot button:hover,.wcard-foot a:hover{background:var(--wine-d)}
 @media(max-width:920px){.grid{grid-template-columns:1fr 1fr}}
@@ -372,7 +375,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 </div></section>
 <section class="sec" id="obchod" style="padding-top:clamp(40px,5vw,70px)"><div class="wrap">
   <div class="shop-bar">
-    <div class="shop-tabs" id="shopTabs"><button data-f="all" class="on">Vše</button><button data-f="red">Červené</button><button data-f="sparkling">Šumivé</button></div>
+    <div class="shop-tabs" id="shopTabs"><button data-f="all" class="on">Vše</button><button data-f="red">Červené</button><button data-f="white">Bílé</button><button data-f="sparkling">Šumivé</button></div>
     <select id="sortSel" class="sort-sel" aria-label="Řadit"><option value="def">Doporučené pořadí</option><option value="name">Podle názvu</option></select>
   </div>
   <div class="grid" id="wineGrid"></div>
@@ -418,7 +421,7 @@ function wimg(id){return IMG[id]||("img/w"+id+".jpg");}
 WINES=window.VINI_CATALOG;IMG=window.VINI_IMAGES;window.WINES=WINES;
 (function(){var typeLabel={red:'Červené',white:'Bílé',rose:'Růžové',sparkling:'Šumivé'};
   var g=document.getElementById('wineGrid'),tabs=document.getElementById('shopTabs'),sortSel=document.getElementById('sortSel');var cur={f:'all',s:'def'};
-  function card(w){return '<div class="wcard-img"><div class="ph"><span class="ph-tag">Produktová fotografie</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="desc">'+w.desc+'</div><div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Mám zájem</a></div></div>';}
+  function card(w){var hasPhoto=!!window.VINI_IMAGES[w.id];return '<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div><div class="desc">'+w.desc+'</div><div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div><div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Mám zájem</a></div></div>';}
   function render(){var list=WINES.filter(function(w){if(cur.f==='all')return true;if(cur.f==='primitivo')return !!w.primitivo;return w.type===cur.f;});
     if(cur.s==='name')list.sort(function(a,b){return a.name.localeCompare(b.name,'cs');});
     g.innerHTML='';list.forEach(function(w){var c=document.createElement('div');c.className='wcard';c.innerHTML=card(w);g.appendChild(c);});}

@@ -2,19 +2,20 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_MESSAGE = 2000;
 const MAX_NAME = 120;
 
-export type KontaktFields = { name: string; email: string; message: string };
+export type KontaktFields = { name: string; email: string; message: string; budget?: string };
 export type KonzultaceFields = KontaktFields & { phone: string; dateIso: string; time: string };
 
 export function validateKontakt(body: Record<string, unknown>): { ok: true; data: KontaktFields } | { ok: false; error: string } {
   const name = typeof body.name === "string" ? body.name.trim().slice(0, MAX_NAME) : "";
   const email = typeof body.email === "string" ? body.email.trim().toLowerCase().slice(0, 254) : "";
   const message = typeof body.message === "string" ? body.message.trim().slice(0, MAX_MESSAGE) : "";
+  const budget = typeof body.budget === "string" ? body.budget.trim().slice(0, 80) : "";
 
   if (name.length < 2) return { ok: false, error: "Vyplň jméno." };
   if (!EMAIL_RE.test(email)) return { ok: false, error: "Vyplň platný e-mail." };
   if (message.length < 4) return { ok: false, error: "Napiš zprávu." };
 
-  return { ok: true, data: { name, email, message } };
+  return { ok: true, data: { name, email, message, ...(budget ? { budget } : {}) } };
 }
 
 export function validateKonzultace(
@@ -44,4 +45,4 @@ export function fakeOkResponse() {
 }
 
 export const RATE_LIMIT_MESSAGE =
-  "Zkuste to prosím později nebo mi napište na niadobysar@gmail.com.";
+  "Zkus to prosím později nebo mi napiš na niadobysar@gmail.com.";

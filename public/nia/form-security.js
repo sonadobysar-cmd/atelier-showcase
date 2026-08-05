@@ -328,7 +328,7 @@
 
       return inFlight;
     },
-    rateLimitMessage: "Zkuste to prosím později nebo mi napište na niadobysar@gmail.com.",
+    rateLimitMessage: "Zkus to prosím později nebo mi napiš na niadobysar@gmail.com.",
   };
 
   if (document.readyState === "loading") {

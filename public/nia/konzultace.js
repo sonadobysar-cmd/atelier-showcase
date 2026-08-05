@@ -109,7 +109,7 @@
 
   function handleApiError(res, errEl) {
     if (res.status === 429) {
-      showErr(errEl, (window.NiaFormSecurity && window.NiaFormSecurity.rateLimitMessage) || "Zkuste to prosím později.");
+      showErr(errEl, (window.NiaFormSecurity && window.NiaFormSecurity.rateLimitMessage) || "Zkus to prosím později.");
       return;
     }
     if (res.status === 403) {
@@ -258,6 +258,8 @@
         return;
       }
 
+      var budgetEl = document.getElementById("fBudget");
+      var budget = budgetEl ? budgetEl.value.trim() : "";
       window.NiaFormSecurity.getPayloadExtras("kontakt")
         .then(function (sec) {
           return fetch("/api/nia/kontakt", {
@@ -268,6 +270,7 @@
               name: document.getElementById("fName").value.trim(),
               email: document.getElementById("fMail").value.trim(),
               message: document.getElementById("fMsg").value.trim(),
+              budget: budget,
               website: (document.getElementById("fWebsite") || {}).value || "",
               formToken: sec.formToken,
               turnstileToken: sec.turnstileToken,

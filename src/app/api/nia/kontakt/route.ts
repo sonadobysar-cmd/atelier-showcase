@@ -47,7 +47,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: validated.error }, { status: 400, headers: corsHeaders(req.headers.get("origin")) });
   }
 
-  const { name, email, message } = validated.data;
+  const { name, email, message, budget } = validated.data;
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
     await logSubmission({
@@ -72,8 +72,8 @@ export async function POST(req: Request) {
     to: [resolveNiaTo()],
     reply_to: email,
     subject: `Poptávka webu — ${name}`,
-    html: `<p><strong>Jméno:</strong> ${esc(name)}<br><strong>E-mail:</strong> ${esc(email)}<br><strong>IP:</strong> ${esc(guard.meta.ip)}</p><p style="white-space:pre-wrap">${esc(message)}</p>`,
-    text: `Poptávka webu\n\nJméno: ${name}\nE-mail: ${email}\nIP: ${guard.meta.ip}\n\n${message}`,
+    html: `<p><strong>Jméno:</strong> ${esc(name)}<br><strong>E-mail:</strong> ${esc(email)}${budget ? `<br><strong>Rozpočet:</strong> ${esc(budget)}` : ""}<br><strong>IP:</strong> ${esc(guard.meta.ip)}</p><p style="white-space:pre-wrap">${esc(message)}</p>`,
+    text: `Poptávka webu\n\nJméno: ${name}\nE-mail: ${email}${budget ? `\nRozpočet: ${budget}` : ""}\nIP: ${guard.meta.ip}\n\n${message}`,
   });
 
   if (!res.ok) {
@@ -100,7 +100,7 @@ export async function POST(req: Request) {
     referer: guard.meta.referer,
     filter: "ok",
     processed: true,
-    payload: { name, email, message },
+      payload: { name, email, message, ...(budget ? { budget } : {}) },
   });
 
   return NextResponse.json({ ok: true }, { headers: corsHeaders(req.headers.get("origin")) });

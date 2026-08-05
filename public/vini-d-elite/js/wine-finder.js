@@ -11,8 +11,7 @@
       opts: [
         { b: "Červené", s: "Struktura, tanin, večerní charakter", v: "red" },
         { b: "Bílé", s: "Svěžest, lehkost, k moři i k jídlu", v: "white" },
-        { b: "Růžové", s: "Šťavnaté, společenské, letní stůl", v: "rose" },
-        { b: "Šumivé", s: "Franciacorta, Moscato — bubliny a radost", v: "sparkling" },
+        { b: "Šumivé", s: "Jemné perlení, aperitiv a radost", v: "sparkling" },
       ],
     },
     {
@@ -34,6 +33,7 @@
         { b: "Maso a gril", s: "Steak, zvěřina, ragù, pečeně", v: "maso" },
         { b: "Ryby a moře", s: "Ryby, plody moře, lehčí chody", v: "ryba" },
         { b: "Sýry a pasty", s: "Parmigiano, uzeniny, těstoviny", v: "syr" },
+        { b: "Předkrmy", s: "Prosciutto, antipasti, první chod", v: "aperitiv" },
         { b: "Bez jídla", s: "Chci si ho vychutnat samotné", v: "solo" },
       ],
     },
@@ -50,7 +50,7 @@
     {
       key: "body",
       q: "Jak plné má být v ústech?",
-      hint: "Tělo a tanin — od lehkého Chianti po mohutné Barolo a Primitivo.",
+      hint: "Tělo popisuje váhu vína v ústech — od vzdušného Grignolina po archivní cuvée.",
       opts: [
         { b: "Lehké a hebké", s: "Pití bez námahy, jemný tanin", v: 0 },
         { b: "Středně plné", s: "Vyvážené, univerzální k jídlu", v: 1 },
@@ -60,7 +60,7 @@
     {
       key: "fruit",
       q: "Jaké ovoce v něm chcete cítit?",
-      hint: "Čerstvé třešně z Chianti, zralé broskve z Puglie nebo sušené fíky z Amarone.",
+      hint: "Čerstvé bobule, zralé třešně nebo koncentrované sušené ovoce vedou k jiné lahvi.",
       opts: [
         { b: "Čerstvé", s: "Citrus, jablko, jahoda, granátové jablko", v: "fresh" },
         { b: "Zralé", s: "Třešeň, broskev, švestka, fík", v: "ripe" },
@@ -70,10 +70,11 @@
     {
       key: "aroma",
       q: "Co má dominovat ve vůni?",
-      hint: "Každá oblast mluví jiným jazykem — květiny, dub nebo kámen z půdy.",
+      hint: "Vůně zpřesní doporučení mezi odrůdou, půdou a způsobem zrání.",
       opts: [
-        { b: "Květiny a byliny", s: "Fialky, heřmánek, bílý květ", v: "floral" },
-        { b: "Dub a koření", s: "Cedr, vanilka, tabák po sudu", v: "woody" },
+        { b: "Ovoce", s: "Třešeň, švestka, lesní plody", v: "fruity" },
+        { b: "Květiny a byliny", s: "Fialka, růže, balsamické byliny", v: "floral" },
+        { b: "Dub a koření", s: "Vanilka, pepř, čokoláda, sud", v: "woody" },
         { b: "Minerál a kámen", s: "Mořská sůl, křída, sopečná půda", v: "mineral" },
       ],
     },
@@ -88,23 +89,23 @@
       ],
     },
     {
-      key: "region",
-      q: "Který italský charakter vás láká?",
-      hint: "Sever, střed nebo jih — každý kraj dává vínu jinou osobnost.",
+      key: "tannin",
+      q: "Jak výraznou chcete tříslovinu?",
+      hint: "Tříslovina je svíravý pocit na dásních — drží strukturu červeného vína a pomáhá mu s jídlem.",
       opts: [
-        { b: "Sever", s: "Piemonte, Lombardie — elegance a svěžest", v: 0 },
-        { b: "Střed", s: "Toscana, Veneto, Sicílie — klasika a rovnováha", v: 1 },
-        { b: "Jih", s: "Puglia — slunce, Primitivo, koncentrace", v: 2 },
+        { b: "Téměř žádnou", s: "Jemné, hladké, bez svírání", v: 0 },
+        { b: "Příjemně znatelnou", s: "Drží víno, ale nepřebíjí ho", v: 1 },
+        { b: "Pevnou a výraznou", s: "Struktura pro steak, zvěřinu a archivaci", v: 2 },
       ],
     },
     {
       key: "adventure",
       q: "Co od lahve očekáváte?",
-      hint: "Poslední otázka — od jisté klasiky po láhev, kterou si zapamatujete.",
+      hint: "Poslední otázka — od bezstarostné lahve po archivní víno, které vyžaduje čas.",
       opts: [
-        { b: "Osvědčenou klasiku", s: "Chianti, Soave, známé jméno", v: 0 },
-        { b: "Zajímavý objev", s: "Etna, Cerasuolo, něco nového", v: 1 },
-        { b: "Výraznou láhev", s: "Barolo, Amarone, riserva — na památku", v: 2 },
+        { b: "Bezstarostnou klasiku", s: "Přístupné víno pro společný stůl", v: 0 },
+        { b: "Autentický objev", s: "Méně známá odrůda s příběhem", v: 1 },
+        { b: "Výjimečnou láhev", s: "Hloubka, archivní charakter, dlouhý závěr", v: 2 },
       ],
     },
   ];
@@ -227,29 +228,30 @@
     var ac = numScore(wfAns.acidity, p.ac, 10, ["měkká kyselina", "vyvážená kyselina", "živá kyselina"]);
     add({ weight: 10, s: ac.s }, ac.r);
 
-    var aromaMap = { floral: "floral", woody: "woody", mineral: "mn" };
     var aromaWeight = 12;
     var aromaHit = 0;
-    if (wfAns.aroma === "floral" && w.tone === "floral") aromaHit = aromaWeight;
-    else if (wfAns.aroma === "woody" && w.tone === "woody") aromaHit = aromaWeight;
+    if (w.aromas && w.aromas.indexOf(wfAns.aroma) > -1) aromaHit = aromaWeight;
+    else if (wfAns.aroma === "floral" && w.aromas && w.aromas.indexOf("herbal") > -1) aromaHit = aromaWeight * 0.8;
+    else if (wfAns.aroma === "woody" && w.aromas && w.aromas.indexOf("spicy") > -1) aromaHit = aromaWeight * 0.8;
     else if (wfAns.aroma === "mineral" && p.mn >= 1) aromaHit = aromaWeight;
     else if (wfAns.aroma === "woody" && p.ok >= 1) aromaHit = aromaWeight * 0.7;
-    else if (wfAns.aroma === "floral" && p.sp === 0 && w.tone === "fruity") aromaHit = aromaWeight * 0.45;
     add(
       { weight: aromaWeight, s: aromaHit },
-      wfAns.aroma === "floral"
+      wfAns.aroma === "fruity"
+        ? "ovocná aromatika"
+        : wfAns.aroma === "floral"
         ? "květinové tóny"
         : wfAns.aroma === "woody"
           ? "dřevo a koření"
           : "minerální čistota"
     );
 
-    var reg = numScore(wfAns.region, p.wm, 12, [
-      "severní elegance",
-      "střední rovnováha",
-      "jižní koncentrace",
+    var tannin = numScore(wfAns.tannin, p.tn, 12, [
+      "jemná tříslovina",
+      "vyvážená tříslovina",
+      "pevná tříslovina",
     ]);
-    add({ weight: 12, s: reg.s }, reg.r);
+    add({ weight: 12, s: tannin.s }, tannin.r);
 
     var adv = numScore(wfAns.adventure, p.adv, 10, [
       "klasická italská volba",
@@ -257,9 +259,6 @@
       "výrazná hloubka",
     ]);
     add({ weight: 10, s: adv.s }, adv.r);
-
-    var tannin = numScore(wfAns.body, p.tn, 8, null);
-    add({ weight: 8, s: tannin.s }, wfAns.body >= 2 && p.tn >= 2 ? "tanin, který drží jídlo" : null);
 
     var cx = numScore(wfAns.adventure, p.cx, 6, null);
     add({ weight: 6, s: cx.s }, wfAns.adventure >= 2 && p.cx >= 2 ? "komplexní závěr" : null);
@@ -338,7 +337,9 @@
   });
 
   function finish() {
-    var ranked = WINES.map(function (w) {
+    var eligible = WINES.filter(function (w) { return w.type === wfAns.type; });
+    if (!eligible.length) eligible = WINES;
+    var ranked = eligible.map(function (w) {
       var r = scoreWine(w);
       return { w: w, pct: r.pct, why: r.why, p: r.p };
     }).sort(function (a, b) {
@@ -362,7 +363,9 @@
       '<div class="match">Chuťový profil · shoda s vašimi odpověďmi</div>' +
       "</div>" +
       '<div class="wfr-card">' +
-      '<div class="wfr-bottle"><img class="rimg" src="' +
+      '<div class="wfr-bottle"><div class="ph"><span class="ph-tag">' +
+      (window.VINI_IMAGES && window.VINI_IMAGES[w.id] ? "Produktová fotografie" : "Fotografii připravujeme") +
+      '</span></div><img class="rimg" src="' +
       wimg(w.id) +
       '" alt="" onerror="this.remove()"></div>' +
       '<div class="wfr-info">' +
@@ -430,7 +433,9 @@
     elRes.querySelector(".wf-match-ring").innerHTML = pick.pct + "<small>%</small>";
     elRes.querySelector(".wfr-card").outerHTML =
       '<div class="wfr-card">' +
-      '<div class="wfr-bottle"><img class="rimg" src="' +
+      '<div class="wfr-bottle"><div class="ph"><span class="ph-tag">' +
+      (window.VINI_IMAGES && window.VINI_IMAGES[w.id] ? "Produktová fotografie" : "Fotografii připravujeme") +
+      '</span></div><img class="rimg" src="' +
       wimg(w.id) +
       '" alt="" onerror="this.remove()"></div>' +
       '<div class="wfr-info">' +

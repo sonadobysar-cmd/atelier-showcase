@@ -1,0 +1,7 @@
+{
+  "name": "vini-d-elite-static",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

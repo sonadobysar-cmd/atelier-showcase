@@ -188,6 +188,10 @@ img{display:block;max-width:100%}
 .wcard-b{padding:22px 22px 26px;display:flex;flex-direction:column;flex:1}
 .wcard-b .reg{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-d);margin-bottom:7px}
 .wcard-b h3{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--dark-ink);line-height:1.1}
+.wine-story{margin:17px 0 2px;border-top:1px solid rgba(42,12,20,.15);border-bottom:1px solid rgba(42,12,20,.15)}
+.wine-story summary{padding:12px 0;cursor:pointer;list-style:none;color:var(--wine);font-family:var(--engrave);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between}
+.wine-story summary::-webkit-details-marker{display:none}.wine-story summary:after{content:'+';font:400 1.1rem/1 var(--serif);color:var(--gold-d)}.wine-story[open] summary:after{content:'−'}
+.wine-story p{padding:0 0 14px;color:#5b4d43;font-size:.83rem;line-height:1.65}
 .wcard-b .grape{font-size:.84rem;color:#8a7553;margin:3px 0 7px}
 .wcard-b .subtitle{font-family:var(--serif);font-size:.92rem;font-style:italic;color:var(--wine);margin:0 0 12px}
 .wcard-b .desc{font-size:.86rem;color:#5a4632;margin-bottom:18px;flex:1}
@@ -421,7 +425,7 @@ function wimg(id){return IMG[id]||("img/w"+id+".jpg");}
 WINES=window.VINI_CATALOG;IMG=window.VINI_IMAGES;window.WINES=WINES;
 (function(){var typeLabel={red:'Červené',white:'Bílé',rose:'Růžové',sparkling:'Šumivé'};
   var g=document.getElementById('wineGrid'),tabs=document.getElementById('shopTabs'),sortSel=document.getElementById('sortSel');var cur={f:'all',s:'def'};
-  function card(w){var hasPhoto=!!window.VINI_IMAGES[w.id];return '<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div><div class="desc">'+w.desc+'</div><div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div><div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';}
+  function card(w){var hasPhoto=!!window.VINI_IMAGES[w.id];var story=w.story?'<details class="wine-story"><summary>Příběh vína</summary><p>'+w.story+'</p></details>':'';return '<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div><div class="desc">'+w.desc+'</div>'+story+'<div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div><div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';}
   function render(){var list=WINES.filter(function(w){if(cur.f==='all')return true;if(cur.f==='primitivo')return !!w.primitivo;return w.type===cur.f;});
     if(cur.s==='name')list.sort(function(a,b){return a.name.localeCompare(b.name,'cs');});
     g.innerHTML='';list.forEach(function(w){var c=document.createElement('div');c.className='wcard';c.innerHTML=card(w);g.appendChild(c);});}

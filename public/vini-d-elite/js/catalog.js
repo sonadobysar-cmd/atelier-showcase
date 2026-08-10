@@ -67,6 +67,10 @@ window.VINI_IMAGES = {
   14:'images/wines/santa-dorotea.webp'
 };
 
+/* Ověřené recenze patří sem. Celkové skóre se počítá automaticky z jejich
+   hodnocení; dokud nejsou dodané skutečné zkušenosti hostů, web je nevymýšlí. */
+window.VINI_REVIEWS = {};
+
 window.viniPriceLabel = function () { return 'Dostupnost ověříme osobně'; };
 window.viniContactHref = function (wine) {
   return 'mailto:obchod@vinidelite.cz?subject=' + encodeURIComponent('Mám zájem o víno: ' + wine.name) + '&body=' + encodeURIComponent('Dobrý den,\n\nmám zájem o víno ' + wine.name + '. Prosím o aktuální dostupnost a osobní doporučení množství či vhodné alternativy.\n\nDěkuji.');

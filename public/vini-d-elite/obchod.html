@@ -72,6 +72,7 @@ img{display:block;max-width:100%}
   filter:drop-shadow(0 2px 4px rgba(0,0,0,.5))}
 .brand .bs{font-family:var(--engrave);font-weight:400;font-size:.5rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold-l);margin-top:8px;opacity:.85}
 .hd-r{position:absolute;right:0;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:18px}
+.set-head-link{display:flex;align-items:center;gap:8px;border:1px solid rgba(217,192,138,.4);padding:9px 12px;color:var(--gold-l);font-family:var(--engrave);font-size:.58rem;letter-spacing:.11em;text-transform:uppercase;white-space:nowrap}.set-head-link svg{width:18px;height:18px}.set-head-link:hover{background:var(--parch);color:var(--dark-ink)}@media(max-width:600px){.set-head-link{padding:8px}.set-head-link span{display:none}.hd-r{gap:8px}}
 .icbtn{background:none;border:none;cursor:pointer;color:var(--parch);position:relative;display:flex;padding:4px}
 .icbtn svg{width:22px;height:22px}
 .cart-count{position:absolute;top:-7px;right:-9px;background:var(--gold);color:var(--dark-ink);font-family:var(--sans);font-size:.6rem;font-weight:600;min-width:16px;height:16px;border-radius:999px;display:flex;align-items:center;justify-content:center;padding:0 4px}
@@ -373,7 +374,6 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 .concierge-note h2{font-family:var(--serif);font-size:1.55rem;color:var(--parch);margin-bottom:4px}.concierge-note p{color:var(--parch-d);font-size:.94rem}.concierge-note .btn{white-space:nowrap}
 @media(max-width:720px){.concierge-note{grid-template-columns:1fr;text-align:center}.concierge-note .btn{width:100%}}
 @media(max-width:640px){.shop-bar{flex-direction:column;align-items:stretch}.shop-tabs{justify-content:flex-start;overflow-x:auto}}
-@media(max-width:640px){.set-promo{grid-template-columns:1fr!important}.set-promo img{min-height:210px!important}.set-promo>span{padding:22px!important}}
 </style>
 </head><body>
 <svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false"><defs><linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8a6a32"/><stop offset=".4" stop-color="#ecd79e"/><stop offset=".55" stop-color="#c39c54"/><stop offset=".75" stop-color="#ecd79e"/><stop offset="1" stop-color="#8a6a32"/></linearGradient></defs></svg>
@@ -383,16 +383,14 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <a class="brand" href="index.html"><span class="bm">Vini d'Elite</span></a>
   <nav class="hd-nav" id="nav"><a href="index.html">Domů</a><a href="index.html#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="la-cantina.html">Privé d’Elite</a><a href="b2b.html">B2B</a></nav>
-  <div class="hd-r"><a class="icbtn" href="mailto:obchod@vinidelite.cz?subject=Osobní%20výběr%20vína" aria-label="Napsat Vini d'Elite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg></a></div>
+  <div class="hd-r"><a class="set-head-link" href="degustacni-set.html" aria-label="Kompletní degustační set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h16v12H4zM2 5h20v3H2zM12 5v15M12 5c-3-4-7-3-7-1 0 1 2 1 7 1Zm0 0c3-4 7-3 7-1 0 1-2 1-7 1Z"/></svg><span>Degustační set</span></a><a class="icbtn" href="mailto:obchod@vinidelite.cz?subject=Osobní%20výběr%20vína" aria-label="Napsat Vini d'Elite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg></a></div>
 </div></header>
 <section class="shop-intro"><div class="wrap" style="padding:clamp(40px,6vw,80px) 0;text-align:center;margin:0 auto">
   <span class="eyebrow" style="display:block;margin-bottom:14px">Kurátorská kolekce</span>
   <h1 style="font-size:clamp(2.6rem,6vw,4.6rem);color:var(--parch)">Víno, které čeká na <em>správný okamžik</em></h1>
   <p style="font-style:italic;color:var(--parch-d);margin:18px auto 0;font-size:1.16rem;max-width:62ch">Nejsme anonymní e-shop. Pracujeme s menšími šaržemi a každou poptávku řešíme osobně — ověříme dostupnost, doporučíme množství i stejně silnou alternativu.</p>
 </div></section>
-<section class="sec" id="obchod" style="padding-top:clamp(40px,5vw,70px)"><div class="wrap">
-  <a class="set-promo" href="degustacni-set.html" style="display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:center;margin-bottom:44px;border:1px solid rgba(217,192,138,.3);background:#210b11;overflow:hidden"><img src="images/degustacni-set-hero.png" alt="Kompletní degustační set Tenuta La Pergola" style="width:100%;height:100%;min-height:260px;object-fit:cover"><span style="padding:28px;color:var(--parch)"><small class="eyebrow">Novinka · kompletní kolekce</small><strong style="display:block;font:500 2rem/1.05 var(--serif);margin:14px 0">Degustační set Tenuta La Pergola</strong><span style="color:var(--parch-d)">Všechna vína značky, doporučené pořadí a nabídka sestavená podle počtu hostů.</span><b style="display:block;margin-top:18px;font-family:var(--engrave);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l)">Prohlédnout celý set →</b></span></a>
-  <div class="concierge-note"><div><h2>Řekněte nám, pro jakou příležitost víno hledáte</h2><p>Večeře, dárek, oslava nebo doplnění soukromého sklepa? Ozveme se s konkrétním výběrem a aktuální dostupností.</p></div><a class="btn btn-gold" href="mailto:obchod@vinidelite.cz?subject=Osobní%20výběr%20vína">Nechat si doporučit</a></div>
+<section class="sec" id="obchod" style="padding-top:clamp(40px,5vw,70px)"><div class="wrap">  <div class="concierge-note"><div><h2>Řekněte nám, pro jakou příležitost víno hledáte</h2><p>Večeře, dárek, oslava nebo doplnění soukromého sklepa? Ozveme se s konkrétním výběrem a aktuální dostupností.</p></div><a class="btn btn-gold" href="mailto:obchod@vinidelite.cz?subject=Osobní%20výběr%20vína">Nechat si doporučit</a></div>
   <div class="shop-bar">
     <div class="shop-tabs" id="shopTabs"><button data-f="all" class="on">Vše</button><button data-f="red">Červené</button><button data-f="white">Bílé</button><button data-f="sparkling">Šumivé</button></div>
     <select id="sortSel" class="sort-sel" aria-label="Řadit"><option value="def">Doporučené pořadí</option><option value="name">Podle názvu</option></select>

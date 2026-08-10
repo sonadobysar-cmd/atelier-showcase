@@ -2,5 +2,13 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "vini.niadobysar.com" }],
+      "destination": "https://www.vinidelite.cz/:path*",
+      "permanent": true
+    }
+  ]
 }

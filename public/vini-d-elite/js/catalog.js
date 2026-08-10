@@ -33,6 +33,25 @@ const VINI_EDITORIAL = {
 };
 window.VINI_CATALOG.forEach(function(wine){if(VINI_EDITORIAL[wine.id])Object.assign(wine,VINI_EDITORIAL[wine.id]);});
 
+/* Doporučený servis. U alkoholu uvádíme jen hodnoty potvrzené v dodaných
+   podkladech; ostatní lahve se mohou lišit podle ročníku. */
+const VINI_TECH = {
+  1:{decant:'30–60 min',temp:'16–18 °C',archive:'potenciál 5–8 let',alcohol:'dle etikety ročníku'},
+  2:{decant:'30 min',temp:'16–18 °C',archive:'potenciál 3–5 let',alcohol:'15 %'},
+  3:{decant:'15–30 min',temp:'15–17 °C',archive:'potenciál 2–4 roky',alcohol:'14,5 %'},
+  4:{decant:'není nutná',temp:'13–15 °C',archive:'potenciál 1–3 roky',alcohol:'dle etikety ročníku'},
+  5:{decant:'není nutná',temp:'14–16 °C',archive:'potenciál 1–3 roky',alcohol:'12,5 %'},
+  6:{decant:'15 min',temp:'14–16 °C',archive:'potenciál 2–4 roky',alcohol:'12,5 %'},
+  7:{decant:'60 min · kvůli sedimentu',temp:'16–18 °C',archive:'archivní ročník · pít nyní',alcohol:'dle etikety ročníku'},
+  8:{decant:'60–90 min',temp:'16–18 °C',archive:'potenciál 3–5 let',alcohol:'dle etikety ročníku'},
+  9:{decant:'není nutná',temp:'6–8 °C',archive:'nejlépe do 2 let',alcohol:'12,5 %'},
+  11:{decant:'není nutná',temp:'8–10 °C',archive:'potenciál 2–4 roky',alcohol:'dle etikety ročníku'},
+  12:{decant:'15 min',temp:'14–16 °C',archive:'potenciál 2–4 roky',alcohol:'dle etikety ročníku'},
+  13:{decant:'45–60 min',temp:'16–18 °C',archive:'potenciál 5–10 let',alcohol:'dle etikety ročníku'},
+  14:{decant:'není nutná',temp:'8–10 °C',archive:'potenciál 2–4 roky',alcohol:'dle etikety ročníku'}
+};
+window.VINI_CATALOG.forEach(function(wine){wine.tech=VINI_TECH[wine.id]||null;});
+
 window.VINI_IMAGES = {
   1:'images/wines/san-lorenzo.webp',
   2:'images/wines/la-cappelletta.webp',

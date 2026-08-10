@@ -316,7 +316,7 @@ img{display:block;max-width:100%}
 .ft a.fl:hover{color:var(--gold-l)}
 .ft-bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);padding-top:24px}
 .ft-bot a{color:var(--parch);font-weight:400}
-@media(max-width:1020px){.ft-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.ft-grid{grid-template-columns:1fr}}
+@media(max-width:1020px){.ft-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.ft{padding:44px 0 22px}.ft-grid{grid-template-columns:1fr 1fr;gap:22px 16px;padding-bottom:22px}.ft-grid>div:first-child{grid-column:1/-1}.ft-grid h4{margin-bottom:10px}.fl{margin:5px 0}.ft-bot{gap:8px;padding-top:18px}}
 
 /* cart — parchment */
 .scrim{position:fixed;inset:0;background:rgba(14,5,8,.6);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:90}
@@ -391,7 +391,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 .rv{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s ease}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}*{scroll-behavior:auto!important}}
-.terroir-story{background:#f2ead9}.terroir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}.terroir-grid article{border:1px solid rgba(42,12,20,.16);padding:30px;min-height:210px;background:rgba(255,255,255,.28)}.terroir-grid article>span{font-family:var(--engrave);font-size:.6rem;letter-spacing:.18em;color:var(--gold-d)}.terroir-grid h3{font-family:var(--serif);font-size:2rem;color:var(--wine);margin:16px 0 10px}.terroir-grid p{color:#63554a;font-size:.9rem;line-height:1.7}.future-panel{margin-top:26px;padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,6vw,80px);align-items:start;background:var(--wine);color:var(--parch)}.future-panel h2{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:500;line-height:1;margin:14px 0 20px}.future-panel h2 em{color:var(--gold-l)}.future-panel p{color:var(--parch-d);line-height:1.75}.future-panel ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px}.future-panel li{border-top:1px solid rgba(217,192,138,.35);padding-top:14px}.future-panel b{font-family:var(--serif);font-size:1.25rem;font-weight:500;display:block}.future-panel small{color:var(--parch-d);display:block;line-height:1.55;margin-top:5px}
+.terroir-story{background:#f2ead9}.terroir-story .eyebrow{color:#765b28}.terroir-story .shead h2{color:#4a1322}.terroir-story .shead h2 em{color:#7a4d28!important;text-shadow:none}.terroir-story .shead p{color:#51443a}.terroir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}.terroir-grid article{border:1px solid rgba(42,12,20,.16);padding:30px;min-height:210px;background:rgba(255,255,255,.28)}.terroir-grid article>span{font-family:var(--engrave);font-size:.6rem;letter-spacing:.18em;color:var(--gold-d)}.terroir-grid h3{font-family:var(--serif);font-size:2rem;color:var(--wine);margin:16px 0 10px}.terroir-grid p{color:#63554a;font-size:.9rem;line-height:1.7}.future-panel{margin-top:26px;padding:clamp(28px,5vw,60px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,6vw,80px);align-items:start;background:var(--wine);color:var(--parch)}.future-panel h2{font-family:var(--serif);font-size:clamp(2.4rem,5vw,4.4rem);font-weight:500;line-height:1;margin:14px 0 20px}.future-panel h2 em{color:var(--gold-l)}.future-panel p{color:var(--parch-d);line-height:1.75}.future-panel ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px}.future-panel li{border-top:1px solid rgba(217,192,138,.35);padding-top:14px}.future-panel b{font-family:var(--serif);font-size:1.25rem;font-weight:500;display:block}.future-panel small{color:var(--parch-d);display:block;line-height:1.55;margin-top:5px}
 @media(max-width:760px){.terroir-grid,.future-panel{grid-template-columns:1fr}.terroir-grid article{min-height:0}.future-panel ul{grid-template-columns:1fr}}
 </style>
 </head>
@@ -406,7 +406,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     <a class="brand" href="#"><span class="bm">Vini d'Elite</span></a>
     <nav class="hd-nav" id="nav">
-      <a href="#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="#primitivo">Tenuta La Pergola</a><a href="la-cantina.html">La Cantina Club</a><a href="b2b.html">B2B</a>
+      <a href="#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="#primitivo">Tenuta La Pergola</a><a href="la-cantina.html">Privé d’Elite</a><a href="b2b.html">B2B</a>
     </nav>
     <div class="hd-r">
       <a class="icbtn" href="mailto:obchod@vinidelite.cz?subject=Osobní%20doporučení%20vína" aria-label="Napsat Vini d'Elite">
@@ -510,7 +510,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   <span class="mono-emboss" aria-hidden="true">V</span>
   <div class="wrap cantina-in">
     <div class="cantina-c">
-      <span class="eyebrow club-label">La Cantina Club</span>
+      <span class="eyebrow club-label">Privé d’Elite</span>
       <h2>Vstupte do <em>Vini d'Elite</em></h2>
       <p>Komunita lidí, kteří chtějí italské víno poznávat v dobré společnosti — ochutnávat spolu, ptát se a sdílet úctu k tomu, odkud každá láhev přišla.</p>
       <div class="cantina-list">
@@ -588,7 +588,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   <div class="wrap">
     <div class="ft-grid">
       <div><a class="brand" href="#"><span class="bm">Vini d'Elite</span></a><p>Ručně vybíraná italská vína z prémiových oblastí. Přímý dovoz, soukromý sklep a privátní degustace.</p></div>
-      <div><h4>Objevit</h4><a class="fl" href="#finder">Najdi své víno</a><a class="fl" href="obchod.html">Kolekce</a><a class="fl" href="#primitivo">Tenuta La Pergola</a><a class="fl" href="la-cantina.html">La Cantina Club</a></div>
+      <div><h4>Objevit</h4><a class="fl" href="#finder">Najdi své víno</a><a class="fl" href="obchod.html">Kolekce</a><a class="fl" href="#primitivo">Tenuta La Pergola</a><a class="fl" href="la-cantina.html">Privé d’Elite</a></div>
       <div><h4>Spolupráce</h4><a class="fl" href="b2b.html">B2B pro firmy</a><a class="fl" href="#pribeh">Příběh</a><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a></div>
             <div><h4>Právní informace</h4><a class="fl" href="obchodni-podminky.html">Obchodní podmínky</a><a class="fl" href="doprava.html">Doprava</a><a class="fl" href="reklamacni-rad.html">Reklamační řád</a><a class="fl" href="gdpr.html">GDPR</a><a class="fl" href="cookies.html">Cookies</a></div>
       <div><h4>Kontakt</h4><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a><span class="fl">Brno, CZ</span></div>
@@ -597,8 +597,9 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
   </div>
 </footer>
 
+<script src="js/catalog.js?v=20260810"></script>
 <script>
-/* ===== WINE DATA (placeholder — klient dodá přesné hodnoty) =====
+/* ===== WINE DATA (záložní data; produkční katalog načítá catalog.js) =====
    type: red|white|rose|sparkling
    sweet:0 suché 1 polosuché 2 sladší | body:0 jemné 1 střední 2 plné&trpké
    intensity:0 světlé 1 střední 2 tmavé | tone: fruity|floral|woody

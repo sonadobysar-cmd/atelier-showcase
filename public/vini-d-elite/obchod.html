@@ -192,6 +192,11 @@ img{display:block;max-width:100%}
 .wine-story summary{padding:12px 0;cursor:pointer;list-style:none;color:var(--wine);font-family:var(--engrave);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between}
 .wine-story summary::-webkit-details-marker{display:none}.wine-story summary:after{content:'+';font:400 1.1rem/1 var(--serif);color:var(--gold-d)}.wine-story[open] summary:after{content:'−'}
 .wine-story p{padding:0 0 14px;color:#5b4d43;font-size:.83rem;line-height:1.65}
+.wine-tech,.wine-reviews{border-bottom:1px solid rgba(42,12,20,.15)}
+.wine-tech summary,.wine-reviews summary{padding:12px 0;cursor:pointer;list-style:none;color:var(--wine);font-family:var(--engrave);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}.wine-tech summary::-webkit-details-marker,.wine-reviews summary::-webkit-details-marker{display:none}.wine-tech summary:after,.wine-reviews summary:after{content:'+';font:400 1.1rem/1 var(--serif);color:var(--gold-d)}.wine-tech[open] summary:after,.wine-reviews[open] summary:after{content:'−'}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;padding:0 0 15px}.tech-grid div{border-left:2px solid rgba(181,147,79,.45);padding-left:9px}.tech-grid dt{font-family:var(--engrave);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:#8a7553}.tech-grid dd{font-size:.78rem;color:#4d3d32;margin-top:2px}
+.review-box{padding:0 0 15px;color:#5b4d43;font-size:.8rem;line-height:1.55}.review-box a{display:inline-block;margin-top:8px;color:var(--wine);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.related{margin:15px 0 17px}.related b{display:block;font-family:var(--engrave);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px}.related-links{display:flex;flex-wrap:wrap;gap:6px}.related-links a{font-size:.7rem;color:var(--wine);border:1px solid rgba(42,12,20,.2);padding:6px 8px}.related-links a:hover{background:rgba(181,147,79,.12)}
 .occasion{margin:2px 0 15px;padding:9px 11px;border-left:2px solid var(--gold-d);background:rgba(181,147,79,.09);color:var(--wine);font-size:.76rem;font-weight:600;line-height:1.45}
 .wcard-b .grape{font-size:.84rem;color:#8a7553;margin:3px 0 7px}
 .wcard-b .subtitle{font-family:var(--serif);font-size:.92rem;font-style:italic;color:var(--wine);margin:0 0 12px}
@@ -293,7 +298,7 @@ img{display:block;max-width:100%}
 .ft a.fl:hover{color:var(--gold-l)}
 .ft-bot{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:var(--mut);padding-top:24px}
 .ft-bot a{color:var(--parch);font-weight:400}
-@media(max-width:1020px){.ft-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.ft-grid{grid-template-columns:1fr}}
+@media(max-width:1020px){.ft-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.ft{padding:44px 0 22px}.ft-grid{grid-template-columns:1fr 1fr;gap:22px 16px;padding-bottom:22px}.ft-grid>div:first-child{grid-column:1/-1}.ft-grid h4{margin-bottom:10px}.fl{margin:5px 0}.ft-bot{gap:8px;padding-top:18px}}
 
 /* cart — parchment */
 .scrim{position:fixed;inset:0;background:rgba(14,5,8,.6);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:90}
@@ -375,7 +380,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 <header class="hd"><div class="wrap hd-in">
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   <a class="brand" href="index.html"><span class="bm">Vini d'Elite</span></a>
-  <nav class="hd-nav" id="nav"><a href="index.html">Domů</a><a href="index.html#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="la-cantina.html">La Cantina Club</a><a href="b2b.html">B2B</a></nav>
+  <nav class="hd-nav" id="nav"><a href="index.html">Domů</a><a href="index.html#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="la-cantina.html">Privé d’Elite</a><a href="b2b.html">B2B</a></nav>
   <div class="hd-r"><a class="icbtn" href="mailto:obchod@vinidelite.cz?subject=Osobní%20výběr%20vína" aria-label="Napsat Vini d'Elite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg></a></div>
 </div></header>
 <section class="shop-intro"><div class="wrap" style="padding:clamp(40px,6vw,80px) 0;text-align:center;margin:0 auto">
@@ -393,7 +398,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 </div></section>
 <footer class="ft"><div class="wrap"><div class="ft-grid">
   <div><a class="brand" href="index.html"><span class="bm">Vini d'Elite</span></a><p>Ručně vybíraná italská vína z prémiových oblastí. Přímý dovoz, soukromý sklep a privátní degustace.</p></div>
-  <div><h4>Objevit</h4><a class="fl" href="index.html#finder">Najdi své víno</a><a class="fl" href="obchod.html">Kolekce</a><a class="fl" href="la-cantina.html">La Cantina Club</a></div>
+  <div><h4>Objevit</h4><a class="fl" href="index.html#finder">Najdi své víno</a><a class="fl" href="obchod.html">Kolekce</a><a class="fl" href="la-cantina.html">Privé d’Elite</a></div>
   <div><h4>Pro profesionály</h4><a class="fl" href="b2b.html">B2B nabídka</a><a class="fl" href="index.html#pribeh">Příběh</a><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a></div>
         <div><h4>Právní informace</h4><a class="fl" href="obchodni-podminky.html">Obchodní podmínky</a><a class="fl" href="doprava.html">Doprava</a><a class="fl" href="reklamacni-rad.html">Reklamační řád</a><a class="fl" href="gdpr.html">GDPR</a><a class="fl" href="cookies.html">Cookies</a></div>
       <div><h4>Kontakt</h4><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a><span class="fl">Brno, CZ</span></div>
@@ -426,10 +431,11 @@ function wimg(id){return IMG[id]||("img/w"+id+".jpg");}
 WINES=window.VINI_CATALOG;IMG=window.VINI_IMAGES;window.WINES=WINES;
 (function(){var typeLabel={red:'Červené',white:'Bílé',rose:'Růžové',sparkling:'Šumivé'};
   var g=document.getElementById('wineGrid'),tabs=document.getElementById('shopTabs'),sortSel=document.getElementById('sortSel');var cur={f:'all',s:'def'};
-  function card(w){var hasPhoto=!!window.VINI_IMAGES[w.id];var occasion=w.occasion?'<div class="occasion">'+w.occasion+'</div>':'';var story=w.story?'<details class="wine-story"><summary>Celý příběh vína</summary><p>'+w.story+'</p></details>':'';return '<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div>'+occasion+'<div class="desc">'+w.desc+'</div>'+story+'<div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div><div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';}
+  function similar(w){return WINES.filter(function(x){return x.id!==w.id;}).map(function(x){var score=(x.type===w.type?4:0)+(x.tone===w.tone?2:0)+(2-Math.min(2,Math.abs((x.body||0)-(w.body||0))))+x.pairing.filter(function(p){return w.pairing.indexOf(p)>-1;}).length;return{x:x,score:score};}).sort(function(a,b){return b.score-a.score;}).slice(0,3).map(function(a){return a.x;});}
+  function card(w){var hasPhoto=!!window.VINI_IMAGES[w.id];var occasion=w.occasion?'<div class="occasion">'+w.occasion+'</div>':'';var story=w.story?'<details class="wine-story"><summary>Celý příběh vína</summary><p>'+w.story+'</p></details>':'';var t=w.tech||{};var tech='<details class="wine-tech"><summary>Technické údaje</summary><dl class="tech-grid"><div><dt>Dekantace</dt><dd>'+t.decant+'</dd></div><div><dt>Teplota</dt><dd>'+t.temp+'</dd></div><div><dt>Archivace</dt><dd>'+t.archive+'</dd></div><div><dt>Alkohol</dt><dd>'+t.alcohol+'</dd></div></dl></details>';var review='<details class="wine-reviews"><summary>Recenze hostů · zatím 0</summary><div class="review-box">Buďte první, kdo víno ohodnotí. Recenze zveřejňujeme po ověření ochutnávky.<br><a href="mailto:obchod@vinidelite.cz?subject='+encodeURIComponent('Recenze vína: '+w.name)+'">Napsat recenzi</a></div></details>';var related='<div class="related"><b>Podobná vína pro vaši chuť</b><div class="related-links">'+similar(w).map(function(x){return '<a href="#wine-'+x.id+'">'+x.name+'</a>';}).join('')+'</div></div>';return '<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div><div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div>'+occasion+'<div class="desc">'+w.desc+'</div>'+story+'<div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div>'+tech+review+related+'<div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';}
   function render(){var list=WINES.filter(function(w){if(cur.f==='all')return true;if(cur.f==='primitivo')return !!w.primitivo;return w.type===cur.f;});
     if(cur.s==='name')list.sort(function(a,b){return a.name.localeCompare(b.name,'cs');});
-    g.innerHTML='';list.forEach(function(w){var c=document.createElement('div');c.className='wcard';c.innerHTML=card(w);g.appendChild(c);});}
+    g.innerHTML='';list.forEach(function(w){var c=document.createElement('article');c.className='wcard';c.id='wine-'+w.id;c.innerHTML=card(w);g.appendChild(c);});}
   tabs.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tabs.querySelectorAll('button').forEach(function(x){x.classList.remove('on');});b.classList.add('on');cur.f=b.dataset.f;render();});
   sortSel.addEventListener('change',function(){cur.s=sortSel.value;render();});render();})();
 /* ===== menu + reveal ===== */

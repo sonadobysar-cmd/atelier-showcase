@@ -14,11 +14,13 @@ for (const entry of readdirSync(new URL('./', import.meta.url))) {
 }
 
 // Keep the catalogue available even when a CDN or browser blocks a standalone
-// JavaScript asset. The shop can then render immediately from one HTML file.
-const shopFile = new URL('./dist/obchod.html', import.meta.url);
+// JavaScript asset. Catalogue pages can then render immediately from one file.
 const catalogue = readFileSync(new URL('./js/catalog.js', import.meta.url), 'utf8');
-const shop = readFileSync(shopFile, 'utf8').replace(
-  '<script src="js/catalog.js"></script>',
-  `<script>${catalogue}</script>`,
-);
-writeFileSync(shopFile, shop);
+for (const page of ['index.html', 'obchod.html']) {
+  const file = new URL(`./dist/${page}`, import.meta.url);
+  const html = readFileSync(file, 'utf8').replace(
+    '<script src="js/catalog.js"></script>',
+    `<script>${catalogue}</script>`,
+  );
+  writeFileSync(file, html);
+}

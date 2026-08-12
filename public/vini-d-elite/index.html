@@ -672,14 +672,15 @@ WINES=window.VINI_CATALOG;IMG=window.VINI_IMAGES;window.WINES=WINES;
   if(detail&&winery){detail.classList.remove('sec');winery.appendChild(detail);}
 })();
 
-/* ===== forms (demo) ===== */
+/* Newsletter odešle skutečný kontakt, nezůstává jen u lokálního potvrzení. */
 function wireForm(btnId,okId,fields){
   var b=document.getElementById(btnId);if(!b)return;
   b.addEventListener('click',function(){
     var ok=document.getElementById(okId);
     for(var i=0;i<fields.length;i++){var f=document.getElementById(fields[i]);if(f&&!f.value.trim()){ok.textContent='Vyplňte prosím všechna pole.';ok.style.color='#e0a';return;}}
-    ok.style.color='';ok.textContent='Hotovo — ozvu se vám osobně. ✦';
-    fields.forEach(function(id){var f=document.getElementById(id);if(f)f.value='';});
+    var email=document.getElementById('n_mail').value.trim();
+    ok.style.color='';ok.textContent='Otevírám zprávu pro Vini d’Elite…';
+    location.href='mailto:obchod@vinidelite.cz?subject='+encodeURIComponent('Přihlášení k novinkám Vini d’Elite')+'&body='+encodeURIComponent('Dobrý den,\n\nprosím o zařazení e-mailu '+email+' mezi odběratele novinek Vini d’Elite.');
   });
 }
 

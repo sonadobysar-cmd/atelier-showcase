@@ -42,6 +42,11 @@ export default async function handler(req, res) {
   if (rateLimited(ip)) return res.status(429).json({ ok: false, error: "Odesíláte příliš rychle. Zkuste to prosím za několik minut." });
 
   const body = req.body && typeof req.body === "object" ? req.body : {};
+  const apiKey = text(process.env.RESEND_API_KEY, 300);
+  if (!apiKey) {
+    console.error("[vini/contact] RESEND_API_KEY is missing");
+    return res.status(503).json({ ok: false, error: "Formulář se právě nepodařilo připojit. Zkuste to prosím později." });
+  }
   if (text(body.website, 200)) return res.status(200).json({ ok: true });
 
   const name = text(body.name, 120);
@@ -54,12 +59,6 @@ export default async function handler(req, res) {
   if (name.length < 2) return res.status(400).json({ ok: false, error: "Doplňte prosím své jméno." });
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ ok: false, error: "Doplňte platný e-mail." });
   if (message.length < 8) return res.status(400).json({ ok: false, error: "Napište prosím krátce, s čím vám můžeme pomoci." });
-
-  const apiKey = text(process.env.RESEND_API_KEY, 300);
-  if (!apiKey) {
-    console.error("[vini/contact] RESEND_API_KEY is missing");
-    return res.status(503).json({ ok: false, error: "Formulář se právě nepodařilo připojit. Zkuste to prosím později." });
-  }
 
   const lines = [`Téma: ${topic}`, context ? `Kontext: ${context}` : "", `Jméno: ${name}`, `E-mail: ${email}`, phone ? `Telefon: ${phone}` : "", "", message].filter(Boolean);
   const response = await fetch("https://api.resend.com/emails", {

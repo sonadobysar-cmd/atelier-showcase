@@ -58,11 +58,36 @@ function rewriteTo(url: URL, destPath: string): NextResponse {
   return NextResponse.rewrite(target);
 }
 
-function withSecurityHeaders(response: NextResponse): NextResponse {
+function withSecurityHeaders(response: NextResponse, pathname = ""): NextResponse {
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set("X-Frame-Options", "SAMEORIGIN");
-  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("Permissions-Policy", "accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
+  response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
+  response.headers.set("Origin-Agent-Cluster", "?1");
+  response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  response.headers.set(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      "base-uri 'self'",
+      "object-src 'none'",
+      "frame-ancestors 'none'",
+      "form-action 'self'",
+      "img-src 'self' data: blob: https://*.blob.vercel-storage.com",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "script-src 'self' 'unsafe-inline'",
+      "connect-src 'self'",
+      "media-src 'self' data: blob: https://*.blob.vercel-storage.com",
+      "upgrade-insecure-requests",
+    ].join("; "),
+  );
+  if (pathname === "/admin" || pathname.endsWith("/vini-d-elite/admin.html") || pathname.startsWith("/api/vini/admin")) {
+    response.headers.set("Cache-Control", "no-store, max-age=0");
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
   return response;
 }
 
@@ -92,6 +117,7 @@ export function middleware(request: NextRequest) {
       "/la-cantina": "/vini-d-elite/la-cantina.html",
       "/b2b": "/vini-d-elite/b2b.html",
       "/kontakt": "/vini-d-elite/kontakt.html",
+      "/admin": "/vini-d-elite/admin.html",
       "/gdpr": "/vini-d-elite/gdpr.html",
       "/cookies": "/vini-d-elite/cookies.html",
       "/obchodni-podminky": "/vini-d-elite/obchodni-podminky.html",
@@ -101,14 +127,20 @@ export function middleware(request: NextRequest) {
       "/sitemap.xml": "/vini-d-elite/sitemap.xml",
     };
     const destination = aliases[pathname];
-    if (destination) return withSecurityHeaders(rewriteTo(request.nextUrl, destination));
+    if (destination) return withSecurityHeaders(rewriteTo(request.nextUrl, destination), pathname);
   }
 
   if (isStaticPath(pathname)) {
+    if ((host === "vinidelite.cz" || host === "www.vinidelite.cz") && pathname.startsWith("/api")) {
+      return withSecurityHeaders(NextResponse.next(), pathname);
+    }
+    if ((host === "vinidelite.cz" || host === "www.vinidelite.cz") && pathname.startsWith("/vini-d-elite/")) {
+      return withSecurityHeaders(NextResponse.next(), pathname);
+    }
     if ((host === "vinidelite.cz" || host === "www.vinidelite.cz") && !pathname.startsWith("/_next") && !pathname.startsWith("/api")) {
       const target = new URL(request.nextUrl.toString());
       target.pathname = `/vini-d-elite${pathname}`;
-      return withSecurityHeaders(NextResponse.rewrite(target));
+      return withSecurityHeaders(NextResponse.rewrite(target), pathname);
     }
     return NextResponse.next();
   }

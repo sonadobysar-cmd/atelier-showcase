@@ -35,6 +35,7 @@ yarn-error.log*
 
 # gloss scratch emails (PII)
 /data/
+/.data/
 
 # typescript
 next-env.d.ts

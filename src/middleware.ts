@@ -24,6 +24,9 @@ const SUBDOMAIN_TO_PATH: Record<string, string> = {
   masterclass: "/masterclass",
   webinar: "/masterclass",
   zakaznici: "/zakaznici",
+  vini: "/vini-d-elite",
+  "vini-d-elite": "/vini-d-elite",
+  vinidelite: "/vini-d-elite",
   portfolio: "/nia/projekty",
   projekty: "/nia/projekty",
 };
@@ -83,7 +86,7 @@ function withSecurityHeaders(response: NextResponse, pathname = ""): NextRespons
       "upgrade-insecure-requests",
     ].join("; "),
   );
-  if (pathname === "/admin" || pathname.endsWith("/vini-d-elite/admin.html") || pathname.startsWith("/api/vini/admin")) {
+  if (pathname === "/admin" || pathname === "/admin.html" || pathname.endsWith("/vini-d-elite/admin.html") || pathname.startsWith("/api/vini/admin")) {
     response.headers.set("Cache-Control", "no-store, max-age=0");
     response.headers.set("Pragma", "no-cache");
     response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");

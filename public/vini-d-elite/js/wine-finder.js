@@ -110,6 +110,11 @@
     },
   ];
 
+  /* Pět rozhodujících otázek; detailnější nuance dořeší Michal osobně. */
+  WF_STEPS = WF_STEPS.filter(function (step) {
+    return ["type", "moment", "pairing", "body", "adventure"].indexOf(step.key) > -1;
+  });
+
   var elQ = document.getElementById("wfQuestion");
   var elHint = document.getElementById("wfHint");
   var elO = document.getElementById("wfOptions");
@@ -263,6 +268,12 @@
     var cx = numScore(wfAns.adventure, p.cx, 6, null);
     add({ weight: 6, s: cx.s }, wfAns.adventure >= 2 && p.cx >= 2 ? "komplexní závěr" : null);
 
+    // Otázky mimo zkrácenou pětikrokovou verzi nesmějí snižovat procento shody.
+    if (typeof wfAns.fruit === "undefined") max -= 12;
+    if (typeof wfAns.sweet === "undefined") max -= 12;
+    if (typeof wfAns.acidity === "undefined") max -= 10;
+    if (typeof wfAns.aroma === "undefined") max -= 12;
+    if (typeof wfAns.tannin === "undefined") max -= 12;
     var pct = max ? Math.round((sc / max) * 100) : 0;
     why = why.filter(function (x, i, a) {
       return x && a.indexOf(x) === i;

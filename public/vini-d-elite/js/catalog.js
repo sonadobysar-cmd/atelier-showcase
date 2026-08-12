@@ -52,6 +52,23 @@ const VINI_TECH = {
 };
 window.VINI_CATALOG.forEach(function(wine){wine.tech=VINI_TECH[wine.id]||null;});
 
+const VINI_OWNER_NOTES = {
+  1:'Po hodině v karafě ukáže, proč má Nebbiolo mezi piemontskými odrůdami výjimečné postavení.',
+  2:'Silná, ale kultivovaná Barbera. Doporučuji ji k výraznému jídlu a dlouhému večeru.',
+  3:'Moje volba k poctivému ragú nebo grilu. Šťavnaté a srozumitelné i pro člověka, který se ve víně nevyzná.',
+  4:'Lehčí červené s osobností. Podávám ho mírně vychlazené jako překvapivě svěží tvář Piemontu.',
+  5:'Nenucené víno pro přátele. Nepotřebuje obřad, jen dobré předkrmy a společnost.',
+  6:'Freisa má lehce divoký charakter. Autentický objev pro ty, kdo už nechtějí stále stejné odrůdy.',
+  7:'Archivní láhev, ke které přistupuji s respektem. Postavit, citlivě dekantovat a dopřát jí čas.',
+  8:'Vlajková loď vinařství pro opravdu důležitý večer. Silná, vrstevnatá a dlouhá.',
+  9:'Bubliny bez okázalosti. Otevírám je jako aperitiv, k prosciuttu nebo jen tak na terase.',
+  11:'Svěží bílé s vlastním minerálním podpisem. Výborná volba pro pracovní oběd nebo rybu.',
+  12:'Přátelské červené v nejlepším smyslu — láhev, která u společného stolu rychle zmizí.',
+  13:'Noblesní Nebbiolo pro soustředěnou večeři. Větší sklenka a čas promění strukturu v eleganci.',
+  14:'Arneis s hloubkou a svěžestí. Volím ho tam, kde má bílé víno působit reprezentativně, ale lehce.'
+};
+window.VINI_CATALOG.forEach(function(wine){wine.ownerNote=VINI_OWNER_NOTES[wine.id]||'';});
+
 window.VINI_IMAGES = {
   1:'images/wines/san-lorenzo.webp',
   2:'images/wines/la-cappelletta.webp',

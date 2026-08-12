@@ -17,7 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cinzel:wght@400;500;600&family=Cinzel+Decorative:wght@400;700&family=Ballet:opsz@16..72&display=swap" rel="stylesheet">
-<script src="js/catalog.js"></script>
 <style>
 :root{
   --noir:#2F1116; --bg:#2F1116; --bg2:#2F1116; --wine:#4A1322; --wine-d:#380E18; --wine-l:#5E1B2E;
@@ -399,6 +398,45 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 @media(max-width:760px){.winery summary{grid-template-columns:1fr;gap:6px}.winery summary em{margin-top:8px}.winery-next{grid-template-columns:1fr}.winery-body{padding:0 18px 24px}}
 /* Tenuta detail drží tmavý, galerijní jazyk celého webu */
 .terroir-story{position:relative;overflow:hidden;background:radial-gradient(circle at 82% 18%,rgba(174,117,48,.18),transparent 31%),linear-gradient(145deg,#260a11,#120508)!important}.terroir-story:before{content:"1903";position:absolute;right:-.04em;top:-.16em;font:600 clamp(140px,25vw,390px)/1 var(--serif);color:rgba(217,192,138,.035);pointer-events:none}.terroir-story .wrap{position:relative;z-index:1}.terroir-story .eyebrow{color:var(--gold-l)!important}.terroir-story .shead h2{color:var(--parch)!important}.terroir-story .shead h2 em{color:var(--gold-l)!important;text-shadow:0 1px 5px rgba(0,0,0,.5)!important}.terroir-story .shead p{color:var(--parch-d)!important}.terroir-grid article{position:relative;border-color:rgba(217,192,138,.25)!important;padding:34px!important;min-height:220px!important;background:linear-gradient(145deg,rgba(95,28,40,.4),rgba(16,5,8,.7))!important;box-shadow:0 18px 45px rgba(0,0,0,.18)}.terroir-grid article:after{content:"";position:absolute;left:34px;right:34px;bottom:0;height:2px;background:linear-gradient(90deg,var(--gold-d),transparent)}.terroir-grid article>span{color:var(--gold-l)!important}.terroir-grid h3{color:var(--parch)!important}.terroir-grid p{color:var(--parch-d)!important}.future-panel{background:rgba(81,20,32,.52)!important;border:1px solid rgba(217,192,138,.22)}
+
+/* Vinařství — kompaktní editorialní tok bez useknutých nadpisů a rozpadlých okrajů */
+#vinarstvi{scroll-margin-top:0;padding-top:clamp(78px,7vw,108px)}
+#vinarstvi>.wrap{width:min(1320px,86vw)}
+#vinarstvi>.wrap>.shead{max-width:780px;margin-bottom:clamp(42px,5vw,64px)}
+#vinarstvi>.wrap>.shead p{max-width:60ch;margin-left:auto;margin-right:auto;line-height:1.7}
+.winery{margin-top:0;background:linear-gradient(145deg,rgba(73,19,32,.42),rgba(17,5,9,.72));box-shadow:0 30px 90px rgba(0,0,0,.2)}
+.winery summary{grid-template-columns:minmax(150px,.65fr) minmax(300px,1.65fr) auto;padding:28px clamp(28px,4vw,52px)}
+.winery summary strong{font-size:clamp(1.75rem,2.7vw,2.45rem)}
+.winery summary em{justify-self:end;white-space:nowrap}
+.winery-body{--winery-pad:clamp(30px,4vw,52px);padding:var(--winery-pad);padding-top:34px}
+.winery-body>.lead-c{max-width:760px;margin:0 auto clamp(42px,5vw,64px)}
+.winery-body>.lead-c .lead{font-family:var(--serif);font-size:clamp(1.15rem,1.7vw,1.42rem);line-height:1.75;color:var(--parch-d)}
+.winery-body>.grid{gap:clamp(18px,2.2vw,30px)}
+.winery-next{margin-top:24px}
+.winery-next article{min-height:190px;display:flex;flex-direction:column;justify-content:center;padding:30px}
+.winery-next p{max-width:34ch;line-height:1.65}
+.winery-body>.terroir-story{margin:clamp(68px,7vw,100px) calc(0px - var(--winery-pad)) calc(0px - var(--winery-pad));padding:clamp(66px,7vw,96px) clamp(30px,4vw,52px);border-top:1px solid rgba(217,192,138,.24)}
+.winery-body>.terroir-story>.wrap{width:100%;max-width:1160px}
+.winery-body>.terroir-story .shead{max-width:840px;margin-bottom:clamp(34px,4vw,50px)}
+.winery-body>.terroir-story .shead h2{font-size:clamp(2.9rem,5.2vw,5rem);line-height:.98}
+.winery-body>.terroir-story .shead h2 em{font-size:1.4em}
+.winery-body>.terroir-story .shead p{max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.65}
+.winery-body>.terroir-story .terroir-grid{margin-top:0}
+@media(max-width:900px){
+  #vinarstvi>.wrap{width:min(100% - 36px,1320px)}
+  .winery summary{grid-template-columns:1fr auto}.winery summary span{grid-column:1/-1}.winery summary em{grid-column:2;grid-row:2}
+  .winery-body>.terroir-story .shead h2 em{display:block;margin-top:10px}
+}
+@media(max-width:760px){
+  html{scroll-padding-top:96px}#vinarstvi{scroll-margin-top:0;padding-top:64px}
+  #vinarstvi>.wrap{width:min(100% - 28px,1320px)}
+  .winery summary{grid-template-columns:1fr;padding:22px 20px;gap:8px}.winery summary em{grid-column:auto;grid-row:auto;justify-self:start;white-space:normal}
+  .winery-body{--winery-pad:18px;padding:26px var(--winery-pad)}.winery-body>.lead-c{text-align:left;margin-bottom:36px}.winery-body>.lead-c .lead{font-size:1.08rem}.winery-body>.grid{width:100%;max-width:none;margin:0}.winery-body>.grid .wcard{width:100%;min-width:0}.winery-body .wcard-foot{align-items:stretch;flex-direction:column}.winery-body .wcard-foot a{width:100%}.mono-emboss{display:none}
+  .winery-body>.terroir-story{margin:54px -18px -26px;padding:54px 18px}
+  .winery-body>.terroir-story .shead{text-align:left;margin-bottom:32px}.winery-body>.terroir-story .shead .eyebrow:after{margin-left:0}
+  .winery-body>.terroir-story .shead h2{font-size:clamp(2.4rem,12vw,3.7rem)}.winery-body>.terroir-story .shead h2 em{font-size:1.16em;line-height:1.05;padding:0}
+  .winery-next article{min-height:0}.terroir-grid{gap:12px}.terroir-grid article{padding:24px!important;min-height:0!important}.terroir-grid article:after{left:24px;right:24px}
+}
 </style>
 </head>
 <body>
@@ -657,9 +695,8 @@ WINES=window.VINI_CATALOG;IMG=window.VINI_IMAGES;window.WINES=WINES;
   WINES.slice(0,6).forEach(function(w){
     var c=document.createElement('div');c.className='wcard rv';
     var hasPhoto=!!window.VINI_IMAGES[w.id];
-    c.innerHTML='<div class="wcard-img"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></div>'+
-      '<div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div>'+
-      '<div class="desc">'+w.desc+'</div><div class="pairing"><b>Nejlépe sedne k</b><br>'+w.pairingText+'</div>'+
+    c.innerHTML='<a class="wcard-img" href="vino.html?id='+w.id+'" aria-label="Detail vína '+w.name+'"><div class="ph"><span class="ph-tag">'+(hasPhoto?'Produktová fotografie':'Fotografii připravujeme')+'</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="'+w.name+' — '+w.grape+'" onerror="this.remove()"><span class="badge">'+typeLabel[w.type]+'</span></a>'+
+      '<div class="wcard-b"><div class="reg">'+w.region+'</div><h3><a href="vino.html?id='+w.id+'">'+w.name+'</a></h3><div class="grape">'+w.grape+'</div><div class="subtitle">'+w.subtitle+'</div>'+
       '<div class="wcard-foot"><span class="wcard-price">'+window.viniPriceLabel(w)+'</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';
     g.appendChild(c);
   });

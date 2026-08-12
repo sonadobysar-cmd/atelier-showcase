@@ -90,5 +90,5 @@ window.VINI_REVIEWS = {};
 
 window.viniPriceLabel = function () { return 'Dostupnost ověříme osobně'; };
 window.viniContactHref = function (wine) {
-  return 'mailto:obchod@vinidelite.cz?subject=' + encodeURIComponent('Mám zájem o víno: ' + wine.name) + '&body=' + encodeURIComponent('Dobrý den,\n\nmám zájem o víno ' + wine.name + '. Prosím o aktuální dostupnost a osobní doporučení množství či vhodné alternativy.\n\nDěkuji.');
+  return 'kontakt.html?tema=' + encodeURIComponent('Ověření dostupnosti vína') + '&vino=' + encodeURIComponent(wine.name);
 };

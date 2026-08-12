@@ -20,7 +20,7 @@
     }).join('');
     var empty = '<div class="review-empty">Toto víno zatím nemá zveřejněnou ověřenou recenzi. ' +
       'Hodnocení nevymýšlíme — zobrazíme je až po skutečné ochutnávce.<br>' +
-      '<a href="mailto:obchod@vinidelite.cz?subject=' + encodeURIComponent('Recenze vína: ' + wine.name) + '">' +
+      '<a href="kontakt.html?tema=Recenze%20vína&vino=' + encodeURIComponent(wine.name) + '">' +
       'Napsat vlastní recenzi</a></div>';
     var label = count ? count + (count === 1 ? ' ověřené hodnocení' : ' ověřených hodnocení') : 'Zatím bez ověřeného hodnocení';
     var button = count ? 'Přečíst recenze' : 'Více o recenzích';

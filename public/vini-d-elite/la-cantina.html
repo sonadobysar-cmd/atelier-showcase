@@ -451,7 +451,7 @@ body.modal-open{overflow:hidden}
       <a href="index.html">Domů</a><a href="index.html#finder">Najdi své víno</a><a href="obchod.html">Kolekce</a><a href="la-cantina.html" aria-current="page">Privé d’Elite</a><a href="b2b.html">B2B</a>
     </nav>
     <div class="hd-r">
-      <a class="set-head-link" href="degustacni-set.html" aria-label="Kompletní degustační set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h16v12H4zM2 5h20v3H2zM12 5v15M12 5c-3-4-7-3-7-1 0 1 2 1 7 1Zm0 0c3-4 7-3 7-1 0 1-2 1-7 1Z"/></svg><span>Degustační set</span></a><a class="icbtn" href="mailto:obchod@vinidelite.cz?subject=La%20Cantina%20Club" aria-label="Napsat Vini d'Elite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg></a>
+      <a class="set-head-link" href="degustacni-set.html" aria-label="Kompletní degustační set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 8h16v12H4zM2 5h20v3H2zM12 5v15M12 5c-3-4-7-3-7-1 0 1 2 1 7 1Zm0 0c3-4 7-3 7-1 0 1-2 1-7 1Z"/></svg><span>Degustační set</span></a><a class="icbtn" href="kontakt.html?tema=Privé%20d’Elite" aria-label="Napsat Vini d'Elite"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5h18v14H3z"/><path d="m3 6 9 7 9-7"/></svg></a>
     </div>
   </div>
 </header>
@@ -623,10 +623,10 @@ body.modal-open{overflow:hidden}
 <footer class="ft"><div class="wrap ft-grid">
   <div><a class="brand" href="index.html"><span class="bm">Vini d'Elite</span></a><p>Ručně vybíraná italská vína z prémiových oblastí. Přímý dovoz, Privé d’Elite a privátní degustace.</p></div>
   <div><h4>Objevit</h4><a class="fl" href="index.html#finder">Najdi své víno</a><a class="fl" href="obchod.html">Kolekce</a><a class="fl" href="la-cantina.html">Privé d’Elite</a></div>
-  <div><h4>Spolupráce</h4><a class="fl" href="b2b.html">B2B pro firmy</a><a class="fl" href="index.html#pribeh">Příběh</a><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a></div>
+  <div><h4>Spolupráce</h4><a class="fl" href="b2b.html">B2B pro firmy</a><a class="fl" href="index.html#pribeh">Příběh</a><a class="fl" href="kontakt.html?tema=Obecný%20dotaz">Kontaktní formulář</a></div>
         <div><h4>Právní informace</h4><a class="fl" href="obchodni-podminky.html">Obchodní podmínky</a><a class="fl" href="doprava.html">Doprava</a><a class="fl" href="reklamacni-rad.html">Reklamační řád</a><a class="fl" href="gdpr.html">GDPR</a><a class="fl" href="cookies.html">Cookies</a></div>
-      <div><h4>Kontakt</h4><a class="fl" href="mailto:obchod@vinidelite.cz">obchod@vinidelite.cz</a><span class="fl">Brno, CZ</span></div>
-</div><div class="wrap ft-bot"><span>© 2026 Vini d'Elite · alkohol prodáváme pouze osobám nad 18 let</span><span>Design &amp; kód — <a href="https://instagram.com/niadobysar" target="_blank" rel="noopener">Nia Dobyšar</a></span></div></footer>
+      <div><h4>Kontakt</h4><a class="fl" href="kontakt.html?tema=Osobní%20doporučení%20vína">Napsat Michalovi</a><span class="fl">Brno, CZ</span></div>
+</div><div class="wrap ft-bot"><span>© 2026 Vini d'Elite · alkohol prodáváme pouze osobám nad 18 let</span><span>Design &amp; kód — <a href="https://instagram.com/niadobysar">Nia Dobyšar</a></span></div></footer>
 
 <script>
 var WINES=[
@@ -676,7 +676,7 @@ function wimg(id){return IMG[id]||("img/w"+id+".jpg");}
     c.innerHTML='<div class="wcard-img"><div class="ph"><span class="ph-tag">Foto láhve</span></div><img class="rimg" src="'+wimg(w.id)+'" alt="" onerror="this.remove()"><span class="badge">Primitivo</span></div>'+
       '<div class="wcard-b"><div class="reg">'+w.region+'</div><h3>'+w.name+'</h3><div class="grape">'+w.grape+'</div>'+
       '<div class="desc">'+w.desc+'</div>'+
-      '<div class="wcard-foot"><span class="wcard-price">Dostupnost ověříme osobně</span><a href="mailto:obchod@vinidelite.cz?subject='+encodeURIComponent('Mám zájem o víno: '+w.name)+'">Zjistit dostupnost</a></div></div>';
+      '<div class="wcard-foot"><span class="wcard-price">Dostupnost ověříme osobně</span><a href="'+window.viniContactHref(w)+'">Zjistit dostupnost</a></div></div>';
     g.appendChild(c);
   });
 })();
@@ -688,9 +688,9 @@ function wireForm(btnId,okId,fields){
     var ok=document.getElementById(okId);
     for(var i=0;i<fields.length;i++){var f=document.getElementById(fields[i]);if(f&&!f.value.trim()){ok.textContent='Vyplňte prosím všechna pole.';ok.style.color='#e0a';return;}}
     var name=document.getElementById('c_name'),mail=document.getElementById('c_mail'),newsletter=document.getElementById('n_mail');
-    ok.style.color='';ok.textContent='Otevírám zprávu pro Vini d’Elite…';
-    if(btnId==='c_send')location.href='mailto:obchod@vinidelite.cz?subject='+encodeURIComponent('Registrace do Privé d’Elite')+'&body='+encodeURIComponent('Dobrý den,\n\nmám zájem o členství v Privé d’Elite.\n\nJméno: '+name.value.trim()+'\nE-mail: '+mail.value.trim());
-    else location.href='mailto:obchod@vinidelite.cz?subject='+encodeURIComponent('Přihlášení k novinkám Vini d’Elite')+'&body='+encodeURIComponent('Dobrý den,\n\nprosím o zařazení e-mailu '+newsletter.value.trim()+' mezi odběratele novinek Vini d’Elite.');
+    ok.style.color='';ok.textContent='Přecházím do kontaktního formuláře…';
+    if(btnId==='c_send')location.href='kontakt.html?tema='+encodeURIComponent('Privé d’Elite')+'&email='+encodeURIComponent(mail.value.trim())+'&zprava='+encodeURIComponent('Mám zájem o členství v Privé d’Elite. Jméno: '+name.value.trim());
+    else location.href='kontakt.html?tema='+encodeURIComponent('Novinky Vini d’Elite')+'&email='+encodeURIComponent(newsletter.value.trim())+'&zprava='+encodeURIComponent('Mám zájem o novinky Vini d’Elite.');
   });
 }
 /* club form */ wireForm('c_send','c_ok',['c_name','c_mail']);

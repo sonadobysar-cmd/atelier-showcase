@@ -91,6 +91,7 @@ export function middleware(request: NextRequest) {
       "/degustacni-set": "/vini-d-elite/degustacni-set.html",
       "/la-cantina": "/vini-d-elite/la-cantina.html",
       "/b2b": "/vini-d-elite/b2b.html",
+      "/kontakt": "/vini-d-elite/kontakt.html",
       "/gdpr": "/vini-d-elite/gdpr.html",
       "/cookies": "/vini-d-elite/cookies.html",
       "/obchodni-podminky": "/vini-d-elite/obchodni-podminky.html",

@@ -1,9 +1,7 @@
 import { cpSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 
 const output = new URL('./dist/', import.meta.url);
-// Vercel deploys api/ as serverless functions; it must not also be copied into
-// the public output as downloadable source code.
-const excluded = new Set(['dist', 'build.mjs', 'package.json', 'api']);
+const excluded = new Set(['dist', 'build.mjs', 'package.json']);
 
 rmSync(output, { recursive: true, force: true });
 mkdirSync(output, { recursive: true });

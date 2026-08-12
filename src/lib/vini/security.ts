@@ -26,7 +26,13 @@ export function sameOrigin(request: Request): boolean {
   // Allow only this read-only Fetch Metadata case. Every state-changing
   // request still requires the exact Origin match below.
   if (!origin) return request.method === "GET" && site === "same-origin" && Boolean(host);
-  return origin === `${proto}://${host}` && (!site || site === "same-origin");
+  const direct = origin === `${proto}://${host}` && (!site || site === "same-origin");
+  if (direct) return true;
+  // The public Vini project proxies its same-origin API calls to this central
+  // backend. Only the two canonical storefront origins are trusted, and the
+  // browser never receives CORS permission for direct cross-site calls.
+  const canonicalVini = origin === "https://www.vinidelite.cz" || origin === "https://vinidelite.cz";
+  return canonicalVini && host === "atelier-showcase-cyan.vercel.app";
 }
 
 export async function limit(key: string, count: number, seconds: number): Promise<{ ok: boolean; retryAfter: number }> {

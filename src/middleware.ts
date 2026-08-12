@@ -109,6 +109,12 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (host === "vinidelite.cz" || host === "www.vinidelite.cz") {
+    if (pathname.startsWith("/api/vini/")) {
+      const backend = new URL(request.nextUrl.toString());
+      backend.protocol = "https:";
+      backend.host = "atelier-showcase-cyan.vercel.app";
+      return withSecurityHeaders(NextResponse.rewrite(backend), pathname);
+    }
     const aliases: Record<string, string> = {
       "/": "/vini-d-elite/index.html",
       "/obchod": "/vini-d-elite/obchod.html",

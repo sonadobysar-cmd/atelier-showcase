@@ -58,6 +58,14 @@ function rewriteTo(url: URL, destPath: string): NextResponse {
   return NextResponse.rewrite(target);
 }
 
+function withSecurityHeaders(response: NextResponse): NextResponse {
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
+  response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  return response;
+}
+
 /** Vrátí subdoménu pro gloss.niadobysar.com → "gloss", kořen → null */
 function getSubdomain(host: string): string | null {
   for (const domain of PORTFOLIO_DOMAINS) {
@@ -75,7 +83,32 @@ export function middleware(request: NextRequest) {
   const host = getHost(request);
   const { pathname } = request.nextUrl;
 
+  if (host === "vinidelite.cz" || host === "www.vinidelite.cz") {
+    const aliases: Record<string, string> = {
+      "/": "/vini-d-elite/index.html",
+      "/obchod": "/vini-d-elite/obchod.html",
+      "/vino": "/vini-d-elite/vino.html",
+      "/degustacni-set": "/vini-d-elite/degustacni-set.html",
+      "/la-cantina": "/vini-d-elite/la-cantina.html",
+      "/b2b": "/vini-d-elite/b2b.html",
+      "/gdpr": "/vini-d-elite/gdpr.html",
+      "/cookies": "/vini-d-elite/cookies.html",
+      "/obchodni-podminky": "/vini-d-elite/obchodni-podminky.html",
+      "/reklamacni-rad": "/vini-d-elite/reklamacni-rad.html",
+      "/doprava": "/vini-d-elite/doprava.html",
+      "/robots.txt": "/vini-d-elite/robots.txt",
+      "/sitemap.xml": "/vini-d-elite/sitemap.xml",
+    };
+    const destination = aliases[pathname];
+    if (destination) return withSecurityHeaders(rewriteTo(request.nextUrl, destination));
+  }
+
   if (isStaticPath(pathname)) {
+    if ((host === "vinidelite.cz" || host === "www.vinidelite.cz") && !pathname.startsWith("/_next") && !pathname.startsWith("/api")) {
+      const target = new URL(request.nextUrl.toString());
+      target.pathname = `/vini-d-elite${pathname}`;
+      return withSecurityHeaders(NextResponse.rewrite(target));
+    }
     return NextResponse.next();
   }
 

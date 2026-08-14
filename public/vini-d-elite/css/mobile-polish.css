@@ -1,0 +1,377 @@
+/* Mobile visual polish — consistent rhythm, readable controls and safe widths. */
+html,
+body {
+  max-width: 100%;
+}
+
+@media (max-width: 820px) {
+  html,
+  body {
+    overflow-x: clip;
+  }
+
+  /* On small screens content must never remain invisible after an anchor jump. */
+  .vde-main .rv {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Shared luxury header: larger touch areas without losing the fine visual weight. */
+  .vde-main .burger {
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .vde-main .burger span {
+    width: 24px;
+  }
+
+  .vde-main .set-head-link {
+    width: auto;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 12px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vde-main .icbtn {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vde-main .hd-r {
+    gap: 4px;
+  }
+
+  .vde-main .hd .brand .bm {
+    font-size: clamp(1.24rem, 5.25vw, 1.45rem);
+    letter-spacing: .14em;
+  }
+
+  .vde-main .hd .brand {
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .vde-main .hd-nav.open a {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 24px;
+  }
+
+  .vde-main .vde-language select,
+  .vde-detail .vde-language select,
+  .vde-b2b .vde-language select,
+  .vde-contact .vde-language select {
+    min-width: 54px !important;
+    height: 44px !important;
+    font-size: .62rem !important;
+  }
+
+  .vde-main .hd-r .vde-language {
+    top: calc(100% + 6px) !important;
+  }
+
+  .vde-main .announce {
+    padding: 11px 18px;
+    font-size: .68rem;
+    line-height: 1.55;
+    letter-spacing: .17em;
+  }
+
+  .vde-main .btn,
+  .vde-main .shop-tabs button,
+  .vde-main .sort-sel,
+  .vde-detail .btn,
+  .vde-detail .review-toggle,
+  .vde-b2b .btn,
+  .vde-contact .btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.25;
+  }
+
+  .vde-main .shop-tabs button {
+    padding: 11px 19px;
+  }
+
+  .vde-main .sort-sel {
+    width: 100%;
+  }
+
+  .vde-main .wf-opt {
+    min-height: 64px;
+  }
+
+  .vde-main .wf-step,
+  .vde-main .wcard-b .reg,
+  .vde-main .wcard-img .badge,
+  .vde-main .wcard-b .pairing b,
+  .vde-main .related b,
+  .vde-main .tech-grid dt,
+  .vde-main .field label,
+  .vde-detail .eyebrow,
+  .vde-detail .label,
+  .vde-detail .specs b,
+  .vde-b2b label,
+  .vde-contact label {
+    font-size: .68rem;
+    line-height: 1.45;
+  }
+
+  .vde-main .wine-story summary,
+  .vde-main .wine-tech summary,
+  .vde-main .wine-reviews summary {
+    min-height: 46px;
+    align-items: center;
+  }
+
+  .vde-main .wcard-foot a,
+  .vde-main .wcard-foot button {
+    min-height: 48px;
+  }
+
+  /* The founder section was being forced back into two desktop columns. */
+  .page-home .about {
+    overflow: hidden;
+  }
+
+  .page-home .about-in {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .page-home .about-img,
+  .page-home .about-c {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-home .about-img {
+    justify-self: center;
+  }
+
+  /* Decorative monograms must stay decorative, never widen the document. */
+  .page-prive .club-join {
+    overflow: hidden;
+  }
+
+  .page-prive .club-join .mono-emboss {
+    display: none;
+  }
+
+  /* Simple-detail headers remain calm but become comfortably tappable. */
+  .vde-detail .nav > .brand,
+  .vde-contact .nav > .brand,
+  .vde-b2b .nav > .brand {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .vde-detail .nav > .brand {
+    font-size: 1.3rem;
+  }
+
+  .vde-detail .crumb a,
+  .vde-contact .back {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .vde-detail .review-toggle {
+    width: 100%;
+  }
+
+  .vde-detail footer,
+  .vde-b2b footer,
+  .vde-contact footer {
+    line-height: 1.75;
+  }
+
+  .vde-detail footer a,
+  .vde-b2b footer a,
+  .vde-contact footer a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+  }
+
+  /* B2B navigation stays editorial, while each destination is easy to tap. */
+  .vde-b2b header nav a {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 5px;
+  }
+
+  .vde-b2b .consent,
+  .vde-contact .consent {
+    gap: 12px;
+    line-height: 1.55;
+  }
+
+  .vde-b2b .consent input,
+  .vde-contact .consent input {
+    width: 20px;
+    min-width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    padding: 0;
+  }
+
+  .vde-contact .back {
+    font-size: .62rem;
+    padding: 0 4px;
+  }
+
+  .vde-contact .copy a[href^="tel:"] {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vde-legal .hd-in {
+    min-height: 72px;
+  }
+
+  .vde-legal .brand {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .vde-legal .legal-hero {
+    padding-top: 64px;
+  }
+
+  .vde-legal .legal-body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .vde-legal .ft a.fl {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    margin: 0;
+  }
+
+  .vde-legal .cookie-actions .btn {
+    min-height: 48px;
+  }
+
+  .vde-legal .vde-language select {
+    min-width: 54px !important;
+    height: 44px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .vde-main .hd-in {
+    height: 84px;
+  }
+
+  .vde-main .set-head-link {
+    width: 44px;
+    padding: 0;
+  }
+
+  .vde-main .grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .vde-main .wcard {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .page-shop .wcard-foot {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-shop .wcard-price {
+    white-space: normal;
+  }
+
+  .page-shop .wcard-foot a,
+  .page-shop .wcard-foot button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .page-tasting .facts > div:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .vde-main .ft a.fl {
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+    margin: 0;
+  }
+
+  .vde-main .ft .brand {
+    min-height: 40px;
+    justify-content: center;
+  }
+
+  .vde-main .cookie-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .vde-main .cookie-actions .btn {
+    width: 100%;
+    padding-inline: 12px;
+  }
+
+  .vde-legal .cookie-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .vde-contact .foot,
+  .vde-b2b .foot {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 370px) {
+  .vde-main .hd .brand .bm {
+    font-size: 1.16rem;
+    letter-spacing: .12em;
+  }
+
+  .vde-main .hd-r {
+    gap: 0;
+  }
+
+  .vde-main .set-head-link,
+  .vde-main .icbtn {
+    width: 44px;
+    min-width: 44px;
+  }
+}

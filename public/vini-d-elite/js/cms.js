@@ -43,6 +43,7 @@
       });
     });
     document.querySelectorAll("[data-cms-legal]").forEach(function (node) { var key = node.getAttribute("data-cms-legal"); if (key && content.legal && content.legal[key]) legal(node, content.legal[key]); });
+    if (window.VINI_I18N && typeof window.VINI_I18N.translate === "function") window.VINI_I18N.translate(document.body);
     window.dispatchEvent(new CustomEvent("vini:content-ready", { detail: content }));
   }
   fetch("/api/vini/content", { credentials: "same-origin", headers: { Accept: "application/json" } }).then(function (response) { return response.ok ? response.json() : Promise.reject(); }).then(function (data) { if (data && data.content) apply(data.content); }).catch(function () { /* bezpečný statický obsah zůstává */ });

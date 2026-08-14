@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vini d’Elite">
+  <rect width="64" height="64" rx="10" fill="#1a0a0e"/>
+  <path d="M11 9h42v46H11z" fill="none" stroke="#c9a24b" stroke-width="1.5"/>
+  <path d="M17 17h8l7 26 7-26h8L35 49h-6z" fill="#e7c879"/>
+  <circle cx="32" cy="13" r="2.4" fill="#c9a24b"/>
+</svg>

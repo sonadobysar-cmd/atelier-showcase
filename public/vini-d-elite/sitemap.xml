@@ -8,4 +8,26 @@
   <url><loc>https://www.vinidelite.cz/kontakt</loc><priority>0.8</priority></url>
   <url><loc>https://www.vinidelite.cz/gdpr</loc><priority>0.2</priority></url>
   <url><loc>https://www.vinidelite.cz/cookies</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/en</loc><priority>0.9</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/collection</loc><priority>0.8</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/tasting-set</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/prive</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/b2b</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/contact</loc><priority>0.6</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/privacy</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/cookies</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/terms</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/complaints</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/en/delivery</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/it</loc><priority>0.9</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/collezione</loc><priority>0.8</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/set-degustazione</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/prive</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/b2b</loc><priority>0.7</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/contatti</loc><priority>0.6</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/privacy</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/cookie</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/condizioni</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/reclami</loc><priority>0.2</priority></url>
+  <url><loc>https://www.vinidelite.cz/it/consegna</loc><priority>0.2</priority></url>
 </urlset>

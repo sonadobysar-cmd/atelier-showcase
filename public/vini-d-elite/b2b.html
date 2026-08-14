@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <base href="/">
   <title>Italská vína pro firmy, dárky a eventy | Vini d’Elite B2B</title>
   <meta name="description" content="Kurátorská italská vína pro firemní dárky, kanceláře, eventy, hotely a gastronomii. Osobní výběr podle rozpočtu, příležitosti a aktuální dostupnosti.">
   <link rel="canonical" href="https://www.vinidelite.cz/b2b">
@@ -49,10 +50,11 @@
     </div></section>
   </main>
   <footer><div class="wrap foot"><span>© 2026 Vini d’Elite · Brno, CZ · <a href="tel:+420733356030">+420 733 356 030</a> · <a href="kontakt.html?tema=B2B%20nabídka%20pro%20firmu">info@vinidelite.cz</a></span><span><a href="obchod.html">Kolekce</a> &nbsp;·&nbsp; <a href="gdpr.html">GDPR</a> &nbsp;·&nbsp; <a href="kontakt.html?tema=B2B%20nabídka%20pro%20firmu">Kontaktní formulář</a></span></div></footer>
+  <script src="js/i18n.js?v=20260814"></script>
   <script src="js/cms.js"></script>
   <script src="js/form-security.js"></script>
   <script>
-    document.getElementById('michalAdvice').addEventListener('click',function(){window.setTimeout(function(){var purpose=document.getElementById('purpose');var message=document.getElementById('message');purpose.value='Jiné';message.value='Mám zájem o osobní doporučení od Michala. Prosím, ozvěte se mi.';document.getElementById('company').focus({preventScroll:true})},350)});
+    document.getElementById('michalAdvice').addEventListener('click',function(){window.setTimeout(function(){var purpose=document.getElementById('purpose');var message=document.getElementById('message');purpose.selectedIndex=purpose.options.length-1;message.value=window.VINI_I18N?window.VINI_I18N.t('Mám zájem o osobní doporučení od Michala. Prosím, ozvěte se mi.'):'Mám zájem o osobní doporučení od Michala. Prosím, ozvěte se mi.';document.getElementById('company').focus({preventScroll:true})},350)});
     document.getElementById('b2bForm').addEventListener('submit',async function(e){e.preventDefault();if(!this.reportValidity())return;var f=new FormData(this),button=document.getElementById('b2bSubmit'),status=document.getElementById('b2bStatus'),body=['Firma: '+f.get('company'),'Příležitost: '+f.get('purpose'),'Orientační množství: '+(f.get('volume')||'neuvedeno'),'Termín: '+(f.get('term')||'neuveden'),'','Rozpočet a představa:',''+(f.get('message')||'neuvedeno')].join('\n');button.disabled=true;button.textContent='Odesílám…';status.className='note status';status.textContent='Poptávku odesíláme přímo Michalovi.';try{var formToken=await window.ViniFormSecurity.token(),response=await fetch('/api/vini/contact',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:f.get('name'),email:f.get('email'),topic:'B2B nabídka pro firmu',message:body,context:'B2B formulář',website:f.get('website'),consent:f.get('consent')==='on',formToken:formToken})}),result=await response.json().catch(function(){return{}});if(!response.ok)throw new Error(result.error||'Odeslání se nepodařilo.');this.reset();window.ViniFormSecurity.renew().catch(function(){});status.className='note status ok';status.textContent='Děkujeme. Zadání jsme přijali a Michal se vám ozve osobně.';button.textContent='Zadání odesláno';}catch(error){status.className='note status error';status.textContent=error.message||'Odeslání se nepodařilo. Zkuste to prosím znovu.';button.disabled=false;button.textContent='Odeslat zadání';}});
   </script>
 </body>

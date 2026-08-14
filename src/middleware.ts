@@ -110,6 +110,7 @@ function getSubdomain(host: string): string | null {
 export function middleware(request: NextRequest) {
   const host = getHost(request);
   const { pathname } = request.nextUrl;
+  const routePath = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
 
   if (host === "vinidelite.cz" || host === "www.vinidelite.cz") {
     if (pathname.startsWith("/api/vini/")) {
@@ -135,7 +136,22 @@ export function middleware(request: NextRequest) {
       "/robots.txt": "/vini-d-elite/robots.txt",
       "/sitemap.xml": "/vini-d-elite/sitemap.xml",
     };
-    const destination = aliases[pathname];
+    const localizedAliases: Record<string, string> = {
+      "/en": "/vini-d-elite/index.html", "/it": "/vini-d-elite/index.html",
+      "/en/collection": "/vini-d-elite/obchod.html", "/it/collezione": "/vini-d-elite/obchod.html",
+      "/en/wine": "/vini-d-elite/vino.html", "/it/vino": "/vini-d-elite/vino.html",
+      "/en/tasting-set": "/vini-d-elite/degustacni-set.html", "/it/set-degustazione": "/vini-d-elite/degustacni-set.html",
+      "/en/prive": "/vini-d-elite/la-cantina.html", "/it/prive": "/vini-d-elite/la-cantina.html",
+      "/en/b2b": "/vini-d-elite/b2b.html", "/it/b2b": "/vini-d-elite/b2b.html",
+      "/en/contact": "/vini-d-elite/kontakt.html", "/it/contatti": "/vini-d-elite/kontakt.html",
+      "/en/privacy": "/vini-d-elite/gdpr.html", "/it/privacy": "/vini-d-elite/gdpr.html",
+      "/en/cookies": "/vini-d-elite/cookies.html", "/it/cookie": "/vini-d-elite/cookies.html",
+      "/en/terms": "/vini-d-elite/obchodni-podminky.html", "/it/condizioni": "/vini-d-elite/obchodni-podminky.html",
+      "/en/complaints": "/vini-d-elite/reklamacni-rad.html", "/it/reclami": "/vini-d-elite/reklamacni-rad.html",
+      "/en/delivery": "/vini-d-elite/doprava.html", "/it/consegna": "/vini-d-elite/doprava.html",
+    };
+    if (localizedAliases[routePath]) return withSecurityHeaders(rewriteTo(request.nextUrl, localizedAliases[routePath]), pathname);
+    const destination = aliases[routePath];
     if (destination) return withSecurityHeaders(rewriteTo(request.nextUrl, destination), pathname);
   }
 

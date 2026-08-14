@@ -689,8 +689,9 @@ function wireForm(btnId,okId,fields){
     for(var i=0;i<fields.length;i++){var f=document.getElementById(fields[i]);if(f&&!f.value.trim()){ok.textContent='Vyplňte prosím všechna pole.';ok.style.color='#e0a';return;}}
     var name=document.getElementById('c_name'),mail=document.getElementById('c_mail'),newsletter=document.getElementById('n_mail');
     ok.style.color='';ok.textContent='Přecházím do kontaktního formuláře…';
-    if(btnId==='c_send')location.href='kontakt.html?tema='+encodeURIComponent('Privé d’Elite')+'&email='+encodeURIComponent(mail.value.trim())+'&zprava='+encodeURIComponent('Mám zájem o členství v Privé d’Elite. Jméno: '+name.value.trim());
-    else location.href='kontakt.html?tema='+encodeURIComponent('Novinky Vini d’Elite')+'&email='+encodeURIComponent(newsletter.value.trim())+'&zprava='+encodeURIComponent('Mám zájem o novinky Vini d’Elite.');
+    var vi=window.VINI_I18N,destination=vi?vi.localizedPath('contact',vi.locale):'kontakt.html';
+    if(btnId==='c_send'){var membership=vi?vi.t('Mám zájem o členství v Privé d’Elite. Jméno:'):'Mám zájem o členství v Privé d’Elite. Jméno:';location.href=destination+'?tema='+encodeURIComponent('Privé d’Elite')+'&email='+encodeURIComponent(mail.value.trim())+'&zprava='+encodeURIComponent(membership+' '+name.value.trim());}
+    else{var news=vi?vi.t('Mám zájem o novinky Vini d’Elite.'):'Mám zájem o novinky Vini d’Elite.';location.href=destination+'?tema='+encodeURIComponent('Novinky Vini d’Elite')+'&email='+encodeURIComponent(newsletter.value.trim())+'&zprava='+encodeURIComponent(news);}
   });
 }
 /* club form */ wireForm('c_send','c_ok',['c_name','c_mail']);
@@ -724,6 +725,7 @@ setTimeout(function(){document.querySelectorAll('.rv').forEach(function(el){io.o
     </div>
   </div>
 </div>
+<script src="js/i18n.js?v=20260814"></script>
 <script src="js/cms.js"></script>
 <script src="js/event-popup.js"></script>
 

@@ -648,6 +648,7 @@ h1 em,h2 em,h3 em{font-family:var(--script)!important;font-style:normal!importan
 </footer>
 
 <script src="js/catalog.js?v=20260810"></script>
+<script src="js/i18n.js?v=20260814"></script>
 <script src="js/cms.js"></script>
 <script>
 /* ===== WINE DATA (záložní data; produkční katalog načítá catalog.js) =====
@@ -723,7 +724,8 @@ function wireForm(btnId,okId,fields){
     for(var i=0;i<fields.length;i++){var f=document.getElementById(fields[i]);if(f&&!f.value.trim()){ok.textContent='Vyplňte prosím všechna pole.';ok.style.color='#e0a';return;}}
     var email=document.getElementById('n_mail').value.trim();
     ok.style.color='';ok.textContent='Přecházím do kontaktního formuláře…';
-    location.href='kontakt.html?tema='+encodeURIComponent('Novinky Vini d’Elite')+'&email='+encodeURIComponent(email)+'&zprava='+encodeURIComponent('Mám zájem o novinky Vini d’Elite.');
+    var vi=window.VINI_I18N,destination=vi?vi.localizedPath('contact',vi.locale):'kontakt.html',note=vi?vi.t('Mám zájem o novinky Vini d’Elite.'):'Mám zájem o novinky Vini d’Elite.';
+    location.href=destination+'?tema='+encodeURIComponent('Novinky Vini d’Elite')+'&email='+encodeURIComponent(email)+'&zprava='+encodeURIComponent(note);
   });
 }
 

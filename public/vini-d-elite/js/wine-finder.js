@@ -115,6 +115,18 @@
     return ["type", "moment", "pairing", "body", "adventure"].indexOf(step.key) > -1;
   });
 
+  var I18N = window.VINI_I18N;
+  var WF_COPY = I18N && I18N.locale !== "cs" && I18N.finder;
+  function wfText(value) {
+    return WF_COPY && WF_COPY.reasons[value] ? WF_COPY.reasons[value] : value;
+  }
+  if (WF_COPY) WF_STEPS.forEach(function (step) {
+    var copy = WF_COPY.steps[step.key];
+    if (!copy) return;
+    step.q = copy.q; step.hint = copy.hint;
+    step.opts.forEach(function (option, index) { if (copy.opts[index]) { option.b = copy.opts[index][0]; option.s = copy.opts[index][1]; } });
+  });
+
   var elQ = document.getElementById("wfQuestion");
   var elHint = document.getElementById("wfHint");
   var elO = document.getElementById("wfOptions");
@@ -278,7 +290,7 @@
     why = why.filter(function (x, i, a) {
       return x && a.indexOf(x) === i;
     }).slice(0, 4);
-    return { pct: pct, why: why, p: p };
+    return { pct: pct, why: why.map(wfText), p: p };
   }
 
   function bar(v, max) {
@@ -289,22 +301,22 @@
   function tasteBars(w, p) {
     return (
       '<div class="wfr-taste">' +
-      '<div class="wfr-bar"><span>Sladkost</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.sweetness : 'Sladkost') + '</span>' +
       bar(w.sweet) +
       "</div>" +
-      '<div class="wfr-bar"><span>Tělo</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.body : 'Tělo') + '</span>' +
       bar(w.body) +
       "</div>" +
-      '<div class="wfr-bar"><span>Kyselina</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.acidity : 'Kyselina') + '</span>' +
       bar(p.ac || 0) +
       "</div>" +
-      '<div class="wfr-bar"><span>Tanin</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.tannin : 'Tanin') + '</span>' +
       bar(p.tn || 0) +
       "</div>" +
-      '<div class="wfr-bar"><span>Dub</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.oak : 'Dub') + '</span>' +
       bar(p.ok || 0) +
       "</div>" +
-      '<div class="wfr-bar"><span>Minerál</span>' +
+      '<div class="wfr-bar"><span>' + (WF_COPY ? WF_COPY.ui.mineral : 'Minerál') + '</span>' +
       bar(p.mn || 0) +
       "</div>" +
       "</div>"
@@ -362,7 +374,7 @@
     var w = top.w;
     var whyTxt = top.why.length
       ? "<span>" + top.why.join(" · ") + "</span>"
-      : "<span>profil vyladěný na vaše odpovědi</span>";
+      : "<span>" + (WF_COPY ? WF_COPY.ui.tailored : "profil vyladěný na vaše odpovědi") + "</span>";
 
     elQuiz.hidden = true;
     elRes.hidden = false;
@@ -371,7 +383,7 @@
       '<div class="wf-match-ring">' +
       top.pct +
       "<small>%</small></div>" +
-      '<div class="match">Chuťový profil · shoda s vašimi odpověďmi</div>' +
+      '<div class="match">' + (WF_COPY ? WF_COPY.ui.match : 'Chuťový profil · shoda s vašimi odpověďmi') + '</div>' +
       "</div>" +
       '<div class="wfr-card">' +
       '<div class="wfr-bottle"><div class="ph"><span class="ph-tag">' +
@@ -389,7 +401,7 @@
       w.grape +
       "</div>" +
       tasteBars(w, top.p) +
-      '<div class="wfr-why">Proč sedí: ' +
+      '<div class="wfr-why">' + (WF_COPY ? WF_COPY.ui.why : 'Proč sedí: ') +
       whyTxt +
       "</div>" +
       '<p class="wfr-desc">' +
@@ -398,10 +410,10 @@
       '<div class="wfr-foot"><span class="wfr-price">Dostupnost ověříme osobně</span>' +
       '<a class="btn btn-gold" style="padding:13px 24px" href="' +
       window.viniContactHref(w) +
-      '">Mám zájem</a></div>' +
+      '">' + (WF_COPY ? WF_COPY.ui.interest : 'Mám zájem') + '</a></div>' +
       "</div>" +
       "</div>" +
-      '<div class="wfr-alts-label">Další blízké shody</div>' +
+      '<div class="wfr-alts-label">' + (WF_COPY ? WF_COPY.ui.alts : 'Další blízké shody') + '</div>' +
       '<div class="wfr-alts">' +
       alts
         .map(function (a) {
@@ -410,7 +422,7 @@
             a.w.id +
             '"><b>' +
             a.w.name +
-            "</b><small>shoda " +
+            "</b><small>" + (WF_COPY ? WF_COPY.ui.score : 'shoda') + " " +
             a.pct +
             " % · " +
             a.w.region +
@@ -419,7 +431,7 @@
         })
         .join("") +
       "</div>" +
-      '<button class="wf-restart" id="wfRestart" type="button">Projít znovu — jiná nálada, jiná láhev</button>';
+      '<button class="wf-restart" id="wfRestart" type="button">' + (WF_COPY ? WF_COPY.ui.restart : 'Projít znovu — jiná nálada, jiná láhev') + '</button>';
 
     elRes.querySelectorAll(".wfr-alt").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -440,7 +452,7 @@
     var w = pick.w;
     var whyTxt = pick.why.length
       ? "<span>" + pick.why.join(" · ") + "</span>"
-      : "<span>profil vyladěný na vaše odpovědi</span>";
+      : "<span>" + (WF_COPY ? WF_COPY.ui.tailored : "profil vyladěný na vaše odpovědi") + "</span>";
     elRes.querySelector(".wf-match-ring").innerHTML = pick.pct + "<small>%</small>";
     elRes.querySelector(".wfr-card").outerHTML =
       '<div class="wfr-card">' +
@@ -459,7 +471,7 @@
       w.grape +
       "</div>" +
       tasteBars(w, pick.p) +
-      '<div class="wfr-why">Proč sedí: ' +
+      '<div class="wfr-why">' + (WF_COPY ? WF_COPY.ui.why : 'Proč sedí: ') +
       whyTxt +
       "</div>" +
       '<p class="wfr-desc">' +
@@ -468,7 +480,7 @@
       '<div class="wfr-foot"><span class="wfr-price">Dostupnost ověříme osobně</span>' +
       '<a class="btn btn-gold" style="padding:13px 24px" href="' +
       window.viniContactHref(w) +
-      '">Mám zájem</a></div>' +
+      '">' + (WF_COPY ? WF_COPY.ui.interest : 'Mám zájem') + '</a></div>' +
       "</div>" +
       "</div>";
   }

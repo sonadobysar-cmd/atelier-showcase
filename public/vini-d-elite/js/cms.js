@@ -12,12 +12,25 @@
   }
   function legal(node, value) {
     node.textContent = "";
-    String(value).split(/\n\s*\n/g).map(function (part) { return part.trim(); }).filter(Boolean).forEach(function (part) {
-      var element;
-      if (part.indexOf("## ") === 0) { element = document.createElement("h2"); element.textContent = part.slice(3).trim(); }
-      else { element = document.createElement("p"); element.textContent = part.replace(/\n/g, " "); }
+    var paragraph = [];
+    function flushParagraph() {
+      if (!paragraph.length) return;
+      var element = document.createElement("p");
+      element.textContent = paragraph.join(" ");
       node.appendChild(element);
+      paragraph = [];
+    }
+    String(value).replace(/\r/g, "").split("\n").forEach(function (line) {
+      var trimmed = line.trim();
+      if (!trimmed) { flushParagraph(); return; }
+      if (trimmed.indexOf("## ") === 0) {
+        flushParagraph();
+        var heading = document.createElement("h2");
+        heading.textContent = trimmed.slice(3).trim();
+        node.appendChild(heading);
+      } else paragraph.push(trimmed);
     });
+    flushParagraph();
   }
   function imageAllowed(value) {
     return typeof value === "string" && (value.indexOf("/images/") === 0 || /^https:\/\/[a-z0-9.-]+\.blob\.vercel-storage\.com\//i.test(value));

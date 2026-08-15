@@ -14,6 +14,12 @@ body {
   min-width: 0;
 }
 
+/* The gift shortcut keeps its gold treatment on pointer hover. */
+.vde-main .set-head-link:hover {
+  background: transparent;
+  color: var(--gold-l);
+}
+
 @media (max-width: 920px) {
   .page-shop .wcard-foot {
     flex-direction: column;

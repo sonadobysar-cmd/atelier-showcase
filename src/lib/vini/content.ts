@@ -25,7 +25,7 @@ export const VINI_IMAGE_KEYS = [
   "wine.7", "wine.8", "wine.9", "wine.12", "wine.13", "wine.14",
 ] as const;
 export const VINI_LEGAL_KEYS = ["gdpr", "terms", "cookies", "complaints", "shipping"] as const;
-export const VINI_PAGE_KEYS = ["home", "collection", "wine-1", "wine-2", "wine-3", "wine-4", "wine-5", "wine-6", "wine-7", "wine-8", "wine-9", "wine-11", "wine-12", "wine-13", "wine-14", "tasting", "prive", "b2b", "contact", "privacy", "cookies", "terms", "complaints", "shipping"] as const;
+export const VINI_PAGE_KEYS = ["home", "collection", "wine-1", "wine-2", "wine-3", "wine-4", "wine-5", "wine-6", "wine-7", "wine-8", "wine-9", "wine-12", "wine-13", "wine-14", "tasting", "prive", "b2b", "contact", "privacy", "cookies", "terms", "complaints", "shipping"] as const;
 export const VINI_LOCALES = ["cs", "en", "it"] as const;
 
 export type ViniTextKey = (typeof VINI_TEXT_KEYS)[number];

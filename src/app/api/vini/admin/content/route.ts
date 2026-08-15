@@ -23,7 +23,7 @@ export async function PUT(request: NextRequest) {
   if (!validCsrf(request, session)) return response({ ok: false, error: "Bezpečnostní token vypršel. Obnovte stránku." }, 403);
   const allowed = await limit(`admin-write:${session.email}:${clientIp(request)}`, 40, 3600);
   if (!allowed.ok) return NextResponse.json({ ok: false, error: "Příliš mnoho změn. Zkuste to později." }, { status: 429, headers: noStoreHeaders({ "Retry-After": String(allowed.retryAfter) }) });
-  if (Number(request.headers.get("content-length") || 0) > 180_000) return response({ ok: false, error: "Obsah je příliš velký." }, 413);
+  if (Number(request.headers.get("content-length") || 0) > 900_000) return response({ ok: false, error: "Obsah je příliš velký." }, 413);
   let body: unknown;
   try { body = await request.json(); } catch { return response({ ok: false, error: "Neplatná data." }, 400); }
   try {
@@ -34,4 +34,3 @@ export async function PUT(request: NextRequest) {
     return response({ ok: false, error: "Změny nelze uložit, protože produkční úložiště není nakonfigurováno." }, 503);
   }
 }
-

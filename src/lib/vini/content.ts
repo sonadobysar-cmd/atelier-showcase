@@ -25,22 +25,32 @@ export const VINI_IMAGE_KEYS = [
   "wine.7", "wine.8", "wine.9", "wine.12", "wine.13", "wine.14",
 ] as const;
 export const VINI_LEGAL_KEYS = ["gdpr", "terms", "cookies", "complaints", "shipping"] as const;
+export const VINI_PAGE_KEYS = ["home", "collection", "wine-1", "wine-2", "wine-3", "wine-4", "wine-5", "wine-6", "wine-7", "wine-8", "wine-9", "wine-11", "wine-12", "wine-13", "wine-14", "tasting", "prive", "b2b", "contact", "privacy", "cookies", "terms", "complaints", "shipping"] as const;
+export const VINI_LOCALES = ["cs", "en", "it"] as const;
 
 export type ViniTextKey = (typeof VINI_TEXT_KEYS)[number];
 export type ViniImageKey = (typeof VINI_IMAGE_KEYS)[number];
 export type ViniLegalKey = (typeof VINI_LEGAL_KEYS)[number];
+export type ViniPageKey = (typeof VINI_PAGE_KEYS)[number];
+export type ViniLocale = (typeof VINI_LOCALES)[number];
+
+export type ViniVisualContent = {
+  texts: Record<ViniLocale, Partial<Record<ViniPageKey, Record<string, string>>>>;
+  images: Partial<Record<ViniPageKey, Record<string, string>>>;
+};
 
 export type ViniContent = {
-  version: 1;
+  version: 2;
   updatedAt: string;
   texts: Record<ViniTextKey, string>;
   images: Record<ViniImageKey, string>;
   legal: Record<ViniLegalKey, string>;
+  visual: ViniVisualContent;
 };
 
 export function defaultViniContent(): ViniContent {
   return {
-    version: 1,
+    version: 2,
     updatedAt: new Date(0).toISOString(),
     texts: {
       "home.finderIntro": "Pět rychlých otázek propojí vaši chuť, příležitost a jídlo s profilem každé lahve. Pro jemnější výběr vám osobně poradí Michal.",
@@ -79,6 +89,7 @@ export function defaultViniContent(): ViniContent {
       complaints: "Reklamaci uplatněte prostřednictvím kontaktního formuláře nebo na info@vinidelite.cz. V případě potřeby volejte +420 733 356 030.\n\n## Co uvést\nPopište objednávku a vadu; u poškozené zásilky přiložte fotografie obalu a lahve.\n\n## Vyřízení\nReklamaci vyřídíme v zákonné lhůtě a o výsledku vás budeme informovat. Finální znění dokumentu před publikací ověřte s právníkem.",
       shipping: "Dopravu a osobní předání domlouváme podle konkrétní dostupnosti, množství a místa doručení.\n\n## Doručení\nPřesnou cenu a termín vždy potvrdíme před uzavřením objednávky.\n\n## Osobní odběr\nPo individuální domluvě v Brně — vhodné zejména pro větší objednávky a degustační sety.",
     },
+    visual: { texts: { cs: {}, en: {}, it: {} }, images: {} },
   };
 }
 
@@ -95,6 +106,31 @@ function imageUrl(value: unknown, fallback: string): string {
   return fallback;
 }
 
+function visualKey(value: string): boolean {
+  return value.length > 0 && value.length <= 1800 && /^(text|attr|image|background)\|/.test(value);
+}
+
+function visualTexts(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const result: Record<string, string> = {};
+  for (const [key, raw] of Object.entries(value).slice(0, 900)) {
+    if (!visualKey(key) || typeof raw !== "string") continue;
+    result[key] = raw.replace(/\u0000/g, "").slice(0, 20_000);
+  }
+  return result;
+}
+
+function visualImages(value: unknown): Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  const result: Record<string, string> = {};
+  for (const [key, raw] of Object.entries(value).slice(0, 300)) {
+    if (!visualKey(key) || typeof raw !== "string") continue;
+    const clean = raw.trim().slice(0, 1200);
+    if (clean.startsWith("/images/") || /^https:\/\/[a-z0-9.-]+\.blob\.vercel-storage\.com\//i.test(clean)) result[key] = clean;
+  }
+  return result;
+}
+
 export function normalizeViniContent(raw: unknown): ViniContent {
   const base = defaultViniContent();
   if (!raw || typeof raw !== "object") return base;
@@ -105,7 +141,19 @@ export function normalizeViniContent(raw: unknown): ViniContent {
   for (const key of VINI_TEXT_KEYS) texts[key] = text(source.texts?.[key], base.texts[key], 4000);
   for (const key of VINI_IMAGE_KEYS) images[key] = imageUrl(source.images?.[key], base.images[key]);
   for (const key of VINI_LEGAL_KEYS) legal[key] = text(source.legal?.[key], base.legal[key], 30000);
-  return { version: 1, updatedAt: text(source.updatedAt, base.updatedAt, 80), texts, images, legal };
+  const visual: ViniVisualContent = { texts: { cs: {}, en: {}, it: {} }, images: {} };
+  const rawVisual = source.visual && typeof source.visual === "object" ? source.visual : base.visual;
+  for (const locale of VINI_LOCALES) {
+    for (const page of VINI_PAGE_KEYS) {
+      const pageTexts = visualTexts(rawVisual.texts?.[locale]?.[page]);
+      if (Object.keys(pageTexts).length) visual.texts[locale][page] = pageTexts;
+    }
+  }
+  for (const page of VINI_PAGE_KEYS) {
+    const pageImages = visualImages(rawVisual.images?.[page]);
+    if (Object.keys(pageImages).length) visual.images[page] = pageImages;
+  }
+  return { version: 2, updatedAt: text(source.updatedAt, base.updatedAt, 80), texts, images, legal, visual };
 }
 
 function usesBlob(): boolean {

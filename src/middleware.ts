@@ -64,7 +64,7 @@ function rewriteTo(url: URL, destPath: string): NextResponse {
 function withSecurityHeaders(response: NextResponse, pathname = ""): NextResponse {
   response.headers.set("X-Content-Type-Options", "nosniff");
   response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
-  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Frame-Options", "SAMEORIGIN");
   response.headers.set("Permissions-Policy", "accelerometer=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()");
   response.headers.set("Cross-Origin-Opener-Policy", "same-origin");
   response.headers.set("Origin-Agent-Cluster", "?1");
@@ -75,7 +75,7 @@ function withSecurityHeaders(response: NextResponse, pathname = ""): NextRespons
       "default-src 'self'",
       "base-uri 'self'",
       "object-src 'none'",
-      "frame-ancestors 'none'",
+      "frame-ancestors 'self'",
       "form-action 'self'",
       "img-src 'self' data: blob: https://*.blob.vercel-storage.com",
       "font-src 'self' data: https://fonts.gstatic.com",
